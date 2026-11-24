@@ -44,7 +44,7 @@ class RouterService : Service() {
     override fun onCreate() {
         super.onCreate()
         getSystemService(NotificationManager::class.java).createNotificationChannel(
-            NotificationChannel(CHANNEL, "局域网共享", NotificationManager.IMPORTANCE_LOW).apply {
+            NotificationChannel(CHANNEL, "模型共享", NotificationManager.IMPORTANCE_LOW).apply {
                 description = "共享状态与停止操作"
                 setShowBadge(false)
             },
@@ -187,7 +187,7 @@ class RouterService : Service() {
         val candidate = snapshot.addresses.firstOrNull { it.kind == LocalAddressKind.WIFI || it.kind == LocalAddressKind.ETHERNET }
             ?: snapshot.addresses.firstOrNull { it.kind == LocalAddressKind.OTHER }
         val text = candidate?.let { "${it.ip}:$port · ${it.interfaceName}" }
-            ?: snapshot.warning ?: "端口 $port · 未发现局域网候选地址"
+            ?: "127.0.0.1:$port · 本机应用"
         getSystemService(NotificationManager::class.java).notify(NOTIFICATION_ID, notification(text))
     }
 
@@ -198,7 +198,7 @@ class RouterService : Service() {
         )
         val builder = Notification.Builder(this, CHANNEL)
             .setSmallIcon(R.drawable.ic_pathpilot_mark)
-            .setContentTitle("PathPilot · 局域网共享")
+            .setContentTitle("PathPilot · 模型共享")
             .setContentText(text)
             .setOngoing(true)
             .setOnlyAlertOnce(true)

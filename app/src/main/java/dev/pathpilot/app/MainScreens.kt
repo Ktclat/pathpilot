@@ -58,6 +58,8 @@ import kotlinx.coroutines.withContext
     }
     val snapshot = if (runtime.running || runtime.stopping)
         LocalAddressSnapshot(runtime.addresses, runtime.addressWarning) else localSnapshot
+    val addressPort = if (runtime.running) runtime.port else config.port
+    var onThisDevice by rememberSaveable { mutableStateOf(true) }
     val enabledProviders = config.providers.filter { it.enabled }
     val enabledRoutes = config.routes.filter { it.enabled }
     val ready = enabledRoutes.any { route -> enabledProviders.any { p ->
@@ -87,31 +89,33 @@ import kotlinx.coroutines.withContext
                     Row(Modifier.fillMaxWidth().heightIn(min = 56.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Icon(PathPilotIcons.Share, null, Modifier.size(28.dp))
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text("局域网共享", style = MaterialTheme.typography.titleLarge)
+                            Text("模型共享", style = MaterialTheme.typography.titleLarge)
                             Text(status, style = MaterialTheme.typography.bodyMedium)
                         }
                         Switch(checked = checked, enabled = canToggle, onCheckedChange = onSharingChange,
-                            modifier = Modifier.semantics { contentDescription = "局域网共享总开关" })
-                    }
-                    if (setupAction != null) FilledTonalButton(enabled = !saving,
-                        shapes = ButtonDefaults.shapesFor(ButtonDefaults.MediumContainerHeight),
-                        modifier = Modifier.fillMaxWidth().heightIn(min = ButtonDefaults.MediumContainerHeight),
-                        onClick = {
-                            if (config.providers.isEmpty() || enabledProviders.isEmpty() || enabledRoutes.isNotEmpty()) onProviders()
-                            else onRoutes()
-                        }) {
-                        Icon(PathPilotIcons.Add, null); Spacer(Modifier.width(8.dp)); Text(setupAction)
+                            modifier = Modifier.semantics { contentDescription = "模型共享总开关" })
                     }
                 }
             }
         }
         runtime.lastError?.let { message -> item { Text(message, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium) } }
-        item { Text("${config.providers.size} 个供应商  ·  ${config.routes.size} 条路由  ·  ${runtime.requestCount} 次请求", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant) }
-        item { SharingAddresses(snapshot, if (runtime.running || runtime.stopping) runtime.port else config.port, onCopy) }
+        item { SharingAddresses(snapshot, addressPort,
+            onThisDevice, { onThisDevice = it }, onCopy) }
         item { ConnectionField("访问密钥", config.accessKey, secret = true, onCopy = { onCopy("访问密钥", it) }) }
-        if (snapshot?.addresses?.any { it.kind == LocalAddressKind.VPN || it.kind == LocalAddressKind.CELLULAR } == true) {
-            item { OtherNetworkAddresses(snapshot.addresses, if (runtime.running || runtime.stopping) runtime.port else config.port, onCopy) }
+        if (setupAction != null) item {
+            FilledTonalButton(enabled = !saving, shapes = ButtonDefaults.shapesFor(ButtonDefaults.MediumContainerHeight),
+                modifier = Modifier.fillMaxWidth().heightIn(min = ButtonDefaults.MediumContainerHeight),
+                onClick = {
+                    if (config.providers.isEmpty() || enabledProviders.isEmpty() || enabledRoutes.isNotEmpty()) onProviders()
+                    else onRoutes()
+                }) {
+                Icon(PathPilotIcons.Add, null); Spacer(Modifier.width(8.dp)); Text(setupAction)
+            }
         }
+        if (!onThisDevice && snapshot?.addresses?.any { it.kind == LocalAddressKind.VPN || it.kind == LocalAddressKind.CELLULAR } == true) {
+            item { OtherNetworkAddresses(snapshot.addresses, addressPort, onCopy) }
+        }
+        item { Text("${config.providers.size} 个供应商  ·  ${config.routes.size} 条路由  ·  ${runtime.requestCount} 次请求", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant) }
         if (runtime.recentRequests.isNotEmpty()) {
             item { Text("最近请求", style = MaterialTheme.typography.titleMedium) }
             items(runtime.recentRequests.take(12)) { event ->
@@ -223,7 +227,7 @@ import kotlinx.coroutines.withContext
     if (editPort) PortDialog(config.port, saving, { editPort = false }) { port -> onPort(port) { editPort = false } }
     if (editProxy) ProxyDialog(config.outboundProxy, saving, { editProxy = false }) { proxy -> onProxy(proxy) { editProxy = false } }
     if (rotate) AlertDialog(onDismissRequest = { if (!saving) rotate = false }, title = { Text("重置访问密钥？") },
-        text = { Text("旧密钥将失效，需要更新其他设备。") },
+        text = { Text("旧密钥将失效，需要更新已接入的应用和设备。") },
         confirmButton = { TextButton(enabled = !saving, onClick = { onRotate { rotate = false } }) { Text("重置") } },
         dismissButton = { TextButton(enabled = !saving, onClick = { rotate = false }) { Text("取消") } })
     if (about) AlertDialog(onDismissRequest = { about = false }, title = { Text("PathPilot ${BuildConfig.VERSION_NAME}") },

@@ -1,6 +1,17 @@
-# 局域网 API 与兼容范围
+# 本机、局域网 API 与兼容范围
 
-手机启动共享后监听 `0.0.0.0:<设置端口>`，默认 `8317`。客户端的 Base URL 填 `http://<手机局域网 IP>:8317/v1`，API Key 填 App 生成的局域网访问密钥。上游 API Key、Codex 访问令牌和刷新令牌不交给客户端。
+手机启动共享服务后监听 `0.0.0.0:<设置端口>`，默认 `8317`，同一手机和其他设备使用不同的连接地址：
+
+| 客户端位置 | Base URL 示例 |
+| --- | --- |
+| 同一手机上的其他 App | `http://127.0.0.1:8317/v1` |
+| 同一局域网的电脑、平板或其他手机 | `http://192.168.1.50:8317/v1`，替换为运行 PathPilot 的手机实际 IP |
+
+`127.0.0.1` 始终指发起请求的设备自身；电脑填它会连接电脑，不会连接手机。`0.0.0.0` 是监听配置，不是供客户端复制的地址。使用明确的 `127.0.0.1` 可避免 `localhost` 被客户端解析到 IPv6 地址。
+
+两个入口共用端口、访问密钥、路由和协议。API Key 都填写 App 生成的访问密钥，**本机访问也需要鉴权**；只有 `/health` 免鉴权。上游 API Key、Codex 访问令牌和刷新令牌不交给客户端。
+
+本机入口不依赖局域网 IP；未连接 Wi-Fi 或没有可显示的 LAN 地址时，服务开启后仍可本机访问。请求上游服务仍需相应网络可达。当前一个开关控制整个服务，关闭后本机和局域网入口一起停止；选择本机地址并不把监听改成仅限本机。
 
 ### 多个 IP 与共享开关
 
@@ -18,7 +29,23 @@
 
 所有地址共用同一端口、访问密钥和模型路由。地址选择只影响显示与复制，不改变 `0.0.0.0` 监听或上游代理。手机使用 VPN 时，局域网互访还取决于 VPN 应用的局域网放行设置。
 
-「局域网共享」总开关控制整个监听服务，状态包含正在开启/已开启/正在关闭/已关闭。启动过程中可取消，停止时先释放监听与锁，再允许重开。尚未配置模型时也可以开启服务；此时 `/health` 可响应，鉴权后的 `/v1/models` 返回空列表，页面显示「暂无可用模型」。
+「模型共享」总开关控制整个监听服务，状态包含正在开启/已开启/正在关闭/已关闭。启动过程中可取消，停止时先释放监听与锁，再允许重开。尚未配置模型时也可以开启服务；此时 `/health` 可响应，鉴权后的 `/v1/models` 返回空列表，页面显示「暂无可用模型」。
+
+### 客户端协议与地址填写
+
+这是 OpenAI 兼容模型 API 的部分接口。客户端选择 **Chat Completions** 或 **Responses**，再选择支持该接口的模型别名，供应商差异见下表。两种协议使用相同 Base URL，改变地址不会把一种协议转换成另一种。
+
+| 客户端字段或请求方式 | 同机示例 |
+| --- | --- |
+| Base URL / `base_url`，客户端自动追加接口路径 | `http://127.0.0.1:8317/v1` |
+| 仅服务器地址，客户端明确自动追加 `/v1` | `http://127.0.0.1:8317` |
+| 完整 Chat Completions 请求地址 | `http://127.0.0.1:8317/v1/chat/completions`，使用 POST |
+| 完整 Responses 请求地址 | `http://127.0.0.1:8317/v1/responses`，使用 POST |
+| 模型列表请求地址 | `http://127.0.0.1:8317/v1/models`，使用 GET |
+
+其他设备只需把示例中的 `127.0.0.1` 换成手机局域网 IP。不要把完整 `/chat/completions` 或 `/responses` 端点填进会自动追加路径的 Base URL 字段，也不要重复 `/v1`。具体字段名依客户端而异，以它最终请求的路径为准。
+
+同手机的客户端需要支持自定义 HTTP 地址。若客户端明确报 `CLEARTEXT communication not permitted`，是该客户端的 Android 网络策略禁止 HTTP，需使用它提供的 HTTP/本地服务设置或支持此类地址的客户端；PathPilot 的网络设置不能改变另一个 App 的策略。当前提供上述 OpenAI 接口，没有 Anthropic Messages 或 Gemini 原生端点。
 
 ### 访问密钥
 
@@ -35,9 +62,11 @@
 | 接口 | 行为 |
 | --- | --- |
 | `GET /health` | 无鉴权，仅返回 `{"status":"ok"}`，不包含账号或配置 |
-| `GET /v1/models` | 需要 `Authorization: Bearer <局域网密钥>`；仅列出启用路由且供应商启用的模型别名 |
+| `GET /v1/models` | 本机与 LAN 都需要 `Authorization: Bearer <访问密钥>`；仅列出启用路由且供应商启用的模型别名 |
 | `POST /v1/chat/completions` | 根据 `model` 别名选定供应商和上游模型；支持 JSON 与 SSE |
 | `POST /v1/responses` | Codex 和提供 Responses 接口的自定义供应商；支持 JSON 与 SSE |
+
+模型列表来自手机路由配置，不会在每次读取时测试上游账号、探测 Responses 能力或保证模型在线。请求中的 `model` 填共享别名，而不是供应商名称。
 
 POST 必须使用 `Content-Type: application/json` 和 `Content-Length`。请求体上限 2 MiB；不接收 gzip 或 chunked 请求体。响应 SSE 使用分块传输。每台手机最多同时转发 8 个请求，超出返回 `429 router_busy`。连接超时 15 秒，上游读取空闲超时 120 秒。
 
@@ -47,17 +76,19 @@ POST 必须使用 `Content-Type: application/json` 和 `Content-Length`。请求
 
 ## 供应商兼容矩阵
 
-| 供应商 | Chat Completions | Responses |
-| --- | --- | --- |
-| DeepSeek | 原样转发，替换模型名；文本、工具和流式能力由 DeepSeek 模型决定 | 返回明确的 `400 unsupported_endpoint`，没有伪装成完整 Responses |
-| 自定义 OpenAI 兼容 | 转发至供应商 Base URL 后的 `/chat/completions` | 转发至 `/responses`；是否支持由供应商决定 |
-| Codex 订阅 | 转换为 Codex Responses 请求，并将结果转换回 Chat Completions | 固定转发至官方 Codex backend；始终 `stream=true, store=false`，客户端要求 JSON 时收集完成事件 |
+| 供应商 | Chat Completions | Responses | 工具调用 |
+| --- | --- | --- | --- |
+| DeepSeek | JSON/SSE 转发，替换模型名 | `400 unsupported_endpoint`，不向上游发送请求 | Chat 工具字段转发，能力取决于上游模型 |
+| 自定义 OpenAI 兼容 | JSON/SSE 转发至 Base URL 后的 `/chat/completions` | JSON/SSE 转发至 `/responses`，上游必须实际提供该接口 | 对应接口的工具字段转发，能力取决于上游 |
+| Codex 订阅 | Responses → Chat 的 JSON/SSE 桥接，支持范围见下文 | 固定官方 Codex backend；上游始终 `stream=true, store=false`，客户端要 JSON 时聚合完成事件，要 SSE 时透传 | Chat 桥接支持 function tools；Responses 保留工具字段，由上游决定支持范围 |
+
+客户端用 `stream=true` 请求 SSE，省略或设为 `false` 请求 JSON。手机转发或转换工具调用，不执行客户端函数；函数结果由客户端在下一轮请求中返回。已接入 DeepSeek API 不表示它支持 Responses；选择「自定义兼容」也不意味着上游同时实现两种协议。
 
 DeepSeek Base URL 可填 `https://api.deepseek.com/v1`；自定义供应商的 Base URL 应包含其 API 前缀，例如 `https://example.com/v1`。自定义来源支持 HTTP/HTTPS；无认证服务可以留空 API Key，此时不发送 Authorization 头。Codex 上游地址固定，不会把订阅凭据转发到自定义地址。转发不跟随重定向。
 
 ### Codex Chat Completions 桥接
 
-实现了用户、系统/开发者与助手消息；文本和用户图片 URL；function tools、工具选择、工具调用历史及工具结果；`reasoning_effort`；文本/工具调用 SSE 增量；可选 `stream_options.include_usage`。助手历史使用 `output_text`，用户和开发者内容使用 `input_text`，依据[官方 Codex 请求类型](https://github.com/openai/codex/blob/32119bac269b881d512b82df74af285e8c60adc2/codex-rs/protocol/src/models.rs)。
+实现了用户、系统/开发者与助手消息；文本和用户图片 URL；function tools、工具选择、工具调用历史及字符串工具结果；`reasoning_effort`；文本/工具调用 SSE 增量；可选 `stream_options.include_usage`。工具结果暂不接受文本数组。上游拒绝内容保留在 Chat JSON 的 `message.refusal` 或 SSE 的 `delta.refusal`，纯拒绝 JSON 的 `content` 为 `null`。助手历史使用 `output_text`，用户和开发者内容使用 `input_text`，依据[官方 Codex 请求类型](https://github.com/openai/codex/blob/32119bac269b881d512b82df74af285e8c60adc2/codex-rs/protocol/src/models.rs)。
 
 以下字段在 Chat 桥接中显式拒绝：`n` 非 1、`temperature`、`top_p`、`max_tokens`、`max_completion_tokens`、`stop`、`presence_penalty`、`frequency_penalty`、`logit_bias`、`audio`、`modalities`、`logprobs`、`top_logprobs`、`response_format`、`seed`。客户端应关闭这些额外参数，或使用原生 Responses 接口发送经供应商支持的字段。
 
@@ -79,4 +110,4 @@ DeepSeek Base URL 可填 `https://api.deepseek.com/v1`；自定义供应商的 B
 
 ## 本地验证证据
 
-`./gradlew :core:test` 包含真实 localhost 网关与 MockWebServer 上游的端到端测试，覆盖鉴权、路由、流式转发、错误脱敏、密钥轮换、请求体上限、禁用供应商、重定向禁用、Codex JSON 桥接、工具增量转换、截断流、客户端断开、认证刷新超时与并发限制。测试使用模拟上游；不替代真实 ChatGPT 订阅、DeepSeek 账号或 Android 真机联调。
+`./gradlew :core:test` 包含经 `127.0.0.1` 连接真实网关与 MockWebServer 上游的端到端测试，覆盖本机鉴权、路由、流式转发、错误脱敏、密钥轮换、请求体上限、禁用供应商、重定向禁用、Codex JSON 桥接、客户端断开、认证刷新超时与并发限制；桥接单元测试覆盖工具历史、工具增量、拒绝内容和截断流。测试使用模拟上游；不替代真实 ChatGPT 订阅、DeepSeek 账号、同手机客户端或另一台 LAN 设备联调。本段列出测试范围，实际执行结果见验证记录。

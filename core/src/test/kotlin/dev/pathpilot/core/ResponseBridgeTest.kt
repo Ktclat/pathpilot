@@ -51,6 +51,43 @@ class ResponseBridgeTest {
         assertEquals(8, chunks.last()["usage"]!!.jsonObject["total_tokens"]!!.jsonPrimitive.int)
     }
 
+    @Test fun completedRefusalIsPreservedInChatMessage() {
+        val response = Json.parseToJsonElement("""{
+          "id":"resp_refusal","status":"completed","output":[
+            {"type":"message","role":"assistant","content":[
+              {"type":"refusal","refusal":"I cannot help with that request."}
+            ]}
+          ]
+        }""").jsonObject
+        val result = ResponseBridge.asChat(response, "code")
+        val choice = result["choices"]!!.jsonArray.single().jsonObject
+        val message = choice["message"]!!.jsonObject
+        assertEquals("I cannot help with that request.", message["refusal"]!!.jsonPrimitive.content)
+        assertEquals(JsonNull, message["content"])
+        assertEquals("stop", choice["finish_reason"]!!.jsonPrimitive.content)
+        assertEquals("code", result["model"]!!.jsonPrimitive.content)
+    }
+
+    @Test fun streamingRefusalIsPreservedWithoutRepeatingDoneOrCompletedText() {
+        val sse = listOf(
+            """{"type":"response.created","response":{"id":"resp_refusal","created_at":123}}""",
+            """{"type":"response.refusal.delta","delta":"I cannot help "}""",
+            """{"type":"response.refusal.delta","delta":"with that request."}""",
+            """{"type":"response.refusal.done","refusal":"I cannot help with that request."}""",
+            """{"type":"response.completed","response":{"status":"completed","output":[{"type":"message","content":[{"type":"refusal","refusal":"I cannot help with that request."}]}]}}""",
+        ).joinToString("") { "data: $it\n\n" }
+        val output = ResponseBridge.chatStream(sse.byteInputStream(), "code", false).bufferedReader().readText()
+        val chunks = output.lineSequence().filter { it.startsWith("data: {") }
+            .map { Json.parseToJsonElement(it.removePrefix("data: ")).jsonObject }.toList()
+        val choices = chunks.flatMap { it["choices"]!!.jsonArray }.map { it.jsonObject }
+        val refusalDeltas = choices.mapNotNull { it["delta"]!!.jsonObject["refusal"]?.jsonPrimitive?.content }
+        assertEquals(listOf("I cannot help ", "with that request."), refusalDeltas)
+        assertEquals("I cannot help with that request.", refusalDeltas.joinToString(""))
+        assertEquals("stop", choices.last()["finish_reason"]!!.jsonPrimitive.content)
+        assertTrue(chunks.all { it["id"]!!.jsonPrimitive.content == "resp_refusal" })
+        assertTrue(output.endsWith("data: [DONE]\n\n"))
+    }
+
     @Test fun truncatedStreamDoesNotPretendToComplete() {
         val sse = "data: {\"type\":\"response.output_text.delta\",\"delta\":\"partial\"}\n\n"
         val output = ResponseBridge.chatStream(sse.byteInputStream(), "code", false).bufferedReader().readText()

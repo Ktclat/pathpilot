@@ -107,10 +107,14 @@ internal object ResponseBridge {
 
     fun asChat(response: JsonObject, alias: String): JsonObject {
         val output = response["output"] as? JsonArray ?: JsonArray(emptyList())
-        val text = output.filter { it.jsonObject["type"]?.jsonPrimitive?.content == "message" }
+        val messageContent = output.filter { it.jsonObject["type"]?.jsonPrimitive?.content == "message" }
             .flatMap { (it.jsonObject["content"] as? JsonArray).orEmpty() }
+        val text = messageContent
             .filter { it.jsonObject["type"]?.jsonPrimitive?.content == "output_text" }
             .joinToString("") { it.jsonObject["text"]?.jsonPrimitive?.content.orEmpty() }
+        val refusal = messageContent
+            .filter { it.jsonObject["type"]?.jsonPrimitive?.content == "refusal" }
+            .joinToString("") { it.jsonObject["refusal"]?.jsonPrimitive?.content.orEmpty() }
         val calls = output.filter { it.jsonObject["type"]?.jsonPrimitive?.content == "function_call" }
         return buildJsonObject {
             put("id", response["id"] ?: JsonPrimitive("chatcmpl-pathpilot")); put("object", "chat.completion")
@@ -118,7 +122,8 @@ internal object ResponseBridge {
             put("choices", buildJsonArray { add(buildJsonObject {
                 put("index", 0)
                 put("message", buildJsonObject {
-                    put("role", "assistant"); put("content", if (text.isEmpty() && calls.isNotEmpty()) JsonNull else JsonPrimitive(text))
+                    put("role", "assistant"); put("content", if (text.isEmpty() && (calls.isNotEmpty() || refusal.isNotEmpty())) JsonNull else JsonPrimitive(text))
+                    if (refusal.isNotEmpty()) put("refusal", refusal)
                     if (calls.isNotEmpty()) put("tool_calls", buildJsonArray { calls.forEach { call -> add(buildJsonObject {
                         val obj = call.jsonObject
                         put("id", obj["call_id"]!!); put("type", "function")
@@ -177,6 +182,7 @@ internal object ResponseBridge {
                         }
                     }
                     "response.output_text.delta" -> output += "data: ${chunk(buildJsonObject { put("content", event["delta"]!!) })}\n\n"
+                    "response.refusal.delta" -> output += "data: ${chunk(buildJsonObject { put("refusal", event["delta"]!!) })}\n\n"
                     "response.output_item.added" -> {
                         val item = event["item"]!!.jsonObject
                         if (item["type"]?.jsonPrimitive?.content == "function_call") {
