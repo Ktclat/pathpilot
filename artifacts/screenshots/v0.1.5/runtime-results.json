@@ -1,0 +1,65 @@
+{
+  "apk_sha256": "bf0316db0f6f0d405f4b8271d45c0df2710147fda21b058074ca4678410ccc1b",
+  "pid": "2888",
+  "phases": {
+    "local": {
+      "pid": "2888",
+      "at": "2026-11-24T17:16:22.124553+00:00",
+      "listening": true,
+      "listener_inode": "socket:[28247]",
+      "requests": [
+        {
+          "address": "127.0.0.1",
+          "path": "/health",
+          "auth": "none",
+          "status": 200
+        },
+        {
+          "address": "127.0.0.1",
+          "path": "/v1/models",
+          "auth": "none",
+          "status": 401
+        },
+        {
+          "address": "127.0.0.1",
+          "path": "/v1/models",
+          "auth": "fixed_invalid_bearer",
+          "status": 401
+        }
+      ]
+    },
+    "lan": {
+      "pid": "2888",
+      "at": "2026-11-24T17:17:49.660931+00:00",
+      "listening": true,
+      "listener_inode": "socket:[28247]",
+      "requests": [
+        {
+          "address": "127.0.0.1",
+          "path": "/health",
+          "auth": "none",
+          "status": 200
+        },
+        {
+          "address": "192.168.50.1",
+          "path": "/health",
+          "auth": "none",
+          "status": 200
+        },
+        {
+          "address": "192.168.50.2",
+          "path": "/health",
+          "auth": "none",
+          "status": 200
+        }
+      ]
+    },
+    "off": {
+      "pid": "2888",
+      "at": "2026-11-24T17:18:57.437567+00:00",
+      "listening": false,
+      "forwarded_health_error": "RemoteDisconnected",
+      "pathpilot_wake_locks": []
+    }
+  }
+}
