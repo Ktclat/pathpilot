@@ -25,7 +25,7 @@ POST 必须使用 `Content-Type: application/json` 和 `Content-Length`。请求
 | 自定义 OpenAI 兼容 | 转发至供应商 Base URL 后的 `/chat/completions` | 转发至 `/responses`；是否支持由供应商决定 |
 | Codex 订阅 | 转换为 Codex Responses 请求，并将结果转换回 Chat Completions | 固定转发至官方 Codex backend；始终 `stream=true, store=false`，客户端要求 JSON 时收集完成事件 |
 
-DeepSeek Base URL 可填 `https://api.deepseek.com/v1`；自定义供应商的 Base URL 应包含其 API 前缀，例如 `https://example.com/v1`。Codex 上游地址固定，不会把订阅凭据转发到自定义地址。转发不跟随重定向。
+DeepSeek Base URL 可填 `https://api.deepseek.com/v1`；自定义供应商的 Base URL 应包含其 API 前缀，例如 `https://example.com/v1`。自定义来源支持 HTTP/HTTPS；无认证服务可以留空 API Key，此时不发送 Authorization 头。Codex 上游地址固定，不会把订阅凭据转发到自定义地址。转发不跟随重定向。
 
 ### Codex Chat Completions 桥接
 
@@ -37,9 +37,17 @@ DeepSeek Base URL 可填 `https://api.deepseek.com/v1`；自定义供应商的 B
 
 ## 错误与隐私
 
-未鉴权返回 401；未知别名返回 404；供应商关闭或缺少 API Key 返回 503；连接失败、Codex 未登录或凭据解析失败返回 502；超时返回 504。上游非成功 HTTP 状态保留，但错误正文替换为不含凭据的统一错误，数字 `Retry-After` 可透传。日志事件仅保留别名、供应商 ID、接口、状态和耗时，不记录提示词、回答或密钥。
+未鉴权返回 401；未知别名返回 404；供应商关闭或 DeepSeek 缺少 API Key 返回 503；连接失败、Codex 未登录或凭据解析失败返回 502；超时返回 504。上游非成功 HTTP 状态保留，但错误正文替换为不含凭据的统一错误，数字 `Retry-After` 可透传。日志事件仅保留别名、供应商 ID、接口、状态和耗时，不记录提示词、回答或密钥。
 
 目前 LAN 入口使用 HTTP，局域网密钥与内容在网络上传输时不加密。因此应在可信私人 Wi-Fi 使用，不要做公网端口映射；需要跨不可信网络时应先通过受信任 VPN/TLS 入口连接。手机到官方上游使用 HTTPS 且保留证书验证。
+
+## 上游代理
+
+在「设置 → 上游代理」选择跟随系统、HTTP 或 SOCKS5。显式代理填写主机/IP和端口，当前用于无需用户名密码的代理。配置在后续请求生效，已经开始的请求继续使用原连接。
+
+代理覆盖 App 内模型请求、模型列表、Codex 设备授权请求和令牌刷新。跟随系统使用平台 ProxySelector 与普通 socket，手机 VPN/TUN 仍可按应用/域名接管；显式代理也不绕过 Android VPN。HTTP CONNECT 和 SOCKS5 隧道内的 HTTPS 继续验证上游证书。代理连接失败不会偷偷回退直连。
+
+浏览器中的 OpenAI 登录网页使用浏览器自己的网络设置。代理配置不会更改局域网监听地址或给其他设备提供通用代理服务。
 
 ## 本地验证证据
 

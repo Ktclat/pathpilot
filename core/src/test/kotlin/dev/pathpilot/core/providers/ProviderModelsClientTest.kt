@@ -1,6 +1,8 @@
 package dev.pathpilot.core.providers
 
 import okhttp3.OkHttpClient
+import dev.pathpilot.core.network.OutboundProxyConfig
+import dev.pathpilot.core.network.OutboundProxyMode
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.SocketPolicy
@@ -18,7 +20,7 @@ class ProviderModelsClientTest {
 
     @Before fun setup() {
         server = MockWebServer().also { it.start() }
-        client = ProviderModelsClient(OkHttpClient(), allowLocalHttpTests = true)
+        client = ProviderModelsClient(OkHttpClient())
     }
     @After fun cleanup() { client.cancel(); server.shutdown() }
     private fun baseUrl() = server.url("/v1").toString()
@@ -48,20 +50,45 @@ class ProviderModelsClientTest {
             server.enqueue(MockResponse().setResponseCode(status).setBody("\"$secret\""))
             val error = failure { client.probe(baseUrl(), secret) }
             assertEquals(expected, error.kind)
-            if (status == 404) assertTrue(error.userMessage.contains("仍可手动"))
+            if (status == 404) assertEquals("此服务未提供模型列表", error.userMessage)
         }
         assertEquals(6, server.requestCount)
     }
 
-    @Test fun productionEntryRejectsHttpBeforeSendingCredential() {
-        val production = ProviderModelsClient()
-        assertEquals(ProviderProbeError.INVALID_CONFIGURATION, failure { production.probe(baseUrl(), secret) }.kind)
-        assertEquals(0, server.requestCount)
+    @Test fun proxyAuthenticationFailureDoesNotMasqueradeAsApiKeyOrModelSuccess() {
+        server.enqueue(MockResponse().setResponseCode(407)
+            .setHeader("Proxy-Authenticate", "Basic realm=proxy").setBody(secret))
+        val proxied = ProviderModelsClient(proxyProvider = {
+            OutboundProxyConfig(OutboundProxyMode.HTTP, "127.0.0.1", server.port)
+        })
+        val error = failure { proxied.probe("http://provider.invalid/v1", secret) }
+        assertEquals(ProviderProbeError.UPSTREAM, error.kind)
+        assertEquals("代理需要认证，当前仅支持无认证代理", error.userMessage)
+        assertEquals(1, server.requestCount)
     }
 
-    @Test fun testHttpExceptionIsOnlyForLoopback() {
+    @Test fun productionEntrySupportsExplicitLocalHttpUpstream() {
+        val production = ProviderModelsClient()
+        server.enqueue(MockResponse().setBody("""{"data":[{"id":"local-ollama"}]}"""))
+        assertEquals(listOf("local-ollama"), production.probe(baseUrl(), secret).models)
+        assertEquals("Bearer $secret", server.takeRequest().getHeader("Authorization"))
+        assertEquals(1, server.requestCount)
+    }
+
+    @Test fun unauthenticatedHttpModelDiscoveryOmitsAuthorizationEntirely() {
+        for (emptyKey in listOf("", "  ")) {
+            server.enqueue(MockResponse().setBody("""{"data":[{"id":"local-ollama"}]}"""))
+            assertEquals(listOf("local-ollama"), client.probe(baseUrl(), emptyKey).models)
+            val request = server.takeRequest(1, TimeUnit.SECONDS)!!
+            assertEquals("GET", request.method)
+            assertEquals("/v1/models", request.path)
+            assertNull(request.getHeader("Authorization"))
+        }
+    }
+
+    @Test fun nonHttpProtocolsAreRejectedBeforeSendingCredentials() {
         assertEquals(ProviderProbeError.INVALID_CONFIGURATION,
-            failure { client.probe("http://example.com/v1", secret) }.kind)
+            failure { client.probe("file:///tmp/models", secret) }.kind)
         assertEquals(0, server.requestCount)
     }
 
@@ -105,7 +132,7 @@ class ProviderModelsClientTest {
     }
 
     @Test fun wholeCallTimeoutIsNotMisreportedAsUserCancellation() {
-        client = ProviderModelsClient(OkHttpClient.Builder().callTimeout(100, TimeUnit.MILLISECONDS).build(), true)
+        client = ProviderModelsClient(OkHttpClient.Builder().callTimeout(100, TimeUnit.MILLISECONDS).build())
         server.enqueue(MockResponse().setBody("{\"data\":[]}").setBodyDelay(500, TimeUnit.MILLISECONDS))
         assertEquals(ProviderProbeError.TIMEOUT, failure { client.probe(baseUrl(), secret) }.kind)
     }

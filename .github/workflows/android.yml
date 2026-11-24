@@ -13,10 +13,10 @@ on:
         type: boolean
         default: false
       release_tag:
-        description: '新预发布标签，例如 v0.1.1-dev.1；不会覆盖已有 Release'
+        description: '新预发布标签，例如 v0.1.2-dev.1；不会覆盖已有 Release'
         required: true
         type: string
-        default: v0.1.1-dev.1
+        default: v0.1.2-dev.1
 
 permissions:
   contents: read
@@ -112,7 +112,7 @@ jobs:
         run: |
           set -euo pipefail
           [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+-dev\.[0-9]+$ ]] || {
-            echo 'Use a development tag such as v0.1.1-dev.1.' >&2; exit 1;
+            echo 'Use a development tag such as v0.1.2-dev.1.' >&2; exit 1;
           }
           [[ "$RELEASE_TAG" == "v${APP_VERSION}-dev."* ]] || {
             echo 'Release tag must match the APK version.' >&2; exit 1;
@@ -146,7 +146,7 @@ jobs:
           - APK 和 SHA256SUMS.txt 来自同一次成功构建，提交：${BUILD_SHA}。
 
           本版本为 debug 签名开发包。不同云端构建的 debug 签名可能不同，无法保证覆盖安装；卸载会清除本机配置和授权。正式分发前需配置长期签名密钥。
-          真实账号调用及实体手机局域网联调仍需验证。不会把模拟上游测试描述为真实服务验证。
+          真实账号调用及实体手机局域网联调仍需验证，具体结果见仓库 docs/validation.md。
           EOF_NOTES
           tag_options=()
           if [[ "$BUILD_REF" == refs/tags/* ]]; then tag_options+=(--verify-tag); fi

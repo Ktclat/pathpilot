@@ -14,6 +14,7 @@ data class RuntimeState(
     val requestCount: Long = 0,
     val lastError: String? = null,
     val recentRequests: List<RequestEvent> = emptyList(),
+    val starting: Boolean = false,
 )
 
 /** Process-local service observations. Never persisted: a restored snapshot is not a live server. */
@@ -22,13 +23,18 @@ object RouterRuntime {
     val state: StateFlow<RuntimeState> = mutableState.asStateFlow()
 
     @Synchronized
-    internal fun started(port: Int) {
-        mutableState.value = RuntimeState(running = true, port = port, addresses = LocalAddresses.ipv4())
+    internal fun starting() {
+        mutableState.value = mutableState.value.copy(starting = true, lastError = null)
+    }
+
+    @Synchronized
+    internal fun started(port: Int, addresses: List<String>) {
+        mutableState.value = RuntimeState(running = true, port = port, addresses = addresses)
     }
 
     @Synchronized
     internal fun stopped(error: String? = null) {
-        mutableState.value = mutableState.value.copy(running = false, lastError = error)
+        mutableState.value = mutableState.value.copy(running = false, starting = false, lastError = error)
     }
 
     @Synchronized

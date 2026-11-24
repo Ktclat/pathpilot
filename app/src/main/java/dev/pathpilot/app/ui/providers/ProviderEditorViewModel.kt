@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dev.pathpilot.core.ProviderConfig
 import dev.pathpilot.core.ProviderKind
 import dev.pathpilot.core.codex.CodexBackend
+import dev.pathpilot.core.network.OutboundProxyConfig
 import dev.pathpilot.core.providers.ProviderModelsClient
 import dev.pathpilot.core.providers.ProviderProbeException
 import dev.pathpilot.core.providers.ProviderProbeResult
@@ -63,8 +64,8 @@ internal interface ProviderModelProbe {
     fun cancel()
 }
 
-private class HttpProviderModelProbe : ProviderModelProbe {
-    private val client = ProviderModelsClient()
+private class HttpProviderModelProbe(proxy: OutboundProxyConfig) : ProviderModelProbe {
+    private val client = ProviderModelsClient(proxyProvider = { proxy })
     override suspend fun probe(baseUrl: String, apiKey: String): ProviderProbeResult =
         withContext(Dispatchers.IO) { client.probe(baseUrl, apiKey) }
     override fun cancel() = client.cancel()
@@ -72,19 +73,22 @@ private class HttpProviderModelProbe : ProviderModelProbe {
 
 /** Activity-scoped, memory-only drafts. Each provider type owns an independent key and URL. */
 class ProviderEditorViewModel() : ViewModel() {
-    private var probeFactory: () -> ProviderModelProbe = { HttpProviderModelProbe() }
-    internal constructor(factory: () -> ProviderModelProbe) : this() { probeFactory = factory }
+    private var probeFactory: (OutboundProxyConfig) -> ProviderModelProbe = { HttpProviderModelProbe(it) }
+    internal constructor(factory: () -> ProviderModelProbe) : this() { probeFactory = { factory() } }
+    internal constructor(factory: (OutboundProxyConfig) -> ProviderModelProbe) : this() { probeFactory = factory }
     private val mutableState = MutableStateFlow(ProviderEditorState())
     internal val state = mutableState.asStateFlow()
     private var baseline = emptyMap<ProviderKind, ProviderDraft>()
     private var probeClient: ProviderModelProbe? = null
     private var probeJob: Job? = null
     private var probeGeneration = 0L
+    private var proxy = OutboundProxyConfig()
 
-    internal fun begin(existing: ProviderConfig?) {
+    internal fun begin(existing: ProviderConfig?, proxy: OutboundProxyConfig = OutboundProxyConfig()) {
         val current = mutableState.value
-        if (current.active && current.editing?.id == existing?.id) return
+        if (current.active && current.editing?.id == existing?.id) { setProxy(proxy); return }
         clear()
+        this.proxy = proxy
         val drafts = defaults().toMutableMap()
         if (existing != null) drafts[existing.kind] = ProviderDraft(existing.name, existing.baseUrl, existing.apiKey)
         baseline = drafts.toMap()
@@ -93,6 +97,17 @@ class ProviderEditorViewModel() : ViewModel() {
             step = if (existing == null) EditorStep.TYPE else EditorStep.CONFIGURATION,
             kind = existing?.kind ?: ProviderKind.CODEX, drafts = drafts,
         )
+    }
+
+    internal fun setProxy(value: OutboundProxyConfig) {
+        if (value == proxy) return
+        stopProbe()
+        proxy = value
+        // The account is unchanged: retain model choices, but do not report a test on the old
+        // network path as current. Generation guards discard any late transport callback.
+        mutableState.value = mutableState.value.copy(drafts = mutableState.value.drafts.mapValues { (_, draft) ->
+            draft.copy(probePhase = ProbePhase.IDLE, probeError = null)
+        })
     }
 
     internal fun selectKind(kind: ProviderKind) {
@@ -147,7 +162,7 @@ class ProviderEditorViewModel() : ViewModel() {
         stopProbe()
         val generation = probeGeneration
         val kind = snapshot.kind
-        val client = probeFactory()
+        val client = probeFactory(proxy)
         probeClient = client
         updateDraft { it.copy(probePhase = ProbePhase.RUNNING, probeError = null) }
         probeJob = viewModelScope.launch {
@@ -206,6 +221,7 @@ class ProviderEditorViewModel() : ViewModel() {
 
     internal fun clear() {
         stopProbe()
+        proxy = OutboundProxyConfig()
         baseline = emptyMap()
         mutableState.value = ProviderEditorState()
     }

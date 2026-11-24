@@ -24,10 +24,10 @@ object ProviderSetup {
     const val MAX_MODELS = 500
 
     fun validate(name: String, baseUrl: String, apiKey: String, kind: ProviderKind): ProviderValidation =
-        validateInternal(name, baseUrl, apiKey, kind, allowLocalHttpTests = false)
+        validateInternal(name, baseUrl, apiKey, kind)
 
     internal fun validateInternal(
-        name: String, baseUrl: String, apiKey: String, kind: ProviderKind, allowLocalHttpTests: Boolean,
+        name: String, baseUrl: String, apiKey: String, kind: ProviderKind,
     ): ProviderValidation {
         val nameError = when {
             name.trim().isEmpty() -> "请输入供应商名称"
@@ -40,21 +40,20 @@ object ProviderSetup {
         val normalized = baseUrl.trim()
         val parsed = normalized.toHttpUrlOrNull()
         val uri = runCatching { URI(normalized) }.getOrNull()
-        val testHttp = allowLocalHttpTests && parsed?.scheme == "http" && parsed.host in setOf("127.0.0.1", "localhost", "::1")
         val urlError = when {
             normalized.isEmpty() -> "请输入 API 基础地址"
             normalized.length > MAX_BASE_URL_LENGTH -> "API 地址最多 $MAX_BASE_URL_LENGTH 个字符"
             baseUrl.any(::isControl) -> "API 地址不能包含换行或控制字符"
             normalized.any { it.isWhitespace() || it == '\\' } -> "API 地址不能包含空白或反斜杠"
-            uri == null || !uri.isAbsolute || uri.rawAuthority.isNullOrBlank() || parsed == null -> "请输入完整的 HTTPS 地址，例如 https://api.deepseek.com/v1"
-            parsed.scheme != "https" && !testHttp -> "API 地址必须使用 HTTPS"
+            uri == null || !uri.isAbsolute || uri.rawAuthority.isNullOrBlank() || parsed == null -> "请输入完整的 HTTP 或 HTTPS 地址，例如 https://api.deepseek.com/v1"
+            parsed.scheme !in setOf("http", "https") -> "API 地址必须使用 HTTP 或 HTTPS"
             uri.rawUserInfo != null || uri.rawAuthority.contains('@') -> "API 地址不能包含用户名或密码；请在 API Key 中填写凭据"
             uri.rawQuery != null || uri.rawFragment != null -> "API 基础地址不能包含查询参数或 # 片段"
             else -> endpointError(parsed.pathSegments.filter(String::isNotEmpty))
         }
         val key = apiKey.trim()
         val keyError = when {
-            key.isEmpty() -> "请输入 API Key"
+            key.isEmpty() && kind != ProviderKind.OPENAI_COMPATIBLE -> "请输入 API Key"
             key.length > MAX_API_KEY_LENGTH -> "API Key 最多 $MAX_API_KEY_LENGTH 个字符"
             key.any { it.code !in 33..126 } -> "API Key 只能包含可打印的英文字符，不能含空格、换行或其他空白"
             else -> null

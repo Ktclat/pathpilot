@@ -1,6 +1,7 @@
 package dev.pathpilot.core
 
 import dev.pathpilot.core.codex.CodexBackend
+import dev.pathpilot.core.network.OutboundHttpClientFactory
 import fi.iki.elonen.NanoHTTPD
 import kotlinx.serialization.json.*
 import okhttp3.Call
@@ -30,8 +31,7 @@ class RouterServer(
     private val json = Json { ignoreUnknownKeys = true }
     private val activeCalls = ConcurrentHashMap.newKeySet<Call>()
     private val requestSlots = Semaphore(8)
-    private val transport = client.newBuilder()
-        .retryOnConnectionFailure(false).followRedirects(false).followSslRedirects(false).build()
+    private val transport = OutboundHttpClientFactory(client)
 
     // NanoHTTPD's default GZIPOutputStream buffers without SYNC_FLUSH, which stalls SSE.
     override fun useGzipWhenAccepted(response: Response): Boolean =
@@ -39,11 +39,11 @@ class RouterServer(
 
     override fun serve(session: IHTTPSession): Response {
         if (session.uri == "/health" && session.method == Method.GET) {
-            return jsonResponse(200, buildJsonObject { put("status", "ok") })
+            return jsonResponse(200, buildJsonObject { put("status", "ok") }).closeIfBodyUnread(session)
         }
         val config = configProvider()
         val supplied = session.headers["authorization"]?.takeIf { it.startsWith("Bearer ", true) }?.substring(7).orEmpty()
-        if (!AccessKeys.matches(config.accessKey, supplied)) return error(401, "invalid_api_key", "A valid local Bearer access key is required.")
+        if (!AccessKeys.matches(config.accessKey, supplied)) return rejectBeforeBody(401, "invalid_api_key", "A valid local Bearer access key is required.")
         if (session.uri == "/v1/models" && session.method == Method.GET) {
             val providers = config.providers.filter { it.enabled }.associateBy { it.id }
             return jsonResponse(200, buildJsonObject {
@@ -53,19 +53,19 @@ class RouterServer(
                         put("id", route.alias); put("object", "model"); put("created", 0); put("owned_by", "pathpilot")
                     }) }
                 })
-            })
+            }).closeIfBodyUnread(session)
         }
-        if (session.uri !in setOf("/v1/chat/completions", "/v1/responses")) return error(404, "not_found", "Unknown API endpoint.")
-        if (session.method != Method.POST) return error(405, "method_not_allowed", "Use POST for this endpoint.")
-        if (session.headers["transfer-encoding"]?.isNotBlank() == true) return error(411, "length_required", "Send a JSON request with Content-Length; chunked request bodies are not supported.")
-        val length = session.headers["content-length"]?.toLongOrNull() ?: return error(411, "length_required", "Content-Length is required.")
-        if (length !in 1..MAX_REQUEST_BYTES) return error(if (length > MAX_REQUEST_BYTES) 413 else 400, "invalid_request", "JSON request body must be between 1 byte and 2 MiB.")
-        if (session.headers["content-encoding"]?.let { it != "identity" } == true) return error(415, "unsupported_media_type", "Compressed request bodies are not supported.")
-        if (session.headers["content-type"]?.substringBefore(';')?.trim()?.lowercase() != "application/json") return error(415, "unsupported_media_type", "Content-Type must be application/json.")
+        if (session.uri !in setOf("/v1/chat/completions", "/v1/responses")) return rejectBeforeBody(404, "not_found", "Unknown API endpoint.")
+        if (session.method != Method.POST) return rejectBeforeBody(405, "method_not_allowed", "Use POST for this endpoint.")
+        if (session.headers["transfer-encoding"]?.isNotBlank() == true) return rejectBeforeBody(411, "length_required", "Send a JSON request with Content-Length; chunked request bodies are not supported.")
+        val length = session.headers["content-length"]?.toLongOrNull() ?: return rejectBeforeBody(411, "length_required", "Content-Length is required.")
+        if (length !in 1..MAX_REQUEST_BYTES) return rejectBeforeBody(if (length > MAX_REQUEST_BYTES) 413 else 400, "invalid_request", "JSON request body must be between 1 byte and 2 MiB.")
+        if (session.headers["content-encoding"]?.let { it != "identity" } == true) return rejectBeforeBody(415, "unsupported_media_type", "Compressed request bodies are not supported.")
+        if (session.headers["content-type"]?.substringBefore(';')?.trim()?.lowercase() != "application/json") return rejectBeforeBody(415, "unsupported_media_type", "Content-Type must be application/json.")
         val body = try {
             json.parseToJsonElement(readBody(session.inputStream, length.toInt()).toString(Charsets.UTF_8)) as? JsonObject
-                ?: return error(400, "invalid_json", "Request body must be a JSON object.")
-        } catch (_: Exception) { return error(400, "invalid_json", "Invalid or incomplete JSON request.") }
+                ?: return rejectBeforeBody(400, "invalid_json", "Request body must be a JSON object.")
+        } catch (_: Exception) { return rejectBeforeBody(400, "invalid_json", "Invalid or incomplete JSON request.") }
         val alias = (body["model"] as? JsonPrimitive)?.contentOrNull ?: return error(400, "model_required", "A model alias is required.")
         val route = config.routes.firstOrNull { it.enabled && it.alias == alias } ?: return error(404, "model_not_found", "Unknown or disabled model alias.")
         val provider = config.providers.firstOrNull { it.enabled && it.id == route.providerId } ?: return error(503, "provider_unavailable", "The selected provider is unavailable.")
@@ -95,14 +95,16 @@ class RouterServer(
                 if (credentials.accessToken.isBlank()) { report(503); return error(503, "account_required", "Sign in to the Codex provider on the phone.") }
                 CodexBackend.prepare(if (chat) ResponseBridge.chatToResponses(routedBody) else routedBody, credentials.accessToken, credentials.accountId)
             } else {
-                if (provider.apiKey.isBlank()) { report(503); return error(503, "api_key_required", "Configure this provider's API key on the phone.") }
+                if (provider.apiKey.isBlank() && provider.kind != ProviderKind.OPENAI_COMPATIBLE) {
+                    report(503); return error(503, "api_key_required", "Configure this provider's API key on the phone.")
+                }
                 val endpoint = provider.baseUrl.trimEnd('/') + if (chat) "/chat/completions" else "/responses"
                 Request.Builder().url(endpoint)
-                    .header("Authorization", "Bearer ${provider.apiKey}")
+                    .apply { if (provider.apiKey.isNotBlank()) header("Authorization", "Bearer ${provider.apiKey.trim()}") }
                     .header("Accept", if (streaming) "text/event-stream" else "application/json")
                     .post(routedBody.toString().toRequestBody(JSON_MEDIA_TYPE)).build()
             }
-            call = transport.newCall(request)
+            call = transport.client(config.outboundProxy).newCall(request)
             activeCalls.add(call)
             val upstream = call.execute()
             if (!upstream.isSuccessful) {
@@ -170,6 +172,15 @@ class RouterServer(
     private fun error(code: Int, type: String, message: String) = jsonResponse(code, buildJsonObject {
         put("error", buildJsonObject { put("type", type); put("message", message); put("code", type) })
     }).also { if (code == 401) it.addHeader("WWW-Authenticate", "Bearer") }
+
+    /** NanoHTTPD does not drain request bodies: unread bytes must never become a new request. */
+    private fun rejectBeforeBody(code: Int, type: String, message: String) =
+        error(code, type, message).also { it.closeConnection(true) }
+
+    private fun Response.closeIfBodyUnread(session: IHTTPSession): Response = apply {
+        if (session.headers.containsKey("transfer-encoding") ||
+            session.headers["content-length"]?.trim()?.let { it != "0" } == true) closeConnection(true)
+    }
 
     private fun jsonResponse(code: Int, body: JsonObject) = newFixedLengthResponse(status(code), "application/json; charset=utf-8", body.toString()).also {
         it.addHeader("Cache-Control", "no-store")

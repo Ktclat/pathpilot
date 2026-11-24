@@ -21,16 +21,14 @@ android {
         applicationId = "dev.pathpilot.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 2
-        versionName = "0.1.1"
+        versionCode = 3
+        versionName = "0.1.2"
         ndk { abiFilters += if (uiCapture) "x86_64" else "arm64-v8a" }
     }
     buildTypes {
         debug {
             if (uiCapture) applicationIdSuffix = ".capture"
-            buildConfigField("boolean", "ALLOW_SCREENSHOTS", uiCapture.toString())
         }
-        release { buildConfigField("boolean", "ALLOW_SCREENSHOTS", "false") }
     }
     buildFeatures { compose = true; buildConfig = true }
     compileOptions {

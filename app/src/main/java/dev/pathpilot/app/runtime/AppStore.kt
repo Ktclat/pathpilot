@@ -4,12 +4,14 @@ import android.content.Context
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import android.util.AtomicFile
+import android.util.Log
 import dev.pathpilot.core.AccessKeys
 import dev.pathpilot.core.CodexCredentials
 import dev.pathpilot.core.ProviderConfig
 import dev.pathpilot.core.RouterConfig
 import dev.pathpilot.core.codex.CodexOAuthClient
 import dev.pathpilot.core.codex.CodexTokens
+import dev.pathpilot.core.network.OutboundProxyValidation
 import java.io.File
 import java.security.KeyStore
 import javax.crypto.Cipher
@@ -37,7 +39,7 @@ class AppStore private constructor(context: Context) {
     val authenticatedCodexProviders: StateFlow<Set<String>> = mutableAccounts.asStateFlow()
     private val mutableError = MutableStateFlow<String?>(null)
     val storageError: StateFlow<String?> = mutableError.asStateFlow()
-    private val oauth by lazy { CodexOAuthClient() }
+    private val oauth by lazy { CodexOAuthClient(proxyProvider = { config.value.outboundProxy }) }
 
     init {
         try {
@@ -53,9 +55,10 @@ class AppStore private constructor(context: Context) {
             } else {
                 persist(stored)
             }
-        } catch (_: Exception) {
+        } catch (error: Exception) {
             // Do not overwrite an existing file when the OS key is unavailable or data is corrupt.
-            mutableError.value = "无法读取加密配置；原文件已保留。请重试，或备份后清除应用数据重新配置。"
+            Log.e("PathPilotStore", "Configuration load failed: ${error.javaClass.simpleName}")
+            mutableError.value = "无法读取加密配置。请重启应用后重试。"
         }
     }
 
@@ -67,7 +70,8 @@ class AppStore private constructor(context: Context) {
         require(config.providers.map { it.id }.distinct().size == config.providers.size) { "供应商 ID 重复" }
         require(config.routes.map { it.alias }.distinct().size == config.routes.size) { "模型别名重复" }
         val retained = stored.codexTokens.filterKeys { id -> config.providers.any { it.id == id } }
-        commit(stored.copy(config = config, codexTokens = retained))
+        val normalized = config.copy(outboundProxy = OutboundProxyValidation.normalized(config.outboundProxy))
+        commit(stored.copy(config = normalized, codexTokens = retained))
     }
 
     @Synchronized

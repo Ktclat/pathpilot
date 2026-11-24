@@ -70,6 +70,20 @@ class CodexOAuthClientTest {
         }
     }
 
+    @Test fun refreshCannotSucceedWithoutANewAccessToken() {
+        MockWebServer().use { server ->
+            val old = CodexTokens("previous-access-secret", "previous-refresh-secret", "", "account-a", 1_000)
+            val client = CodexOAuthClient(issuer = server.url("/").toString())
+            listOf("{}", """{"access_token":""}""", """{"access_token":123}""", """{"refresh_token":"replacement-refresh-secret"}""").forEach { body ->
+                server.enqueue(json(body))
+                val error = assertThrows(CodexAuthException::class.java) { client.refresh(old) }
+                assertEquals("Invalid response from Codex authentication", error.message)
+                assertFalse(error.toString().contains("secret"))
+            }
+            assertEquals(4, server.requestCount)
+        }
+    }
+
     @Test fun errorBodiesAreNotExposedAnd401IsNotPending() {
         MockWebServer().use { server ->
             server.enqueue(MockResponse().setResponseCode(401).setBody("echoed-secret-refresh"))

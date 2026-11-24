@@ -1,6 +1,9 @@
 package dev.pathpilot.app.ui.providers
 
 import dev.pathpilot.core.ProviderKind
+import dev.pathpilot.core.ProviderConfig
+import dev.pathpilot.core.network.OutboundProxyConfig
+import dev.pathpilot.core.network.OutboundProxyMode
 import dev.pathpilot.core.providers.ProviderProbeError
 import dev.pathpilot.core.providers.ProviderProbeException
 import dev.pathpilot.core.providers.ProviderProbeResult
@@ -204,6 +207,71 @@ class ProviderEditorViewModelTest {
         val submission = requireNotNull(editor.prepareSubmission())
         assertEquals("Manual gateway", submission.provider.name)
         assertEquals(listOf("private-coding-model"), submission.selectedModels)
+    }
+
+    @Test fun `proxy change cancels in-flight probe and next request uses the selected proxy`() = runTest(dispatcher) {
+        val staleProbe = DelayedProbe()
+        val seenProxies = mutableListOf<OutboundProxyConfig>()
+        val system = OutboundProxyConfig()
+        val selected = OutboundProxyConfig(OutboundProxyMode.HTTP, "127.0.0.1", 7890)
+        val editor = ProviderEditorViewModel { proxy: OutboundProxyConfig ->
+            seenProxies += proxy
+            if (seenProxies.size == 1) staleProbe
+            else ImmediateProbe { _, _ -> ProviderProbeResult(listOf("new-path-model")) }
+        }.also(editors::add)
+        editor.begin(null, system)
+        editor.selectKind(ProviderKind.DEEPSEEK)
+        editor.setKey("proxy-test-key")
+        editor.setManualInput("manual-model")
+        editor.addManualModels()
+        editor.probe()
+        runCurrent()
+
+        editor.begin(null, selected)
+        assertEquals(1, staleProbe.cancellations)
+        staleProbe.complete(listOf("stale-model"))
+        runCurrent()
+        assertProbeReset(editor)
+        assertEquals(listOf("manual-model"), editor.state.value.draft.selectedModels)
+
+        editor.probe()
+        runCurrent()
+        assertEquals(listOf(system, selected), seenProxies)
+        assertEquals(listOf("new-path-model"), editor.state.value.draft.discoveredModels)
+    }
+
+    @Test fun `changing proxy retains prior choices without claiming a current connection test`() = runTest(dispatcher) {
+        val editor = editor { ImmediateProbe { _, _ -> ProviderProbeResult(listOf("chosen-model")) } }
+        editor.begin(null)
+        editor.selectKind(ProviderKind.DEEPSEEK)
+        editor.setKey("proxy-test-key")
+        editor.probe()
+        runCurrent()
+        editor.toggleDiscovered("chosen-model")
+
+        editor.setProxy(OutboundProxyConfig(OutboundProxyMode.SOCKS5, "127.0.0.1", 1080))
+
+        assertEquals(ProbePhase.IDLE, editor.state.value.draft.probePhase)
+        assertEquals(listOf("chosen-model"), editor.state.value.draft.discoveredModels)
+        assertEquals(listOf("chosen-model"), requireNotNull(editor.prepareSubmission()).selectedModels)
+    }
+
+    @Test fun `opening and probing existing provider needs no discard confirmation without input changes`() = runTest(dispatcher) {
+        val editor = editor { ImmediateProbe { _, _ -> ProviderProbeResult(listOf("available-model")) } }
+        val existing = ProviderConfig("existing", "Local gateway", ProviderKind.OPENAI_COMPATIBLE,
+            "http://192.168.1.2:8000/v1", "existing-test-key")
+        editor.begin(existing)
+        assertFalse(editor.hasChanges())
+        editor.probe()
+        runCurrent()
+        assertFalse(editor.hasChanges())
+        assertEquals(existing, requireNotNull(editor.prepareSubmission()).provider)
+        assertTrue(requireNotNull(editor.prepareSubmission()).selectedModels.isEmpty())
+
+        editor.setName("Changed gateway")
+        assertTrue(editor.hasChanges())
+        editor.setName(existing.name)
+        assertFalse(editor.hasChanges())
     }
 
     private fun editor(factory: () -> ProviderModelProbe = {

@@ -15,8 +15,8 @@ class ProviderSetupTest {
         assertTrue(validate("https://example.com/v1", "  secret-key  ", " 测试供应商 ").isValid)
     }
 
-    @Test fun onlyAbsoluteHttpsHostWithoutUserInfoQueryFragmentOrControlsIsAccepted() {
-        listOf("example.com/v1", "/v1", "http://example.com/v1", "https:///", "https://user:pass@example.com/v1",
+    @Test fun onlyAbsoluteHttpOrHttpsWithoutUserInfoQueryFragmentOrControlsIsAccepted() {
+        listOf("example.com/v1", "/v1", "ftp://example.com/v1", "https:///", "https://user:pass@example.com/v1",
             "https://@example.com/v1", "https://example.com/v1?key=secret", "https://example.com/v1#fragment",
             "https://example.com/v1?", "https://example.com/v1#", "https://example.com/\nv1", "https://example.com\\v1",
             "https://example.com/some path").forEach { url ->
@@ -27,6 +27,9 @@ class ProviderSetupTest {
         }
         assertTrue(validate("https://localhost:8443/custom").isValid)
         assertTrue(validate("https://[::1]:8443/custom").isValid)
+        assertTrue(validate("http://127.0.0.1:11434/v1").isValid)
+        assertTrue(validate("http://192.168.1.20:11434/v1").isValid)
+        assertTrue(validate("http://custom.example/v1").isValid)
     }
 
     @Test fun pastedOperationEndpointsGiveActionableFieldError() {
@@ -63,5 +66,11 @@ class ProviderSetupTest {
         assertTrue(result.isValid)
         assertEquals(CodexBackend.BASE_URL, result.normalizedBaseUrl)
         assertFalse(ProviderSetup.validate("", "", "", ProviderKind.CODEX).isValid)
+    }
+
+    @Test fun onlyCompatibleApiAllowsAnEmptyKeyWhileSuppliedKeysRemainValidated() {
+        assertTrue(ProviderSetup.validate("Local Ollama", "http://127.0.0.1:11434/v1", "", ProviderKind.OPENAI_COMPATIBLE).isValid)
+        assertNotNull(ProviderSetup.validate("DeepSeek", "https://api.deepseek.com/v1", "", ProviderKind.DEEPSEEK).keyError)
+        assertNotNull(ProviderSetup.validate("Gateway", "http://127.0.0.1:11434/v1", "bad key", ProviderKind.OPENAI_COMPATIBLE).keyError)
     }
 }

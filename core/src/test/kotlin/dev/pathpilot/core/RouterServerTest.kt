@@ -5,6 +5,8 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.RequestBody
+import okio.BufferedSink
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
@@ -59,6 +61,29 @@ class RouterServerTest {
         assertEquals("deepseek-chat", Json.parseToJsonElement(forwarded.body.readUtf8()).jsonObject["model"]!!.jsonPrimitive.content)
     }
 
+    @Test fun unauthenticatedCompatibleHttpUpstreamStillRequiresLocalAccessKey() {
+        config = config.copy(providers = config.providers.map { it.copy(kind = ProviderKind.OPENAI_COMPATIBLE, apiKey = "") })
+        request("/v1/chat/completions", """{"model":"fast","messages":[]}""", authorization = null).use { assertEquals(401, it.code) }
+        assertEquals(0, upstream.requestCount)
+        upstream.enqueue(MockResponse().setBody("""{"choices":[{"message":{"content":"local answer"}}]}"""))
+        request("/v1/chat/completions", """{"model":"fast","messages":[{"role":"user","content":"hello"}]}""").use {
+            assertEquals(200, it.code)
+            assertTrue(it.body!!.string().contains("local answer"))
+        }
+        val forwarded = upstream.takeRequest(1, TimeUnit.SECONDS)!!
+        assertEquals("/v1/chat/completions", forwarded.path)
+        assertNull(forwarded.getHeader("Authorization"))
+    }
+
+    @Test fun deepSeekStillRejectsMissingApiKeyBeforeUpstream() {
+        config = config.copy(providers = config.providers.map { it.copy(apiKey = "") })
+        request("/v1/chat/completions", """{"model":"fast","messages":[]}""").use {
+            assertEquals(503, it.code)
+            assertTrue(it.body!!.string().contains("api_key_required"))
+        }
+        assertEquals(0, upstream.requestCount)
+    }
+
     @Test fun streamsSseWithoutCollectingAndDoesNotRetry() {
         val sse = "data: {\"choices\":[{\"delta\":{\"content\":\"one\"}}]}\n\ndata: [DONE]\n\n"
         upstream.enqueue(MockResponse().setHeader("Content-Type", "text/event-stream").setChunkedBody(sse, 7))
@@ -81,6 +106,52 @@ class RouterServerTest {
         request("/v1/chat/completions", "{").use { assertEquals(400, it.code) }
         request("/v1/chat/completions", "x".repeat(2 * 1024 * 1024 + 1)).use { assertEquals(413, it.code) }
         assertEquals(0, upstream.requestCount)
+    }
+
+    @Test fun earlyRejectionsCloseUnreadBodiesAndTheSameClientCanContinue() {
+        val payload = """{"model":"fast","messages":[]}"""
+        fun builder(path: String = "/v1/chat/completions") = Request.Builder()
+            .url("http://127.0.0.1:${router.listeningPort}$path")
+            .header("Authorization", "Bearer $key")
+            .post(payload.toRequestBody("application/json".toMediaType()))
+        val chunked = object : RequestBody() {
+            override fun contentType() = "application/json".toMediaType()
+            override fun writeTo(sink: BufferedSink) { sink.writeUtf8(payload) }
+        }
+        val cases = listOf(
+            builder().removeHeader("Authorization").build() to 401,
+            builder("/unknown").build() to 404,
+            builder().method("PUT", payload.toRequestBody("application/json".toMediaType())).build() to 405,
+            builder().post(payload.toRequestBody("text/plain".toMediaType())).build() to 415,
+            builder().header("Content-Encoding", "gzip").build() to 415,
+            builder().post("".toRequestBody("application/json".toMediaType())).build() to 400,
+            builder().post(chunked).build() to 411,
+            builder().post("{".toRequestBody("application/json".toMediaType())).build() to 400,
+        )
+        for ((invalid, status) in cases) {
+            client.newCall(invalid).execute().use {
+                assertEquals(status, it.code)
+                assertEquals("close", it.header("Connection"))
+                it.body!!.string()
+            }
+            request("/v1/models").use { assertEquals(200, it.code); assertTrue(it.body!!.string().contains("fast")) }
+        }
+        assertEquals(0, upstream.requestCount)
+    }
+
+    @Test fun errorsAfterCompleteBodyReadKeepConnectionUsable() {
+        request("/v1/chat/completions", """{"model":"unknown","messages":[]}""").use {
+            assertEquals(404, it.code)
+            assertNotEquals("close", it.header("Connection"))
+            it.body!!.string()
+        }
+        upstream.enqueue(MockResponse().setResponseCode(429).setBody("rate limited"))
+        request("/v1/chat/completions", """{"model":"fast","messages":[]}""").use {
+            assertEquals(429, it.code)
+            assertNotEquals("close", it.header("Connection"))
+            it.body!!.string()
+        }
+        request("/v1/models").use { assertEquals(200, it.code); it.body!!.string() }
     }
 
     @Test fun upstreamErrorBodyIsRedactedAndStatusPreserved() {

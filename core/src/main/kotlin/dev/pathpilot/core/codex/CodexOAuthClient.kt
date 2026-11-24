@@ -1,6 +1,8 @@
 package dev.pathpilot.core.codex
 
 import kotlinx.serialization.Serializable
+import dev.pathpilot.core.network.OutboundHttpClientFactory
+import dev.pathpilot.core.network.OutboundProxyConfig
 import kotlinx.serialization.json.*
 import okhttp3.FormBody
 import okhttp3.MediaType.Companion.toMediaType
@@ -55,15 +57,16 @@ class CodexOAuthClient(
     issuer: String = DEFAULT_ISSUER,
     private val clientId: String = CLIENT_ID,
     private val nowEpochSeconds: () -> Long = { System.currentTimeMillis() / 1000 },
+    proxyProvider: () -> OutboundProxyConfig = { OutboundProxyConfig() },
 ) {
     private val issuer = issuer.trimEnd('/')
-    private val client = httpClient.newBuilder()
+    private val clients = OutboundHttpClientFactory(httpClient.newBuilder()
         .followRedirects(false)
         .followSslRedirects(false)
         .retryOnConnectionFailure(false)
         .connectTimeout(15, TimeUnit.SECONDS)
         .callTimeout(45, TimeUnit.SECONDS)
-        .build()
+        .build(), proxyProvider)
 
     init {
         require(this.issuer.startsWith("https://") || this.issuer.startsWith("http://localhost:") ||
@@ -93,7 +96,7 @@ class CodexOAuthClient(
             put("device_auth_id", challenge.deviceAuthId)
             put("user_code", challenge.userCode)
         })
-        val result = client.newCall(request).execute().use { response ->
+        val result = clients.client().newCall(request).execute().use { response ->
             // This is the Codex-specific device protocol, not RFC 8628's 400 authorization_pending.
             if (response.code == 403 || response.code == 404) return DeviceLoginResult.Pending
             response.readJson("Poll device login")
@@ -130,7 +133,7 @@ class CodexOAuthClient(
         .build()
 
     private fun executeJson(request: Request, operation: String): JsonObject =
-        client.newCall(request).execute().use { it.readJson(operation) }
+        clients.client().newCall(request).execute().use { it.readJson(operation) }
 
     private fun Response.readJson(operation: String): JsonObject {
         if (!isSuccessful) {
@@ -155,7 +158,7 @@ class CodexOAuthClient(
     }
 
     private fun parseTokens(json: JsonObject, previous: CodexTokens? = null): CodexTokens {
-        val accessToken = json.string("access_token") ?: previous?.accessToken ?: throw invalidResponse()
+        val accessToken = json.string("access_token") ?: throw invalidResponse()
         val idToken = json.string("id_token") ?: previous?.idToken.orEmpty()
         val accessClaims = decodeClaims(accessToken)
         val idClaims = decodeClaims(idToken)
@@ -181,7 +184,7 @@ class CodexOAuthClient(
     } catch (_: Exception) { JsonObject(emptyMap()) }
 
     private fun JsonObject.string(key: String): String? =
-        (get(key) as? JsonPrimitive)?.contentOrNull?.takeIf { it.isNotBlank() }
+        (get(key) as? JsonPrimitive)?.takeIf { it.isString }?.contentOrNull?.takeIf { it.isNotBlank() }
 
     private fun JsonObject.requiredString(key: String): String = string(key) ?: throw invalidResponse()
     private fun invalidResponse() = CodexAuthException(null, "Invalid response from Codex authentication")

@@ -1,6 +1,8 @@
 package dev.pathpilot.core.providers
 
 import dev.pathpilot.core.ProviderKind
+import dev.pathpilot.core.network.OutboundHttpClientFactory
+import dev.pathpilot.core.network.OutboundProxyConfig
 import kotlinx.serialization.json.*
 import okhttp3.Call
 import okhttp3.OkHttpClient
@@ -24,29 +26,32 @@ enum class ProviderProbeError {
 class ProviderProbeException(val kind: ProviderProbeError, val userMessage: String) : IOException(userMessage)
 
 /** Only lists models; never sends a billable generation request. A cancelled instance is not reusable. */
-class ProviderModelsClient internal constructor(client: OkHttpClient, private val allowLocalHttpTests: Boolean) {
-    constructor(client: OkHttpClient = defaultClient()) : this(client, false)
-
-    private val transport = client.newBuilder()
+class ProviderModelsClient(
+    client: OkHttpClient = defaultClient(),
+    proxyProvider: () -> OutboundProxyConfig = { OutboundProxyConfig() },
+) {
+    private val transport = OutboundHttpClientFactory(client.newBuilder()
         .retryOnConnectionFailure(false).followRedirects(false).followSslRedirects(false)
         .callTimeout(capTimeout(client.callTimeoutMillis, 10_000), TimeUnit.MILLISECONDS)
         .connectTimeout(capTimeout(client.connectTimeoutMillis, 15_000), TimeUnit.MILLISECONDS)
         .readTimeout(capTimeout(client.readTimeoutMillis, 15_000), TimeUnit.MILLISECONDS)
         .writeTimeout(capTimeout(client.writeTimeoutMillis, 15_000), TimeUnit.MILLISECONDS)
-        .build()
+        .build(), proxyProvider)
     private val cancelled = AtomicBoolean(false)
     private val calls = ConcurrentHashMap.newKeySet<Call>()
     private val json = Json { ignoreUnknownKeys = true }
 
     fun probe(baseUrl: String, apiKey: String): ProviderProbeResult {
         if (cancelled.get()) throw failure(ProviderProbeError.CANCELLED)
-        val validation = ProviderSetup.validateInternal("provider", baseUrl, apiKey, ProviderKind.OPENAI_COMPATIBLE, allowLocalHttpTests)
+        val validation = ProviderSetup.validateInternal("provider", baseUrl, apiKey, ProviderKind.OPENAI_COMPATIBLE)
         if (!validation.isValid) throw ProviderProbeException(ProviderProbeError.INVALID_CONFIGURATION,
             validation.urlError ?: validation.keyError ?: "请检查供应商配置")
         val request = Request.Builder().url(validation.normalizedBaseUrl + "/models")
-            .header("Authorization", "Bearer ${apiKey.trim()}")
+            .apply { if (apiKey.isNotBlank()) header("Authorization", "Bearer ${apiKey.trim()}") }
             .header("Accept", "application/json").get().build()
-        val call = transport.newCall(request)
+        val call = try { transport.client().newCall(request) } catch (_: IllegalArgumentException) {
+            throw ProviderProbeException(ProviderProbeError.INVALID_CONFIGURATION, "代理配置无效，请检查代理主机和端口")
+        }
         calls.add(call)
         try {
             if (cancelled.get()) { call.cancel(); throw failure(ProviderProbeError.CANCELLED) }
@@ -55,6 +60,7 @@ class ProviderModelsClient internal constructor(client: OkHttpClient, private va
                     401 -> throw failure(ProviderProbeError.UNAUTHORIZED)
                     403 -> throw failure(ProviderProbeError.FORBIDDEN)
                     404, 405 -> throw failure(ProviderProbeError.MODELS_UNSUPPORTED)
+                    407 -> throw ProviderProbeException(ProviderProbeError.UPSTREAM, "代理需要认证，当前仅支持无认证代理")
                     429 -> throw failure(ProviderProbeError.RATE_LIMITED)
                     in 200..299 -> Unit
                     else -> throw failure(ProviderProbeError.UPSTREAM)
@@ -93,7 +99,7 @@ class ProviderModelsClient internal constructor(client: OkHttpClient, private va
         } catch (_: IOException) {
             throw failure(if (cancelled.get() || call.isCanceled()) ProviderProbeError.CANCELLED else ProviderProbeError.NETWORK)
         } catch (_: Exception) {
-            throw failure(ProviderProbeError.INVALID_RESPONSE)
+            throw failure(ProviderProbeError.UPSTREAM)
         } finally { calls.remove(call) }
     }
 
@@ -112,17 +118,17 @@ class ProviderModelsClient internal constructor(client: OkHttpClient, private va
 
         private fun capTimeout(value: Int, maximum: Int): Long = if (value in 1..maximum) value.toLong() else maximum.toLong()
         private fun failure(kind: ProviderProbeError): ProviderProbeException = ProviderProbeException(kind, when (kind) {
-            ProviderProbeError.MODELS_UNSUPPORTED -> "该供应商未提供模型列表接口，仍可手动填写模型 ID 并保存"
-            ProviderProbeError.UNAUTHORIZED -> "认证失败，请检查 API Key 是否正确或已失效"
-            ProviderProbeError.FORBIDDEN -> "当前凭据没有读取模型列表的权限，请检查账号权限；也可手动填写模型 ID"
-            ProviderProbeError.RATE_LIMITED -> "供应商暂时限制请求频率，请稍后重试；也可手动填写模型 ID"
-            ProviderProbeError.TIMEOUT -> "连接测试超时，请检查网络或稍后重试"
-            ProviderProbeError.NETWORK -> "无法连接供应商，请检查网络、API 地址和 HTTPS 证书"
-            ProviderProbeError.INVALID_RESPONSE -> "供应商返回的模型列表格式不受支持，请手动填写模型 ID"
-            ProviderProbeError.RESPONSE_TOO_LARGE -> "模型列表超过 1 MiB 或 500 个模型，请手动填写所需模型 ID"
-            ProviderProbeError.INVALID_CONFIGURATION -> "请检查 API 地址和 API Key"
+            ProviderProbeError.MODELS_UNSUPPORTED -> "此服务未提供模型列表"
+            ProviderProbeError.UNAUTHORIZED -> "API Key 无效或已过期"
+            ProviderProbeError.FORBIDDEN -> "当前账号无权读取模型列表"
+            ProviderProbeError.RATE_LIMITED -> "请求过于频繁，请稍后重试"
+            ProviderProbeError.TIMEOUT -> "连接测试超时"
+            ProviderProbeError.NETWORK -> "连接失败，请检查地址或代理"
+            ProviderProbeError.INVALID_RESPONSE -> "无法识别模型列表格式"
+            ProviderProbeError.RESPONSE_TOO_LARGE -> "模型列表超过 1 MiB 或 500 个模型"
+            ProviderProbeError.INVALID_CONFIGURATION -> "API 地址或 API Key 无效"
             ProviderProbeError.CANCELLED -> "已取消连接测试"
-            ProviderProbeError.UPSTREAM -> "供应商未能返回模型列表，请检查 API 地址或稍后重试；也可手动填写模型 ID"
+            ProviderProbeError.UPSTREAM -> "服务未能返回模型列表"
         })
     }
 }

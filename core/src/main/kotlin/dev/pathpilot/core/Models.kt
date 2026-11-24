@@ -1,6 +1,7 @@
 package dev.pathpilot.core
 
 import kotlinx.serialization.Serializable
+import dev.pathpilot.core.network.OutboundProxyConfig
 import java.security.MessageDigest
 import java.security.SecureRandom
 
@@ -34,6 +35,7 @@ data class RouterConfig(
     val accessKey: String,
     val providers: List<ProviderConfig> = emptyList(),
     val routes: List<RouteConfig> = emptyList(),
+    val outboundProxy: OutboundProxyConfig = OutboundProxyConfig(),
 ) {
     override fun toString() = "RouterConfig(port=$port, accessKey=<redacted>, providers=$providers, routes=$routes)"
 }

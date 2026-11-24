@@ -1,5 +1,6 @@
 package dev.pathpilot.app
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.pathpilot.app.runtime.AppStore
@@ -74,10 +75,11 @@ class CodexLoginViewModel : ViewModel() {
     private fun startAuthorization() {
         job?.cancel()
         val providerId = mutableState.value.providerId ?: return
+        val appStore = store ?: return
         mutableState.value = CodexLoginUiState(providerId, CodexLoginPhase.REQUESTING)
         job = viewModelScope.launch {
             try {
-                val client = CodexOAuthClient()
+                val client = CodexOAuthClient(proxyProvider = { appStore.config.value.outboundProxy })
                 val challenge = withContext(Dispatchers.IO) { client.beginDeviceLogin() }
                 mutableState.value = CodexLoginUiState(providerId, CodexLoginPhase.POLLING, challenge)
                 while (isActive) {
@@ -95,10 +97,11 @@ class CodexLoginViewModel : ViewModel() {
                 throw cancelled
             } catch (error: Exception) {
                 currentCoroutineContext().ensureActive()
+                Log.e("PathPilotLogin", "Authorization failed: ${error.javaClass.simpleName}")
                 mutableState.value = mutableState.value.copy(
                     phase = CodexLoginPhase.AUTH_ERROR,
                     error = if (error is CodexAuthException) error.message
-                        else "无法完成授权，请检查网络后重试。",
+                        else "授权失败，请重试。",
                 )
             }
         }
@@ -118,11 +121,12 @@ class CodexLoginViewModel : ViewModel() {
             mutableState.value = mutableState.value.copy(phase = CodexLoginPhase.COMPLETE, challenge = null)
         } catch (cancelled: CancellationException) {
             throw cancelled
-        } catch (_: Exception) {
+        } catch (error: Exception) {
             currentCoroutineContext().ensureActive()
+            Log.e("PathPilotLogin", "Credential save failed: ${error.javaClass.simpleName}")
             mutableState.value = mutableState.value.copy(
                 phase = CodexLoginPhase.SAVE_ERROR,
-                error = "OpenAI 授权已完成，但本机加密保存失败，原有授权已保留。请检查设备存储状态后重试保存，无需重新登录。",
+                error = "授权已完成，但保存失败。请重试保存。",
             )
         }
     }
