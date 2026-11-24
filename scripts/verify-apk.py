@@ -16,7 +16,7 @@ with zipfile.ZipFile(apk) as archive:
     if abis != {'arm64-v8a'}:
         raise SystemExit(f'Expected arm64-v8a only, found {sorted(abis)}')
 
-aapt = pathlib.Path(os.environ['ANDROID_HOME']) / 'build-tools/35.0.0/aapt'
+aapt = pathlib.Path(os.environ['ANDROID_HOME']) / 'build-tools/36.0.0/aapt'
 badging = subprocess.check_output([str(aapt), 'dump', 'badging', str(apk)], text=True)
 if not re.search(r"^package: name='dev\.pathpilot\.app' ", badging, re.MULTILINE):
     raise SystemExit('Unexpected package identity: refusing screenshot or unrelated APK')

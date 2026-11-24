@@ -13,10 +13,10 @@ on:
         type: boolean
         default: false
       release_tag:
-        description: '新预发布标签，例如 v0.1.0-dev.1；不会覆盖已有 Release'
+        description: '新预发布标签，例如 v0.1.1-dev.1；不会覆盖已有 Release'
         required: true
         type: string
-        default: v0.1.0-dev.1
+        default: v0.1.1-dev.1
 
 permissions:
   contents: read
@@ -42,13 +42,13 @@ jobs:
         run: bash scripts/setup-ci-android.sh
       - uses: gradle/actions/setup-gradle@v4
       - name: Test, build and lint
-        run: ./gradlew --no-daemon :core:test :app:assembleDebug :app:lintDebug
+        run: ./gradlew --no-daemon :core:test :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
       - name: Verify and package ARM64 APK
         id: package
         shell: bash
         run: |
           set -euo pipefail
-          sdk_tools="$ANDROID_HOME/build-tools/35.0.0"
+          sdk_tools="$ANDROID_HOME/build-tools/36.0.0"
           apk=app/build/outputs/apk/debug/app-debug.apk
           "$sdk_tools/apksigner" verify --verbose "$apk"
           badging="$($sdk_tools/aapt dump badging "$apk")"
@@ -79,6 +79,8 @@ jobs:
           path: |
             core/build/reports/tests/
             core/build/test-results/test/
+            app/build/reports/tests/
+            app/build/test-results/
             app/build/reports/lint-results-debug.*
           retention-days: 30
 
@@ -110,7 +112,7 @@ jobs:
         run: |
           set -euo pipefail
           [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+-dev\.[0-9]+$ ]] || {
-            echo 'Use a development tag such as v0.1.0-dev.1.' >&2; exit 1;
+            echo 'Use a development tag such as v0.1.1-dev.1.' >&2; exit 1;
           }
           [[ "$RELEASE_TAG" == "v${APP_VERSION}-dev."* ]] || {
             echo 'Release tag must match the APK version.' >&2; exit 1;

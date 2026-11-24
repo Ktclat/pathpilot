@@ -33,20 +33,20 @@ export PATH="$JAVA_HOME/bin:$PATH"
 
 # SHA256 from the official Gradle distribution checksum; Android archive was
 # checked against Google's repository2 XML checksum before pinning its SHA256.
-if [[ ! -x "$tools_dir/gradle-8.9/bin/gradle" ]]; then
-  fetch_verified 'https://services.gradle.org/distributions/gradle-8.9-bin.zip' \
-    "$tools_dir/downloads/gradle-8.9-bin.zip" \
-    'd725d707bfabd4dfdc958c624003b3c80accc03f7037b5122c4b1d0ef15cecab'
-  unzip -q "$tools_dir/downloads/gradle-8.9-bin.zip" -d "$tools_dir"
+if [[ ! -x "$tools_dir/gradle-9.3.1/bin/gradle" ]]; then
+  fetch_verified 'https://services.gradle.org/distributions/gradle-9.3.1-bin.zip' \
+    "$tools_dir/downloads/gradle-9.3.1-bin.zip" \
+    'b266d5ff6b90eada6dc3b20cb090e3731302e553a27c5d3e4df1f0d76beaff06'
+  unzip -q "$tools_dir/downloads/gradle-9.3.1-bin.zip" -d "$tools_dir"
 fi
-if [[ ! -x "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]]; then
-  fetch_verified 'https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip' \
-    "$tools_dir/downloads/android-cli.zip" \
-    '2d2d50857e4eb553af5a6dc3ad507a17adf43d115264b1afc116f95c92e5e258'
+if [[ ! -x "$ANDROID_HOME/cmdline-tools/23.0/bin/sdkmanager" ]]; then
+  fetch_verified 'https://dl.google.com/android/repository/commandlinetools-linux-16111833_latest.zip' \
+    "$tools_dir/downloads/android-cli-16111833.zip" \
+    '0877a1d048fe4a24efe2eff536ca4223f7adeb58648bb81909d33c446918cfa8'
   mkdir -p "$ANDROID_HOME/cmdline-tools"
   staging_dir="$(mktemp -d "$tools_dir/android-cli.XXXXXX")"
-  unzip -q "$tools_dir/downloads/android-cli.zip" -d "$staging_dir"
-  mv "$staging_dir/cmdline-tools" "$ANDROID_HOME/cmdline-tools/latest"
+  unzip -q "$tools_dir/downloads/android-cli-16111833.zip" -d "$staging_dir"
+  mv "$staging_dir/cmdline-tools" "$ANDROID_HOME/cmdline-tools/23.0"
   rmdir "$staging_dir"
 fi
 
@@ -78,9 +78,9 @@ fi
 
 # Setup authorization includes accepting the Android SDK dependency license.
 # subprocess keeps sdkmanager's actual exit status (unlike `yes | ...`).
-python3 - "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "--sdk_root=$ANDROID_HOME" "${sdk_proxy[@]}" <<'PY'
+python3 - "$ANDROID_HOME/cmdline-tools/23.0/bin/sdkmanager" "--sdk_root=$ANDROID_HOME" "${sdk_proxy[@]}" <<'PY'
 import subprocess,sys
-args=sys.argv[1:]+['platforms;android-35','build-tools;35.0.0','platform-tools']
+args=sys.argv[1:]+['platforms;android-37.0','build-tools;36.0.0','platform-tools']
 result=subprocess.run(args,input='y\n'*20,text=True)
 raise SystemExit(result.returncode)
 PY
@@ -96,7 +96,7 @@ fi
   printf 'export GRADLE_USER_HOME=%q\n' "$GRADLE_USER_HOME"
   printf 'export ANDROID_HOME=%q\n' "$ANDROID_HOME"
   printf 'export ANDROID_USER_HOME=%q\n' "$ANDROID_USER_HOME"
-  printf 'export PATH=%q:"$PATH"\n' "$JAVA_HOME/bin:$tools_dir/gradle-8.9/bin:$ANDROID_HOME/platform-tools"
+  printf 'export PATH=%q:"$PATH"\n' "$JAVA_HOME/bin:$tools_dir/gradle-9.3.1/bin:$ANDROID_HOME/platform-tools"
   if ((${#gradle_proxy[@]})); then
     # GRADLE_OPTS is interpreted by the Gradle launcher; quote each JVM argument.
     opts=''
@@ -105,7 +105,7 @@ fi
   fi
 } > "$tools_dir/pathpilot-env.sh"
 
-"$tools_dir/gradle-8.9/bin/gradle" "${gradle_proxy[@]}" --version
+"$tools_dir/gradle-9.3.1/bin/gradle" "${gradle_proxy[@]}" --version
 "$ANDROID_HOME/platform-tools/adb" version
 printf '\nToolchains ready. For each shell: source %s/pathpilot-env.sh\n' "$tools_dir"
 printf 'Build from %s with: ./gradlew :core:test :app:assembleDebug\n' "$repo_dir"
