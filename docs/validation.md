@@ -30,6 +30,8 @@ $ANDROID_HOME/build-tools/36.0.0/apksigner verify artifacts/PathPilot-0.1.4-arm6
 
 工具链与 0.1.3 相同。Lint 剩余项为目标 SDK、依赖版本和 WakeLock 释放/超时建议。
 
+代码提交 `5c1b3ee` 的 [GitHub Actions](https://github.com/Ktclat/pathpilot/actions/runs/45440622128) 已成功，耗时 2 分 46 秒；测试、构建、Lint、ARM64 校验和产物上传均通过。
+
 本地交付包：`artifacts/PathPilot-0.1.4-arm64.apk`。SHA-256：
 
 ```text
@@ -42,6 +44,18 @@ cd8ee32083e3242a9707029edce584c669cc90538d1c8dbe59a0119fa6c8e2d3
 
 初次包实际通过了地址选择、空模型启动、两个私网 IP 的 `/health` 返回 200、移除所选地址后自动回退。随后发现真实关停失败：UI 已关闭、Android 服务已销毁，但同一 capture 进程仍监听 8317，新的健康请求继续成功。
 
-根因是清理段首个 `withContext(NonCancellable + Main)` 返回已取消 IO 上下文时抛出取消，跳过了 listener 和锁释放，完成兜底又提前更新关闭状态。修复将整个释放序列置于不切换 dispatcher 的 `withContext(NonCancellable)` 内，并把兜底限定为协程 body 从未进入的情况。新增的端口关闭回归已通过；修复包正在进行同进程关闭/重开复验，结果将补入 [截图记录](../artifacts/screenshots/v0.1.4/README.md)。
+根因是清理段首个 `withContext(NonCancellable + Main)` 返回已取消 IO 上下文时抛出取消，跳过了 listener 和锁释放，完成兜底又提前更新关闭状态。修复将整个释放序列置于不切换 dispatcher 的 `withContext(NonCancellable)` 内，并把兜底限定为协程 body 从未进入的情况。
+
+最终截图包 SHA-256 为 `ee8789903b6b5afda8c7b77e6e032b81974cb727e630c2903b06afde5f07162b`。在同一进程（PID 3082）中完成两轮开启、关闭复验：
+
+| 阶段 | 监听与健康检查 | 唤醒锁 |
+| --- | --- | --- |
+| 初始关闭 | 8317 无监听；转发的健康请求无法连接 | 无 PathPilot 锁 |
+| 第一次开启 | 两个本机 IPv4 地址及 adb 转发的 `/health` 均返回 200 | 持有 `PathPilot:LanRouter` |
+| 第一次关闭 | 8317 无监听；转发的健康请求无法连接 | PathPilot 锁已释放 |
+| 第二次开启 | 相同端口成功重用；两地址及转发健康请求均返回 200 | 重新持有 PathPilot 锁 |
+| 第二次关闭 | 8317 无监听；转发的健康请求无法连接 | PathPilot 锁已释放 |
+
+最终包还验证了关闭共享时的地址刷新：选择 `.2` 后移除该地址，页面自动回退 `.1`，多地址入口随之消失，不需重新开启服务。三张 [实际运行截图及测试条件](../artifacts/screenshots/v0.1.4/README.md)一并保存。界面地址选择只改变展示与复制内容，两个地址都由同一监听器提供服务。
 
 MCP 本轮仅研究并写入 [后续范围](mcp-roadmap.md)，未集成 MCP SDK 或提供 MCP 端点。真实多网络手机、VPN 入站互访及真实账号调用不计入本轮验证结果。
