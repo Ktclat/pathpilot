@@ -49,7 +49,7 @@ source /workspace/toolchains/pathpilot-env.sh
 
 普通安装包保持防截屏。云端截图使用独立测试开关 `./gradlew -PuiCapture=true :app:assembleDebug`，临时生成供当前 x86_64 Android 模拟器使用的 `dev.pathpilot.app.capture` 调试应用，并允许截屏。它与正常应用的数据及 Keystore 隔离，不用于真实账号或交付；该开关禁止 Release 任务。截完后执行不带该参数的常规构建，即恢复 ARM64 和防截屏配置。
 
-截图直接来自 Android 模拟器运行中的界面，不是设计稿；新版图片位于 `artifacts/screenshots/v0.1.1/`，首版截图保留在 `artifacts/screenshots/`。实体 ARM64 手机运行和网络联调仍单独验证。
+截图直接来自 Android 模拟器运行中的界面，不是设计稿；新版图片与逐项说明见 [0.1.1 模拟器截图](artifacts/screenshots/v0.1.1/README.md)，首版截图保留在 `artifacts/screenshots/`。实体 ARM64 手机运行和网络联调仍单独验证。
 
 测试使用本机 MockWebServer 和真实 HTTP 路由监听，覆盖鉴权、路由、SSE、订阅请求适配及 OAuth 刷新。它们不会访问付费推理服务。实际测试结果与尚未完成的设备/账号验证见 [验证记录](docs/validation.md)。
 

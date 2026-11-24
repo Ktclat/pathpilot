@@ -9,7 +9,7 @@
 - 启动窗口、状态栏、导航栏随明暗主题调整。图标统一为 Material 线框风格，PathPilot 的 P 形路径标识用于页面标题、启动器与共享通知。
 - 提供自适应图标和 Android 13+ monochrome 图层；主题图标是否启用由系统启动器设置决定。
 
-依赖使用 Compose BOM `2026.09.00` 的 1.12.1 基础组件，并明确指定 Material 3 `1.5.0`。官方 AAR 元数据要求 compile SDK 37 / AGP 9.1.1，因此工具链同步升级；minSdk 26、targetSdk 35 和 ARM64 交付范围保持不变。
+依赖使用 Compose BOM `2026.09.00` 的 1.12.1 基础组件，并明确指定 Material 3 `1.5.0`。官方 AAR 元数据要求 compile SDK 37 / AGP 至少 9.1.0；项目使用支持 SDK 37 的 AGP 9.1.1，因此工具链同步升级；minSdk 26、targetSdk 35 和 ARM64 交付范围保持不变。
 
 一手依据：[Material 3 1.5.0 官方源码包](https://dl.google.com/dl/android/maven2/androidx/compose/material3/material3/1.5.0/material3-1.5.0-sources.jar)、[官方 Android 组件包](https://dl.google.com/dl/android/maven2/androidx/compose/material3/material3-android/1.5.0/material3-android-1.5.0.aar)、[Compose 动态配色文档](https://developer.android.com/develop/ui/compose/designsystems/material3#dynamic_color)。版本能力已通过前两个实际发布文件核实。
 

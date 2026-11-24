@@ -1,64 +1,60 @@
-# 验证记录
+# 0.1.1 验证记录
 
-日期：2026-11-24（香港时间）。本文记录本地 `0.1.0` 开发版 APK 和模拟器验证结果；远程 Actions 与 GitHub Release 状态以仓库运行记录和发布页为准。正式长期签名版本尚未发布。
+日期：2026-11-24（香港时间）。本文记录 Material 3 Expressive / Monet 和供应商配置改版；[0.1.0 历史验证](validation-0.1.0.md)单独保留。
 
-## 构建与核心行为
+## 构建与自动测试
 
-实际执行：
+实际执行并成功退出：
 
 ```bash
-bash scripts/bootstrap-cloud.sh
 source /workspace/toolchains/pathpilot-env.sh
-./gradlew :core:test :app:assembleDebug :app:lintDebug
+./gradlew --no-daemon :core:test :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
+python3 scripts/verify-apk.py artifacts/PathPilot-0.1.1-arm64.apk
+$ANDROID_HOME/build-tools/36.0.0/apksigner verify --verbose artifacts/PathPilot-0.1.1-arm64.apk
 ```
 
-最终组合命令成功退出。完整 JDK 17、SDK 35、Build Tools 35.0.0、Gradle 8.9 均已安装并用于实际构建；云端安装/启动说明已保存至环境配置草稿，发布仍由用户在环境设置完成。没有验证新任务恢复后的环境。
+使用 JDK 17、SDK 37.0、Build Tools 36.0.0、Gradle 9.3.1、AGP 9.1.1、Kotlin 2.2.20。云端引导脚本和 CI SDK 安装脚本均在本环境实际执行成功。SDK XML v4 兼容提示、AGP 旧 Kotlin/DSL 迁移提示和只读系统目录的遥测提示仍可出现在日志中；未抑制这些提示，组合构建成功。
 
 | 验证 | 结果 |
 | --- | --- |
-| `RouterServerTest` | 13 通过，0 失败，0 跳过 |
-| `ResponseBridgeTest` | 5 通过，0 失败，0 跳过 |
-| `CodexOAuthClientTest` | 5 通过，0 失败，0 跳过 |
-| `CodexBackendTest` | 3 通过，0 失败，0 跳过 |
-| `assembleDebug` | 成功，APK 已生成 |
-| `lintDebug` | 0 错误，1 条 WakeLock 超时建议 |
-| `apksigner verify --verbose` | APK v2 签名验证通过 |
-| APK manifest 检查 | `dev.pathpilot.app`，版本 0.1.0，minSdk 26，targetSdk 35 |
+| 既有 HTTP 路由 / SSE / Codex OAuth 与转换 | 26 项通过 |
+| 供应商校验 / 模型探测 / 自动路由 | 22 项通过 |
+| 供应商编辑 ViewModel | 6 项通过 |
+| 测试总计 | **54 通过，0 失败，0 跳过** |
+| Android Lint | **0 错误、10 条建议** |
+| ARM64 APK | 构建成功，ZIP 完整性和 APK v2 签名验证通过 |
+| 包身份和 ABI | `dev.pathpilot.app`，仅 `arm64-v8a` |
+| APK 版本及系统范围 | `0.1.1` / versionCode 2，minSdk 26，targetSdk 35 |
 
-WakeLock 用于用户主动开启的前台共享服务，并在停止/销毁服务时释放；目前没有自动超时关闭共享。这条 Lint 建议未被隐藏。真实厂商系统的长时间省电行为仍需真机验证。
+Lint 剩余建议为目标 SDK（保留 35）、依赖可升级版本及前台共享 WakeLock 超时建议。API 26 导航栏属性问题已修复；主题/图标新增错误均已消除。WakeLock 在停止/销毁前台共享服务时释放，厂商后台省电行为仍需实体设备验证。
 
-核心测试使用真实本机 HTTP 监听和模拟上游，覆盖访问鉴权、模型映射、SSE 转发与工具增量、JSON 聚合、超时、错误脱敏、密钥轮换、并发限制和客户端断开。测试发现并修复了 NanoHTTPD 的 gzip 缓冲导致 SSE 延迟的问题。测试没有消耗真实模型账号额度。
+新增测试覆盖 HTTPS 地址与 Key 格式、模型列表状态码/超时/取消/重定向/大小限制/错误脱敏、别名冲突与重复路由、分来源草稿凭据隔离、取消后的迟到结果、模型测试失败仍可手动保存，以及重试失败保留已选模型。模型列表测试使用本机 MockWebServer，不发起真实推理。
 
-当前交付 APK：`artifacts/PathPilot-0.1.0-arm64.apk`，同一文件也输出到 `app/build/outputs/apk/debug/app-debug.apk`。
-
-已实际检查 ZIP 原生库目录与 APK `native-code`：仅含 `arm64-v8a`；没有 `armeabi-v7a`、`x86` 或 `x86_64`。正常 debug/release 构建均限制 ARM64。本轮构建、26 项核心测试、Lint 和 APK 签名检查通过；尚未在实体 ARM64 设备上运行。
-
-SHA-256：
+本地 APK：`artifacts/PathPilot-0.1.1-arm64.apk`。SHA-256：
 
 ```text
-b34b80d0a472797063670118300ff98952f2b1ecbc2ebb4d151f22188b01f950
+0d1c75ad5de65bbe9aeda0e4d3f832ab4a0a42dbb3a4500a4279ef8ec7303902
 ```
 
-## 上一轮 Android 运行验证（通用开发包）
+远程提交 `2722fb5` 的 [Android ARM64 Actions #4](https://github.com/Ktclat/pathpilot/actions/runs/45402704772) 已成功：测试、Lint、ARM64 包校验与两项产物上传均通过。
 
-已安装 Android 15 / API 35 x86_64 模拟器并完成启动。当前云机器没有 `/dev/kvm`，使用 Android Emulator 自身提供的 TCG 软件模拟模式，未禁用 APK 或网络校验。
+## 模拟器验证
 
-上一轮通用开发包（SHA-256 `5a4bf99edf264aff5f6833b37e79b3ed4af69234e268cacb39e8ac79c6149d00`）已通过 `adb install -r` 安装成功，ActivityTaskManager 于 11:27:56 UTC 记录最终版 `dev.pathpilot.app/.MainActivity` 首屏 `Displayed`；当时未发现 PathPilot 自身的 AndroidRuntime 崩溃。首次 Keystore/配置初始化已移至 IO 线程并显示原生加载界面。这些结果属于上一轮通用开发包，不等同于 ARM64 真机验证。
+截图使用独立 `.capture` 调试变体，在 Android 15 / API 35 x86_64 模拟器运行；正常交付包仍只有 ARM64，仍启用防截屏。测试包与正式包的应用数据和 Keystore 隔离，未录入真实账号或密钥。
 
-软件模拟器出现系统、SystemUI、电话/媒体服务无响应，UIAutomator 出现 `Timeout while connecting UiAutomation` 和 `null root node`，因此未完成界面新增供应商、配置路由、前台共享启停及 Android 内 HTTP 访问的整套操作验证。没有在模拟器录入真实账号或调用真实上游，也没有把进程存在等同于功能通过。
+同源截图包构建命令：`./gradlew --no-daemon -PuiCapture=true :app:assembleDebug`。截图包 SHA-256：`5fcbbb8964c29f941bc50a2b1ce5d83d0e077cbee295bc4ef5f3e037be96454f`。
 
-## 本轮 UI 截图验证
+已检查的原始 PNG 位于 [`artifacts/screenshots/v0.1.1/`](../artifacts/screenshots/v0.1.1/)。同一 APK 分别在系统蓝色、琥珀色、琥珀深色调色板下渲染，配色变化来自 Android 系统动态 overlay；未修改截图像素。截图不包含真实供应商凭据。
 
-使用同一份 Compose UI 源码构建独立 `dev.pathpilot.app.capture` 调试应用，在 Android 15 / API 35 x86_64 模拟器上实际安装和运行。仅这个截图测试包开放截图；正常 ARM64 包仍开启防截屏。截图包有独立应用数据目录和 Keystore，未登录或录入真实供应商凭据。
+已实测来源选择、DeepSeek 表单、空 Key 提交拦截及错误摘要、键盘打开时底部操作按钮避让、Key 显示/隐藏、选择模型并随供应商保存路由。使用纯测试占位 Key 保存 `QA-Test-Only` 与 `deepseek-chat` 路由，强制停止后重新打开仍保留 1 个供应商和 1 条正确映射的路由。模型读取及错误分支通过 MockWebServer / ViewModel 自动测试；本轮界面验证未向真实供应商发出请求。
 
-已实际点击共享、供应商、路由、设置标签，打开添加供应商表单并滚动查看连接信息，共得到六张截图。通过 `adb exec-out screencap -p` 保存原始 720×1280 PNG，逐张查看确认是完整运行界面而非加载页、系统弹窗或效果图。图片保存在 `artifacts/screenshots/`，展示尚未配置供应商/路由、共享关闭的初始状态。这验证了原生页面渲染与页面切换，不代表真实账号转发或 ARM64 真机验证。
+无 KVM 的软件模拟器中实际记录到 **2 次约 5 秒 FocusEvent 超时 ANR**：一次发生在系统 Monet 调色板热切换后，一次发生在重启后首次打开供应商编辑器时。主线程样本分别处于文字绘制、`FlowRow → ModelSelection → composeInitial` 首次布局，伴随明显 JIT 与系统 CPU 压力；未见凭据存储、网络或锁等待。第二次事件两分多钟后的同进程样本显示主线程回到消息队列空闲，未持续卡在布局循环。保留这两次真实响应性失败；现有样本不足以确定全部原因或把它们完全归因于环境。正常截图及保存流程通过不代表响应性能通过，仍需 ARM64 实体设备复核。
 
-## 尚需真实环境确认
+供应商删除及第二次 ANR 后的编辑交互未完成手工验证；旋转屏幕和跨来源往返也未在此模拟器上补测。测试结束仅清除独立 `dev.pathpilot.app.capture` 包中的占位数据（`pm clear` 成功），未清除正常包；系统调色板和浅色模式已恢复，模拟器停止。
 
-- 真实 ChatGPT/Codex 账号的设备授权、订阅权限、模型可用性及完整推理；实现依据是官方源码，OAuth 与请求转换通过模拟服务测试。
-- 真实 DeepSeek API 调用；没有提供或使用真实 API Key。
-- 具体第三方聊天客户端及 Codex CLI 版本的完整端到端兼容性。
-- Android 实体手机、其他局域网设备互访、厂商后台省电、长时间并发流式运行。
-- Keystore/磁盘写入故障注入以及 OAuth 刷新 Token 轮换中的设备异常恢复。
+## 验证边界
 
-新供应商和 Magpie 的具体仓库尚未明确；目前提供自定义 OpenAI 兼容 API，未声称未知 Coding Plan 已通过联调。
+- 未在实体 ARM64 手机上运行；Android 8–11 的备用色板和导航栏完成编译/Lint 检查，未声称完成这些系统版本的运行验证。
+- 未使用真实 ChatGPT/Codex 或 DeepSeek 凭据；真实授权、推理、第三方客户端兼容性和设备间局域网互访仍需账号与设备联调。
+- `/models` 探测只验证模型列表接口，不代表推理请求已通过。
+- GitHub 开发包使用 debug 签名，长期发布签名尚未配置；远程 APK 签名及哈希可能与本地包不同。
