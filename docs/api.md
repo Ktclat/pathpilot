@@ -2,6 +2,16 @@
 
 手机启动共享后监听 `0.0.0.0:<设置端口>`，默认 `8317`。客户端的 Base URL 填 `http://<手机局域网 IP>:8317/v1`，API Key 填 App 生成的局域网访问密钥。上游 API Key、Codex 访问令牌和刷新令牌不交给客户端。
 
+### 访问密钥
+
+0.1.3 起新生成的共享密钥采用 `sk-` 加 64 个十六进制字符，随机部分为 32 字节（256 位）。客户端 API Key 字段填写完整密钥，由客户端发送 `Authorization: Bearer <密钥>`。
+
+`sk-` 是常见格式约定，Bearer 鉴权协议并不要求这个前缀。支持自定义 Base URL、Bearer API Key 及下列接口的客户端可接入；仅接受官方地址或使用不同接口的客户端还需相应适配。
+
+升级保留原有 `pp_` 密钥，现有客户端配置继续可用。需要改用新格式时，在「设置 → 重置访问密钥」操作，再更新其他设备的 Key。密钥匹配按完整字符串校验，不按前缀放行。
+
+官方 OpenAI Python SDK 支持 [自定义 Base URL](https://github.com/openai/openai-python/blob/abbd37925aa749ec35cd45cd94722e449f909388/README.md#L966)，[鉴权实现](https://github.com/openai/openai-python/blob/abbd37925aa749ec35cd45cd94722e449f909388/src/openai/lib/_client_auth.py#L347)将所配置的 Key 放入 Bearer 头。已使用 SDK 3.58.0 对本地模拟端点验证新旧格式的模型列表、Chat Completions、Responses 请求，详见验证记录。客户端自己的 UI 格式校验与具体功能支持仍取决于该客户端。
+
 ## 接口
 
 | 接口 | 行为 |

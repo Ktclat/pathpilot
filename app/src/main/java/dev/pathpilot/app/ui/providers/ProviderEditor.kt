@@ -39,6 +39,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.pathpilot.app.ui.icons.PathPilotIcons
+import dev.pathpilot.app.ui.icons.ProviderBrandIcon
 import dev.pathpilot.core.ProviderConfig
 import dev.pathpilot.core.ProviderKind
 import dev.pathpilot.core.network.OutboundProxyConfig
@@ -131,7 +132,12 @@ fun ProviderEditor(
                         WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom else WindowInsetsSides.Horizontal),
                     topBar = {
                         TopAppBar(
-                            title = { Text(if (state.step == EditorStep.TYPE) "添加供应商" else if (existing == null) state.kind.title() else "编辑供应商", fontWeight = FontWeight.SemiBold) },
+                            title = {
+                                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                                    if (state.step == EditorStep.CONFIGURATION) ProviderBrandIcon(state.kind)
+                                    Text(if (state.step == EditorStep.TYPE) "添加供应商" else if (existing == null) state.kind.title() else "编辑供应商", fontWeight = FontWeight.SemiBold)
+                                }
+                            },
                             navigationIcon = { IconButton(enabled = !saving, onClick = ::back) {
                                 Icon(if (state.step == EditorStep.CONFIGURATION && existing == null) PathPilotIcons.Back else PathPilotIcons.Close,
                                     if (state.step == EditorStep.CONFIGURATION && existing == null) "返回来源选择" else "关闭编辑")
@@ -207,7 +213,7 @@ fun ProviderEditor(
         colors = CardDefaults.outlinedCardColors(containerColor = MaterialTheme.colorScheme.surface),
     ) {
         Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-            Icon(kind.icon(), null, Modifier.size(24.dp), tint = MaterialTheme.colorScheme.primary)
+            ProviderBrandIcon(kind, Modifier.size(28.dp))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
                 Text(kind.title(), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                 Text(kind.description(), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -396,11 +402,6 @@ private fun ProviderKind.description() = when (this) {
     ProviderKind.CODEX -> "ChatGPT 订阅"
     ProviderKind.DEEPSEEK -> "API Key"
     ProviderKind.OPENAI_COMPATIBLE -> "自定义 API 地址"
-}
-private fun ProviderKind.icon() = when (this) {
-    ProviderKind.CODEX -> PathPilotIcons.Account
-    ProviderKind.DEEPSEEK -> PathPilotIcons.Api
-    ProviderKind.OPENAI_COMPATIBLE -> PathPilotIcons.Providers
 }
 private tailrec fun Context.activity(): Activity? = when (this) {
     is Activity -> this

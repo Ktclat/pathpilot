@@ -8,10 +8,10 @@
 
 - **Codex 订阅**：OpenAI 官方设备代码授权、浏览器登录、令牌刷新；不是用 OpenAI API Key 替代订阅。账号必须拥有相应 Codex 权限，模型 ID 按账号实际可用范围填写。
 - **DeepSeek / 自定义供应商**：直接选择来源、HTTP/HTTPS 地址与密钥校验、可选读取模型列表、手动填写模型、随供应商一起保存路由、启停及删除。
-- **原生界面**：官方 Material 3 Expressive 主题和组件；Android 12+ 跟随系统 Monet 动态取色与明暗主题，Android 8–11 使用统一备用配色。应用图标、导航和操作图标使用一致样式，支持 Android 13+ 主题图标。
+- **原生界面**：官方 Material 3 Expressive 主题和组件；Android 12+ 跟随系统 Monet 动态取色与明暗主题，Android 8–11 使用统一备用配色。应用图标、导航和操作图标使用一致样式，支持 Android 13+ 主题图标；ChatGPT/Codex 与 DeepSeek 显示各自品牌标记。
 - **上游代理**：「设置 → 上游代理」支持跟随系统、HTTP、SOCKS5，覆盖模型请求、模型列表与 Codex 登录/刷新。使用手机 VPN/TUN 时保留「跟随系统」。
 - **模型路由**：客户端别名 → 供应商 → 上游模型 ID；支持运行中更新配置。
-- **局域网共享**：用户主动开启的前台服务、常驻通知及停止操作，显示 IPv4 地址、端口、独立随机访问密钥。
+- **局域网共享**：用户主动开启的前台服务、常驻通知及停止操作，显示 IPv4 地址、端口、独立随机 `sk-` 访问密钥；升级保留已有密钥。
 - **API**：`GET /v1/models`、`POST /v1/chat/completions`、`POST /v1/responses`。Codex 支持聊天到 Responses 的转换；DeepSeek 仅使用 Chat Completions。详细边界见 [接口文档](docs/api.md)。
 - **隐私**：Android Keystore AES-GCM 加密整个配置，原子写入，禁用备份；记录仅包含模型、HTTP 状态和耗时。局域网请求不携带上游凭据。
 
@@ -44,13 +44,13 @@ source /workspace/toolchains/pathpilot-env.sh
 
 脚本把工具链与缓存放在仓库外，通过标准 SDK 工具安装并校验依赖，处理 Java 工具的代理配置。APK 输出：`app/build/outputs/apk/debug/app-debug.apk`。这是供开发验证的 debug 签名版本；正式发布应使用你自己的长期签名密钥。
 
-本轮 ARM64 交付副本：`artifacts/PathPilot-0.1.2-arm64.apk`。已检查 APK 中的原生库仅有 `lib/arm64-v8a/`。
+本轮 ARM64 交付副本：`artifacts/PathPilot-0.1.3-arm64.apk`。已检查 APK 中的原生库仅有 `lib/arm64-v8a/`。
 
 ### UI 运行截图
 
 正常安装包允许系统截图，密钥默认隐藏。云端 x86_64 模拟器使用 `./gradlew -PuiCapture=true :app:assembleDebug` 构建独立 `dev.pathpilot.app.capture` 测试包；数据与正常 ARM64 包隔离，该开关禁止 Release 任务。常规构建只输出 ARM64。
 
-截图来自模拟器实际运行界面：[0.1.2 截图](artifacts/screenshots/v0.1.2/README.md) · [0.1.1 截图](artifacts/screenshots/v0.1.1/README.md)。运行条件、结果与限制见 [验证记录](docs/validation.md)。
+截图来自模拟器实际运行界面：[0.1.3 截图](artifacts/screenshots/v0.1.3/README.md) · [0.1.2 截图](artifacts/screenshots/v0.1.2/README.md) · [0.1.1 截图](artifacts/screenshots/v0.1.1/README.md)。运行条件、结果与限制见 [验证记录](docs/validation.md)。
 
 测试使用本机 MockWebServer 和真实 HTTP 路由监听，覆盖鉴权、路由、SSE、订阅请求适配及 OAuth 刷新。它们不会访问付费推理服务。实际测试结果与尚未完成的设备/账号验证见 [验证记录](docs/validation.md)。
 
@@ -59,9 +59,9 @@ source /workspace/toolchains/pathpilot-env.sh
 进入仓库 **Actions → Android ARM64 → Run workflow**，选择 `main`：
 
 - 只验证构建：保持 `publish_prerelease=false`。成功后在该运行的 Artifacts 下载 `PathPilot-arm64-debug`，其中包含 ARM64 APK 和 `SHA256SUMS.txt`。
-- 验证成功后发布：设置 `publish_prerelease=true`，填写新的 `release_tag`，例如 `v0.1.2-dev.1`。同一次运行先完成测试、Lint、签名与架构检查，再用其构建产物发布 GitHub 预发布版；失败不会发布。
+- 验证成功后发布：设置 `publish_prerelease=true`，填写新的 `release_tag`，例如 `v0.1.3-dev.1`。同一次运行先完成测试、Lint、签名与架构检查，再用其构建产物发布 GitHub 预发布版；失败不会发布。
 
-推送到 `main` 或提交 PR 只做构建检查，不会发布。也可以在 `main` 的提交上创建并推送 `v0.1.2-dev.1` 形式的新标签，自动触发「构建 → 检查 → 预发布」。此方式不要求开发机器调用 GitHub API。发布会校验标签确实属于 `main` 的历史且版本匹配 APK；手动触发仍仅允许选择 `main`。已有 Release 不会被覆盖，标签不会被移动。上传失败时可能留下未公开的草稿，应检查运行日志后处理，不要删除已发布版本重试。
+推送到 `main` 或提交 PR 只做构建检查，不会发布。也可以在 `main` 的提交上创建并推送 `v0.1.3-dev.1` 形式的新标签，自动触发「构建 → 检查 → 预发布」。此方式不要求开发机器调用 GitHub API。发布会校验标签确实属于 `main` 的历史且版本匹配 APK；手动触发仍仅允许选择 `main`。已有 Release 不会被覆盖，标签不会被移动。上传失败时可能留下未公开的草稿，应检查运行日志后处理，不要删除已发布版本重试。
 
 当前使用 **debug 签名**：不同 GitHub Runner 的签名可能不同，后续 APK 不保证可覆盖安装，卸载会清除本机配置和授权。开发预发布用于测试；正式发布前应配置长期签名密钥。本流程不会在仓库中保存私钥或真实供应商凭据。
 

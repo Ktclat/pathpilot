@@ -32,7 +32,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
-/** One outlined Material family throughout the app; no copied supplier branding. */
+/** Outlined Material interface icons. Provider brand marks live in ProviderBrandIcon. */
 object PathPilotIcons {
     val Share: ImageVector get() = Icons.Outlined.WifiTethering
     val Providers: ImageVector get() = Icons.Outlined.Dns

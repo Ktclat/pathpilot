@@ -203,7 +203,7 @@ class MainActivity : ComponentActivity() {
         Column(Modifier.padding(16.dp)) {
             Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(if (secret && !visible) "pp_••••••••••••••••" else value, modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium, fontFamily = FontFamily.Monospace)
+                Text(if (secret && !visible) "••••••••••••••••" else value, modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium, fontFamily = FontFamily.Monospace)
                 if (secret) IconButton(onClick = { visible = !visible }) { Icon(if (visible) PathPilotIcons.VisibilityOff else PathPilotIcons.Visibility, if (visible) "隐藏密钥" else "显示密钥") }
                 IconButton(onClick = { onCopy(value) }) { Icon(PathPilotIcons.Copy, "复制$label") }
             }

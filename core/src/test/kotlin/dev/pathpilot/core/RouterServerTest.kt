@@ -170,6 +170,23 @@ class RouterServerTest {
         request("/v1/models", authorization = replacement).use { assertEquals(200, it.code) }
     }
 
+    @Test fun generatedAccessKeyUsesSkPrefixAndBearerSafeCharacters() {
+        assertTrue(key.matches(Regex("sk-[0-9a-f]{64}")))
+        request("/v1/models").use { assertEquals(200, it.code) }
+        request("/v1/models", authorization = key.dropLast(1)).use { assertEquals(401, it.code) }
+    }
+
+    @Test fun legacyKeyRemainsValidUntilUserRotatesIt() {
+        val legacyKey = "pp_" + "0123456789abcdef".repeat(4)
+        config = config.copy(accessKey = legacyKey)
+        request("/v1/models", authorization = legacyKey).use { assertEquals(200, it.code) }
+        assertEquals(legacyKey, config.accessKey)
+        val replacement = AccessKeys.generate()
+        config = config.copy(accessKey = replacement)
+        request("/v1/models", authorization = legacyKey).use { assertEquals(401, it.code) }
+        request("/v1/models", authorization = replacement).use { assertEquals(200, it.code) }
+    }
+
     @Test fun responsesCompatibleProviderUsesResponsesPath() {
         config = config.copy(providers = config.providers.map { it.copy(kind = ProviderKind.OPENAI_COMPATIBLE) })
         upstream.enqueue(MockResponse().setBody("{\"id\":\"resp_123\",\"output\":[]}"))

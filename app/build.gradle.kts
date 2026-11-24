@@ -21,8 +21,8 @@ android {
         applicationId = "dev.pathpilot.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 3
-        versionName = "0.1.2"
+        versionCode = 4
+        versionName = "0.1.3"
         ndk { abiFilters += if (uiCapture) "x86_64" else "arm64-v8a" }
     }
     buildTypes {

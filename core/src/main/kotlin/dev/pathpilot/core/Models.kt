@@ -54,7 +54,7 @@ data class RequestEvent(
 )
 
 object AccessKeys {
-    fun generate(): String = "pp_" + ByteArray(32).also(SecureRandom()::nextBytes)
+    fun generate(): String = "sk-" + ByteArray(32).also(SecureRandom()::nextBytes)
         .joinToString("") { "%02x".format(it.toInt() and 255) }
 
     fun matches(expected: String, supplied: String): Boolean = expected.isNotBlank() &&

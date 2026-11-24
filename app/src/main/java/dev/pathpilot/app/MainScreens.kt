@@ -30,6 +30,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import dev.pathpilot.app.runtime.LocalAddresses
 import dev.pathpilot.app.runtime.RuntimeState
 import dev.pathpilot.app.ui.icons.PathPilotIcons
+import dev.pathpilot.app.ui.icons.ProviderBrandIcon
 import dev.pathpilot.core.*
 import dev.pathpilot.core.network.*
 import kotlinx.coroutines.Dispatchers
@@ -113,7 +114,8 @@ import kotlinx.coroutines.withContext
         Column(Modifier.fillMaxWidth().padding(start = 16.dp, top = 12.dp, end = 8.dp, bottom = 8.dp)) {
             Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(if (secret && !revealed) "••••••••••••••••" else value, Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium, fontFamily = FontFamily.Monospace)
+                val prefix = when { value.startsWith("sk-") -> "sk-"; value.startsWith("pp_") -> "pp_"; else -> "" }
+                Text(if (secret && !revealed) "${prefix}••••••••••••••••" else value, Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium, fontFamily = FontFamily.Monospace)
                 if (secret) IconButton(onClick = { revealed = !revealed }) { Icon(if (revealed) PathPilotIcons.VisibilityOff else PathPilotIcons.Visibility, if (revealed) "隐藏密钥" else "显示密钥") }
                 IconButton(onClick = { onCopy(value) }) { Icon(PathPilotIcons.Copy, "复制$label") }
             }
@@ -131,7 +133,7 @@ import kotlinx.coroutines.withContext
             OutlinedCard(onClick = { onEdit(provider) }, enabled = !saving) {
                 Column(Modifier.padding(start = 16.dp, top = 10.dp, end = 12.dp, bottom = 4.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Icon(if (provider.kind == ProviderKind.CODEX) PathPilotIcons.Account else PathPilotIcons.Api, null)
+                        ProviderBrandIcon(provider.kind, Modifier.size(28.dp))
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(provider.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                             Text(if (provider.kind == ProviderKind.CODEX) { if (provider.id in sessions) "已登录" else "未登录" } else provider.baseUrl,
