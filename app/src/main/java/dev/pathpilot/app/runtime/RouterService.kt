@@ -10,13 +10,16 @@ import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.net.wifi.WifiManager
 import android.os.Build
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.os.PowerManager
 import android.util.Log
 import androidx.core.content.ContextCompat
 import dev.pathpilot.app.R
 import dev.pathpilot.core.RouterServer
 import java.net.BindException
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +38,8 @@ class RouterService : Service() {
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var serviceJob: Job? = null
     private var failure: String? = null
+    private var destroyed = false
+    private var cleanupComplete = false
 
     override fun onCreate() {
         super.onCreate()
@@ -48,8 +53,9 @@ class RouterService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent?.action == ACTION_STOP) {
-            serviceJob?.cancel()
-            stopSelf()
+            RouterRuntime.stopping()
+            val job = serviceJob
+            if (job == null) finishShutdown(null) else job.cancel()
             return START_NOT_STICKY
         }
         if (serviceJob != null) return START_NOT_STICKY
@@ -62,19 +68,28 @@ class RouterService : Service() {
             }
         } catch (error: Exception) {
             logFailure("startForeground", error)
-            fail("无法启动前台服务，请在应用中重试。")
+            finishShutdown("无法启动前台服务，请在应用中重试。")
             return START_NOT_STICKY
         }
-        RouterRuntime.starting()
+        // The UI can turn the switch off before Android delivers this start command.
+        // Acknowledge startForeground promptly, then stop without opening a listener.
+        if (RouterRuntime.state.value.stopping) {
+            finishShutdown(null)
+            return START_NOT_STICKY
+        }
+        if (!RouterRuntime.state.value.starting) RouterRuntime.starting()
+        val bodyEntered = AtomicBoolean(false)
         serviceJob = serviceScope.launch {
+            bodyEntered.set(true)
             var server: RouterServer? = null
             var wakeLock: PowerManager.WakeLock? = null
             var wifiLock: WifiManager.WifiLock? = null
+            var terminalError: String? = null
             try {
                 val store = AppStore.get(this@RouterService)
                 currentCoroutineContext().ensureActive()
                 store.storageError.value?.let { message ->
-                    withContext(Dispatchers.Main.immediate) { fail(message) }
+                    terminalError = message
                     return@launch
                 }
                 val config = store.config.value
@@ -104,14 +119,14 @@ class RouterService : Service() {
                 } catch (error: UnsupportedOperationException) {
                     logFailure("optional Wi-Fi lock", error)
                 }
-                var addresses = LocalAddresses.ipv4()
+                var addresses = LocalAddresses.discover(this@RouterService)
                 withContext(Dispatchers.Main.immediate) {
-                    RouterRuntime.started(config.port, addresses)
+                    if (!RouterRuntime.started(config.port, addresses)) throw CancellationException("Sharing was stopped during startup")
                     updateNotification(config.port, addresses)
                 }
                 while (isActive) {
                     delay(5_000)
-                    val updated = LocalAddresses.ipv4()
+                    val updated = LocalAddresses.discover(this@RouterService)
                     if (updated != addresses) {
                         addresses = updated
                         withContext(Dispatchers.Main.immediate) {
@@ -124,37 +139,55 @@ class RouterService : Service() {
                 throw cancelled
             } catch (error: Exception) {
                 logFailure("router startup or monitoring", error)
-                val message = when (error) {
+                terminalError = when (error) {
                     is BindException -> "端口已被占用，请修改端口。"
                     is SecurityException -> "共享服务缺少系统权限。"
                     else -> "共享服务出错，请重试。"
                 }
-                withContext(Dispatchers.Main.immediate) { fail(message) }
             } finally {
-                // No UI updates here: a newer service instance may already be starting. These
-                // resources remain local to this job, even when cancellation interrupted startup.
-                try {
-                    server?.stop()
-                } finally {
-                    try {
-                        wifiLock?.let { if (it.isHeld) it.release() }
-                    } finally {
-                        wakeLock?.let { if (it.isHeld) it.release() }
-                    }
+                // The switch remains in stopping until this owner closes the listener and locks
+                // AND Android destroys its Service. A new owner cannot claim the same port early.
+                releaseRouterResources(
+                    markStopping = { withContext(Dispatchers.Main.immediate) { RouterRuntime.stopping() }; Unit },
+                    stopServer = { server?.stop() },
+                    releaseWifiLock = { wifiLock?.let { if (it.isHeld) it.release() } },
+                    releaseWakeLock = { wakeLock?.let { if (it.isHeld) it.release() } },
+                    onReleased = { error ->
+                        if (error != null) {
+                            logFailure("router cleanup", error)
+                            terminalError = terminalError ?: "共享服务停止时出错，请重试。"
+                        }
+                        withContext(Dispatchers.Main.immediate) { finishShutdown(terminalError) }
+                    },
+                )
+            }
+        }.also { job ->
+            // A stop can cancel a queued IO coroutine before its body (and finally) runs.
+            job.invokeOnCompletion {
+                Handler(Looper.getMainLooper()).post {
+                    if (!bodyEntered.get() && !cleanupComplete) finishShutdown(failure)
                 }
             }
         }
         return START_NOT_STICKY
     }
 
-    private fun fail(message: String) {
+    private fun finishShutdown(message: String?) {
         failure = message
-        RouterRuntime.stopped(message)
-        stopSelf()
+        cleanupComplete = true
+        if (destroyed) RouterRuntime.stopped(message)
+        else {
+            RouterRuntime.stopping()
+            stopForeground(STOP_FOREGROUND_REMOVE)
+            stopSelf()
+        }
     }
 
-    private fun updateNotification(port: Int, addresses: List<String>) {
-        val text = addresses.firstOrNull()?.let { "$it:$port" } ?: "端口 $port · 未发现局域网地址"
+    private fun updateNotification(port: Int, snapshot: LocalAddressSnapshot) {
+        val candidate = snapshot.addresses.firstOrNull { it.kind == LocalAddressKind.WIFI || it.kind == LocalAddressKind.ETHERNET }
+            ?: snapshot.addresses.firstOrNull { it.kind == LocalAddressKind.OTHER }
+        val text = candidate?.let { "${it.ip}:$port · ${it.interfaceName}" }
+            ?: snapshot.warning ?: "端口 $port · 未发现局域网候选地址"
         getSystemService(NotificationManager::class.java).notify(NOTIFICATION_ID, notification(text))
     }
 
@@ -180,9 +213,11 @@ class RouterService : Service() {
     }
 
     override fun onDestroy() {
+        destroyed = true
+        RouterRuntime.stopping()
         serviceScope.cancel()
         stopForeground(STOP_FOREGROUND_REMOVE)
-        RouterRuntime.stopped(failure)
+        if (serviceJob == null || cleanupComplete) RouterRuntime.stopped(failure)
         super.onDestroy()
     }
 
@@ -200,6 +235,7 @@ class RouterService : Service() {
         }
 
         fun start(context: Context) {
+            if (!RouterRuntime.starting()) return
             try {
                 ContextCompat.startForegroundService(context, Intent(context, RouterService::class.java))
             } catch (error: Exception) {
@@ -209,7 +245,16 @@ class RouterService : Service() {
         }
 
         fun stop(context: Context) {
-            context.stopService(Intent(context, RouterService::class.java))
+            if (!RouterRuntime.stopping()) return
+            try {
+                // Deliver a stop even if Android has not created the requested service yet.
+                context.startService(Intent(context, RouterService::class.java).setAction(ACTION_STOP))
+            } catch (error: IllegalStateException) {
+                logFailure("request service stop", error)
+                // A false result is not a lifecycle completion callback. Retain the stop
+                // intent so a pending START cannot open its listener after this fallback.
+                context.stopService(Intent(context, RouterService::class.java))
+            }
         }
     }
 }

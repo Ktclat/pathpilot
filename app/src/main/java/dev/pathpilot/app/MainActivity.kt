@@ -5,6 +5,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -31,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.pathpilot.app.runtime.*
@@ -96,6 +98,7 @@ class MainActivity : ComponentActivity() {
     var codexLoginProviderId by rememberSaveable { mutableStateOf<String?>(null) }
     var saving by remember { mutableStateOf(false) }
     var saveError by remember { mutableStateOf<String?>(null) }
+    var notificationPending by rememberSaveable { mutableStateOf(false) }
     val snackbar = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     fun notify(message: String) { scope.launch { snackbar.showSnackbar(message) } }
@@ -119,12 +122,22 @@ class MainActivity : ComponentActivity() {
         }
     }
     val notificationPermission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
-        RouterService.start(context)
+        if (notificationPending) {
+            notificationPending = false
+            RouterService.start(context)
+        }
     }
-    fun toggleSharing() {
-        if (runtime.running) RouterService.stop(context)
-        else if (Build.VERSION.SDK_INT >= 33) notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
-        else RouterService.start(context)
+    fun setSharing(enabled: Boolean) {
+        if (!enabled) {
+            notificationPending = false
+            RouterService.stop(context)
+        } else if (!runtime.running && !runtime.starting && !runtime.stopping && !notificationPending) {
+            if (Build.VERSION.SDK_INT >= 33 && ContextCompat.checkSelfPermission(context,
+                    Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                notificationPending = true
+                notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+            } else RouterService.start(context)
+        }
     }
     fun newRoute(providerId: String? = null) {
         if (config.providers.isEmpty()) { addProvider = true; return }
@@ -151,8 +164,8 @@ class MainActivity : ComponentActivity() {
             if (saving) LinearProgressIndicator(Modifier.fillMaxWidth())
             storageError?.let { Text(it, Modifier.padding(horizontal = 20.dp, vertical = 8.dp), color = MaterialTheme.colorScheme.error) }
             when (tab) {
-                0 -> SharingScreen(config, runtime, sessions, saving || storageError != null,
-                    onToggle = ::toggleSharing, onProviders = { tab = 1; if (config.providers.isEmpty()) addProvider = true }, onRoutes = { tab = 2; if (config.routes.isEmpty()) newRoute() },
+                0 -> SharingScreen(config, runtime, sessions, saving || storageError != null, notificationPending,
+                    onSharingChange = ::setSharing, onProviders = { tab = 1; if (config.providers.isEmpty()) addProvider = true }, onRoutes = { tab = 2; if (config.routes.isEmpty()) newRoute() },
                     onCopy = { label, value -> copy(context, label, value); notify("已复制") })
                 1 -> ProvidersScreen(config, sessions, saving,
                     onAdd = { addProvider = true }, onEdit = { providerEditorId = it.id },
@@ -160,7 +173,7 @@ class MainActivity : ComponentActivity() {
                     onLogin = { codexLoginProviderId = it.id }, onRoute = { newRoute(it.id) })
                 2 -> RoutesScreen(config, saving, onAdd = { newRoute() }, onEdit = { routeEditorAlias = it.alias },
                     onToggle = { route, enabled -> update { c -> c.copy(routes = c.routes.map { if (it.alias == route.alias) it.copy(enabled = enabled) else it }) } })
-                3 -> SettingsScreen(config, runtime.running || runtime.starting, saving,
+                3 -> SettingsScreen(config, runtime.running || runtime.starting || runtime.stopping || notificationPending, saving,
                     onPort = { port, done -> update(onSuccess = done) { it.copy(port = port) } },
                     onProxy = { proxy, done -> update(onSuccess = done) { it.copy(outboundProxy = proxy) } },
                     onRotate = { done -> update(onSuccess = { done(); notify("密钥已更新") }) { it.copy(accessKey = AccessKeys.generate()) } })

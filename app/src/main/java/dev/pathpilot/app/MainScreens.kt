@@ -27,6 +27,8 @@ import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
+import dev.pathpilot.app.runtime.LocalAddressSnapshot
+import dev.pathpilot.app.runtime.LocalAddressKind
 import dev.pathpilot.app.runtime.LocalAddresses
 import dev.pathpilot.app.runtime.RuntimeState
 import dev.pathpilot.app.ui.icons.PathPilotIcons
@@ -35,68 +37,81 @@ import dev.pathpilot.core.*
 import dev.pathpilot.core.network.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.awaitCancellation
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
 
 @Composable internal fun SharingScreen(
-    config: RouterConfig, runtime: RuntimeState, sessions: Set<String>, saving: Boolean,
-    onToggle: () -> Unit, onProviders: () -> Unit, onRoutes: () -> Unit, onCopy: (String, String) -> Unit,
+    config: RouterConfig, runtime: RuntimeState, sessions: Set<String>, saving: Boolean, notificationPending: Boolean,
+    onSharingChange: (Boolean) -> Unit, onProviders: () -> Unit, onRoutes: () -> Unit, onCopy: (String, String) -> Unit,
 ) {
+    val context = LocalContext.current.applicationContext
     val lifecycle = LocalLifecycleOwner.current.lifecycle
-    val localAddresses by produceState(emptyList<String>(), lifecycle) {
+    val localSnapshot by produceState<LocalAddressSnapshot?>(null, context, lifecycle, runtime.running) {
         lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-            value = withContext(Dispatchers.IO) { LocalAddresses.ipv4() }
-            awaitCancellation()
+            if (runtime.running) awaitCancellation()
+            else while (isActive) {
+                value = withContext(Dispatchers.IO) { LocalAddresses.discover(context) }
+                delay(5_000)
+            }
         }
     }
-    val addresses = if (runtime.running) runtime.addresses else localAddresses
+    val snapshot = if (runtime.running || runtime.stopping)
+        LocalAddressSnapshot(runtime.addresses, runtime.addressWarning) else localSnapshot
     val enabledProviders = config.providers.filter { it.enabled }
     val enabledRoutes = config.routes.filter { it.enabled }
     val ready = enabledRoutes.any { route -> enabledProviders.any { p ->
         p.id == route.providerId && (p.kind != ProviderKind.CODEX || p.id in sessions)
     } }
-    val action = when {
-        runtime.running -> "停止共享"
-        runtime.starting -> "正在启动…"
+    val setupAction = when {
         config.providers.isEmpty() -> "添加供应商"
         enabledProviders.isEmpty() -> "启用供应商"
         enabledRoutes.isEmpty() -> "配置路由"
         !ready -> "检查供应商"
-        else -> "开启共享"
+        else -> null
+    }
+    val checked = runtime.running || runtime.starting || notificationPending
+    val canToggle = !runtime.stopping && (checked || !saving)
+    val status = when {
+        runtime.stopping -> "正在关闭…"
+        runtime.starting -> "正在开启…"
+        notificationPending -> "等待通知权限"
+        runtime.running && !ready -> "已开启 · 暂无可用模型"
+        runtime.running -> "已开启"
+        else -> "已关闭"
     }
     LazyColumn(contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
             Card(colors = CardDefaults.cardColors(containerColor = if (runtime.running) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainer), shape = MaterialTheme.shapes.extraLarge) {
-                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                Column(Modifier.padding(horizontal = 16.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Row(Modifier.fillMaxWidth().heightIn(min = 56.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Icon(PathPilotIcons.Share, null, Modifier.size(28.dp))
-                        Column(Modifier.weight(1f)) {
-                            Text(when { runtime.running -> "共享中"; runtime.starting -> "正在启动"; !ready -> "尚未配置"; else -> "未启动" }, style = MaterialTheme.typography.titleLarge)
-                            if (ready || runtime.running) Text("端口 ${if (runtime.running) runtime.port else config.port}", style = MaterialTheme.typography.bodyMedium)
+                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                            Text("局域网共享", style = MaterialTheme.typography.titleLarge)
+                            Text(status, style = MaterialTheme.typography.bodyMedium)
                         }
+                        Switch(checked = checked, enabled = canToggle, onCheckedChange = onSharingChange,
+                            modifier = Modifier.semantics { contentDescription = "局域网共享总开关" })
                     }
-                    Button(enabled = (runtime.running || !saving) && !runtime.starting, shapes = ButtonDefaults.shapesFor(ButtonDefaults.MediumContainerHeight),
+                    if (setupAction != null) FilledTonalButton(enabled = !saving,
+                        shapes = ButtonDefaults.shapesFor(ButtonDefaults.MediumContainerHeight),
                         modifier = Modifier.fillMaxWidth().heightIn(min = ButtonDefaults.MediumContainerHeight),
                         onClick = {
-                            when {
-                                runtime.running || ready -> onToggle()
-                                config.providers.isEmpty() || enabledProviders.isEmpty() -> onProviders()
-                                enabledRoutes.isEmpty() -> onRoutes()
-                                else -> onProviders()
-                            }
+                            if (config.providers.isEmpty() || enabledProviders.isEmpty() || enabledRoutes.isNotEmpty()) onProviders()
+                            else onRoutes()
                         }) {
-                        Icon(if (runtime.running) PathPilotIcons.Stop else if (ready) PathPilotIcons.Play else PathPilotIcons.Add, null)
-                        Spacer(Modifier.width(8.dp)); Text(action)
+                        Icon(PathPilotIcons.Add, null); Spacer(Modifier.width(8.dp)); Text(setupAction)
                     }
                 }
             }
         }
         runtime.lastError?.let { message -> item { Text(message, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium) } }
         item { Text("${config.providers.size} 个供应商  ·  ${config.routes.size} 条路由  ·  ${runtime.requestCount} 次请求", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant) }
-        if (addresses.isEmpty()) item { Text("连接 Wi-Fi 或开启热点后显示地址", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant) }
-        items(addresses, key = { it }) { address ->
-            ConnectionField("API 地址", "http://$address:${if (runtime.running) runtime.port else config.port}/v1", onCopy = { onCopy("API 地址", it) })
-        }
+        item { SharingAddresses(snapshot, if (runtime.running || runtime.stopping) runtime.port else config.port, onCopy) }
         item { ConnectionField("访问密钥", config.accessKey, secret = true, onCopy = { onCopy("访问密钥", it) }) }
+        if (snapshot?.addresses?.any { it.kind == LocalAddressKind.VPN || it.kind == LocalAddressKind.CELLULAR } == true) {
+            item { OtherNetworkAddresses(snapshot.addresses, if (runtime.running || runtime.stopping) runtime.port else config.port, onCopy) }
+        }
         if (runtime.recentRequests.isNotEmpty()) {
             item { Text("最近请求", style = MaterialTheme.typography.titleMedium) }
             items(runtime.recentRequests.take(12)) { event ->
