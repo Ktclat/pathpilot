@@ -22,6 +22,8 @@
 
 工具链与 0.1.2 相同。Lint 剩余项为目标 SDK、依赖版本和 WakeLock 释放/超时建议。
 
+代码提交 `9086237` 的 [Android ARM64 Actions](https://github.com/Ktclat/pathpilot/actions/runs/45430812460) 已成功，测试、Lint、签名与 ABI 检查、APK 和报告上传均通过。
+
 本地交付包：`artifacts/PathPilot-0.1.3-arm64.apk`。SHA-256：
 
 ```text
@@ -41,5 +43,7 @@ SDK 实现和固定源码链接见 [API 文档](api.md#访问密钥)。其他客
 ## UI 验证
 
 本轮截图使用独立 `dev.pathpilot.app.capture` 包，在 Android 15 / API 35 软件模拟器中运行；正常交付包仍仅支持 ARM64。截图、实际操作与构建哈希见 [0.1.3 截图记录](../artifacts/screenshots/v0.1.3/README.md)。
+
+已检查首页实际显示 `sk-` 掩码，以及来源页的 OpenAI/ChatGPT 结形标记、DeepSeek 蓝色鲸鱼和自定义来源的通用图标。使用占位 Key 保存 DeepSeek 后，列表与配置标题均显示其品牌标记。系统启动阶段曾出现 System UI 无响应及黑屏，恢复后采集原始截图；完整运行记录见截图说明。
 
 真实账号调用、实体手机 VPN 出口和设备间 Wi-Fi 互访不属于本轮验证结果。
