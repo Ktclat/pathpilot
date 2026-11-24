@@ -59,7 +59,7 @@ source /workspace/toolchains/pathpilot-env.sh
 - 只验证构建：保持 `publish_prerelease=false`。成功后在该运行的 Artifacts 下载 `PathPilot-arm64-debug`，其中包含 ARM64 APK 和 `SHA256SUMS.txt`。
 - 验证成功后发布：设置 `publish_prerelease=true`，填写新的 `release_tag`，例如 `v0.1.0-dev.1`。同一次运行先完成测试、Lint、签名与架构检查，再用其构建产物发布 GitHub 预发布版；失败不会发布。
 
-推送到 `main` 或提交 PR 只做构建检查，不会发布。发布仅允许手动从 `main` 执行，标签版本必须匹配 APK 版本，已有标签/Release 不会被覆盖。上传失败时可能留下未公开的草稿，应检查运行日志后处理，不要删除已发布版本重试。
+推送到 `main` 或提交 PR 只做构建检查，不会发布。也可以在 `main` 的提交上创建并推送 `v0.1.0-dev.1` 形式的新标签，自动触发「构建 → 检查 → 预发布」。此方式不要求开发机器调用 GitHub API。发布会校验标签确实属于 `main` 的历史且版本匹配 APK；手动触发仍仅允许选择 `main`。已有 Release 不会被覆盖，标签不会被移动。上传失败时可能留下未公开的草稿，应检查运行日志后处理，不要删除已发布版本重试。
 
 当前使用 **debug 签名**：不同 GitHub Runner 的签名可能不同，后续 APK 不保证可覆盖安装，卸载会清除本机配置和授权。开发预发布用于测试；正式发布前应配置长期签名密钥。本流程不会在仓库中保存私钥或真实供应商凭据。
 

@@ -3,6 +3,7 @@ name: Android ARM64
 on:
   push:
     branches: [main]
+    tags: ['v*-dev.*']
   pull_request:
   workflow_dispatch:
     inputs:
@@ -37,7 +38,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
+      - name: Prepare pinned Android SDK
+        run: bash scripts/setup-ci-android.sh
       - uses: gradle/actions/setup-gradle@v4
       - name: Test, build and lint
         run: ./gradlew --no-daemon :core:test :app:assembleDebug :app:lintDebug
@@ -83,7 +85,7 @@ jobs:
   publish:
     name: Publish development prerelease
     needs: build
-    if: github.event_name == 'workflow_dispatch' && inputs.publish_prerelease
+    if: (github.event_name == 'workflow_dispatch' && inputs.publish_prerelease) || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v'))
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -91,11 +93,14 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
-      RELEASE_TAG: ${{ inputs.release_tag }}
+      RELEASE_TAG: ${{ github.event_name == 'push' && github.ref_name || inputs.release_tag }}
       APP_VERSION: ${{ needs.build.outputs.version }}
       BUILD_SHA: ${{ github.sha }}
       BUILD_REF: ${{ github.ref }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/download-artifact@v4
         with:
           name: PathPilot-arm64-debug
@@ -104,7 +109,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$BUILD_REF" = refs/heads/main || { echo 'Publish only from main.' >&2; exit 1; }
           [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+-dev\.[0-9]+$ ]] || {
             echo 'Use a development tag such as v0.1.0-dev.1.' >&2; exit 1;
           }
@@ -112,9 +116,18 @@ jobs:
             echo 'Release tag must match the APK version.' >&2; exit 1;
           }
           (cd dist && sha256sum --check SHA256SUMS.txt)
+          if [[ "$BUILD_REF" == refs/tags/* ]]; then
+            test "$BUILD_REF" = "refs/tags/$RELEASE_TAG"
+            test "$(git rev-parse "$BUILD_REF^{commit}")" = "$BUILD_SHA"
+            git merge-base --is-ancestor "$BUILD_SHA" origin/main || {
+              echo 'Release tag must point to a commit on main.' >&2; exit 1;
+            }
+          else
+            test "$BUILD_REF" = refs/heads/main || { echo 'Publish only from main.' >&2; exit 1; }
+          fi
           # Creation is non-destructive: existing tags/releases are never deleted or replaced.
           gh api "repos/$GH_REPO/git/matching-refs/tags/$RELEASE_TAG" --paginate --jq '.[].ref' > existing-refs.txt
-          if grep -Fxq "refs/tags/$RELEASE_TAG" existing-refs.txt; then
+          if [[ "$BUILD_REF" != refs/tags/* ]] && grep -Fxq "refs/tags/$RELEASE_TAG" existing-refs.txt; then
             echo 'Tag already exists; choose a new development tag.' >&2
             exit 1
           fi
@@ -133,7 +146,9 @@ jobs:
           本版本为 debug 签名开发包。不同云端构建的 debug 签名可能不同，无法保证覆盖安装；卸载会清除本机配置和授权。正式分发前需配置长期签名密钥。
           真实账号调用及实体手机局域网联调仍需验证。不会把模拟上游测试描述为真实服务验证。
           EOF_NOTES
-          gh release create "$RELEASE_TAG" --target "$BUILD_SHA" --draft --prerelease \
+          tag_options=()
+          if [[ "$BUILD_REF" == refs/tags/* ]]; then tag_options+=(--verify-tag); fi
+          gh release create "$RELEASE_TAG" --target "$BUILD_SHA" --draft --prerelease "${tag_options[@]}" \
             --title "PathPilot $RELEASE_TAG (ARM64 development preview)" \
             --notes-file release-notes.md \
             dist/PathPilot-*-arm64-debug.apk dist/SHA256SUMS.txt
