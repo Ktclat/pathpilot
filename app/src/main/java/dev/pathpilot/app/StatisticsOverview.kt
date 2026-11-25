@@ -103,7 +103,8 @@ internal fun StatisticsTrend(buckets: List<UsageTrendBucket>, range: UsageRange)
     if (buckets.isEmpty()) return
     var tokens by rememberSaveable { mutableStateOf(false) }
     var selected by rememberSaveable(range, buckets.size) { mutableIntStateOf(buckets.indexOfLast { it.requestCount > 0 }.coerceAtLeast(0)) }
-    val current = buckets[selected.coerceIn(buckets.indices)]
+    val selectedIndex = selected.coerceIn(buckets.indices)
+    val current = buckets[selectedIndex]
     val values = buckets.map { if (tokens) it.totalTokens else it.requestCount.toLong() }
     val maximum = (values.filterNotNull().maxOrNull() ?: 0L).coerceAtLeast(1).toDouble()
     val primary = MaterialTheme.colorScheme.primary
@@ -111,7 +112,7 @@ internal fun StatisticsTrend(buckets: List<UsageTrendBucket>, range: UsageRange)
     val unknown = MaterialTheme.colorScheme.outline
     val baseline = MaterialTheme.colorScheme.outlineVariant
     val label = if (tokens) "Token" else "请求"
-    val selectionText = "${trendPeriod(current, range)} · ${formatTokenCount(values[selected])} $label"
+    val selectionText = "${trendPeriod(current, range)} · ${formatTokenCount(values[selectedIndex])} $label"
     OutlinedCard(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text("趋势", style = MaterialTheme.typography.titleMedium)
@@ -134,7 +135,7 @@ internal fun StatisticsTrend(buckets: List<UsageTrendBucket>, range: UsageRange)
                         drawLine(unknown, Offset(x, size.height - 6.dp.toPx()), Offset(x + width, size.height - 6.dp.toPx()), 2.dp.toPx())
                     } else if (value > 0) {
                         val height = (value / maximum * (size.height - 4.dp.toPx())).toFloat().coerceAtLeast(2.dp.toPx())
-                        drawRoundRect(if (index == selected) primary else secondary, Offset(x, size.height - height),
+                        drawRoundRect(if (index == selectedIndex) primary else secondary, Offset(x, size.height - height),
                             Size(width, height), CornerRadius(3.dp.toPx()))
                     }
                 }
@@ -144,12 +145,12 @@ internal fun StatisticsTrend(buckets: List<UsageTrendBucket>, range: UsageRange)
                 if (buckets.size > 1) Text(buckets.last().label, style = MaterialTheme.typography.labelSmall)
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = { selected-- }, enabled = selected > 0) {
+                IconButton(onClick = { selected = selectedIndex - 1 }, enabled = selectedIndex > 0) {
                     Icon(Icons.AutoMirrored.Outlined.KeyboardArrowLeft, "上一个时间段")
                 }
                 Text(selectionText, Modifier.weight(1f).semantics { contentDescription = selectionText },
                     style = MaterialTheme.typography.bodySmall)
-                IconButton(onClick = { selected++ }, enabled = selected < buckets.lastIndex) {
+                IconButton(onClick = { selected = selectedIndex + 1 }, enabled = selectedIndex < buckets.lastIndex) {
                     Icon(Icons.AutoMirrored.Outlined.KeyboardArrowRight, "下一个时间段")
                 }
             }
