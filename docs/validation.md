@@ -21,6 +21,8 @@ $ANDROID_HOME/build-tools/36.0.0/apksigner verify artifacts/PathPilot-0.1.6-arm6
 | APK | ZIP、签名、ARM64 架构与包名检查通过 |
 | Actions 配置 | actionlint 通过 |
 
+提交 `0614f0e` 的 [GitHub Actions](https://github.com/Ktclat/pathpilot/actions/runs/45522453140) 已成功，耗时 2 分 24 秒；测试、构建、Lint、ARM64 校验及产物上传均通过。
+
 Lint 为 11 条既有项和新增 androidTest MockWebServer 的版本提示；该库沿用与生产 OkHttp 一致的 4.12.0。常规 APK 不包含 instrumentation fixture Token、测试供应商 ID 或测试类。
 
 常规包为 `dev.pathpilot.app`，版本 `0.1.6` / versionCode 7，仅 `arm64-v8a`。本地副本 `artifacts/PathPilot-0.1.6-arm64.apk` 的 SHA-256：
@@ -40,6 +42,12 @@ ViewModel 回归覆盖凭据解析与重试、选模后路由提交、取消与�
 截图包 SHA-256：`19a502292bfea043af7de6f2db6087adfe6771f2ebfd6c45fcd8c981dacadae2`。
 测试包 SHA-256：`3fa88dbf71154a5eb932ada7ddc85969a0f9564b8a34d931e1b4c0848f91d343`。
 
-3 项 instrumentation 测试正在模拟器执行；结果与原始截图将补入 [截图目录](../artifacts/screenshots/v0.1.6/README.md)。测试流程包括已登录入口获取、选模保存，401 显示与重试，以及未登录时展示登录操作。路由保存检查的是组件回调调用 `ProviderRoutes.addSelected` 的配置结果，不代表本轮验证了 AppStore 跨重启持久化。
+API 35 软件模拟器上的一次完整 instrumentation 运行已通过：**3 项通过，0 失败**，JUnit 耗时 113.222 秒。三项检查分别为：
+
+- 已登录供应商卡片的「获取模型」打开真实编辑器并自动读取目录一次；勾选模型、保存后生成对应路由。
+- 401 显示「Codex 登录已过期，请重新登录」；再次获取重新解析凭据并成功显示目录。
+- 未登录时展示登录操作、禁用获取按钮，并且不发出目录请求。
+
+原始 [instrumentation 日志](../artifacts/screenshots/v0.1.6/instrumentation.log)、[结果与截图校验和](../artifacts/screenshots/v0.1.6/instrumentation-results.json)和三张未编辑的 PNG 保存在 [截图目录](../artifacts/screenshots/v0.1.6/README.md)。测试模型、凭据和供应商名都是明确标注的离线 fixture；截图时间和 SHA 已核对。路由保存检查的是组件回调调用 `ProviderRoutes.addSelected` 的配置结果，不代表本轮验证了 AppStore 跨重启持久化。
 
 本轮未使用真实 ChatGPT 账号验证授权、目录或推理；界面与错误状态的截图会明确标记为离线联调。

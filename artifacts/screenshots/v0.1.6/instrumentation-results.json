@@ -1,0 +1,63 @@
+{
+  "target_sha256": "19a502292bfea043af7de6f2db6087adfe6771f2ebfd6c45fcd8c981dacadae2",
+  "test_sha256": "3fa88dbf71154a5eb932ada7ddc85969a0f9564b8a34d931e1b4c0848f91d343",
+  "host_started_at": "2026-11-25T01:00:31.652271+00:00",
+  "device_started_epoch": 1795568429,
+  "command": [
+    "/workspace/toolchains/android-sdk/platform-tools/adb",
+    "-s",
+    "emulator-5554",
+    "shell",
+    "am",
+    "instrument",
+    "-w",
+    "-r",
+    "-e",
+    "class",
+    "dev.pathpilot.app.ui.providers.CodexModelsFlowTest",
+    "dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner"
+  ],
+  "timed_out": false,
+  "scope": "Production Compose components/ViewModel/catalog client mounted in instrumentation ComponentActivity; simulated subscription credentials and loopback MockWebServer; no real account.",
+  "exit_code": 0,
+  "host_finished_at": "2026-11-25T01:02:33.134316+00:00",
+  "junit_summary": [
+    "OK (3 tests)"
+  ],
+  "passed": true,
+  "screenshots": {
+    "01-provider-entry.png": {
+      "device_mtime_epoch": 1795568499,
+      "size": 41939,
+      "created_this_run": true,
+      "sha256": "7ffe66394694ecc22a4b96b9eabbbe55d4d49fd29684df4361afd4c915072cac"
+    },
+    "02-model-selection.png": {
+      "device_mtime_epoch": 1795568516,
+      "size": 77031,
+      "created_this_run": true,
+      "sha256": "63f0bc57162be7311ede6438c993af7c6a5b02636b86ca76ac8e889d23d60cd0"
+    },
+    "03-auth-error.png": {
+      "device_mtime_epoch": 1795568467,
+      "size": 80673,
+      "created_this_run": true,
+      "sha256": "d147145a890454023de2bfa67d4cb99ef9b0d9855a3b39e3f900de807faa29e4"
+    }
+  },
+  "all_screenshots_created_this_run": true,
+  "test_results": [
+    {
+      "name": "expiredLoginShowsErrorAndCanRetryModelFetch",
+      "status_code": 0
+    },
+    {
+      "name": "signedInProviderFetchesCatalogSelectsModelAndSavesRoute",
+      "status_code": 0
+    },
+    {
+      "name": "signedOutProviderRequestsLoginWithoutCallingCatalog",
+      "status_code": 0
+    }
+  ]
+}
