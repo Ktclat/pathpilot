@@ -128,4 +128,4 @@ adb shell am instrument -w -r -e class \
 
 ## MCP 调用记录
 
-`dev.pathpilot.app.runtime.McpCallHistoryStoreTest` 使用真实 Android SQLite 和独立数据库，覆盖重新打开、去重、清空、写失败重试及 1,000 条上限。现有 `McpFlowTest` 还验证停止共享后能打开并筛选之前的调用；新增实际截图 `settings-e2e/13-mcp-history.png`。均不需要真实订阅、外部 MCP 服务或其他设备。
+`dev.pathpilot.app.runtime.McpCallHistoryStoreTest` 使用真实 Android SQLite 和独立数据库，覆盖重新打开、去重、清空、写失败重试及 1,000 条上限。现有 `McpFlowTest` 还验证停止共享后能打开并筛选之前的调用；新增实际截图写入调试包内部 `files/settings-e2e/13-mcp-history.png`，可在隔离测试设备上通过 `adb exec-out run-as dev.pathpilot.app.capture cat files/settings-e2e/13-mcp-history.png` 导出。均不需要真实订阅、外部 MCP 服务或其他设备。

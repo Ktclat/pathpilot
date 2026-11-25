@@ -159,7 +159,7 @@ class McpFlowTest {
         hideCaptureKeyboard()
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasTestTag(tag))
         compose.onNodeWithTag(tag).assertIsDisplayed()
-        compose.captureSettingsScreenshot("13-mcp-history")
+        compose.captureSettingsScreenshot("13-mcp-history", internalStorage = true)
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("按工具名称筛选"))
         compose.onNodeWithText("按工具名称筛选").performTextReplacement("no_matching_fixture_tool")
         hideCaptureKeyboard()
