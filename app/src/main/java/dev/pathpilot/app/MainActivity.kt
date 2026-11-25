@@ -192,7 +192,8 @@ class MainActivity : ComponentActivity() {
         }) },
         bottomBar = { NavigationBar { tabs.forEachIndexed { index, label ->
             NavigationBarItem(selected = tab == index, onClick = { if (index != tab) { if (index == 3) resetStatistics(); tab = index } },
-                icon = { Icon(icons[index], null) }, label = { Text(label) })
+                icon = { Icon(icons[index], null) },
+                label = { Text(label, Modifier.fillMaxWidth(), textAlign = TextAlign.Center) })
         } } },
         snackbarHost = { SnackbarHost(snackbar) },
     ) { padding ->

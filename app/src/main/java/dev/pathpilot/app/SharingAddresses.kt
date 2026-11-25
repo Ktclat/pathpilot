@@ -35,11 +35,11 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
         Column(Modifier.fillMaxWidth().padding(start = 16.dp, top = 12.dp, end = 16.dp, bottom = 4.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text("API 地址", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+            SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().height(IntrinsicSize.Min)) {
                 SegmentedButton(selected = onThisDevice, onClick = { onDeviceChange(true); choosing = false },
-                    shape = SegmentedButtonDefaults.itemShape(0, 2)) { Text("本机应用") }
+                    shape = SegmentedButtonDefaults.itemShape(0, 2), modifier = Modifier.fillMaxHeight()) { Text("本机") }
                 SegmentedButton(selected = !onThisDevice, onClick = { onDeviceChange(false) },
-                    shape = SegmentedButtonDefaults.itemShape(1, 2)) { Text("局域网设备") }
+                    shape = SegmentedButtonDefaults.itemShape(1, 2), modifier = Modifier.fillMaxHeight()) { Text("局域网") }
             }
             if (!onThisDevice) {
                 snapshot?.warning?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium) }

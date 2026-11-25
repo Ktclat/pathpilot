@@ -91,6 +91,12 @@ class StatisticsNavigationTest {
                 compose.activity.resources.configuration.screenWidthDp in 320..360)
         assertEquals(1.5f, compose.activity.resources.configuration.fontScale, 0.01f)
         assertTrue(compose.activity.resources.configuration.screenWidthDp in 320..360)
+        screenshot("10-sharing-large-font")
+        val localAddress = compose.onNode(hasText("本机") and hasClickAction()).assertIsDisplayed()
+        val lanAddress = compose.onNode(hasText("局域网") and hasClickAction()).assertIsDisplayed()
+        assertEquals("Local and LAN address buttons have equal height",
+            localAddress.fetchSemanticsNode().boundsInRoot.height,
+            lanAddress.fetchSemanticsNode().boundsInRoot.height, 0.1f)
         val now = System.currentTimeMillis()
         val history = store!!.requestHistory
         history.record(RequestEvent("daily-codex-long-model-2026-preview", "offline-codex", 200, 2_300,
@@ -108,12 +114,12 @@ class StatisticsNavigationTest {
         compose.waitForIdle()
 
         navigation("统计").performClick().assertIsSelected()
+        screenshot("06-statistics-large-font")
         listOf("共享", "供应商", "模型", "统计", "设置").forEach { label ->
             navigation(label).assertIsDisplayed()
             assertNavigationTextFits(label)
         }
         compose.onNodeWithContentDescription("请求数，3").assertIsDisplayed()
-        screenshot("06-statistics-large-font")
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasContentDescription("趋势：请求"))
         compose.onNodeWithContentDescription("趋势：请求").assertIsDisplayed()
         screenshot("07-trend-large-font")
@@ -131,8 +137,10 @@ class StatisticsNavigationTest {
             .performSemanticsAction(SemanticsActions.GetTextLayoutResult) { action -> action(layouts) }
         assertTrue("Navigation label $label has a text layout", layouts.isNotEmpty())
         layouts.forEach { layout ->
-            assertFalse("Navigation label $label overflows horizontally", layout.didOverflowWidth)
-            assertFalse("Navigation label $label overflows vertically", layout.didOverflowHeight)
+            val bounds = "size=${layout.size}, intrinsic=${layout.multiParagraph.intrinsics.maxIntrinsicWidth}, " +
+                "lines=${layout.lineCount}, right=${(0 until layout.lineCount).map(layout::getLineRight)}"
+            assertFalse("Navigation label $label overflows horizontally: $bounds", layout.didOverflowWidth)
+            assertFalse("Navigation label $label overflows vertically: $bounds", layout.didOverflowHeight)
         }
     }
 
