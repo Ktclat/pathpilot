@@ -25,6 +25,8 @@ import dev.pathpilot.app.ui.icons.ProviderBrandIcon
 import dev.pathpilot.core.ProviderConfig
 import dev.pathpilot.core.RouteConfig
 import dev.pathpilot.core.RouterConfig
+import dev.pathpilot.core.RequestEvent
+import java.text.NumberFormat
 
 @Composable
 internal fun ProviderModelGroupsScreen(
@@ -79,11 +81,17 @@ internal fun ProviderModelsScreen(
     onEdit: (RouteConfig) -> Unit,
     onToggle: (RouteConfig, Boolean) -> Unit,
     onProviderToggle: (Boolean) -> Unit,
+    requestEvents: List<RequestEvent> = emptyList(),
+    onViewUsage: ((RouteConfig) -> Unit)? = null,
 ) {
     var query by rememberSaveable(provider.id) { mutableStateOf("") }
     var filter by rememberSaveable(provider.id) { mutableStateOf(ModelFilter.ALL) }
     val focus = LocalFocusManager.current
     val models = routes.filter { it.providerId == provider.id }
+    val usage = remember(requestEvents) {
+        requestEvents.groupBy { Triple(it.providerId, it.model, it.upstreamModel) }
+            .mapValues { UsageAnalytics.summarize(it.value) }
+    }
     val needle = query.trim()
     val visible = models.filter { model ->
         (model.alias.contains(needle, ignoreCase = true) || model.upstreamModel.contains(needle, ignoreCase = true)) &&
@@ -159,6 +167,14 @@ internal fun ProviderModelsScreen(
                                 maxLines = 2, overflow = TextOverflow.Ellipsis)
                             if (model.alias != model.upstreamModel) Text("上游 ID：${model.upstreamModel}", style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                            if (onViewUsage != null) {
+                                val summary = usage[Triple(provider.id, model.alias, model.upstreamModel)]
+                                TextButton(onClick = { onViewUsage(model) }, contentPadding = PaddingValues(0.dp)) {
+                                    Text(if (summary == null) "查看用量" else "最近 ${summary.requestCount} 次 · " +
+                                        (summary.totalTokens?.let { "已知 ${NumberFormat.getIntegerInstance().format(it)} Token" } ?: "Token 未提供"),
+                                        style = MaterialTheme.typography.labelMedium)
+                                }
+                            }
                         }
                         Switch(checked = model.enabled, enabled = !saving, onCheckedChange = { onToggle(model, it) },
                             modifier = Modifier.semantics { contentDescription = "启用模型 ${model.alias}" })

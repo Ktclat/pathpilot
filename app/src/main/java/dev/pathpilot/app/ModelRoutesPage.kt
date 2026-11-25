@@ -12,6 +12,7 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
 import dev.pathpilot.core.ProviderConfig
 import dev.pathpilot.core.RouteConfig
 import dev.pathpilot.core.RouterConfig
+import dev.pathpilot.core.RequestEvent
 
 /** The selected provider is hoisted so the supplier page can open its model list directly. */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,6 +26,8 @@ import dev.pathpilot.core.RouterConfig
     onEditModel: (RouteConfig) -> Unit,
     onModelToggle: (RouteConfig, Boolean) -> Unit,
     onProviderToggle: (ProviderConfig, Boolean) -> Unit,
+    requestEvents: List<RequestEvent> = emptyList(),
+    onViewUsage: ((ProviderConfig, RouteConfig?) -> Unit)? = null,
 ) {
     val provider = config.providers.find { it.id == selectedProviderId }
     LaunchedEffect(selectedProviderId, provider?.id) {
@@ -40,6 +43,9 @@ import dev.pathpilot.core.RouterConfig
                 }
             },
             actions = {
+                if (provider != null && onViewUsage != null) IconButton(onClick = { onViewUsage(provider, null) }) {
+                    Icon(PathPilotIcons.Usage, "查看供应商用量")
+                }
                 if (provider != null) IconButton(enabled = !saving, onClick = { onAddModel(provider.id) }) {
                     Icon(PathPilotIcons.Add, "添加模型")
                 }
@@ -53,7 +59,9 @@ import dev.pathpilot.core.RouterConfig
             else key(provider.id) {
                 ProviderModelsScreen(provider, config.routes, saving,
                     onAdd = { onAddModel(provider.id) }, onEdit = onEditModel, onToggle = onModelToggle,
-                    onProviderToggle = { onProviderToggle(provider, it) })
+                    onProviderToggle = { onProviderToggle(provider, it) },
+                    requestEvents = requestEvents,
+                    onViewUsage = onViewUsage?.let { view -> { route -> view(provider, route) } })
             }
         }
     }

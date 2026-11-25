@@ -57,50 +57,72 @@ class RouterServer(
         }
         if (session.uri !in setOf("/v1/chat/completions", "/v1/responses")) return rejectBeforeBody(404, "not_found", "Unknown API endpoint.")
         if (session.method != Method.POST) return rejectBeforeBody(405, "method_not_allowed", "Use POST for this endpoint.")
-        if (session.headers["transfer-encoding"]?.isNotBlank() == true) return rejectBeforeBody(411, "length_required", "Send a JSON request with Content-Length; chunked request bodies are not supported.")
-        val length = session.headers["content-length"]?.toLongOrNull() ?: return rejectBeforeBody(411, "length_required", "Content-Length is required.")
-        if (length !in 1..MAX_REQUEST_BYTES) return rejectBeforeBody(if (length > MAX_REQUEST_BYTES) 413 else 400, "invalid_request", "JSON request body must be between 1 byte and 2 MiB.")
-        if (session.headers["content-encoding"]?.let { it != "identity" } == true) return rejectBeforeBody(415, "unsupported_media_type", "Compressed request bodies are not supported.")
-        if (session.headers["content-type"]?.substringBefore(';')?.trim()?.lowercase() != "application/json") return rejectBeforeBody(415, "unsupported_media_type", "Content-Type must be application/json.")
-        val body = try {
-            json.parseToJsonElement(readBody(session.inputStream, length.toInt()).toString(Charsets.UTF_8)) as? JsonObject
-                ?: return rejectBeforeBody(400, "invalid_json", "Request body must be a JSON object.")
-        } catch (_: Exception) { return rejectBeforeBody(400, "invalid_json", "Invalid or incomplete JSON request.") }
-        val alias = (body["model"] as? JsonPrimitive)?.contentOrNull ?: return error(400, "model_required", "A model alias is required.")
-        val route = config.routes.firstOrNull { it.enabled && it.alias == alias } ?: return error(404, "model_not_found", "Unknown or disabled model alias.")
-        val provider = config.providers.firstOrNull { it.enabled && it.id == route.providerId } ?: return error(503, "provider_unavailable", "The selected provider is unavailable.")
-        if (!requestSlots.tryAcquire()) return error(429, "router_busy", "The phone is already handling 8 requests. Retry after a request completes.")
         val started = System.nanoTime()
+        val startedAt = System.currentTimeMillis()
+        var alias = ""
+        var route: RouteConfig? = null
+        var provider: ProviderConfig? = null
+        var streaming = false
+        var slotAcquired = false
         var call: Call? = null
+        var observation: ResponseObservation? = null
         val reported = AtomicBoolean(false)
-        fun report(status: Int) {
+        fun report(status: Int, outcome: RequestOutcome = if (status in 200..299) RequestOutcome.SUCCESS else RequestOutcome.HTTP_ERROR,
+                   code: String? = null) {
             if (reported.compareAndSet(false, true)) {
-                requestSlots.release()
-                runCatching { onRequest(RequestEvent(alias, provider.id, status, TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - started), session.uri)) }
+                if (slotAcquired) requestSlots.release()
+                runCatching { onRequest(RequestEvent(
+                    model = alias.take(128), providerId = provider?.id ?: route?.providerId.orEmpty(),
+                    status = status, durationMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - started),
+                    endpoint = session.uri, startedAtEpochMs = startedAt, providerName = provider?.name.orEmpty(),
+                    upstreamModel = route?.upstreamModel.orEmpty(), streaming = streaming,
+                    usage = observation?.usage, outcome = outcome, errorCode = code,
+                )) }
             }
         }
+        fun reject(code: Int, type: String, message: String, unread: Boolean = false): Response {
+            report(code, code = type)
+            return if (unread) rejectBeforeBody(code, type, message) else error(code, type, message)
+        }
+        if (session.headers["transfer-encoding"]?.isNotBlank() == true) return reject(411, "length_required", "Send a JSON request with Content-Length; chunked request bodies are not supported.", true)
+        val length = session.headers["content-length"]?.toLongOrNull() ?: return reject(411, "length_required", "Content-Length is required.", true)
+        if (length !in 1..MAX_REQUEST_BYTES) return reject(if (length > MAX_REQUEST_BYTES) 413 else 400, "invalid_request", "JSON request body must be between 1 byte and 2 MiB.", true)
+        if (session.headers["content-encoding"]?.let { it != "identity" } == true) return reject(415, "unsupported_media_type", "Compressed request bodies are not supported.", true)
+        if (session.headers["content-type"]?.substringBefore(';')?.trim()?.lowercase() != "application/json") return reject(415, "unsupported_media_type", "Content-Type must be application/json.", true)
+        val body = try {
+            json.parseToJsonElement(readBody(session.inputStream, length.toInt()).toString(Charsets.UTF_8)) as? JsonObject
+                ?: return reject(400, "invalid_json", "Request body must be a JSON object.", true)
+        } catch (_: Exception) { return reject(400, "invalid_json", "Invalid or incomplete JSON request.", true) }
+        alias = (body["model"] as? JsonPrimitive)?.contentOrNull ?: return reject(400, "model_required", "A model alias is required.")
+        streaming = (body["stream"] as? JsonPrimitive)?.booleanOrNull == true
+        val selectedRoute = config.routes.firstOrNull { it.alias == alias }
+        route = selectedRoute
+        val selectedProvider = config.providers.firstOrNull { it.id == selectedRoute?.providerId }
+        provider = selectedProvider
+        if (selectedRoute == null || !selectedRoute.enabled) return reject(404, "model_not_found", "Unknown or disabled model alias.")
+        if (selectedProvider == null || !selectedProvider.enabled) return reject(503, "provider_unavailable", "The selected provider is unavailable.")
+        if (!requestSlots.tryAcquire()) return reject(429, "router_busy", "The phone is already handling 8 requests. Retry after a request completes.")
+        slotAcquired = true
         try {
             val streamValue = body["stream"]
             require(streamValue == null || streamValue is JsonPrimitive && streamValue.booleanOrNull != null) { "stream must be a boolean." }
-            val streaming = streamValue?.jsonPrimitive?.booleanOrNull == true
-            val routedBody = JsonObject(body + ("model" to JsonPrimitive(route.upstreamModel)))
-            val codex = provider.kind == ProviderKind.CODEX
+            val routedBody = JsonObject(body + ("model" to JsonPrimitive(selectedRoute.upstreamModel)))
+            val codex = selectedProvider.kind == ProviderKind.CODEX
             val chat = session.uri == "/v1/chat/completions"
-            if (provider.kind == ProviderKind.DEEPSEEK && !chat) {
-                report(400)
-                return error(400, "unsupported_endpoint", "DeepSeek routes support /v1/chat/completions. Use a Codex or Responses-compatible provider for /v1/responses.")
+            if (selectedProvider.kind == ProviderKind.DEEPSEEK && !chat) {
+                return reject(400, "unsupported_endpoint", "DeepSeek routes support /v1/chat/completions. Use a Codex or Responses-compatible provider for /v1/responses.")
             }
             val request = if (codex) {
-                val credentials = codexCredentials(provider)
-                if (credentials.accessToken.isBlank()) { report(503); return error(503, "account_required", "Sign in to the Codex provider on the phone.") }
+                val credentials = codexCredentials(selectedProvider)
+                if (credentials.accessToken.isBlank()) return reject(503, "account_required", "Sign in to the Codex provider on the phone.")
                 CodexBackend.prepare(if (chat) ResponseBridge.chatToResponses(routedBody) else routedBody, credentials.accessToken, credentials.accountId)
             } else {
-                if (provider.apiKey.isBlank() && provider.kind != ProviderKind.OPENAI_COMPATIBLE) {
-                    report(503); return error(503, "api_key_required", "Configure this provider's API key on the phone.")
+                if (selectedProvider.apiKey.isBlank() && selectedProvider.kind != ProviderKind.OPENAI_COMPATIBLE) {
+                    return reject(503, "api_key_required", "Configure this provider's API key on the phone.")
                 }
-                val endpoint = provider.baseUrl.trimEnd('/') + if (chat) "/chat/completions" else "/responses"
+                val endpoint = selectedProvider.baseUrl.trimEnd('/') + if (chat) "/chat/completions" else "/responses"
                 Request.Builder().url(endpoint)
-                    .apply { if (provider.apiKey.isNotBlank()) header("Authorization", "Bearer ${provider.apiKey.trim()}") }
+                    .apply { if (selectedProvider.apiKey.isNotBlank()) header("Authorization", "Bearer ${selectedProvider.apiKey.trim()}") }
                     .header("Accept", if (streaming) "text/event-stream" else "application/json")
                     .post(routedBody.toString().toRequestBody(JSON_MEDIA_TYPE)).build()
             }
@@ -110,26 +132,59 @@ class RouterServer(
             if (!upstream.isSuccessful) {
                 val status = upstream.code
                 val retryAfter = upstream.header("Retry-After")?.takeIf { it.matches(Regex("[0-9]{1,8}")) }
-                upstream.close(); activeCalls.remove(call); report(status)
+                upstream.close(); activeCalls.remove(call); report(status, code = "upstream_error")
                 return error(status, "upstream_error", "Upstream returned HTTP $status. Check the provider account and model on the phone.").also {
                     retryAfter?.let { delay -> it.addHeader("Retry-After", delay) }
                 }
             }
             val responseBody = upstream.body ?: throw IOException("Upstream response has no body.")
+            val observed = ResponseObservation(sse = codex || streaming)
+            observation = observed
+            val raw = observed.wrap(responseBody.byteStream())
             if (codex && !streaming) {
-                val final = upstream.use { ResponseBridge.aggregate(responseBody.byteStream()) }
-                activeCalls.remove(call); report(200)
-                return jsonResponse(200, if (chat) ResponseBridge.asChat(final, alias) else JsonObject(final + ("model" to JsonPrimitive(alias))))
+                val final = upstream.use { ResponseBridge.aggregate(raw) }
+                activeCalls.remove(call)
+                val response = jsonResponse(200, if (chat) ResponseBridge.asChat(final, alias)
+                    else JsonObject(final + ("model" to JsonPrimitive(alias))))
+                report(200, if (observed.incomplete) RequestOutcome.INTERRUPTED
+                    else if (observed.errorCode != null) RequestOutcome.HTTP_ERROR else RequestOutcome.SUCCESS, observed.errorCode)
+                return response
             }
-            val raw = responseBody.byteStream()
             val content = if (codex && chat) ResponseBridge.chatStream(raw, alias,
                 (body["stream_options"] as? JsonObject)?.get("include_usage")?.jsonPrimitive?.booleanOrNull == true) else raw
             val stream = object : FilterInputStream(content) {
                 private val closed = AtomicBoolean(false)
+                private var eof = false
+                private var readFailure = false
+                private var readTimeout = false
+
+                private inline fun readObserved(read: () -> Int): Int = try {
+                    read().also { if (it < 0) eof = true }
+                } catch (timeout: SocketTimeoutException) {
+                    readFailure = true; readTimeout = true; throw timeout
+                } catch (failure: IOException) {
+                    readFailure = true; throw failure
+                }
+                override fun read(): Int = readObserved { `in`.read() }
+                override fun read(bytes: ByteArray, offset: Int, length: Int): Int =
+                    readObserved { `in`.read(bytes, offset, length) }
+
                 override fun close() {
                     if (closed.compareAndSet(false, true)) {
+                        val interrupted = !eof || readFailure || observed.incomplete || (streaming && !observed.terminal)
+                        val outcome = if (interrupted) RequestOutcome.INTERRUPTED
+                            else if (observed.errorCode != null) RequestOutcome.HTTP_ERROR else RequestOutcome.SUCCESS
+                        val code = when {
+                            readTimeout -> "upstream_timeout"
+                            !eof || readFailure -> if (call.isCanceled()) "request_cancelled" else "stream_interrupted"
+                            observed.errorCode != null -> observed.errorCode
+                            streaming && !observed.terminal -> "upstream_stream_incomplete"
+                            else -> null
+                        }
                         try { super.close() } finally {
-                            upstream.close(); call.cancel(); activeCalls.remove(call); report(upstream.code)
+                            try { upstream.close() } finally {
+                                call.cancel(); activeCalls.remove(call); report(upstream.code, outcome, code)
+                            }
                         }
                     }
                 }
@@ -139,14 +194,16 @@ class RouterServer(
                 it.addHeader("X-Accel-Buffering", "no")
             }
         } catch (_: SocketTimeoutException) {
-            call?.cancel(); call?.let(activeCalls::remove); report(504)
+            call?.cancel(); call?.let(activeCalls::remove); report(504, code = "upstream_timeout")
             return error(504, "upstream_timeout", "The upstream request timed out.")
-        } catch (e: IllegalArgumentException) {
-            call?.cancel(); call?.let(activeCalls::remove); report(400)
-            // Locally authored validation messages only; never return arbitrary exception content.
+        } catch (_: IllegalArgumentException) {
+            call?.cancel(); call?.let(activeCalls::remove); report(400, code = "unsupported_request")
             return error(400, "unsupported_request", "Invalid upstream URL or unsupported request fields for this provider. Check the API compatibility documentation.")
         } catch (_: Exception) {
-            call?.cancel(); call?.let(activeCalls::remove); report(502)
+            val cancelled = call?.isCanceled() == true
+            call?.cancel(); call?.let(activeCalls::remove)
+            report(502, if (cancelled) RequestOutcome.INTERRUPTED else RequestOutcome.HTTP_ERROR,
+                if (cancelled) "request_cancelled" else observation?.errorCode ?: "upstream_unavailable")
             return error(502, "upstream_unavailable", "Could not complete the upstream request. Check network access and provider login on the phone.")
         }
     }

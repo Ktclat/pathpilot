@@ -97,7 +97,12 @@ class RouterService : Service() {
                 val ownerContext = currentCoroutineContext()
                 server = RouterServer(
                     configProvider = { store.config.value },
-                    onRequest = { event -> if (ownerContext.isActive) RouterRuntime.record(event) },
+                    onRequest = { event ->
+                        // NanoHTTPD workers and service cleanup run off the main thread.
+                        // Keep final interrupted requests even after the service owner is cancelled.
+                        store.requestHistory.record(event)
+                        if (ownerContext.isActive) RouterRuntime.record(event)
+                    },
                     codexCredentials = store::resolveCodexCredentials,
                 )
                 server.start()

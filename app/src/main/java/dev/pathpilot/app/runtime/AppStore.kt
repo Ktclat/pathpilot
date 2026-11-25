@@ -27,6 +27,7 @@ import kotlinx.serialization.json.Json
 
 /** The complete configuration (including upstream and LAN credentials) is encrypted at rest. */
 class AppStore private constructor(context: Context) {
+    val requestHistory = RequestHistoryStore(context)
     private val file = AtomicFile(File(context.noBackupFilesDir, "pathpilot-config.enc"))
     private val json = Json { ignoreUnknownKeys = true; encodeDefaults = true }
     private var stored = StoredState(RouterConfig(accessKey = AccessKeys.generate()))

@@ -1,53 +1,44 @@
-# 0.1.7 验证记录
+# 0.1.8 验证记录
 
-日期：2026-11-25（UTC）。本轮把模型管理改为「供应商 → 具体模型」两级结构，增加供应商内搜索、状态筛选及供应商开关。[0.1.6 记录](validation-0.1.6.md)保留。
+日期：2026-11-25（UTC）。本轮增加实际 Token 用量观测、按模型统计、持久请求历史与详情，并更新 MCP 后续方案。[0.1.7 记录](validation-0.1.7.md)保留。
 
 ## 构建与自动测试
 
 ```sh
 ./gradlew --no-daemon :core:test :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
-python3 scripts/verify-apk.py artifacts/PathPilot-0.1.7-arm64.apk
-$ANDROID_HOME/build-tools/36.0.0/apksigner verify artifacts/PathPilot-0.1.7-arm64.apk
+python3 scripts/verify-apk.py artifacts/PathPilot-0.1.8-arm64.apk
+$ANDROID_HOME/build-tools/36.0.0/apksigner verify artifacts/PathPilot-0.1.8-arm64.apk
 ```
 
 | 检查 | 结果 |
 | --- | --- |
-| 核心 JVM 测试 | 78 通过 |
-| Android ViewModel / runtime JVM 测试 | 29 通过 |
-| 合计 | **107 通过，0 失败，0 跳过** |
-| Android Lint | **0 错误，12 条既有警告** |
-| APK | ZIP、签名、ARM64 架构与包名检查通过 |
+| 核心 JVM 测试 | 98 通过；本轮新增 20 项 |
+| Android / 聚合 JVM 测试 | 36 通过；本轮新增 7 项 |
+| 合计 | **134 通过，0 失败，0 跳过** |
+| Android Lint | **0 错误，13 警告**；新增一项 SQLite transaction 的 UseKtx 建议 |
+| 常规 APK | 签名、ZIP、包名和 ARM64-only 校验通过 |
 | Actions 配置 | actionlint 通过 |
 
-提交 `158e05d` 的 [GitHub Actions](https://github.com/Ktclat/pathpilot/actions/runs/45526870305) 已成功，耗时 **2 分 33 秒**；测试、构建、Lint、ARM64 校验及产物上传均通过。
+首次 Lint 分析 UsageAnalytics.kt 时出现分析器 `Bad parent: KtFile` 崩溃；源码停止变动后重跑上述完整命令成功，未关闭任何 Lint 规则。
 
-常规包为 `dev.pathpilot.app`，版本 `0.1.7` / versionCode 8，仅 `arm64-v8a`。本地副本 `artifacts/PathPilot-0.1.7-arm64.apk` 的 SHA-256：
+常规包为 `dev.pathpilot.app`，版本 `0.1.8` / versionCode 9，仅 `arm64-v8a`。本地副本 `artifacts/PathPilot-0.1.8-arm64.apk` 的 SHA-256：
 
 ```text
-a7f16aa02af9966675e37a09552c62bc752bf8822f0a9063d588e2e7dc44d6f6
+04b032197ac655216bffa0e849aea90f584416dde74fa3d05d95b96b06ae36d5
 ```
 
-常规 APK 检查未包含本轮 fixture 密钥及 instrumentation 测试类。截图包和测试包独立构建，不能代替常规交付包。
+常规 DEX 未包含本轮 UI/SQLite instrumentation 测试类及测试密钥。截图构建为独立包，不能代替 ARM64 交付包。
 
-本轮只调整模型管理界面、导航和文案，沿用原有 `RouteConfig`、共享模型名、配置存储及转发逻辑。模型开关只更新对应模型；供应商开关只更新供应商，保留每个模型的设置。客户端可见模型仍须同时满足供应商与模型已启用。
+## 请求观测与聚合
 
-## Android 界面验证
+新增真实回环 HTTP 回归覆盖 Chat JSON、Chat SSE、Responses SSE、Codex 非流式与流式、未取得用量、上游 HTTP 错误、HTTP 200 内失败/不完整事件、未知或停用模型、供应商停用、下游提前关闭、服务停止取消及回调唯一性。观察单元测试覆盖部分字段、缓存输入/推理输出、数值边界、多行与分块 SSE，以及超出 4 MiB 后转发字节不变。
 
-使用 API 35 软件模拟器运行生产 `ModelRoutesPage` 及其两级页面。测试宿主提供两个明确标注「离线测试」的供应商及四个本地模型配置，不使用真实账号。
+用量只读取实际响应字段，不改客户端 include_usage。观察缓冲每份 JSON/单 SSE 事件最多 4 MiB，超出时该段用量可能未知，但继续转发全部响应。HTTP 状态与成功/失败/中断分开，不把 HTTP 200 自动视为完整成功。
 
-最终完整 instrumentation 运行结果为 **4 项通过，0 失败**，JUnit 耗时 **137.235 秒**。逐例均返回 `INSTRUMENTATION_STATUS_CODE: 0`：
+聚合测试覆盖本地午夜和七个自然日、夏令时、缺失值与真实零、部分用量、供应商/共享模型/上游模型隔离、结果筛选与数值边界。模型行和请求详情使用相同的历史范围和模型三元组。
 
-- 一级只列供应商；打开后只显示该供应商模型，返回恢复供应商列表。
-- 搜索匹配共享模型名与上游 ID，可叠加启用状态筛选；单模型开关不改变其他供应商或模型。
-- 关闭、恢复供应商总开关均保留每个模型的设置。
-- Codex 供应商「获取模型」成功读取模拟目录，选中后保存对应共享模型配置。
+## Android 设备验证
 
-前三项仅使用本地配置；Codex 回归使用模拟凭据和 MockWebServer。截图包 SHA-256 为 `4c32cd9155f029763a52487f8e4b79cc97d3bd1cbe964a36f1df82e43f72a6d7`，测试包为 `3fd8174307b31acda9a7e260ff875d09919db49acf73e5318f2c1d19685960af`。
+已编写 3 项用量/请求页面 instrumentation 与 6 项 SQLite 存储 instrumentation。页面使用明确标注的离线元数据，不发真实模型请求；SQLite 使用独立临时目录。实际模拟器运行结果及原始截图待本轮完成后补充。
 
-四项功能验证的原始 [instrumentation 日志](../artifacts/screenshots/v0.1.7/instrumentation.log)及[结果](../artifacts/screenshots/v0.1.7/instrumentation-results.json)已保留。
-
-两次完整运行的四项断言均通过（156.026 秒、137.235 秒），截图却分别被模拟器 Quickstep、System UI 无响应弹窗遮挡，均未作为有效界面截图。分别保留[首轮原始记录](../artifacts/screenshots/v0.1.7/diagnostics/first-run/instrumentation-results.json)和[第二轮记录](../artifacts/screenshots/v0.1.7/diagnostics/second-run/instrumentation-results.json)。没有修改源码、重新安装或重启模拟器。
-
-关闭 System UI 弹窗并确认桌面恢复后，仅复跑生成分组页、模型页及停用状态截图的两项用例，**2 项通过，耗时 77.106 秒**。这两项是上述四项中的子集。三张原始 PNG 已逐张检查，界面清晰且没有弹窗遮挡；该轮[捕获日志](../artifacts/screenshots/v0.1.7/capture-instrumentation.log)、[结果与校验和](../artifacts/screenshots/v0.1.7/capture-results.json)及图片见[截图目录](../artifacts/screenshots/v0.1.7/README.md)。
-
-本轮界面测试不覆盖 AppStore 跨重启持久化、编辑重命名或真实订阅请求。这些范围不计入本轮通过结果。
+本轮未验证真实账号订阅剩余额度，也未实现按价格计费。MCP 为一手资料核查与下一阶段网关方案，未集成 MCP 依赖或运行其接口；见 [MCP 方案](mcp-roadmap.md)。

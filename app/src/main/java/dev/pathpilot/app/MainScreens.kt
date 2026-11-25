@@ -31,6 +31,7 @@ import dev.pathpilot.app.runtime.LocalAddressSnapshot
 import dev.pathpilot.app.runtime.LocalAddressKind
 import dev.pathpilot.app.runtime.LocalAddresses
 import dev.pathpilot.app.runtime.RuntimeState
+import dev.pathpilot.app.runtime.RequestHistoryState
 import dev.pathpilot.app.ui.icons.PathPilotIcons
 import dev.pathpilot.app.ui.icons.ProviderBrandIcon
 import dev.pathpilot.core.*
@@ -44,6 +45,7 @@ import kotlinx.coroutines.withContext
 @Composable internal fun SharingScreen(
     config: RouterConfig, runtime: RuntimeState, sessions: Set<String>, saving: Boolean, notificationPending: Boolean,
     onSharingChange: (Boolean) -> Unit, onProviders: () -> Unit, onRoutes: () -> Unit, onCopy: (String, String) -> Unit,
+    history: RequestHistoryState, onActivity: (Boolean) -> Unit, onRequest: (RequestEvent) -> Unit,
 ) {
     val context = LocalContext.current.applicationContext
     val lifecycle = LocalLifecycleOwner.current.lifecycle
@@ -68,7 +70,7 @@ import kotlinx.coroutines.withContext
     val setupAction = when {
         config.providers.isEmpty() -> "添加供应商"
         enabledProviders.isEmpty() -> "启用供应商"
-        enabledRoutes.isEmpty() -> "添加模型"
+        enabledRoutes.isEmpty() -> if (config.routes.isEmpty()) "添加模型" else "启用模型"
         !ready -> "检查供应商"
         else -> null
     }
@@ -115,14 +117,17 @@ import kotlinx.coroutines.withContext
         if (!onThisDevice && snapshot?.addresses?.any { it.kind == LocalAddressKind.VPN || it.kind == LocalAddressKind.CELLULAR } == true) {
             item { OtherNetworkAddresses(snapshot.addresses, addressPort, onCopy) }
         }
-        item { Text("${config.providers.size} 个供应商  ·  ${config.routes.size} 个模型  ·  ${runtime.requestCount} 次请求", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant) }
-        if (runtime.recentRequests.isNotEmpty()) {
-            item { Text("最近请求", style = MaterialTheme.typography.titleMedium) }
-            items(runtime.recentRequests.take(12)) { event ->
-                ListItem(content = { Text(event.model.ifBlank { "未知模型" }, maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                    supportingContent = { Text("${event.durationMs} ms") },
-                    trailingContent = { Text(event.status.toString(), color = if (event.status >= 400) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant) })
+        item { UsageOverviewCard(history.events, history.error, onClick = { onActivity(false) }) }
+        item {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Text("最近请求", Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
+                TextButton(onClick = { onActivity(true) }) { Text("全部") }
             }
+        }
+        if (history.events.isEmpty()) item {
+            Text("暂无请求", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        } else items(history.events.take(3), key = { it.id }) { event ->
+            RecentRequestPreview(event, onClick = { onRequest(event) })
         }
     }
 }

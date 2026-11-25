@@ -1,67 +1,78 @@
-# MCP 后续范围
+# MCP 后续方案
 
-**当前未实现 MCP。** PathPilot 目前提供模型 API；本文件是后续建议，不代表 APK 已能连接或提供 MCP 工具。核查日期：2026-11-24。
+**当前 APK 尚未实现 MCP。** 本文是 2026-11-25 的接口核查与实施方案。本轮先完善模型用量和请求记录；下一阶段建议做「远程 MCP 连接管理 + 本机/局域网共享」，由现有客户端继续负责模型与工具的调用流程。
 
-## 对当前使用方式的价值
+## 哪种方式适合 PathPilot
 
-用户主要在电脑上的 Codex 或其他客户端使用手机提供的模型。优先让支持 MCP 的客户端继续负责工具，PathPilot 负责模型路由。增加 MCP 有助于共享工具和数据访问能力，不会自动增加模型来源、订阅额度或模型接口兼容性。
-
-| 角色 | 实际行为 | 建议 |
+| 方式 | 手机负责什么 | 适用阶段 |
 | --- | --- | --- |
-| 手机作为 MCP server | 向局域网客户端提供手机或路由工具；客户端仍是 host，决定何时调用 | 有具体手机工具需求时优先，使用独立可选的 `/mcp` 入口 |
-| 手机作为 MCP host/client | 手机连接远程 MCP server、管理工具凭据，并把工具接入模型执行流程 | 等确有集中管理工具、手机内任务执行需求再做；连接管理之外还需要模型与工具调用循环 |
-| 现有模型 API 路由 | 转发模型请求及 function tools，由请求方处理工具调用 | 保持现有职责，不因配置 MCP 自动改变请求 |
+| 客户端直接连接 MCP | PathPilot 只转发模型请求；电脑或手机上的客户端连接工具 | 现在即可这样组合使用，客户端本身需支持 MCP |
+| 手机作为 MCP 网关 | 统一保存远程工具地址和凭据，向本机/局域网客户端提供 MCP 入口 | **建议的下一阶段**；最贴近现在统一管理和共享模型的用途 |
+| 手机提供自己的 MCP 工具 | 向客户端提供模型状态、用量查询或用户选择的手机数据 | 网关贯通后按实际工具需求增加 |
+| 手机作为 MCP host / Agent | 选择工具、执行工具、再请求模型，维护多轮任务 | 手机内任务执行功能成熟后单独建设 |
 
-MCP 使用 JSON-RPC，定义工具发现、`tools/list`、`tools/call` 等消息。[OpenAI function tools][openai-tools] 是模型请求中的工具定义和调用结果，两者不是同一种协议。host 可以在两者之间转换，但需要处理工具名、参数、调用 ID、结果和下一轮模型请求。
+推荐的网关同时是远程 MCP 的 client、局域网客户端眼中的 server。客户端仍是 host，决定何时调用工具。仅保存 MCP 连接而没有共享入口或执行方，不能让现有模型自动使用这些工具。
 
-若在现有 `/v1/chat/completions` 或 `/v1/responses` 内自动加入 MCP 工具并代为执行，会改变客户端提交的 `tools`、`tool_choice`、对话历史与响应过程，还会增加模型轮次、延迟和用量。这是新增执行语义，不能作为透明转发的小改动塞进现有入口。
+模型 API 与 MCP 保持两个入口：`/v1/chat/completions`、`/v1/responses` 接收模型请求；MCP 接收 JSON-RPC 的 `tools/list`、`tools/call` 等消息。OpenAI 的 function tools 与 MCP 不是同一协议；host 在工具定义、调用 ID、参数和结果之间转换。[工具规范][tools] · [OpenAI function tools][openai-tools]
 
-## 最小下一阶段
+因此，首版不在每个模型旁增加一个含义不清的「启用 MCP」开关。工具由客户端配置；未来若增加手机 Agent，再在任务配置中选择模型和工具集合。现有模型 API 不自动插入工具，也不替客户端追加模型轮次。
 
-先选定一个实际要连接的客户端和一个确实需要由手机提供的工具。若启动技术验证，建议只做可选 MCP server：
+## 下一阶段的最小交付
 
-1. 独立开关、`/mcp` 地址、可撤销的 MCP 访问令牌；与模型 API 并存。
-2. 两个只读验证工具：`pathpilot_list_models` 返回已允许共享的模型别名；`pathpilot_get_status` 返回运行状态和请求计数。不返回上游密钥、账号令牌、提示词或完整配置。
-3. 用目标客户端验证发现、列出工具、调用、错误和取消；停用 MCP 后工具请求失效，现有模型 API 继续可用。
+先打通**一个远程 Streamable HTTP 来源 → 手机 → 一个支持自定义 MCP 地址的客户端**，随后沿用相同连接结构增加来源。
 
-这两个工具适合验证接入，单凭它们的收益有限。后续可按真实用途增加手机文件或设备能力；届时再落实对应 Android 权限和操作范围。没有具体工具需求时，继续使用客户端自身的 MCP 功能即可。
+1. 在「设置 → MCP」添加连接：名称、完整 MCP URL、认证方式（无认证 / Bearer）、凭据。提供「连接测试」「获取工具」；错误显示实际 HTTP / MCP 结果。
+2. 连接详情显示工具名称、简短说明及允许共享的开关。首版只声明 Tools 能力；展示列表与实际调用使用同一授权集合。
+3. 每个连接提供独立 `/mcp/<connectionId>` 入口，保持上游工具名。暂不合并为一个跨来源工具目录，避免名称冲突和重命名兼容问题。
+4. 「共享」页在已配置 MCP 后显示独立「MCP 共享」开关、地址和访问密钥。复用已有「本机应用 / 局域网设备」及网卡选择；原型采用独立端口，例如 `8318`，不改动现有模型 API 的 `8317` 监听。
+5. 客户端配置两个地址：模型请求使用原来的 `/v1`，工具连接使用指定的 MCP URL。手机关闭 MCP 时取消其活动调用，模型共享继续按自身开关运行。
 
-首阶段只实现 Tools。手机 Agent、工具目录和运行时包管理按后续实际需求另行评估。
+建议先选一个支持静态 Bearer 的远程工具服务和一个能填写自定义请求头的客户端贯通。需要 OAuth 的服务接入时，再补资源/授权服务器发现、PKCE、浏览器授权及令牌刷新；不把静态令牌原型称为完整 MCP OAuth 实现。
 
-## 传输与 Android 可行性
+外网 MCP 请求沿用当前上游代理设置；来源凭据按连接加密保存。入站 MCP 密钥与模型共享密钥分开，手机验证入站密钥后使用对应来源的上游凭据，不把下游密钥转发给远程服务。监听局域网时实现规范要求的 `Origin` 校验。沿用明文 HTTP 的客户端接入说明，与现有模型共享保持一致。[HTTP 传输][http] · [授权绑定][auth-security]
 
-- **Streamable HTTP**：适合手机连接远程工具，也适合局域网设备连接手机工具。它有独立 MCP 端点和 JSON-RPC 请求，响应可以是 JSON 或请求对应的 SSE；现有模型 SSE 转发本身不构成 MCP 支持。[传输规范][http]
-- **stdio**：标准方式是 client 启动同机子进程，通过 stdin/stdout 交换消息，不是其他设备可直接填写的网络地址。Android 可以集成专门打包并适配的工具，但桌面上的 `npx`、`uvx` 或 Python 命令不能直接当作手机已具备的运行环境。现有 stdio 工具可先运行在电脑上，由客户端直接连接；需要手机访问时，再由工具所在机器提供 HTTP 入口。[stdio 规范][stdio]
-- **复用候选**：官方 Kotlin SDK 提供 client/server 和 Streamable HTTP/stdio 实现；README 声明 JVM、Native、JS、Wasm，并未承诺已验证 Android。其 Ktor 引擎需自行选择；Ktor OkHttp client 引擎支持 Android，但这不等于整个 SDK 或 server 引擎已在本 App 验证。集成前做依赖解析、D8/minSdk 26 和真机启停验证，不需要为了 MCP 改成 Termux。[SDK][sdk] · [Ktor 引擎][ktor]
+工具参数和结果默认不写入请求日志。若以后加入文件、设备或其他可修改数据的工具，再按具体能力落实 Android 权限、可访问范围与已有持续授权；工具的 `readOnlyHint` 只作为描述信息使用。
 
-### 规范与 SDK 版本不能混用
+## 用量和最近请求如何衔接
 
-官方仓库当前标记的最新稳定规范为 **2026-07-28**，有独立正式 tag；本次依据该版文档，不使用 draft。[版本入口][versions]
+| 记录类型 | 展示维度 | 统计口径 |
+| --- | --- | --- |
+| 模型请求 | 供应商、共享模型名、上游模型 ID、时间、结果、耗时、Token | 按实际模型响应的 usage 计入；未返回的字段保持未知 |
+| MCP 工具调用 | MCP 连接、工具名、时间、结果、耗时 | 单独统计调用次数、失败数和耗时；一次工具调用不等于一次模型请求 |
+| 手机 Agent 任务（后续） | 一项任务关联的模型请求与工具调用 | 用任务 ID 关联，模型 Token 汇总其实际模型请求，避免重复相加 |
 
-该版已取消 `initialize` 会话握手、`Mcp-Session-Id` 和 HTTP GET 通知流，改为每请求版本/能力元数据、`server/discover` 和 POST 响应流；Roots、Sampling 已弃用，不建议新项目通过 sampling 另造模型入口。[版本变化][changes]
+MCP 工具本身返回的普通文本不是模型 Token 用量；它可能被客户端放进下一次模型输入，此时由下一次模型响应的 usage 体现。工具服务自己的费用或配额，也不以模型 Token 估算。
 
-本次核实的 Kotlin SDK 最新稳定版 **0.16.0**，`LATEST_PROTOCOL_VERSION` 仍为 **2025-11-25**，client 仍执行初始化握手，server 会拒绝版本头为 2026-07-28 的请求。它提供部分新发现消息类型，不等于已经实现新生命周期。首个原型应锁定目标客户端与 SDK 实际共同支持的版本；可先验证 2025-11-25 兼容路径，但不能标称最新协议全兼容。需要连接仅支持 2026-07-28 的一方时，需升级到支持该版的实现或补充独立适配后联调。[SDK 版本常量][sdk-version] · [client][sdk-client] · [server 版本校验][sdk-server]
+当客户端分别调用模型 API 与 MCP，手机通常没有足够信息自动推断它们属于同一个任务。首版在请求记录中分「模型 / 工具」查看；只有客户端显式传递可核对的关联标识，或以后由手机 host 管理任务时，才展示一条完整执行链。
 
-## 鉴权与操作确认
+网关完成后，可增加 PathPilot 自有的只读工具，例如 `pathpilot_list_models`、`pathpilot_get_usage`（指定时间范围和模型）及 `pathpilot_get_status`。它们复用本地统计查询，只返回聚合数据和运行状态，不需要再次调用模型。作为便利功能即可，不将这几个状态查询工具当作整个 MCP 方案的主要价值。
 
-**局域网 server**：用户明确开启局域网 MCP 后才监听 LAN；只接受授予该 MCP 入口的令牌，模型访问密钥不自动获得手机工具权限。普通私有 LAN 可以使用独立静态 Bearer 令牌，前提是目标客户端支持配置该请求头；这不等同于实现 MCP OAuth 自动发现。沿用 HTTP 时传输仍是明文，需要保密传输则增加 TLS 或使用已有受信任 VPN。按规范检查请求中存在的 `Origin`，拒绝不允许的来源，同时保留令牌鉴权。[HTTP 要求][http] · [授权范围][auth]
+## 已核查的协议与复用候选
 
-**远程 client（后续）**：远程 MCP 凭据按服务分别存储，不把 Codex/DeepSeek 凭据或手机共享密钥拿去登录工具服务。若目标服务要求标准 OAuth，再实现资源/授权服务器发现、PKCE、面向目标 resource 的令牌和浏览器授权；无需为静态令牌服务提前建设整套 OAuth。MCP 入站令牌与访问第三方 API 的令牌保持分离。[授权安全要求][auth-security]
+- 官方版本入口当前标记最新稳定规范为 **2026-07-28**；正式 tag 存在。[版本入口][versions] · [正式 tag][spec-tag]
+- 该版移除 `initialize` 握手、`Mcp-Session-Id` 和 GET 通知流，使用请求版本/能力元数据、`server/discover` 与 POST 响应流；Roots、Sampling 已弃用。新实现不通过 Sampling 另造模型路由入口。[版本变化][changes]
+- 官方 Kotlin SDK 最新稳定发布仍是 **0.16.0**，协议常量仍为 **2025-11-25**，支持 client/server 与 Streamable HTTP；不能据此宣称已支持 2026-07-28。原型需固定客户端、远程服务和 SDK 共同支持的版本，兼容性记录分别写清上游与下游版本。[发布页][sdk-release] · [版本常量][sdk-version]
+- SDK README 声明 JVM / Native / JS / Wasm，Ktor 引擎由应用选择，并未给出本 App 的 Android 验证结果。下一步先验证依赖解析、D8、minSdk 26 以及 ARM64 设备启停，再选服务端引擎或给现有监听增加传输适配；不为研究 MCP 改成 Termux。[SDK][sdk]
+- Streamable HTTP 要处理 JSON 和 SSE 两种响应。stdio 是同机子进程协议，桌面的 `npx` / `uvx` 命令不能直接作为局域网地址；已有 stdio 工具可继续在电脑运行，或由其所在机器提供 HTTP 入口。[HTTP][http] · [stdio][stdio]
 
-**工具授权**：在用户明确选择的工具、数据和操作范围内持续授权，不重复弹窗。删除文件、发送消息、修改配置等能力按已授予的范围执行；超出范围时再展示具体目标与参数取得授权。Android 权限按具体能力申请，第三方工具的 `readOnlyHint` 作为描述信息使用。客户端 host 负责交互，手机 server 执行实际权限检查。[工具规范][tools]
+本次复核读取了官方仓库当前版本入口、2026-07-28 规范、Kotlin SDK release 页面及协议常量。规范文档引用固定在 `2bbace557bbf2cb5d03d6f9b48905415cd7607b0`，SDK 固定在 `0.16.0` 对应的 `4c55826b6af00d616e1f5a285677ff53867cb941`。尚未集成依赖或运行 Android MCP 联调。
 
-后续验收应覆盖：目标客户端的协议版本、JSON/SSE 两种响应、缺失/撤销令牌、非法 Origin、越权工具、停用时取消调用、拒绝操作不产生副作用，以及启用 MCP 不改写现有模型请求。本次仅文档研究，未集成 SDK、未运行 MCP 或 Android 兼容性测试。
+## 验收顺序
+
+1. ARM64 / minSdk 26 构建通过，远程连接测试能列出真实工具；记录双方协议版本。
+2. 一个实际客户端通过手机完成列出、调用、分页、JSON / SSE 响应、错误及取消；工具禁用后不可被调用。
+3. 验证来源凭据、入站密钥、缺失或撤销密钥、非法 Origin；MCP 关闭时取消活动调用。
+4. 多个客户端同时调用时结果与调用 ID 不串线，模型共享的配置和请求保持原有行为。
+5. MCP 调用进入独立日志；模型 Token 不因工具调用而重复计数。之后再增加多个来源、目录合并或手机自有工具。
 
 [openai-tools]: https://github.com/openai/openai-python/blob/abbd37925aa749ec35cd45cd94722e449f909388/src/openai/types/chat/chat_completion_function_tool_param.py
-[versions]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/b0be8f0f2481be8d5ea5294cf3fa57cd03cedc48/docs/docs.json#L33
-[changes]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/b0be8f0f2481be8d5ea5294cf3fa57cd03cedc48/docs/specification/2026-07-28/changelog.mdx
-[http]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/b0be8f0f2481be8d5ea5294cf3fa57cd03cedc48/docs/specification/2026-07-28/basic/transports/streamable-http.mdx
-[stdio]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/b0be8f0f2481be8d5ea5294cf3fa57cd03cedc48/docs/specification/2026-07-28/basic/transports/stdio.mdx
-[tools]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/b0be8f0f2481be8d5ea5294cf3fa57cd03cedc48/docs/specification/2026-07-28/server/tools.mdx
-[auth]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/b0be8f0f2481be8d5ea5294cf3fa57cd03cedc48/docs/specification/2026-07-28/basic/authorization/index.mdx
-[auth-security]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/b0be8f0f2481be8d5ea5294cf3fa57cd03cedc48/docs/specification/2026-07-28/basic/authorization/security-considerations.mdx
-[sdk]: https://github.com/modelcontextprotocol/kotlin-sdk/tree/4c55826b6af00d616e1f5a285677ff53867cb941
+[versions]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/2bbace557bbf2cb5d03d6f9b48905415cd7607b0/docs/docs.json#L33
+[spec-tag]: https://github.com/modelcontextprotocol/modelcontextprotocol/tree/2026-07-28
+[changes]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/2bbace557bbf2cb5d03d6f9b48905415cd7607b0/docs/specification/2026-07-28/changelog.mdx
+[http]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/2bbace557bbf2cb5d03d6f9b48905415cd7607b0/docs/specification/2026-07-28/basic/transports/streamable-http.mdx
+[stdio]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/2bbace557bbf2cb5d03d6f9b48905415cd7607b0/docs/specification/2026-07-28/basic/transports/stdio.mdx
+[tools]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/2bbace557bbf2cb5d03d6f9b48905415cd7607b0/docs/specification/2026-07-28/server/tools.mdx
+[auth-security]: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/2bbace557bbf2cb5d03d6f9b48905415cd7607b0/docs/specification/2026-07-28/basic/authorization/security-considerations.mdx
+[sdk-release]: https://github.com/modelcontextprotocol/kotlin-sdk/releases/tag/0.16.0
 [sdk-version]: https://github.com/modelcontextprotocol/kotlin-sdk/blob/4c55826b6af00d616e1f5a285677ff53867cb941/kotlin-sdk-core/src/commonMain/kotlin/io/modelcontextprotocol/kotlin/sdk/types/common.kt
-[sdk-client]: https://github.com/modelcontextprotocol/kotlin-sdk/blob/4c55826b6af00d616e1f5a285677ff53867cb941/kotlin-sdk-client/src/commonMain/kotlin/io/modelcontextprotocol/kotlin/sdk/client/Client.kt
-[sdk-server]: https://github.com/modelcontextprotocol/kotlin-sdk/blob/4c55826b6af00d616e1f5a285677ff53867cb941/kotlin-sdk-server/src/commonMain/kotlin/io/modelcontextprotocol/kotlin/sdk/server/StreamableHttpServerTransport.kt#L803
-[ktor]: https://github.com/ktorio/ktor-documentation/blob/2392849f91ec7aa55e269c2d5eb0de99889fe7cf/topics/client-engines.md
+[sdk]: https://github.com/modelcontextprotocol/kotlin-sdk/blob/4c55826b6af00d616e1f5a285677ff53867cb941/README.md

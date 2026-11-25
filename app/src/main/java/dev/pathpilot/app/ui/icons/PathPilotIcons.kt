@@ -19,6 +19,7 @@ import androidx.compose.material.icons.outlined.Key
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Refresh
+import androidx.compose.material.icons.outlined.QueryStats
 import androidx.compose.material.icons.outlined.Stop
 import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.material.icons.outlined.Visibility
@@ -53,6 +54,7 @@ object PathPilotIcons {
     val Error: ImageVector get() = Icons.Outlined.ErrorOutline
     val Key: ImageVector get() = Icons.Outlined.Key
     val Refresh: ImageVector get() = Icons.Outlined.Refresh
+    val Usage: ImageVector get() = Icons.Outlined.QueryStats
     val OpenInNew: ImageVector get() = Icons.AutoMirrored.Outlined.OpenInNew
     val Account: ImageVector get() = Icons.Outlined.AccountCircle
     val Api: ImageVector get() = Icons.Outlined.Api
