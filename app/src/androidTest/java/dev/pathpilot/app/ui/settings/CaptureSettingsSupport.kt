@@ -4,7 +4,13 @@ import android.app.LocaleManager
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.LocaleList
+import android.os.SystemClock
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.view.inspector.WindowInspector
 import androidx.compose.ui.test.junit4.ComposeTestRule
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.platform.app.InstrumentationRegistry
 import dev.pathpilot.app.runtime.AppStore
 import dev.pathpilot.app.settings.AppLanguage
@@ -43,4 +49,26 @@ internal fun ComposeTestRule.captureSettingsScreenshot(name: String) {
         check(bitmap.compress(Bitmap.CompressFormat.PNG, 100, output))
     }
     bitmap.recycle()
+}
+
+/** The API 35 capture device also has separate Dialog and BottomSheet input windows. */
+internal fun hideCaptureKeyboard() {
+    check(Build.VERSION.SDK_INT >= 29)
+    val instrumentation = InstrumentationRegistry.getInstrumentation()
+    lateinit var focusedRoot: View
+    instrumentation.runOnMainSync {
+        focusedRoot = WindowInspector.getGlobalWindowViews().single { it.hasWindowFocus() }
+        focusedRoot.context.getSystemService(InputMethodManager::class.java)
+            .hideSoftInputFromWindow(focusedRoot.windowToken, 0)
+    }
+    val deadline = SystemClock.uptimeMillis() + 10_000
+    while (SystemClock.uptimeMillis() < deadline) {
+        var visible = false
+        instrumentation.runOnMainSync {
+            visible = ViewCompat.getRootWindowInsets(focusedRoot)?.isVisible(WindowInsetsCompat.Type.ime()) == true
+        }
+        if (!visible) return
+        SystemClock.sleep(50)
+    }
+    error("IME did not close for the focused input window")
 }

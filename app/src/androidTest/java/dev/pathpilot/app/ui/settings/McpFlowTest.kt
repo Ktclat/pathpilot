@@ -11,7 +11,6 @@ import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextReplacement
@@ -92,7 +91,7 @@ class McpFlowTest {
         compose.onNodeWithText("MCP URL").performTextReplacement(upstream.url)
         compose.onNodeWithText("Bearer").performScrollTo().performClick()
         compose.onNodeWithText("Token").performScrollTo().performTextReplacement(upstream.token)
-        compose.onNodeWithText("Token").performImeAction()
+        hideCaptureKeyboard()
         compose.captureSettingsScreenshot("09-mcp-editor")
         compose.onNodeWithText("保存").performScrollTo().performClick()
         compose.waitUntil(30_000) { store.mcp.value.connections.size == 1 }

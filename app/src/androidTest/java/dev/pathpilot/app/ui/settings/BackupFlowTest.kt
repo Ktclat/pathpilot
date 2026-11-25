@@ -99,7 +99,7 @@ class BackupFlowTest {
         compose.onNodeWithText("导出备份").performClick()
         compose.onNodeWithText("密码").performTextReplacement(password)
         compose.onNodeWithText("确认密码").performTextReplacement(password)
-        compose.onNodeWithText("确认密码").performImeAction()
+        hideCaptureKeyboard()
         compose.onNodeWithText("包含订阅登录状态").assertIsOff()
         compose.captureSettingsScreenshot("07-backup-export")
         compose.onNodeWithText("继续").performClick()
@@ -114,12 +114,12 @@ class BackupFlowTest {
         compose.waitUntil(30_000) { compose.onAllNodes(hasText("解锁备份")).fetchSemanticsNodes().isNotEmpty() }
         assertEquals(Intent.ACTION_OPEN_DOCUMENT, pickerActions.last())
         compose.onNodeWithText("密码").performTextReplacement("incorrect-password")
-        compose.onNodeWithText("密码").performImeAction()
+        hideCaptureKeyboard()
         compose.onNodeWithText("继续").performClick()
         compose.waitUntil(180_000) { compose.onAllNodes(hasText("密码不正确或备份已损坏")).fetchSemanticsNodes().isNotEmpty() }
         assertTrue(store.config.value.providers.isEmpty())
         compose.onNodeWithText("密码").performTextReplacement(password)
-        compose.onNodeWithText("密码").performImeAction()
+        hideCaptureKeyboard()
         compose.onNodeWithText("继续").performClick()
         compose.waitUntil(180_000) { compose.onAllNodes(hasText("恢复此备份？")).fetchSemanticsNodes().isNotEmpty() }
         compose.onNodeWithText("1 个供应商 · 1 个模型 · 1 个 MCP 连接").assertIsDisplayed()
