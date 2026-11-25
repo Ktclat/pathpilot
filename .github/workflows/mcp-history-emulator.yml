@@ -21,8 +21,8 @@ jobs:
           java-version: '17'
       - name: Verify isolated source and KVM
         run: |
-          test "$(git rev-parse HEAD^)" = '04ad624131ecc854c1e8f0058295e2875e1d5f9f'
-          test "$(git diff --name-only HEAD^ HEAD)" = '.github/workflows/mcp-history-emulator.yml'
+          test "$(git rev-parse HEAD^2)" = '8581e4cde93231bcc9826d06d3fe2c4b2a8cb640'
+          test "$(git diff --name-only HEAD^2 HEAD)" = '.github/workflows/mcp-history-emulator.yml'
           test -c /dev/kvm
           if [[ ! -r /dev/kvm || ! -w /dev/kvm ]]; then
             sudo -n setfacl -m "u:$(id -u):rw" /dev/kvm
@@ -120,9 +120,7 @@ jobs:
           }
           run_test dev.pathpilot.app.runtime.McpCallHistoryStoreTest sqlite 'OK (3 tests)'
           run_test dev.pathpilot.app.ui.settings.McpFlowTest ui 'OK (1 test)'
-          path=/sdcard/Android/data/dev.pathpilot.app.capture/files/settings-e2e/13-mcp-history.png
-          "$adb" -s emulator-5554 exec-out run-as dev.pathpilot.app.capture cat "$path" > "$ev/13-mcp-history.png" ||
-            "$adb" -s emulator-5554 pull "$path" "$ev/13-mcp-history.png"
+          "$adb" -s emulator-5554 exec-out run-as dev.pathpilot.app.capture cat files/settings-e2e/13-mcp-history.png > "$ev/13-mcp-history.png"
           python3 - "$ev/13-mcp-history.png" <<'PY'
           import sys
           from pathlib import Path
