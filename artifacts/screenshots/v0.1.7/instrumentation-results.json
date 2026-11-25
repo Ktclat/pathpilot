@@ -1,0 +1,94 @@
+{
+  "target_sha256": "4c32cd9155f029763a52487f8e4b79cc97d3bd1cbe964a36f1df82e43f72a6d7",
+  "test_sha256": "3fd8174307b31acda9a7e260ff875d09919db49acf73e5318f2c1d19685960af",
+  "host_started_at": "2026-11-25T01:40:43.636606+00:00",
+  "device_started_epoch": 1795570842,
+  "command": [
+    "/workspace/toolchains/android-sdk/platform-tools/adb",
+    "-s",
+    "emulator-5554",
+    "shell",
+    "am",
+    "instrument",
+    "-w",
+    "-r",
+    "-e",
+    "class",
+    "dev.pathpilot.app.ui.models.ProviderModelsFlowTest,dev.pathpilot.app.ui.providers.CodexModelsFlowTest#signedInProviderFetchesCatalogSelectsModelAndSavesRoute",
+    "dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner"
+  ],
+  "timed_out": false,
+  "primary_scope": "Three tests mount production ModelRoutesPage with local in-memory config fixtures; no network.",
+  "regression_scope": "One Codex success flow uses simulated subscription credentials and loopback MockWebServer; no real account.",
+  "exit_code": 0,
+  "host_finished_at": "2026-11-25T01:43:10.151096+00:00",
+  "junit_summary": [
+    "OK (4 tests)"
+  ],
+  "test_results": [
+    {
+      "name": "providerMasterSwitchPreservesEveryIndividualModelPreference",
+      "status_code": 0
+    },
+    {
+      "name": "firstLevelShowsProvidersAndDetailContainsOnlyTheirModels",
+      "status_code": 0
+    },
+    {
+      "name": "aliasAndUpstreamSearchCombineWithEnabledFilterAndScopedToggle",
+      "status_code": 0
+    },
+    {
+      "name": "signedInProviderFetchesCatalogSelectsModelAndSavesRoute",
+      "status_code": 0
+    }
+  ],
+  "passed": true,
+  "screenshots": {
+    "01-provider-groups.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/provider-models-e2e/01-provider-groups.png",
+      "device_mtime_epoch": 1795570909,
+      "size": 58555,
+      "created_this_run": true,
+      "sha256": "7336169c76aff637e2323bc144a0141f7647970ce447380b32d1423e1fce0772"
+    },
+    "02-provider-models.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/provider-models-e2e/02-provider-models.png",
+      "device_mtime_epoch": 1795570915,
+      "size": 85049,
+      "created_this_run": true,
+      "sha256": "d9652333f68ef88a9d6144835f11b3ee1a64c211293404d86988e270e96bc941"
+    },
+    "03-provider-disabled.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/provider-models-e2e/03-provider-disabled.png",
+      "device_mtime_epoch": 1795570888,
+      "size": 90914,
+      "created_this_run": true,
+      "sha256": "2a0fdad1d7ff83bfaba865315447b26b93e4324c5ffbefbdfd76f9e2cf380024"
+    },
+    "regression-codex/01-provider-entry.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/codex-models-e2e/01-provider-entry.png",
+      "device_mtime_epoch": 1795570972,
+      "size": 60855,
+      "created_this_run": true,
+      "sha256": "f5c47509a9d92bcace1be18d66d396e3774f59c08b4307b937198d6e9761bce5"
+    },
+    "regression-codex/02-model-selection.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/codex-models-e2e/02-model-selection.png",
+      "device_mtime_epoch": 1795570981,
+      "size": 81473,
+      "created_this_run": true,
+      "sha256": "c4c1cef90c5832b9821b8d298c5d7781286e0497d2320518de55a25e592b134f"
+    }
+  },
+  "all_screenshots_created_this_run": true,
+  "attempt": 2,
+  "previous_attempt": "diagnostics/first-run/instrumentation-results.json",
+  "recovery_before_run": "Closed the observed Quickstep system ANR dialog once; no emulator restart or APK/source change.",
+  "visual_validation": {
+    "accepted": false,
+    "reason": "All five screenshots are obscured by a System UI ANR dialog, verified individually with view_image; four test assertions passed but screenshots are not usable UI evidence."
+  },
+  "screenshot_evidence_directory": "diagnostics/second-run",
+  "final_screenshot_validation": "capture-results.json"
+}

@@ -1,0 +1,69 @@
+{
+  "attempt": 3,
+  "purpose": "Capture three unobscured model-page screenshots after closing the System UI ANR dialog once. Two previously passing local-config tests only; no search or Codex regression rerun.",
+  "target_sha256": "4c32cd9155f029763a52487f8e4b79cc97d3bd1cbe964a36f1df82e43f72a6d7",
+  "test_sha256": "3fd8174307b31acda9a7e260ff875d09919db49acf73e5318f2c1d19685960af",
+  "host_started_at": "2026-11-25T01:48:49.356599+00:00",
+  "device_started_epoch": 1795571328,
+  "command": [
+    "/workspace/toolchains/android-sdk/platform-tools/adb",
+    "-s",
+    "emulator-5554",
+    "shell",
+    "am",
+    "instrument",
+    "-w",
+    "-r",
+    "-e",
+    "class",
+    "dev.pathpilot.app.ui.models.ProviderModelsFlowTest#firstLevelShowsProvidersAndDetailContainsOnlyTheirModels,dev.pathpilot.app.ui.models.ProviderModelsFlowTest#providerMasterSwitchPreservesEveryIndividualModelPreference",
+    "dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner"
+  ],
+  "timed_out": false,
+  "exit_code": 0,
+  "host_finished_at": "2026-11-25T01:50:15.274552+00:00",
+  "junit_summary": [
+    "OK (2 tests)"
+  ],
+  "elapsed_seconds": 77.106,
+  "test_results": [
+    {
+      "name": "providerMasterSwitchPreservesEveryIndividualModelPreference",
+      "status_code": 0
+    },
+    {
+      "name": "firstLevelShowsProvidersAndDetailContainsOnlyTheirModels",
+      "status_code": 0
+    }
+  ],
+  "passed": true,
+  "screenshots": {
+    "01-provider-groups.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/provider-models-e2e/01-provider-groups.png",
+      "device_mtime_epoch": 1795571396,
+      "size": 46293,
+      "created_this_run": true,
+      "sha256": "a2be8925284b3e7cb631a48a9b6e2cd3a6889aa82fc3388eceee720701a1f5c6"
+    },
+    "02-provider-models.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/provider-models-e2e/02-provider-models.png",
+      "device_mtime_epoch": 1795571403,
+      "size": 86167,
+      "created_this_run": true,
+      "sha256": "45f9fdae9d6b80a8a04a82259eb790590906e111a47dfaf0e9214b11e5f19ebc"
+    },
+    "03-provider-disabled.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/provider-models-e2e/03-provider-disabled.png",
+      "device_mtime_epoch": 1795571372,
+      "size": 91247,
+      "created_this_run": true,
+      "sha256": "e57293515f6a128e3c78ce8263a66387949e4a517ebd650ae735ddaa00d27325"
+    }
+  },
+  "all_screenshots_created_this_run": true,
+  "visual_validation": {
+    "accepted": true,
+    "method": "Each of the three original PNGs was inspected with view_image; no System UI or Quickstep dialog obscures them."
+  },
+  "screenshots_relative_to": "."
+}

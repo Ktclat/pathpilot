@@ -19,6 +19,8 @@ $ANDROID_HOME/build-tools/36.0.0/apksigner verify artifacts/PathPilot-0.1.7-arm6
 | APK | ZIP、签名、ARM64 架构与包名检查通过 |
 | Actions 配置 | actionlint 通过 |
 
+提交 `158e05d` 的 [GitHub Actions](https://github.com/Ktclat/pathpilot/actions/runs/45526870305) 已成功，耗时 **2 分 33 秒**；测试、构建、Lint、ARM64 校验及产物上传均通过。
+
 常规包为 `dev.pathpilot.app`，版本 `0.1.7` / versionCode 8，仅 `arm64-v8a`。本地副本 `artifacts/PathPilot-0.1.7-arm64.apk` 的 SHA-256：
 
 ```text
@@ -33,6 +35,19 @@ a7f16aa02af9966675e37a09552c62bc752bf8822f0a9063d588e2e7dc44d6f6
 
 使用 API 35 软件模拟器运行生产 `ModelRoutesPage` 及其两级页面。测试宿主提供两个明确标注「离线测试」的供应商及四个本地模型配置，不使用真实账号。
 
-待本轮运行完成后补充四项 instrumentation 的实际结果及原始截图：供应商分组与返回导航、搜索与筛选及模型开关、供应商开关保留单模型配置，以及既有 Codex 获取模型成功流程回归。前三项仅使用本地配置；Codex 回归使用模拟凭据和 MockWebServer。
+最终完整 instrumentation 运行结果为 **4 项通过，0 失败**，JUnit 耗时 **137.235 秒**。逐例均返回 `INSTRUMENTATION_STATUS_CODE: 0`：
+
+- 一级只列供应商；打开后只显示该供应商模型，返回恢复供应商列表。
+- 搜索匹配共享模型名与上游 ID，可叠加启用状态筛选；单模型开关不改变其他供应商或模型。
+- 关闭、恢复供应商总开关均保留每个模型的设置。
+- Codex 供应商「获取模型」成功读取模拟目录，选中后保存对应共享模型配置。
+
+前三项仅使用本地配置；Codex 回归使用模拟凭据和 MockWebServer。截图包 SHA-256 为 `4c32cd9155f029763a52487f8e4b79cc97d3bd1cbe964a36f1df82e43f72a6d7`，测试包为 `3fd8174307b31acda9a7e260ff875d09919db49acf73e5318f2c1d19685960af`。
+
+四项功能验证的原始 [instrumentation 日志](../artifacts/screenshots/v0.1.7/instrumentation.log)及[结果](../artifacts/screenshots/v0.1.7/instrumentation-results.json)已保留。
+
+两次完整运行的四项断言均通过（156.026 秒、137.235 秒），截图却分别被模拟器 Quickstep、System UI 无响应弹窗遮挡，均未作为有效界面截图。分别保留[首轮原始记录](../artifacts/screenshots/v0.1.7/diagnostics/first-run/instrumentation-results.json)和[第二轮记录](../artifacts/screenshots/v0.1.7/diagnostics/second-run/instrumentation-results.json)。没有修改源码、重新安装或重启模拟器。
+
+关闭 System UI 弹窗并确认桌面恢复后，仅复跑生成分组页、模型页及停用状态截图的两项用例，**2 项通过，耗时 77.106 秒**。这两项是上述四项中的子集。三张原始 PNG 已逐张检查，界面清晰且没有弹窗遮挡；该轮[捕获日志](../artifacts/screenshots/v0.1.7/capture-instrumentation.log)、[结果与校验和](../artifacts/screenshots/v0.1.7/capture-results.json)及图片见[截图目录](../artifacts/screenshots/v0.1.7/README.md)。
 
 本轮界面测试不覆盖 AppStore 跨重启持久化、编辑重命名或真实订阅请求。这些范围不计入本轮通过结果。
