@@ -13,10 +13,10 @@ on:
         type: boolean
         default: false
       release_tag:
-        description: '新预发布标签，例如 v0.1.8-dev.1；不会覆盖已有 Release'
+        description: '新预发布标签，例如 v0.1.9-dev.1；不会覆盖已有 Release'
         required: true
         type: string
-        default: v0.1.8-dev.1
+        default: v0.1.9-dev.1
 
 permissions:
   contents: read
@@ -112,7 +112,7 @@ jobs:
         run: |
           set -euo pipefail
           [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+-dev\.[0-9]+$ ]] || {
-            echo 'Use a development tag such as v0.1.8-dev.1.' >&2; exit 1;
+            echo 'Use a development tag such as v0.1.9-dev.1.' >&2; exit 1;
           }
           [[ "$RELEASE_TAG" == "v${APP_VERSION}-dev."* ]] || {
             echo 'Release tag must match the APK version.' >&2; exit 1;

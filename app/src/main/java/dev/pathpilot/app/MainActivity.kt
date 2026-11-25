@@ -92,12 +92,13 @@ class MainActivity : ComponentActivity() {
     val sessions by store.authenticatedCodexProviders.collectAsStateWithLifecycle()
     val history by store.requestHistory.state.collectAsStateWithLifecycle()
     var tab by rememberSaveable { mutableIntStateOf(0) }
-    var activityVisible by rememberSaveable { mutableStateOf(false) }
-    var activityRequests by rememberSaveable { mutableStateOf(false) }
-    var activityProvider by rememberSaveable { mutableStateOf<String?>(null) }
-    var activityModel by rememberSaveable { mutableStateOf<String?>(null) }
-    var activityUpstreamModel by rememberSaveable { mutableStateOf<String?>(null) }
-    var activityRequestId by rememberSaveable { mutableStateOf<String?>(null) }
+    var statisticsReturnTab by rememberSaveable { mutableStateOf<Int?>(null) }
+    var statisticsEntry by rememberSaveable { mutableIntStateOf(0) }
+    var statisticsRequests by rememberSaveable { mutableStateOf(false) }
+    var statisticsProvider by rememberSaveable { mutableStateOf<String?>(null) }
+    var statisticsModel by rememberSaveable { mutableStateOf<String?>(null) }
+    var statisticsUpstreamModel by rememberSaveable { mutableStateOf<String?>(null) }
+    var statisticsRequestId by rememberSaveable { mutableStateOf<String?>(null) }
     var providerEditorId by rememberSaveable { mutableStateOf<String?>(null) }
     var fetchModelsOnOpen by rememberSaveable { mutableStateOf(false) }
     var addProvider by rememberSaveable { mutableStateOf(false) }
@@ -154,20 +155,35 @@ class MainActivity : ComponentActivity() {
         routeProviderId = providerId
         addRoute = true
     }
-    fun openActivity(requests: Boolean = false, providerId: String? = null, model: String? = null,
+    fun openStatistics(requests: Boolean = false, providerId: String? = null, model: String? = null,
                      upstreamModel: String? = null, requestId: String? = null) {
-        activityRequests = requests
-        activityProvider = providerId
-        activityModel = model
-        activityUpstreamModel = upstreamModel
-        activityRequestId = requestId
-        activityVisible = true
+        statisticsRequests = requests
+        statisticsProvider = providerId
+        statisticsModel = model
+        statisticsUpstreamModel = upstreamModel
+        statisticsRequestId = requestId
+        statisticsReturnTab = tab.takeUnless { it == 3 }
+        statisticsEntry++
+        tab = 3
     }
-    BackHandler(enabled = activityVisible) { activityVisible = false }
-    val tabs = listOf("共享", "供应商", "模型", "设置")
-    val icons = listOf(PathPilotIcons.Share, PathPilotIcons.Providers, PathPilotIcons.Routes, PathPilotIcons.Settings)
+    fun resetStatistics() {
+        statisticsRequests = false
+        statisticsProvider = null
+        statisticsModel = null
+        statisticsUpstreamModel = null
+        statisticsRequestId = null
+        statisticsReturnTab = null
+        statisticsEntry++
+    }
+    fun leaveStatistics() {
+        tab = statisticsReturnTab ?: 0
+        statisticsReturnTab = null
+    }
+    BackHandler(enabled = tab == 3) { leaveStatistics() }
+    val tabs = listOf("共享", "供应商", "模型", "统计", "设置")
+    val icons = listOf(PathPilotIcons.Share, PathPilotIcons.Providers, PathPilotIcons.Routes, PathPilotIcons.Usage, PathPilotIcons.Settings)
     Scaffold(
-        topBar = { if (!activityVisible && tab != 2) TopAppBar(title = { Text(tabs[tab]) }, actions = {
+        topBar = { if (tab != 2 && tab != 3) TopAppBar(title = { Text(tabs[tab]) }, actions = {
             if (tab == 1 && config.providers.isNotEmpty()) {
                 IconButton(enabled = !saving, onClick = { addProvider = true }) {
                     Icon(PathPilotIcons.Add, "添加供应商")
@@ -175,7 +191,7 @@ class MainActivity : ComponentActivity() {
             }
         }) },
         bottomBar = { NavigationBar { tabs.forEachIndexed { index, label ->
-            NavigationBarItem(selected = tab == index, onClick = { activityVisible = false; tab = index },
+            NavigationBarItem(selected = tab == index, onClick = { if (index != tab) { if (index == 3) resetStatistics(); tab = index } },
                 icon = { Icon(icons[index], null) }, label = { Text(label) })
         } } },
         snackbarHost = { SnackbarHost(snackbar) },
@@ -183,19 +199,11 @@ class MainActivity : ComponentActivity() {
         Column(Modifier.padding(padding).fillMaxSize()) {
             if (saving) LinearProgressIndicator(Modifier.fillMaxWidth())
             storageError?.let { Text(it, Modifier.padding(horizontal = 20.dp, vertical = 8.dp), color = MaterialTheme.colorScheme.error) }
-            if (activityVisible) UsageRequestsPage(
-                events = history.events, error = history.error,
-                initialProviderId = activityProvider, initialModel = activityModel,
-                initialUpstreamModel = activityUpstreamModel,
-                initialRequests = activityRequests, initialRequestId = activityRequestId,
-                onBack = { activityVisible = false },
-                onClear = { scope.launch { withContext(Dispatchers.IO) { store.requestHistory.clear() } } },
-                onRetry = { scope.launch { withContext(Dispatchers.IO) { store.requestHistory.reload() } } },
-            ) else when (tab) {
+            when (tab) {
                 0 -> SharingScreen(config, runtime, sessions, saving || storageError != null, notificationPending,
                     onSharingChange = ::setSharing, onProviders = { tab = 1; if (config.providers.isEmpty()) addProvider = true }, onRoutes = { modelProviderId = null; tab = 2 },
-                    history = history, onActivity = { openActivity(it) },
-                    onRequest = { openActivity(requests = true, requestId = it.id) },
+                    history = history, onRequests = { openStatistics(requests = true) },
+                    onRequest = { openStatistics(requests = true, requestId = it.id) },
                     onCopy = { label, value -> copy(context, label, value); notify("已复制") })
                 1 -> ProvidersScreen(config, sessions, saving,
                     onAdd = { fetchModelsOnOpen = false; addProvider = true }, onEdit = { fetchModelsOnOpen = false; providerEditorId = it.id },
@@ -207,10 +215,19 @@ class MainActivity : ComponentActivity() {
                     onAddProvider = { fetchModelsOnOpen = false; addProvider = true }, onAddModel = { newRoute(it) },
                     onEditModel = { routeEditorAlias = it.alias },
                     requestEvents = history.events,
-                    onViewUsage = { provider, route -> openActivity(providerId = provider.id, model = route?.alias, upstreamModel = route?.upstreamModel) },
+                    onViewUsage = { provider, route -> openStatistics(providerId = provider.id, model = route?.alias, upstreamModel = route?.upstreamModel) },
                     onModelToggle = { route, enabled -> update { c -> c.copy(routes = c.routes.map { if (it.alias == route.alias) it.copy(enabled = enabled) else it }) } },
                     onProviderToggle = { provider, enabled -> update { c -> c.copy(providers = c.providers.map { if (it.id == provider.id) it.copy(enabled = enabled) else it }) } })
-                3 -> SettingsScreen(config, runtime.running || runtime.starting || runtime.stopping || notificationPending, saving,
+                3 -> key(statisticsEntry) { StatisticsPage(
+                    events = history.events, error = history.error,
+                    initialProviderId = statisticsProvider, initialModel = statisticsModel,
+                    initialUpstreamModel = statisticsUpstreamModel,
+                    initialRequests = statisticsRequests, initialRequestId = statisticsRequestId,
+                    onBack = if (statisticsReturnTab != null) ({ leaveStatistics() }) else null,
+                    onClear = { scope.launch { withContext(Dispatchers.IO) { store.requestHistory.clear() } } },
+                    onRetry = { scope.launch { withContext(Dispatchers.IO) { store.requestHistory.reload() } } },
+                ) }
+                4 -> SettingsScreen(config, runtime.running || runtime.starting || runtime.stopping || notificationPending, saving,
                     onPort = { port, done -> update(onSuccess = done) { it.copy(port = port) } },
                     onProxy = { proxy, done -> update(onSuccess = done) { it.copy(outboundProxy = proxy) } },
                     onRotate = { done -> update(onSuccess = { done(); notify("密钥已更新") }) { it.copy(accessKey = AccessKeys.generate()) } })

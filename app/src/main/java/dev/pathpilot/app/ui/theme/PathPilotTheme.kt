@@ -154,6 +154,7 @@ fun PathPilotTheme(content: @Composable () -> Unit) {
     }
     MaterialExpressiveTheme(
         colorScheme = colors,
+        typography = PathPilotTypography,
         content = content,
     )
 }

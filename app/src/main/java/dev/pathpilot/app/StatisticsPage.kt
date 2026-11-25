@@ -2,6 +2,8 @@ package dev.pathpilot.app
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
@@ -18,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -33,7 +34,7 @@ import kotlinx.coroutines.isActive
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun UsageRequestsPage(
+internal fun StatisticsPage(
     events: List<RequestEvent>,
     error: String?,
     initialProviderId: String? = null,
@@ -41,7 +42,7 @@ internal fun UsageRequestsPage(
     initialUpstreamModel: String? = null,
     initialRequests: Boolean = false,
     initialRequestId: String? = null,
-    onBack: () -> Unit,
+    onBack: (() -> Unit)? = null,
     onClear: () -> Unit,
     onRetry: () -> Unit,
 ) {
@@ -72,14 +73,27 @@ internal fun UsageRequestsPage(
     val visible = remember(scoped, query, outcome) { UsageAnalytics.filter(scoped, query = query, outcome = outcome) }
     val summary = remember(scoped) { UsageAnalytics.summarize(scoped) }
     val modelUsage = remember(scoped) { UsageAnalytics.byModel(scoped) }
+    val providerUsage = remember(scoped) { UsageAnalytics.byProvider(scoped) }
+    val trend = remember(scoped, range, now) {
+        UsageAnalytics.trend(scoped, range, nowEpochMs = now).filter { it.startEpochMs <= now }
+    }
+    var groupByModel by rememberSaveable { mutableStateOf(false) }
+    fun showRequests(provider: String, model: String? = null, upstream: String? = null) {
+        providerFilter = provider
+        modelFilter = model
+        upstreamFilter = upstream
+        query = ""
+        outcome = null
+        requestsTab = true
+    }
     val providerName = events.firstOrNull { it.providerId == providerFilter }?.providerName
         ?.takeIf { it.isNotBlank() } ?: if (providerFilter != null) "所选供应商" else ""
-    BackHandler(onBack = onBack)
+    if (onBack != null) BackHandler(onBack = onBack)
 
     Column(Modifier.fillMaxSize()) {
         TopAppBar(
-            title = { Text("用量与请求") },
-            navigationIcon = { IconButton(onClick = onBack) { Icon(PathPilotIcons.Back, "返回") } },
+            title = { Text("统计") },
+            navigationIcon = { if (onBack != null) IconButton(onClick = onBack) { Icon(PathPilotIcons.Back, "返回") } },
             actions = {
                 IconButton(onClick = { help = true }) { Icon(Icons.Outlined.Info, "统计说明") }
                 Box {
@@ -95,12 +109,13 @@ internal fun UsageRequestsPage(
         )
         Column(Modifier.padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
-                listOf("用量", "请求").forEachIndexed { index, label ->
+                listOf("概览", "请求").forEachIndexed { index, label ->
                     SegmentedButton(selected = requestsTab == (index == 1), onClick = { requestsTab = index == 1 },
-                        shape = SegmentedButtonDefaults.itemShape(index, 2)) { Text(label) }
+                        shape = SegmentedButtonDefaults.itemShape(index, 2),
+                        modifier = Modifier.semantics { contentDescription = if (index == 0) "统计概览" else "查看请求记录" }) { Text(label) }
                 }
             }
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 UsageRange.entries.forEach { option ->
                     FilterChip(selected = range == option, onClick = { range = option }, label = { Text(option.label) })
                 }
@@ -119,80 +134,42 @@ internal fun UsageRequestsPage(
         }
         if (requestsTab) RequestHistoryList(visible, query, { query = it }, outcome, { outcome = it }, onDetails = { details = it })
         else LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            item(key = "summary") { UsageSummaryCard(summary) }
-            if (modelUsage.isEmpty()) item(key = "empty") { RequestEmptyState("暂无用量记录") }
+            item(key = "summary") { StatisticsMetrics(summary) }
+            if (scoped.isEmpty()) item(key = "empty") { RequestEmptyState("暂无请求记录") }
             else {
-                item(key = "models-heading") { Text("按模型", style = MaterialTheme.typography.titleMedium) }
-                items(modelUsage, key = { "${it.key.providerId.length}:${it.key.providerId}${it.key.model.length}:${it.key.model}${it.key.upstreamModel}" }) { model ->
-                    ModelUsageCard(model) {
-                        providerFilter = model.key.providerId
-                        modelFilter = model.key.model
-                        upstreamFilter = model.key.upstreamModel
-                        query = ""
-                        outcome = null
-                        requestsTab = true
+                item(key = "trend") { StatisticsTrend(trend, range) }
+                item(key = "breakdown") {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("用量明细", style = MaterialTheme.typography.titleMedium)
+                        SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+                            listOf("供应商", "模型").forEachIndexed { index, label ->
+                                SegmentedButton(selected = groupByModel == (index == 1), onClick = { groupByModel = index == 1 },
+                                    shape = SegmentedButtonDefaults.itemShape(index, 2),
+                                    modifier = Modifier.semantics { contentDescription = "按${label}查看统计" }) { Text(label) }
+                            }
+                        }
                     }
+                }
+                if (groupByModel) items(modelUsage, key = { "${it.key.providerId.length}:${it.key.providerId}${it.key.model.length}:${it.key.model}${it.key.upstreamModel}" }) { model ->
+                    StatisticsBreakdownCard(model.key.model.ifBlank { "未指定模型" },
+                        listOf(model.providerName, model.key.upstreamModel.takeIf { it != model.key.model }.orEmpty())
+                            .filter { it.isNotBlank() }.joinToString(" · "), model.summary) {
+                        showRequests(model.key.providerId, model.key.model, model.key.upstreamModel)
+                    }
+                } else items(providerUsage, key = { it.providerId }) { provider ->
+                    StatisticsBreakdownCard(provider.providerName, null, provider.summary) { showRequests(provider.providerId) }
                 }
             }
         }
     }
     if (help) AlertDialog(onDismissRequest = { help = false }, title = { Text("统计说明") },
-        text = { Text("统计基于保留的最近 1,000 条请求。Token 按上游返回汇总；未返回的部分显示“未提供”，不计为零。此处不表示订阅剩余额度。") },
+        text = { Text("统计基于保留的最近 1,000 条请求，按手机本地时间分组。Token 汇总上游已返回的用量，“—”表示未提供。缓存输入属于输入 Token，推理输出属于输出 Token。成功率和平均耗时包含所选范围内的全部请求；耗时为请求总时长。订阅剩余额度不在此统计中。") },
         confirmButton = { TextButton(onClick = { help = false }) { Text("知道了") } })
     if (confirmClear) AlertDialog(onDismissRequest = { confirmClear = false }, title = { Text("清空请求记录？") },
         text = { Text("将删除已保存的请求记录及其用量统计。") },
         confirmButton = { TextButton(onClick = { confirmClear = false; onClear() }) { Text("清空") } },
         dismissButton = { TextButton(onClick = { confirmClear = false }) { Text("取消") } })
     details?.let { RequestDetailsSheet(it, onDismiss = { details = null }) }
-}
-
-@Composable
-internal fun UsageSummaryCard(summary: UsageSummary, modifier: Modifier = Modifier) {
-    OutlinedCard(modifier) {
-        Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                UsageMetric("请求", summary.requestCount.toString(), Modifier.weight(1f))
-                UsageMetric("已知 Token", formatTokenCount(summary.totalTokens), Modifier.weight(1f))
-            }
-            Text("成功 ${summary.successCount} · 失败 ${summary.errorCount} · 中断 ${summary.interruptedCount}",
-                style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            HorizontalDivider()
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                UsageMetric("输入 Token", formatTokenCount(summary.inputTokens), Modifier.weight(1f), compact = true)
-                UsageMetric("输出 Token", formatTokenCount(summary.outputTokens), Modifier.weight(1f), compact = true)
-            }
-            if (summary.requestCount > 0) Text("${summary.usageReportedCount}/${summary.requestCount} 条请求返回用量",
-                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-    }
-}
-
-@Composable
-private fun UsageMetric(label: String, value: String, modifier: Modifier, compact: Boolean = false) {
-    Column(modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        Text(value, style = if (compact) MaterialTheme.typography.titleMedium else MaterialTheme.typography.headlineSmall)
-    }
-}
-
-@Composable
-private fun ModelUsageCard(model: ModelUsageSummary, onClick: () -> Unit) {
-    OutlinedCard(onClick = onClick) {
-        Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            Text(model.key.model.ifBlank { "未指定模型" }, style = MaterialTheme.typography.titleMedium,
-                fontFamily = FontFamily.Monospace, maxLines = 2, overflow = TextOverflow.Ellipsis)
-            Text(model.providerName.ifBlank { "未匹配供应商" }, style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant)
-            if (model.key.upstreamModel.isNotBlank() && model.key.upstreamModel != model.key.model) {
-                Text("上游 ID：${model.key.upstreamModel}", style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis)
-            }
-            Text("${model.summary.requestCount} 次请求 · 已知 Token ${formatTokenCount(model.summary.totalTokens)}",
-                style = MaterialTheme.typography.bodyMedium)
-            Text("${model.summary.usageReportedCount}/${model.summary.requestCount} 条返回用量",
-                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-    }
 }
 
 @Composable
@@ -242,7 +219,7 @@ internal fun RequestHistoryCard(event: RequestEvent, onClick: () -> Unit) {
     OutlinedCard(onClick = onClick) {
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                Text(event.model.ifBlank { "未指定模型" }, Modifier.weight(1f), fontFamily = FontFamily.Monospace,
+                Text(event.model.ifBlank { "未指定模型" }, Modifier.weight(1f),
                     style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 Text(requestOutcomeLabel(event.outcome), style = MaterialTheme.typography.labelLarge,
                     color = if (event.outcome == RequestOutcome.SUCCESS) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error)

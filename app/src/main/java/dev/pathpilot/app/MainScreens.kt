@@ -45,7 +45,7 @@ import kotlinx.coroutines.withContext
 @Composable internal fun SharingScreen(
     config: RouterConfig, runtime: RuntimeState, sessions: Set<String>, saving: Boolean, notificationPending: Boolean,
     onSharingChange: (Boolean) -> Unit, onProviders: () -> Unit, onRoutes: () -> Unit, onCopy: (String, String) -> Unit,
-    history: RequestHistoryState, onActivity: (Boolean) -> Unit, onRequest: (RequestEvent) -> Unit,
+    history: RequestHistoryState, onRequests: () -> Unit, onRequest: (RequestEvent) -> Unit,
 ) {
     val context = LocalContext.current.applicationContext
     val lifecycle = LocalLifecycleOwner.current.lifecycle
@@ -91,7 +91,7 @@ import kotlinx.coroutines.withContext
                     Row(Modifier.fillMaxWidth().heightIn(min = 56.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         Icon(PathPilotIcons.Share, null, Modifier.size(28.dp))
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text("模型共享", style = MaterialTheme.typography.titleLarge)
+                            Text("模型共享", style = MaterialTheme.typography.titleMedium)
                             Text(status, style = MaterialTheme.typography.bodyMedium)
                         }
                         Switch(checked = checked, enabled = canToggle, onCheckedChange = onSharingChange,
@@ -117,18 +117,18 @@ import kotlinx.coroutines.withContext
         if (!onThisDevice && snapshot?.addresses?.any { it.kind == LocalAddressKind.VPN || it.kind == LocalAddressKind.CELLULAR } == true) {
             item { OtherNetworkAddresses(snapshot.addresses, addressPort, onCopy) }
         }
-        item { UsageOverviewCard(history.events, history.error, onClick = { onActivity(false) }) }
-        item {
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                Text("最近请求", Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
-                TextButton(onClick = { onActivity(true) }) { Text("全部") }
+        if (history.events.isNotEmpty()) {
+            item {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text("最近请求", Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
+                    TextButton(onClick = onRequests) { Text("全部") }
+                }
+            }
+            items(history.events.take(2), key = { it.id }) { event ->
+                RecentRequestPreview(event, onClick = { onRequest(event) })
             }
         }
-        if (history.events.isEmpty()) item {
-            Text("暂无请求", color = MaterialTheme.colorScheme.onSurfaceVariant)
-        } else items(history.events.take(3), key = { it.id }) { event ->
-            RecentRequestPreview(event, onClick = { onRequest(event) })
-        }
+
     }
 }
 
@@ -136,7 +136,7 @@ import kotlinx.coroutines.withContext
     var revealed by rememberSaveable { mutableStateOf(false) }
     OutlinedCard {
         Column(Modifier.fillMaxWidth().padding(start = 16.dp, top = 12.dp, end = 8.dp, bottom = 8.dp)) {
-            Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(label, style = MaterialTheme.typography.titleMedium)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 val prefix = when { value.startsWith("sk-") -> "sk-"; value.startsWith("pp_") -> "pp_"; else -> "" }
                 Text(if (secret && !revealed) "${prefix}••••••••••••••••" else value, Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium, fontFamily = FontFamily.Monospace)

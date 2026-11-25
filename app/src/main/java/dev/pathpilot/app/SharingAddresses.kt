@@ -34,7 +34,7 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
     OutlinedCard {
         Column(Modifier.fillMaxWidth().padding(start = 16.dp, top = 12.dp, end = 16.dp, bottom = 4.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text("API 地址", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("API 地址", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
                 SegmentedButton(selected = onThisDevice, onClick = { onDeviceChange(true); choosing = false },
                     shape = SegmentedButtonDefaults.itemShape(0, 2)) { Text("本机应用") }
