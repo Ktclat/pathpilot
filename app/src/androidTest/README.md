@@ -125,3 +125,7 @@ adb shell am instrument -w -r -e class \
 ```
 
 原图位于 `externalFilesDir/settings-e2e/`。测试结束恢复此前记录的 density/font_scale，并清理隔离包。语言用例启动 Activity 前同时设置 AppStore 和 Android 13+ 的应用 LocaleManager；用例中的用户语言切换走实际设置界面。
+
+## MCP 调用记录
+
+`dev.pathpilot.app.runtime.McpCallHistoryStoreTest` 使用真实 Android SQLite 和独立数据库，覆盖重新打开、去重、清空、写失败重试及 1,000 条上限。现有 `McpFlowTest` 还验证停止共享后能打开并筛选之前的调用；新增实际截图 `settings-e2e/13-mcp-history.png`。均不需要真实订阅、外部 MCP 服务或其他设备。

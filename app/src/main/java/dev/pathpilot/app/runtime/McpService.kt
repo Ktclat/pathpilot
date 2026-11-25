@@ -95,11 +95,10 @@ class McpService : Service() {
                 }
                 val config = store.mcp.value
                 require(config.port in 1024..65535 && config.accessKey.length >= 24)
-                val ownerContext = currentCoroutineContext()
                 server = McpGatewayServer(
                     settingsProvider = { store.mcp.value },
                     proxyProvider = { store.config.value.outboundProxy },
-                    onCall = { if (ownerContext.isActive) McpRuntime.record(it) },
+                    onCall = store.mcpCallHistory::record,
                 )
                 server.start()
                 currentCoroutineContext().ensureActive()

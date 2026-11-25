@@ -94,4 +94,15 @@
     <string name="mcp_call_connection_failed">Connection failed</string>
     <string name="mcp_call_protocol_error">Protocol error</string>
     <string name="mcp_call_rpc_error">JSON-RPC %1$d</string>
+    <string name="mcp_history">Call history</string>
+    <string name="mcp_history_filter_connection">Filter by connection name</string>
+    <string name="mcp_history_filter_tool">Filter by tool name</string>
+    <string name="mcp_history_totals">Calls: %1$d · Succeeded: %2$d · Failed: %3$d</string>
+    <string name="mcp_history_empty">No calls yet</string>
+    <string name="mcp_history_no_matches">No matching calls</string>
+    <string name="mcp_history_read_error">Could not read tool call history.</string>
+    <string name="mcp_history_write_error">Tool call history has not been saved.</string>
+    <string name="mcp_history_clear_error">Could not clear tool call history.</string>
+    <string name="mcp_history_clear">Clear call history</string>
+    <string name="mcp_history_clear_body">Clear local MCP call history? Model request history is not affected.</string>
 </resources>

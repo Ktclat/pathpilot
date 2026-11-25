@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -53,6 +54,8 @@ internal fun McpPage(store: AppStore, onBack: () -> Unit) {
     val config by store.config.collectAsStateWithLifecycle()
     val settings by store.mcp.collectAsStateWithLifecycle()
     val runtime by McpRuntime.state.collectAsStateWithLifecycle()
+    val history by store.mcpCallHistory.state.collectAsStateWithLifecycle()
+    var historyVisible by rememberSaveable { mutableStateOf(false) }
     val storageError by store.storageError.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
@@ -90,7 +93,7 @@ internal fun McpPage(store: AppStore, onBack: () -> Unit) {
         }
     }
     fun navigateBack() { if (selectedId != null) selectedId = null else onBack() }
-    BackHandler(onBack = ::navigateBack)
+    BackHandler(enabled = !historyVisible, onBack = ::navigateBack)
     val permission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
         if (notificationPending) {
             notificationPending = false
@@ -112,6 +115,11 @@ internal fun McpPage(store: AppStore, onBack: () -> Unit) {
     fun copied(value: String, secret: Boolean = false) {
         copyMcpValue(context, value, secret)
         scope.launch { snackbar.showSnackbar(strings.getString(R.string.mcp_copied)) }
+    }
+
+    if (historyVisible) {
+        McpCallHistoryPage(store.mcpCallHistory) { historyVisible = false }
+        return
     }
 
     Scaffold(
@@ -177,10 +185,15 @@ internal fun McpPage(store: AppStore, onBack: () -> Unit) {
                             })
                         }
                     }
-                    if (runtime.recentCalls.isNotEmpty()) {
-                        item { Text(stringResource(R.string.mcp_recent_calls), Modifier.padding(top = 8.dp), style = MaterialTheme.typography.titleMedium) }
-                        items(runtime.recentCalls.take(5), key = { it.id }) { event -> McpCallRow(event) }
+                    item {
+                        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text(stringResource(R.string.mcp_recent_calls), Modifier.weight(1f),
+                                style = MaterialTheme.typography.titleMedium)
+                            TextButton(onClick = { historyVisible = true }) { Text(stringResource(R.string.mcp_history)) }
+                        }
                     }
+                    items(history.events.take(5), key = { it.id }) { event -> McpCallRow(event) }
                 }
             } else {
                 McpConnectionDetails(selected, settings, store, busy, runtime,
@@ -355,16 +368,17 @@ private fun McpConnectionDetails(
 }
 
 @Composable
-private fun McpCallRow(event: McpCallEvent) {
-    OutlinedCard(Modifier.fillMaxWidth()) {
+internal fun McpCallRow(event: McpCallEvent, includeDate: Boolean = false) {
+    OutlinedCard(Modifier.fillMaxWidth().testTag("mcp-call:${event.id}")) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(event.toolName, style = MaterialTheme.typography.titleMedium)
             Text(event.connectionName, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(stringResource(R.string.mcp_call_summary, stringResource(if (event.success) R.string.mcp_success else R.string.mcp_failed), event.durationMs),
                 style = MaterialTheme.typography.bodyMedium)
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(Instant.ofEpochMilli(event.startedAtEpochMs).atZone(ZoneId.systemDefault())
-                    .format(DateTimeFormatter.ofPattern("HH:mm:ss")), style = MaterialTheme.typography.bodySmall)
+                    .format(if (includeDate) DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                    else DateTimeFormatter.ofPattern("HH:mm:ss")), style = MaterialTheme.typography.bodySmall)
                 event.errorCode?.let { code ->
                     val number = code.substringAfter('_', "").toIntOrNull()
                     val label = when (code) {

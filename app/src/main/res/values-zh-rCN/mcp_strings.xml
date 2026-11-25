@@ -94,4 +94,15 @@
     <string name="mcp_call_connection_failed">连接失败</string>
     <string name="mcp_call_protocol_error">协议错误</string>
     <string name="mcp_call_rpc_error">JSON-RPC %1$d</string>
+    <string name="mcp_history">调用记录</string>
+    <string name="mcp_history_filter_connection">按连接名称筛选</string>
+    <string name="mcp_history_filter_tool">按工具名称筛选</string>
+    <string name="mcp_history_totals">%1$d 次调用 · %2$d 次成功 · %3$d 次失败</string>
+    <string name="mcp_history_empty">暂无调用记录</string>
+    <string name="mcp_history_no_matches">没有符合筛选条件的调用</string>
+    <string name="mcp_history_read_error">无法读取工具调用记录。</string>
+    <string name="mcp_history_write_error">工具调用记录尚未保存。</string>
+    <string name="mcp_history_clear_error">无法清空工具调用记录。</string>
+    <string name="mcp_history_clear">清空调用记录</string>
+    <string name="mcp_history_clear_body">清空本机的 MCP 调用记录？模型请求记录不受影响。</string>
 </resources>

@@ -83,7 +83,7 @@ docs/  一手资料、复用评估、兼容性与验证记录
 
 界面和供应商流程：[设计与行为说明](docs/ui-and-providers.md)。统计页的信息结构及 CC Switch 一手源码参考见 [统计页参考](docs/statistics-reference.md)。
 
-MCP 当前实现远程 HTTP Tools 共享，协议固定为 2025-11-25；2026-07-28、MCP OAuth、stdio、Resources、Prompts 和手机 Agent 留作后续适配。最近工具调用展示在 MCP 页面，与模型 Token 统计分开。实现细节见 [MCP 能力与后续方向](docs/mcp-roadmap.md)；设置、备份与 MCP 的 CC Switch / Magpie 一手依据见 [参考核查](docs/settings-mcp-reference.md)。
+MCP 当前实现远程 HTTP Tools 共享，协议固定为 2025-11-25；2026-07-28、MCP OAuth、stdio、Resources、Prompts 和手机 Agent 留作后续适配。MCP 页面持久保存最近 1,000 条工具调用元数据，可按日期、连接与工具筛选，独立于模型 Token 统计。实现细节见 [MCP 能力与后续方向](docs/mcp-roadmap.md)；设置、备份与 MCP 的 CC Switch / Magpie 一手依据见 [参考核查](docs/settings-mcp-reference.md)。
 
 研究与设计依据：[开源复用评估](docs/reuse-assessment.md)、[Codex 官方源码核查](docs/codex-research.md)。未复制 RikkaHub 的 AGPL 实现。项目保留仓库原有 MIT 许可证；依赖及参考说明见 [第三方说明](docs/third-party.md)。
 
