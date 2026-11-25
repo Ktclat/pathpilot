@@ -96,6 +96,7 @@ class MainActivity : ComponentActivity() {
     var routeEditorAlias by rememberSaveable { mutableStateOf<String?>(null) }
     var addRoute by rememberSaveable { mutableStateOf(false) }
     var routeProviderId by rememberSaveable { mutableStateOf<String?>(null) }
+    var modelProviderId by rememberSaveable { mutableStateOf<String?>(null) }
     var codexLoginProviderId by rememberSaveable { mutableStateOf<String?>(null) }
     var saving by remember { mutableStateOf(false) }
     var saveError by remember { mutableStateOf<String?>(null) }
@@ -145,13 +146,13 @@ class MainActivity : ComponentActivity() {
         routeProviderId = providerId
         addRoute = true
     }
-    val tabs = listOf("共享", "供应商", "路由", "设置")
+    val tabs = listOf("共享", "供应商", "模型", "设置")
     val icons = listOf(PathPilotIcons.Share, PathPilotIcons.Providers, PathPilotIcons.Routes, PathPilotIcons.Settings)
     Scaffold(
-        topBar = { TopAppBar(title = { Text(tabs[tab]) }, actions = {
-            if ((tab == 1 && config.providers.isNotEmpty()) || (tab == 2 && config.routes.isNotEmpty())) {
-                IconButton(enabled = !saving, onClick = { if (tab == 1) addProvider = true else newRoute() }) {
-                    Icon(PathPilotIcons.Add, if (tab == 1) "添加供应商" else "添加路由")
+        topBar = { if (tab != 2) TopAppBar(title = { Text(tabs[tab]) }, actions = {
+            if (tab == 1 && config.providers.isNotEmpty()) {
+                IconButton(enabled = !saving, onClick = { addProvider = true }) {
+                    Icon(PathPilotIcons.Add, "添加供应商")
                 }
             }
         }) },
@@ -166,15 +167,19 @@ class MainActivity : ComponentActivity() {
             storageError?.let { Text(it, Modifier.padding(horizontal = 20.dp, vertical = 8.dp), color = MaterialTheme.colorScheme.error) }
             when (tab) {
                 0 -> SharingScreen(config, runtime, sessions, saving || storageError != null, notificationPending,
-                    onSharingChange = ::setSharing, onProviders = { tab = 1; if (config.providers.isEmpty()) addProvider = true }, onRoutes = { tab = 2; if (config.routes.isEmpty()) newRoute() },
+                    onSharingChange = ::setSharing, onProviders = { tab = 1; if (config.providers.isEmpty()) addProvider = true }, onRoutes = { modelProviderId = null; tab = 2 },
                     onCopy = { label, value -> copy(context, label, value); notify("已复制") })
                 1 -> ProvidersScreen(config, sessions, saving,
                     onAdd = { fetchModelsOnOpen = false; addProvider = true }, onEdit = { fetchModelsOnOpen = false; providerEditorId = it.id },
                     onToggle = { provider, enabled -> update { c -> c.copy(providers = c.providers.map { if (it.id == provider.id) it.copy(enabled = enabled) else it }) } },
                     onLogin = { codexLoginProviderId = it.id }, onRoute = { newRoute(it.id) },
-                    onModels = { providerEditorId = it.id; fetchModelsOnOpen = true })
-                2 -> RoutesScreen(config, saving, onAdd = { newRoute() }, onEdit = { routeEditorAlias = it.alias },
-                    onToggle = { route, enabled -> update { c -> c.copy(routes = c.routes.map { if (it.alias == route.alias) it.copy(enabled = enabled) else it }) } })
+                    onModels = { providerEditorId = it.id; fetchModelsOnOpen = true },
+                    onManageModels = { modelProviderId = it.id; tab = 2 })
+                2 -> ModelRoutesPage(config, saving, modelProviderId, onSelectProvider = { modelProviderId = it },
+                    onAddProvider = { fetchModelsOnOpen = false; addProvider = true }, onAddModel = { newRoute(it) },
+                    onEditModel = { routeEditorAlias = it.alias },
+                    onModelToggle = { route, enabled -> update { c -> c.copy(routes = c.routes.map { if (it.alias == route.alias) it.copy(enabled = enabled) else it }) } },
+                    onProviderToggle = { provider, enabled -> update { c -> c.copy(providers = c.providers.map { if (it.id == provider.id) it.copy(enabled = enabled) else it }) } })
                 3 -> SettingsScreen(config, runtime.running || runtime.starting || runtime.stopping || notificationPending, saving,
                     onPort = { port, done -> update(onSuccess = done) { it.copy(port = port) } },
                     onProxy = { proxy, done -> update(onSuccess = done) { it.copy(outboundProxy = proxy) } },
@@ -193,7 +198,7 @@ class MainActivity : ComponentActivity() {
                 addProvider = false; providerEditorId = null; fetchModelsOnOpen = false
                 tab = 1
                 if (provider.kind == ProviderKind.CODEX && provider.id !in store.authenticatedCodexProviders.value) codexLoginProviderId = provider.id
-                else notify(if (models.isEmpty()) "已保存" else "供应商与路由已保存")
+                else notify(if (models.isEmpty()) "已保存" else "供应商与模型已保存")
             }) { ProviderRoutes.addSelected(it, provider, models) }
         },
         onDelete = { provider -> update(onSuccess = { providerEditorId = null; fetchModelsOnOpen = false }) { c ->
@@ -250,7 +255,7 @@ private fun kindLabel(kind: ProviderKind) = when (kind) { ProviderKind.CODEX -> 
     var menu by remember { mutableStateOf(false) }
     val duplicate = config.routes.any { it.alias == alias.trim() && it.alias != existing?.alias }
     val modelError = ProviderSetup.validateModelId(model)
-    AlertDialog(onDismissRequest = onDismiss, title = { Text(if (existing == null) "添加模型路由" else "编辑模型路由") }, text = {
+    AlertDialog(onDismissRequest = onDismiss, title = { Text(if (existing == null) "添加模型" else "编辑模型") }, text = {
         Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             if (saving) LinearProgressIndicator(Modifier.fillMaxWidth())
             Box {
@@ -263,9 +268,9 @@ private fun kindLabel(kind: ProviderKind) = when (kind) { ProviderKind.CODEX -> 
                     providerId = p.id; menu = false
                 }) } }
             }
-            OutlinedTextField(alias, { alias = it }, enabled = !saving, label = { Text("共享别名") }, supportingText = { Text(if (duplicate) "别名已存在" else "客户端请求中的 model") }, isError = duplicate, singleLine = true)
+            OutlinedTextField(alias, { alias = it }, enabled = !saving, label = { Text("共享模型名") }, supportingText = { Text(if (duplicate) "名称已存在" else "客户端请求中的 model") }, isError = duplicate, singleLine = true)
             OutlinedTextField(model, { model = it }, enabled = !saving, label = { Text("上游模型 ID") }, supportingText = { Text(if (model.isNotBlank() && modelError != null) modelError else if (selected?.kind == ProviderKind.CODEX) "填写订阅可用的 Codex 模型 ID" else "填写供应商支持的模型 ID") }, isError = model.isNotBlank() && modelError != null, singleLine = true)
-            if (existing != null) TextButton(enabled = !saving, onClick = { onDelete(existing) }) { Text("删除路由", color = MaterialTheme.colorScheme.error) }
+            if (existing != null) TextButton(enabled = !saving, onClick = { onDelete(existing) }) { Text("删除模型", color = MaterialTheme.colorScheme.error) }
         }
     }, confirmButton = { TextButton(enabled = !saving && selected != null && alias.trim().matches(Regex("[A-Za-z0-9._:/-]{1,128}")) && modelError == null && !duplicate, onClick = { onSave(RouteConfig(alias.trim(), providerId, model.trim(), existing?.enabled ?: true)) }) { Text(if (saving) "正在保存…" else "保存") } }, dismissButton = { TextButton(enabled = !saving, onClick = onDismiss) { Text("取消") } })
 }

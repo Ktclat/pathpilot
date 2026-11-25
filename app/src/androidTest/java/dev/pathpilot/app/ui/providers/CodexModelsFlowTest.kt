@@ -129,7 +129,7 @@ class CodexModelsFlowTest {
         assertEquals("", saved.providers.single().apiKey)
         assertEquals(provider.id, saved.routes.single().providerId)
         assertEquals(MODEL_A, saved.routes.single().upstreamModel)
-        compose.onNodeWithText("1 条路由").assertIsDisplayed()
+        compose.onNodeWithText("1 个模型").assertIsDisplayed()
         assertEquals(1, server.requestCount)
         assertEquals(1, resolvedCredentials.get())
         assertEquals(1, autoFetchStarts.get())
@@ -205,6 +205,7 @@ class CodexModelsFlowTest {
                         onLogin = { loginRequests.incrementAndGet() },
                         onRoute = {},
                         onModels = { fetchOnOpen = true; editing = true },
+                        onManageModels = {},
                     )
                 }
             }

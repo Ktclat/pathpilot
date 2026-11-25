@@ -113,7 +113,7 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
                     }
                 }
             }
-            item { Text("API Key 填写首页的访问密钥；模型填写「路由」中的共享模型名。",
+            item { Text("API Key 填写首页的访问密钥；模型填写「模型」页中的共享模型名。",
                 style = MaterialTheme.typography.bodyMedium) }
             item { Text("接口", style = MaterialTheme.typography.titleMedium) }
             item { EndpointGuide("Chat Completions", "POST", "/chat/completions", baseUrl,
@@ -122,7 +122,7 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
                 "Codex；自定义供应商需上游支持。DeepSeek 不提供此接口。", onCopy) }
             item { EndpointGuide("模型列表", "GET", "/models", baseUrl,
                 "返回已启用供应商下的共享模型名。", onCopy) }
-            item { Text("先开启首页的模型共享。本机与局域网共用开关、密钥和路由；切换地址只改变展示与复制内容。",
+            item { Text("先开启首页的模型共享。本机与局域网共用开关、密钥和模型配置；切换地址只改变展示与复制内容。",
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
         }
     }

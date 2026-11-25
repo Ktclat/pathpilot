@@ -68,7 +68,7 @@ import kotlinx.coroutines.withContext
     val setupAction = when {
         config.providers.isEmpty() -> "添加供应商"
         enabledProviders.isEmpty() -> "启用供应商"
-        enabledRoutes.isEmpty() -> "配置路由"
+        enabledRoutes.isEmpty() -> "添加模型"
         !ready -> "检查供应商"
         else -> null
     }
@@ -115,7 +115,7 @@ import kotlinx.coroutines.withContext
         if (!onThisDevice && snapshot?.addresses?.any { it.kind == LocalAddressKind.VPN || it.kind == LocalAddressKind.CELLULAR } == true) {
             item { OtherNetworkAddresses(snapshot.addresses, addressPort, onCopy) }
         }
-        item { Text("${config.providers.size} 个供应商  ·  ${config.routes.size} 条路由  ·  ${runtime.requestCount} 次请求", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+        item { Text("${config.providers.size} 个供应商  ·  ${config.routes.size} 个模型  ·  ${runtime.requestCount} 次请求", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant) }
         if (runtime.recentRequests.isNotEmpty()) {
             item { Text("最近请求", style = MaterialTheme.typography.titleMedium) }
             items(runtime.recentRequests.take(12)) { event ->
@@ -146,6 +146,7 @@ import kotlinx.coroutines.withContext
     onAdd: () -> Unit, onEdit: (ProviderConfig) -> Unit, onToggle: (ProviderConfig, Boolean) -> Unit,
     onLogin: (ProviderConfig) -> Unit, onRoute: (ProviderConfig) -> Unit,
     onModels: (ProviderConfig) -> Unit,
+    onManageModels: (ProviderConfig) -> Unit,
 ) {
     LazyColumn(contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         if (config.providers.isEmpty()) item { EmptyPage("还没有供应商", "添加供应商", saving, onAdd) }
@@ -163,30 +164,14 @@ import kotlinx.coroutines.withContext
                             modifier = Modifier.semantics { contentDescription = "启用 ${provider.name}" })
                     }
                     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                        Text("${config.routes.count { it.providerId == provider.id }} 条路由", Modifier.weight(1f), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        TextButton(enabled = !saving, modifier = Modifier.weight(1f),
+                            contentPadding = PaddingValues(horizontal = 0.dp), onClick = { onManageModels(provider) }) {
+                            Text("${config.routes.count { it.providerId == provider.id }} 个模型")
+                        }
                         if (provider.kind == ProviderKind.CODEX) TextButton(enabled = !saving, onClick = { onLogin(provider) }) { Text(if (provider.id in sessions) "重新登录" else "登录") }
                         if (provider.kind == ProviderKind.CODEX && provider.id in sessions) TextButton(enabled = !saving, onClick = { onModels(provider) }) { Text("获取模型") }
-                        TextButton(enabled = !saving, onClick = { onRoute(provider) }) { Text("添加路由") }
+                        if (provider.kind != ProviderKind.CODEX) TextButton(enabled = !saving, onClick = { onRoute(provider) }) { Text("添加模型") }
                     }
-                }
-            }
-        }
-    }
-}
-
-@Composable internal fun RoutesScreen(config: RouterConfig, saving: Boolean, onAdd: () -> Unit,
-    onEdit: (RouteConfig) -> Unit, onToggle: (RouteConfig, Boolean) -> Unit,
-) {
-    LazyColumn(contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        if (config.routes.isEmpty()) item { EmptyPage("还没有模型路由", if (config.providers.isEmpty()) "添加供应商" else "添加路由", saving, onAdd) }
-        items(config.routes, key = { it.alias }) { route ->
-            OutlinedCard(onClick = { onEdit(route) }, enabled = !saving) {
-                Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text(route.alias, style = MaterialTheme.typography.titleMedium, fontFamily = FontFamily.Monospace)
-                        Text("${config.providers.find { it.id == route.providerId }?.name.orEmpty()} · ${route.upstreamModel}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    }
-                    Switch(checked = route.enabled, enabled = !saving, onCheckedChange = { onToggle(route, it) }, modifier = Modifier.semantics { contentDescription = "启用 ${route.alias}" })
                 }
             }
         }

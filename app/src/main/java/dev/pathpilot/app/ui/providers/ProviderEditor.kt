@@ -210,7 +210,7 @@ fun ProviderEditor(
             onDismissRequest = { if (!saving) model.confirmDelete(false) },
             icon = { Icon(PathPilotIcons.Delete, null, tint = MaterialTheme.colorScheme.error) },
             title = { Text("删除 ${existing.name}？") },
-            text = { Text("关联路由也会删除。") },
+            text = { Text("该供应商的模型配置也会删除。") },
             confirmButton = { TextButton(enabled = !saving, onClick = { onDelete(existing) },
                 colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.error)) { Text(if (saving) "正在删除…" else "删除") } },
             dismissButton = { TextButton(enabled = !saving, onClick = { model.confirmDelete(false) }) { Text("取消") } },
@@ -311,7 +311,7 @@ fun ProviderEditor(
     val draft = state.draft
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Text(if (state.editing == null) "模型路由" else "添加模型路由", Modifier.weight(1f),
+            Text(if (state.editing == null) "共享模型" else "添加模型", Modifier.weight(1f),
                 style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             if (draft.probePhase == ProbePhase.RUNNING) TextButton(enabled = !saving, onClick = model::cancelProbe) {
                 CircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp)

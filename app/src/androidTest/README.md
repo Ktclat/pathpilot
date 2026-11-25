@@ -18,3 +18,9 @@
 - `03-auth-error.png`：回环 HTTP 返回 401 的错误状态，之后继续测试重试成功。
 
 截图展示的是明确离线 mock 场景，不是实际订阅账号结果。测试宿主仅负责页面切换与真实路由更新回调；不增加产品界面 mock 标记或生产测试数据。文件存在不代表本次测试通过，应同时核对当前 instrumentation 结果和截图时间。
+
+## 按供应商管理模型
+
+`dev.pathpilot.app.ui.models.ProviderModelsFlowTest` 挂载生产 `ModelRoutesPage`，只由测试持有本地配置与选中供应商 ID。覆盖一级供应商、二级模型隔离和返回；共享名称/上游 ID 搜索、启用筛选、单模型切换；供应商总开关关闭及恢复时保留每个模型设置。
+
+该流程无需网络或账号。原始截图写入测试包的 `externalFilesDir/provider-models-e2e/`：`01-provider-groups.png`、`02-provider-models.png`、`03-provider-disabled.png`。它验证真实页面及状态回调，不包含 AppStore 跨重启持久化或真实上游模型可用性。
