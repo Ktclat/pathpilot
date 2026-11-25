@@ -24,7 +24,7 @@ $ANDROID_HOME/build-tools/36.0.0/apksigner verify artifacts/PathPilot-0.1.8-arm6
 常规包为 `dev.pathpilot.app`，版本 `0.1.8` / versionCode 9，仅 `arm64-v8a`。本地副本 `artifacts/PathPilot-0.1.8-arm64.apk` 的 SHA-256：
 
 ```text
-04b032197ac655216bffa0e849aea90f584416dde74fa3d05d95b96b06ae36d5
+c5eb46139a983f309f5195b924a829411fc3cf3cfb3f7fdedbf58004516e83b6
 ```
 
 常规 DEX 未包含本轮 UI/SQLite instrumentation 测试类及测试密钥。截图构建为独立包，不能代替 ARM64 交付包。

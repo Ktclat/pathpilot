@@ -73,7 +73,7 @@ internal fun UsageRequestsPage(
     val summary = remember(scoped) { UsageAnalytics.summarize(scoped) }
     val modelUsage = remember(scoped) { UsageAnalytics.byModel(scoped) }
     val providerName = events.firstOrNull { it.providerId == providerFilter }?.providerName
-        ?.takeIf { it.isNotBlank() } ?: providerFilter.orEmpty()
+        ?.takeIf { it.isNotBlank() } ?: if (providerFilter != null) "所选供应商" else ""
     BackHandler(onBack = onBack)
 
     Column(Modifier.fillMaxSize()) {
@@ -85,7 +85,7 @@ internal fun UsageRequestsPage(
                 Box {
                     IconButton(onClick = { menu = true }) { Icon(Icons.Outlined.MoreVert, "更多操作") }
                     DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
-                        DropdownMenuItem(text = { Text("清空记录") }, enabled = events.isNotEmpty(),
+                        DropdownMenuItem(text = { Text("清空记录") }, enabled = events.isNotEmpty() || error != null,
                             leadingIcon = { Icon(PathPilotIcons.Delete, null) },
                             onClick = { menu = false; confirmClear = true })
                     }
