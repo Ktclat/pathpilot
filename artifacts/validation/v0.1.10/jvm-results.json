@@ -1,0 +1,108 @@
+{
+  "core": {
+    "tests": 110,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "suites": [
+      {
+        "name": "dev.pathpilot.core.ResponseObservationTest",
+        "tests": 7,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.core.codex.CodexModelsClientTest",
+        "tests": 12,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.core.providers.ProviderRoutesTest",
+        "tests": 5,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.core.network.OutboundProxyTest",
+        "tests": 6,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.core.codex.CodexOAuthClientTest",
+        "tests": 6,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.core.RouterServerTest",
+        "tests": 19,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.core.providers.ProviderModelsClientTest",
+        "tests": 13,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.core.ResponseBridgeTest",
+        "tests": 7,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.core.providers.ProviderSetupTest",
+        "tests": 7,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.core.mcp.McpTransportTest",
+        "tests": 12,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.core.codex.CodexBackendTest",
+        "tests": 3,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.core.RouterUsageTest",
+        "tests": 13,
+        "failures": 0
+      }
+    ]
+  },
+  "app": {
+    "tests": 51,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "suites": [
+      {
+        "name": "dev.pathpilot.app.runtime.RouterRuntimeTest",
+        "tests": 4,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.app.UsageAnalyticsTest",
+        "tests": 15,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest",
+        "tests": 16,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.app.runtime.LocalAddressRulesTest",
+        "tests": 7,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.app.runtime.RouterCleanupTest",
+        "tests": 2,
+        "failures": 0
+      },
+      {
+        "name": "dev.pathpilot.app.settings.BackupCodecTest",
+        "tests": 7,
+        "failures": 0
+      }
+    ]
+  }
+}

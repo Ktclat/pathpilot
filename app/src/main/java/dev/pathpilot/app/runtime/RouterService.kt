@@ -35,6 +35,7 @@ import kotlinx.coroutines.withContext
 
 /** The IO coroutine owns the listener and locks, including cleanup if startup is cancelled. */
 class RouterService : Service() {
+    private val strings get() = AppLanguageController.wrapContext(this).resources
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var serviceJob: Job? = null
     private var failure: String? = null
@@ -44,8 +45,8 @@ class RouterService : Service() {
     override fun onCreate() {
         super.onCreate()
         getSystemService(NotificationManager::class.java).createNotificationChannel(
-            NotificationChannel(CHANNEL, "模型共享", NotificationManager.IMPORTANCE_LOW).apply {
-                description = "共享状态与停止操作"
+            NotificationChannel(CHANNEL, strings.getString(R.string.ui_model_sharing), NotificationManager.IMPORTANCE_LOW).apply {
+                description = strings.getString(R.string.ui_sharing_notification_description)
                 setShowBadge(false)
             },
         )
@@ -60,7 +61,7 @@ class RouterService : Service() {
         }
         if (serviceJob != null) return START_NOT_STICKY
         try {
-            val notification = notification("正在启动…")
+            val notification = notification(strings.getString(R.string.ui_service_starting))
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 startForeground(NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE)
             } else {
@@ -68,7 +69,7 @@ class RouterService : Service() {
             }
         } catch (error: Exception) {
             logFailure("startForeground", error)
-            finishShutdown("无法启动前台服务，请在应用中重试。")
+            finishShutdown(strings.getString(R.string.ui_foreground_service_failed))
             return START_NOT_STICKY
         }
         // The UI can turn the switch off before Android delivers this start command.
@@ -145,9 +146,9 @@ class RouterService : Service() {
             } catch (error: Exception) {
                 logFailure("router startup or monitoring", error)
                 terminalError = when (error) {
-                    is BindException -> "端口已被占用，请修改端口。"
-                    is SecurityException -> "共享服务缺少系统权限。"
-                    else -> "共享服务出错，请重试。"
+                    is BindException -> strings.getString(R.string.ui_port_in_use)
+                    is SecurityException -> strings.getString(R.string.ui_sharing_permission_missing)
+                    else -> strings.getString(R.string.ui_sharing_error)
                 }
             } finally {
                 // The switch remains in stopping until this owner closes the listener and locks
@@ -160,7 +161,7 @@ class RouterService : Service() {
                     onReleased = { error ->
                         if (error != null) {
                             logFailure("router cleanup", error)
-                            terminalError = terminalError ?: "共享服务停止时出错，请重试。"
+                            terminalError = terminalError ?: strings.getString(R.string.ui_sharing_stop_error)
                         }
                         withContext(Dispatchers.Main.immediate) { finishShutdown(terminalError) }
                     },
@@ -191,8 +192,8 @@ class RouterService : Service() {
     private fun updateNotification(port: Int, snapshot: LocalAddressSnapshot) {
         val candidate = snapshot.addresses.firstOrNull { it.kind == LocalAddressKind.WIFI || it.kind == LocalAddressKind.ETHERNET }
             ?: snapshot.addresses.firstOrNull { it.kind == LocalAddressKind.OTHER }
-        val text = candidate?.let { "${it.ip}:$port · ${it.interfaceName}" }
-            ?: "127.0.0.1:$port · 本机应用"
+        val text = candidate?.let { "${it.ip}:${port} · ${it.interfaceName}" }
+            ?: strings.getString(R.string.ui_loopback_notification, port)
         getSystemService(NotificationManager::class.java).notify(NOTIFICATION_ID, notification(text))
     }
 
@@ -203,12 +204,12 @@ class RouterService : Service() {
         )
         val builder = Notification.Builder(this, CHANNEL)
             .setSmallIcon(R.drawable.ic_pathpilot_mark)
-            .setContentTitle("PathPilot · 模型共享")
+            .setContentTitle(strings.getString(R.string.ui_model_sharing_notification))
             .setContentText(text)
             .setOngoing(true)
             .setOnlyAlertOnce(true)
             .setCategory(Notification.CATEGORY_SERVICE)
-            .addAction(Notification.Action.Builder(null, "停止", stopIntent).build())
+            .addAction(Notification.Action.Builder(null, strings.getString(R.string.ui_stop), stopIntent).build())
         packageManager.getLaunchIntentForPackage(packageName)?.let { launch ->
             builder.setContentIntent(
                 PendingIntent.getActivity(this, 0, launch, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE),
@@ -236,7 +237,7 @@ class RouterService : Service() {
 
         // Log stack locations without exception messages, which can contain upstream credentials.
         private fun logFailure(operation: String, error: Exception) {
-            Log.e(TAG, "$operation: ${error.javaClass.simpleName}\n${error.stackTrace.joinToString("\n")}")
+            Log.e(TAG, "${operation}: ${error.javaClass.simpleName}\n${error.stackTrace.joinToString("\n")}")
         }
 
         fun start(context: Context) {
@@ -245,7 +246,7 @@ class RouterService : Service() {
                 ContextCompat.startForegroundService(context, Intent(context, RouterService::class.java))
             } catch (error: Exception) {
                 logFailure("request foreground service", error)
-                RouterRuntime.error("无法启动共享，请在应用中重试。")
+                RouterRuntime.error(AppLanguageController.wrapContext(context).getString(R.string.ui_sharing_start_failed))
             }
         }
 

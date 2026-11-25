@@ -1,5 +1,6 @@
 package dev.pathpilot.app
 
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -35,6 +36,7 @@ internal fun ProviderModelGroupsScreen(
     onOpen: (ProviderConfig) -> Unit,
     onAddProvider: () -> Unit,
 ) {
+    val strings = LocalResources.current
     val modelsByProvider = remember(config.routes) { config.routes.groupBy { it.providerId } }
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -42,7 +44,7 @@ internal fun ProviderModelGroupsScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         if (config.providers.isEmpty()) item(key = "empty") {
-            ModelsEmptyState("还没有供应商", "添加供应商", saving, onAddProvider)
+            ModelsEmptyState(strings.getString(R.string.ui_no_providers), strings.getString(R.string.ui_add_provider), saving, onAddProvider)
         }
         items(config.providers, key = { "provider:${it.id}" }) { provider ->
             val models = modelsByProvider[provider.id].orEmpty()
@@ -56,8 +58,8 @@ internal fun ProviderModelGroupsScreen(
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(provider.name, style = MaterialTheme.typography.titleMedium,
                             maxLines = 2, overflow = TextOverflow.Ellipsis)
-                        Text(if (provider.enabled) "${models.size} 个模型 · 已启用 ${models.count { it.enabled }} 个"
-                            else "${models.size} 个模型 · 供应商已停用",
+                        Text(if (provider.enabled) strings.getString(R.string.ui_models_enabled_count, models.size, models.count { it.enabled })
+                            else strings.getString(R.string.ui_models_provider_disabled, models.size),
                             style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     Icon(PathPilotIcons.Back, null, Modifier.size(20.dp).rotate(180f),
@@ -68,8 +70,8 @@ internal fun ProviderModelGroupsScreen(
     }
 }
 
-private enum class ModelFilter(val label: String) {
-    ALL("全部"), ENABLED("已启用"), DISABLED("已停用"),
+private enum class ModelFilter(val labelRes: Int) {
+    ALL(R.string.ui_all), ENABLED(R.string.ui_enabled), DISABLED(R.string.ui_disabled),
 }
 
 @Composable
@@ -84,6 +86,7 @@ internal fun ProviderModelsScreen(
     requestEvents: List<RequestEvent> = emptyList(),
     onViewUsage: ((RouteConfig) -> Unit)? = null,
 ) {
+    val strings = LocalResources.current
     var query by rememberSaveable(provider.id) { mutableStateOf("") }
     var filter by rememberSaveable(provider.id) { mutableStateOf(ModelFilter.ALL) }
     val focus = LocalFocusManager.current
@@ -112,15 +115,15 @@ internal fun ProviderModelsScreen(
                     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                         ProviderBrandIcon(provider.kind, Modifier.size(28.dp))
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text("启用供应商", style = MaterialTheme.typography.titleMedium)
-                            Text(if (provider.enabled) "${models.size} 个模型 · 已启用 ${models.count { it.enabled }} 个"
-                                else "${models.size} 个模型",
+                            Text(strings.getString(R.string.ui_enable_provider), style = MaterialTheme.typography.titleMedium)
+                            Text(if (provider.enabled) strings.getString(R.string.ui_models_enabled_count, models.size, models.count { it.enabled })
+                                else strings.getString(R.string.ui_model_count, models.size),
                                 style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                         Switch(checked = provider.enabled, enabled = !saving, onCheckedChange = onProviderToggle,
-                            modifier = Modifier.semantics { contentDescription = "启用供应商 ${provider.name}" })
+                            modifier = Modifier.semantics { contentDescription = strings.getString(R.string.ui_enable_named_provider, provider.name) })
                     }
-                    if (!provider.enabled) Text("供应商已停用，模型开关设置保留",
+                    if (!provider.enabled) Text(strings.getString(R.string.ui_provider_disabled_models_retained),
                         style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
@@ -129,10 +132,10 @@ internal fun ProviderModelsScreen(
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 OutlinedTextField(
                     value = query, onValueChange = { query = it }, modifier = Modifier.fillMaxWidth(),
-                    label = { Text("搜索共享模型名或上游 ID") }, singleLine = true,
+                    label = { Text(strings.getString(R.string.ui_search_model_id)) }, singleLine = true,
                     leadingIcon = { Icon(Icons.Outlined.Search, null) },
                     trailingIcon = if (query.isNotEmpty()) { {
-                        IconButton(onClick = { query = "" }) { Icon(PathPilotIcons.Close, "清除搜索") }
+                        IconButton(onClick = { query = "" }) { Icon(PathPilotIcons.Close, strings.getString(R.string.ui_clear_search)) }
                     } } else null,
                     keyboardOptions = KeyboardOptions(autoCorrectEnabled = false, imeAction = ImeAction.Search),
                     keyboardActions = KeyboardActions(onSearch = { focus.clearFocus() }),
@@ -141,7 +144,7 @@ internal fun ProviderModelsScreen(
                     ModelFilter.entries.forEachIndexed { index, option ->
                         SegmentedButton(selected = filter == option, onClick = { filter = option },
                             shape = SegmentedButtonDefaults.itemShape(index, ModelFilter.entries.size)) {
-                            Text(option.label)
+                            Text(strings.getString(option.labelRes))
                         }
                     }
                 }
@@ -149,10 +152,10 @@ internal fun ProviderModelsScreen(
         }
         when {
             models.isEmpty() -> item(key = "empty-models") {
-                ModelsEmptyState("还没有模型", "添加模型", saving, onAdd)
+                ModelsEmptyState(strings.getString(R.string.ui_no_models), strings.getString(R.string.ui_add_model), saving, onAdd)
             }
             visible.isEmpty() -> item(key = "empty-results") {
-                ModelsEmptyState("没有匹配的模型", "清除筛选", false) {
+                ModelsEmptyState(strings.getString(R.string.ui_no_matching_models), strings.getString(R.string.ui_clear_filters), false) {
                     query = ""
                     filter = ModelFilter.ALL
                     focus.clearFocus()
@@ -165,19 +168,19 @@ internal fun ProviderModelsScreen(
                         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             Text(model.alias, style = MaterialTheme.typography.titleMedium, fontFamily = FontFamily.Monospace,
                                 maxLines = 2, overflow = TextOverflow.Ellipsis)
-                            if (model.alias != model.upstreamModel) Text("上游 ID：${model.upstreamModel}", style = MaterialTheme.typography.bodySmall,
+                            if (model.alias != model.upstreamModel) Text(strings.getString(R.string.ui_upstream_id_value, model.upstreamModel), style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis)
                             if (onViewUsage != null) {
                                 val summary = usage[Triple(provider.id, model.alias, model.upstreamModel)]
                                 TextButton(onClick = { onViewUsage(model) }, contentPadding = PaddingValues(0.dp)) {
-                                    Text(if (summary == null) "查看用量" else "最近 ${summary.requestCount} 次 · " +
-                                        (summary.totalTokens?.let { "已知 ${NumberFormat.getIntegerInstance().format(it)} Token" } ?: "Token 未提供"),
+                                    Text(if (summary == null) strings.getString(R.string.ui_view_usage) else strings.getString(R.string.ui_recent_request_prefix, summary.requestCount) + " " +
+                                        (summary.totalTokens?.let { strings.getString(R.string.ui_known_tokens, NumberFormat.getIntegerInstance().format(it)) } ?: strings.getString(R.string.ui_tokens_unavailable)),
                                         style = MaterialTheme.typography.labelMedium)
                                 }
                             }
                         }
                         Switch(checked = model.enabled, enabled = !saving, onCheckedChange = { onToggle(model, it) },
-                            modifier = Modifier.semantics { contentDescription = "启用模型 ${model.alias}" })
+                            modifier = Modifier.semantics { contentDescription = strings.getString(R.string.ui_enable_named_model, model.alias) })
                     }
                 }
             }
@@ -187,6 +190,7 @@ internal fun ProviderModelsScreen(
 
 @Composable
 private fun ModelsEmptyState(title: String, action: String, saving: Boolean, onAction: () -> Unit) {
+    val strings = LocalResources.current
     Column(Modifier.fillMaxWidth().padding(vertical = 32.dp), horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Text(title, style = MaterialTheme.typography.titleMedium)

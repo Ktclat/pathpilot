@@ -1,5 +1,6 @@
 package dev.pathpilot.app
 
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -15,20 +16,21 @@ import java.time.format.DateTimeFormatter
 
 @Composable
 internal fun RecentRequestPreview(event: RequestEvent, onClick: () -> Unit) {
+    val strings = LocalResources.current
     val time = remember(event.startedAtEpochMs) {
         DateTimeFormatter.ofPattern("MM-dd HH:mm:ss").withZone(ZoneId.systemDefault())
             .format(Instant.ofEpochMilli(event.startedAtEpochMs))
     }
     val outcome = when (event.outcome) {
-        RequestOutcome.SUCCESS -> "成功"
-        RequestOutcome.HTTP_ERROR -> "失败 · ${event.status}"
-        RequestOutcome.INTERRUPTED -> "中断"
+        RequestOutcome.SUCCESS -> strings.getString(R.string.ui_success)
+        RequestOutcome.HTTP_ERROR -> strings.getString(R.string.ui_failed_status, event.status)
+        RequestOutcome.INTERRUPTED -> strings.getString(R.string.ui_interrupted)
     }
     OutlinedCard(onClick = onClick) {
         ListItem(
-            content = { Text(event.model.ifBlank { "未指定模型" }, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+            content = { Text(event.model.ifBlank { strings.getString(R.string.ui_unspecified_model) }, maxLines = 1, overflow = TextOverflow.Ellipsis) },
             supportingContent = {
-                Text("${event.providerName.ifBlank { "未匹配供应商" }} · $time", maxLines = 2, overflow = TextOverflow.Ellipsis)
+                Text("${event.providerName.ifBlank { strings.getString(R.string.ui_unmatched_provider) }} · ${time}", maxLines = 2, overflow = TextOverflow.Ellipsis)
             },
             trailingContent = {
                 Column(horizontalAlignment = Alignment.End) {

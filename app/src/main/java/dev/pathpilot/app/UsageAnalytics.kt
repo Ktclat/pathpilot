@@ -3,7 +3,6 @@ package dev.pathpilot.app
 import dev.pathpilot.core.RequestEvent
 import dev.pathpilot.core.RequestOutcome
 import dev.pathpilot.core.TokenUsage
-import java.text.NumberFormat
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -11,9 +10,7 @@ import java.time.temporal.ChronoUnit
 import java.util.Locale
 import kotlin.math.roundToLong
 
-internal enum class UsageRange(val label: String) {
-    TODAY("今天"), LAST_7_DAYS("7天"), LAST_30_DAYS("30天"), ALL("全部"),
-}
+internal enum class UsageRange { TODAY, LAST_7_DAYS, LAST_30_DAYS, ALL }
 
 internal data class UsageSummary(
     val requestCount: Int,
@@ -116,7 +113,7 @@ internal object UsageAnalytics {
         .groupBy { it.providerId }
         .map { (providerId, requests) ->
             val latest = requests.maxBy { it.startedAtEpochMs }
-            ProviderUsageSummary(providerId, latest.providerName.ifBlank { "未匹配供应商" }, summarize(requests))
+            ProviderUsageSummary(providerId, latest.providerName, summarize(requests))
         }
         .sortedWith(compareByDescending<ProviderUsageSummary> { it.summary.requestCount }
             .thenBy { it.providerName }.thenBy { it.providerId })
@@ -197,13 +194,5 @@ internal object UsageAnalytics {
     }
 }
 
-internal fun formatTokenCount(value: Long?): String = value?.let { NumberFormat.getIntegerInstance().format(it) } ?: "未提供"
-
 internal fun formatRequestDuration(durationMs: Long): String = if (durationMs < 1_000) "$durationMs ms"
     else String.format(Locale.getDefault(), "%.1f s", durationMs / 1_000.0)
-
-internal fun requestOutcomeLabel(outcome: RequestOutcome): String = when (outcome) {
-    RequestOutcome.SUCCESS -> "成功"
-    RequestOutcome.HTTP_ERROR -> "失败"
-    RequestOutcome.INTERRUPTED -> "中断"
-}

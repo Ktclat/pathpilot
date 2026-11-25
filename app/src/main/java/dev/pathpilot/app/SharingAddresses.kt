@@ -1,5 +1,7 @@
 package dev.pathpilot.app
 
+import dev.pathpilot.app.ui.i18n.localize
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -19,6 +21,7 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
     snapshot: LocalAddressSnapshot?, port: Int, onThisDevice: Boolean, onDeviceChange: (Boolean) -> Unit,
     onCopy: (String, String) -> Unit,
 ) {
+    val strings = LocalResources.current
     val local = snapshot?.addresses.orEmpty().filter {
         it.kind != LocalAddressKind.VPN && it.kind != LocalAddressKind.CELLULAR
     }
@@ -26,7 +29,7 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
     var choosing by remember { mutableStateOf(false) }
     var showGuide by rememberSaveable { mutableStateOf(false) }
     val selected = local.find { it.key() == selectedKey } ?: local.firstOrNull()
-    val baseUrl = if (onThisDevice) "http://127.0.0.1:$port/v1" else selected?.let { "http://${it.ip}:$port/v1" }
+    val baseUrl = if (onThisDevice) "http://127.0.0.1:${port}/v1" else selected?.let { "http://${it.ip}:${port}/v1" }
     LaunchedEffect(local) {
         if (local.none { it.key() == selectedKey }) selectedKey = local.firstOrNull()?.key()
         if (local.size < 2) choosing = false
@@ -34,47 +37,47 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
     OutlinedCard {
         Column(Modifier.fillMaxWidth().padding(start = 16.dp, top = 12.dp, end = 16.dp, bottom = 4.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text("API 地址", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(strings.getString(R.string.ui_api_address), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().height(IntrinsicSize.Min)) {
                 SegmentedButton(selected = onThisDevice, onClick = { onDeviceChange(true); choosing = false },
-                    shape = SegmentedButtonDefaults.itemShape(0, 2), modifier = Modifier.fillMaxHeight()) { Text("本机") }
+                    shape = SegmentedButtonDefaults.itemShape(0, 2), modifier = Modifier.fillMaxHeight()) { Text(strings.getString(R.string.ui_this_device)) }
                 SegmentedButton(selected = !onThisDevice, onClick = { onDeviceChange(false) },
-                    shape = SegmentedButtonDefaults.itemShape(1, 2), modifier = Modifier.fillMaxHeight()) { Text("局域网") }
+                    shape = SegmentedButtonDefaults.itemShape(1, 2), modifier = Modifier.fillMaxHeight()) { Text(strings.getString(R.string.ui_lan)) }
             }
             if (!onThisDevice) {
-                snapshot?.warning?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium) }
+                snapshot?.warning?.let { Text(strings.localize(it), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium) }
                 if (selected == null) Text(
-                    if (snapshot == null) "正在读取网络地址…" else "连接 Wi-Fi、网线或开启热点后显示地址",
+                    if (snapshot == null) strings.getString(R.string.ui_reading_addresses) else strings.getString(R.string.ui_connect_network),
                     Modifier.padding(vertical = 12.dp), style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 ) else {
                     Row(Modifier.fillMaxWidth().heightIn(min = 32.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Text(selected.label(), Modifier.weight(1f), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text(selected.label(strings), Modifier.weight(1f), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         if (local.size > 1) Box {
                             TextButton(onClick = { choosing = true }) {
-                                Text("${local.size} 个地址")
+                                Text(strings.getString(R.string.ui_address_count, local.size))
                                 Icon(PathPilotIcons.ExpandMore, null, Modifier.size(18.dp))
                             }
                             DropdownMenu(expanded = choosing, onDismissRequest = { choosing = false }) {
-                                Text("选择客户端所在网络", Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                                Text(strings.getString(R.string.ui_choose_client_network), Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                                     style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                 local.forEach { address ->
                                     DropdownMenuItem(text = {
                                         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                            Text(address.label())
+                                            Text(address.label(strings))
                                             Text(address.ip, fontFamily = FontFamily.Monospace, style = MaterialTheme.typography.bodyMedium)
                                         }
                                     }, onClick = { selectedKey = address.key(); choosing = false },
-                                        trailingIcon = if (address == selected) { { Icon(PathPilotIcons.Check, "当前地址", Modifier.size(20.dp)) } } else null)
+                                        trailingIcon = if (address == selected) { { Icon(PathPilotIcons.Check, strings.getString(R.string.ui_current_address), Modifier.size(20.dp)) } } else null)
                                 }
                             }
                         }
                     }
                 }
             }
-            baseUrl?.let { UrlRow(it, "API 地址", onCopy) }
+            baseUrl?.let { UrlRow(it, strings.getString(R.string.ui_api_address), onCopy) }
             TextButton(onClick = { showGuide = true }, contentPadding = PaddingValues(horizontal = 0.dp, vertical = 8.dp)) {
-                Text("OpenAI 兼容 · 接入说明")
+                Text(strings.getString(R.string.ui_openai_connection_guide))
                 Spacer(Modifier.width(4.dp))
                 Icon(PathPilotIcons.ExpandMore, null, Modifier.size(18.dp))
             }
@@ -87,42 +90,43 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
 @Composable private fun ConnectionGuide(baseUrl: String?, onThisDevice: Boolean,
     onCopy: (String, String) -> Unit, onDismiss: () -> Unit,
 ) {
+    val strings = LocalResources.current
     ModalBottomSheet(onDismissRequest = onDismiss, sheetState = rememberBottomSheetState(
         initialValue = SheetValue.Hidden, enabledValues = setOf(SheetValue.Hidden, SheetValue.Expanded),
     )) {
         LazyColumn(contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            item { Text("接入说明", style = MaterialTheme.typography.headlineSmall) }
+            item { Text(strings.getString(R.string.ui_connection_guide), style = MaterialTheme.typography.headlineSmall) }
             item {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("客户端类型：OpenAI 兼容", style = MaterialTheme.typography.titleMedium)
-                    Text(if (onThisDevice) "本机地址供当前手机上的其他应用使用。" else "局域网地址供同一网络中的其他设备使用。",
+                    Text(strings.getString(R.string.ui_client_openai_compatible), style = MaterialTheme.typography.titleMedium)
+                    Text(if (onThisDevice) strings.getString(R.string.ui_loopback_address_help) else strings.getString(R.string.ui_lan_address_help),
                         style = MaterialTheme.typography.bodyMedium)
-                    Text("HTTP · JSON / SSE · Bearer 鉴权", style = MaterialTheme.typography.bodySmall,
+                    Text(strings.getString(R.string.ui_http_protocols), style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
             item {
                 OutlinedCard {
                     Column(Modifier.fillMaxWidth().padding(12.dp)) {
-                        Text("API 地址（Base URL）", style = MaterialTheme.typography.labelLarge)
-                        if (baseUrl == null) Text("连接局域网后显示地址", Modifier.padding(vertical = 12.dp))
-                        else UrlRow(baseUrl, "API 地址", onCopy)
-                        Text("已包含 /v1；仅在客户端要求完整接口地址时使用下方端点。",
+                        Text(strings.getString(R.string.ui_api_base_url), style = MaterialTheme.typography.labelLarge)
+                        if (baseUrl == null) Text(strings.getString(R.string.ui_connect_lan_for_address), Modifier.padding(vertical = 12.dp))
+                        else UrlRow(baseUrl, strings.getString(R.string.ui_api_address), onCopy)
+                        Text(strings.getString(R.string.ui_base_url_v1_help),
                             style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }
-            item { Text("API Key 填写首页的访问密钥；模型填写「模型」页中的共享模型名。",
+            item { Text(strings.getString(R.string.ui_client_key_model_help),
                 style = MaterialTheme.typography.bodyMedium) }
-            item { Text("接口", style = MaterialTheme.typography.titleMedium) }
+            item { Text(strings.getString(R.string.ui_endpoint), style = MaterialTheme.typography.titleMedium) }
             item { EndpointGuide("Chat Completions", "POST", "/chat/completions", baseUrl,
-                "DeepSeek、Codex；自定义供应商需上游支持。", onCopy) }
+                strings.getString(R.string.ui_chat_support), onCopy) }
             item { EndpointGuide("Responses", "POST", "/responses", baseUrl,
-                "Codex；自定义供应商需上游支持。DeepSeek 不提供此接口。", onCopy) }
-            item { EndpointGuide("模型列表", "GET", "/models", baseUrl,
-                "返回已启用供应商下的共享模型名。", onCopy) }
-            item { Text("先开启首页的模型共享。本机与局域网共用开关、密钥和模型配置；切换地址只改变展示与复制内容。",
+                strings.getString(R.string.ui_responses_support), onCopy) }
+            item { EndpointGuide(strings.getString(R.string.ui_model_list), "GET", "/models", baseUrl,
+                strings.getString(R.string.ui_models_endpoint_help), onCopy) }
+            item { Text(strings.getString(R.string.ui_sharing_connection_help),
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
         }
     }
@@ -131,30 +135,32 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
 @Composable private fun EndpointGuide(title: String, method: String, path: String, baseUrl: String?, description: String,
     onCopy: (String, String) -> Unit,
 ) {
+    val strings = LocalResources.current
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Text(title, style = MaterialTheme.typography.titleSmall)
             Text(method, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
-        if (baseUrl != null) UrlRow("$baseUrl$path", "$title 接口地址", onCopy)
-        else Text("/v1$path", fontFamily = FontFamily.Monospace, style = MaterialTheme.typography.bodyMedium)
+        if (baseUrl != null) UrlRow("${baseUrl}${path}", strings.getString(R.string.ui_endpoint_address, title), onCopy)
+        else Text("/v1${path}", fontFamily = FontFamily.Monospace, style = MaterialTheme.typography.bodyMedium)
         Text(description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 
 @Composable internal fun OtherNetworkAddresses(addresses: List<LocalAddress>, port: Int, onCopy: (String, String) -> Unit) {
+    val strings = LocalResources.current
     val other = addresses.filter { it.kind == LocalAddressKind.VPN || it.kind == LocalAddressKind.CELLULAR }
     var showOther by rememberSaveable { mutableStateOf(false) }
     if (other.isNotEmpty()) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             TextButton(onClick = { showOther = !showOther }) {
-                Text("其他网络地址（${other.size}）")
+                Text(strings.getString(R.string.ui_other_addresses, other.size))
                 Icon(PathPilotIcons.ExpandMore, null, Modifier.size(18.dp).rotate(if (showOther) 180f else 0f))
             }
             if (showOther) OutlinedCard {
                 Column(Modifier.fillMaxWidth().padding(start = 16.dp, top = 12.dp, end = 8.dp, bottom = 12.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("VPN、蜂窝地址需单独确认客户端可达", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(strings.getString(R.string.ui_other_addresses_help), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     other.forEachIndexed { index, address ->
                         if (index > 0) HorizontalDivider()
                         AddressRow(address, port, onCopy)
@@ -166,29 +172,31 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
 }
 
 @Composable private fun AddressRow(address: LocalAddress, port: Int, onCopy: (String, String) -> Unit) {
-    val url = "http://${address.ip}:$port/v1"
+    val strings = LocalResources.current
+    val url = "http://${address.ip}:${port}/v1"
     Column {
-        Text(address.label(), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        UrlRow(url, "API 地址", onCopy)
+        Text(address.label(strings), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        UrlRow(url, strings.getString(R.string.ui_api_address), onCopy)
     }
 }
 
 @Composable private fun UrlRow(url: String, label: String, onCopy: (String, String) -> Unit) {
+    val strings = LocalResources.current
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(url, Modifier.weight(1f), fontFamily = FontFamily.Monospace, style = MaterialTheme.typography.bodyMedium)
-        IconButton(onClick = { onCopy(label, url) }) { Icon(PathPilotIcons.Copy, "复制$label") }
+        IconButton(onClick = { onCopy(label, url) }) { Icon(PathPilotIcons.Copy, strings.getString(R.string.ui_copy_value, label)) }
     }
 }
 
-private fun LocalAddress.key(): String = "$interfaceName|$ip"
+private fun LocalAddress.key(): String = "${interfaceName}|${ip}"
 
-private fun LocalAddress.label(): String {
+private fun LocalAddress.label(strings: android.content.res.Resources): String {
     val kindLabel = when (kind) {
         LocalAddressKind.WIFI -> "Wi-Fi"
-        LocalAddressKind.ETHERNET -> "有线网络"
-        LocalAddressKind.OTHER -> "网络接口"
+        LocalAddressKind.ETHERNET -> strings.getString(R.string.ui_ethernet)
+        LocalAddressKind.OTHER -> strings.getString(R.string.ui_network_interface)
         LocalAddressKind.VPN -> "VPN"
-        LocalAddressKind.CELLULAR -> "蜂窝网络"
+        LocalAddressKind.CELLULAR -> strings.getString(R.string.ui_cellular)
     }
-    return if (interfaceName.isBlank()) kindLabel else "$kindLabel · $interfaceName"
+    return if (interfaceName.isBlank()) kindLabel else "${kindLabel} · ${interfaceName}"
 }

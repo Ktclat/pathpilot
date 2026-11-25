@@ -11,13 +11,14 @@
     <application android:allowBackup="false" android:label="PathPilot"
         android:fullBackupContent="@xml/backup_rules" android:dataExtractionRules="@xml/data_extraction_rules"
         android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher" android:theme="@style/Theme.PathPilot"
-        android:supportsRtl="true" android:usesCleartextTraffic="true">
+        android:localeConfig="@xml/locales_config" android:supportsRtl="true" android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".runtime.McpService" android:exported="false" android:foregroundServiceType="connectedDevice" />
         <service android:name=".runtime.RouterService" android:exported="false" android:foregroundServiceType="connectedDevice" />
     </application>
 </manifest>

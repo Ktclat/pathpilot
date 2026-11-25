@@ -1,5 +1,10 @@
 package dev.pathpilot.app
 
+import dev.pathpilot.app.ui.i18n.localize
+import dev.pathpilot.app.ui.i18n.tokenCount
+import dev.pathpilot.app.ui.i18n.outcomeLabel
+import dev.pathpilot.app.ui.i18n.rangeLabel
+import androidx.compose.ui.platform.LocalResources
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.horizontalScroll
@@ -46,6 +51,7 @@ internal fun StatisticsPage(
     onClear: () -> Unit,
     onRetry: () -> Unit,
 ) {
+    val strings = LocalResources.current
     var requestsTab by rememberSaveable(initialProviderId, initialModel, initialRequests, initialRequestId) {
         mutableStateOf(initialRequests || initialModel != null || initialRequestId != null)
     }
@@ -87,19 +93,19 @@ internal fun StatisticsPage(
         requestsTab = true
     }
     val providerName = events.firstOrNull { it.providerId == providerFilter }?.providerName
-        ?.takeIf { it.isNotBlank() } ?: if (providerFilter != null) "所选供应商" else ""
+        ?.takeIf { it.isNotBlank() } ?: if (providerFilter != null) strings.getString(R.string.ui_selected_provider) else ""
     if (onBack != null) BackHandler(onBack = onBack)
 
     Column(Modifier.fillMaxSize()) {
         TopAppBar(
-            title = { Text("统计") },
-            navigationIcon = { if (onBack != null) IconButton(onClick = onBack) { Icon(PathPilotIcons.Back, "返回") } },
+            title = { Text(strings.getString(R.string.ui_statistics)) },
+            navigationIcon = { if (onBack != null) IconButton(onClick = onBack) { Icon(PathPilotIcons.Back, strings.getString(R.string.ui_back)) } },
             actions = {
-                IconButton(onClick = { help = true }) { Icon(Icons.Outlined.Info, "统计说明") }
+                IconButton(onClick = { help = true }) { Icon(Icons.Outlined.Info, strings.getString(R.string.ui_statistics_help)) }
                 Box {
-                    IconButton(onClick = { menu = true }) { Icon(Icons.Outlined.MoreVert, "更多操作") }
+                    IconButton(onClick = { menu = true }) { Icon(Icons.Outlined.MoreVert, strings.getString(R.string.ui_more_actions)) }
                     DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
-                        DropdownMenuItem(text = { Text("清空记录") }, enabled = events.isNotEmpty() || error != null,
+                        DropdownMenuItem(text = { Text(strings.getString(R.string.ui_clear_history)) }, enabled = events.isNotEmpty() || error != null,
                             leadingIcon = { Icon(PathPilotIcons.Delete, null) },
                             onClick = { menu = false; confirmClear = true })
                     }
@@ -109,15 +115,15 @@ internal fun StatisticsPage(
         )
         Column(Modifier.padding(horizontal = 20.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
-                listOf("概览", "请求").forEachIndexed { index, label ->
+                listOf(strings.getString(R.string.ui_overview), strings.getString(R.string.ui_requests)).forEachIndexed { index, label ->
                     SegmentedButton(selected = requestsTab == (index == 1), onClick = { requestsTab = index == 1 },
                         shape = SegmentedButtonDefaults.itemShape(index, 2),
-                        modifier = Modifier.semantics { contentDescription = if (index == 0) "统计概览" else "查看请求记录" }) { Text(label) }
+                        modifier = Modifier.semantics { contentDescription = if (index == 0) strings.getString(R.string.ui_statistics_overview) else strings.getString(R.string.ui_view_requests) }) { Text(label) }
                 }
             }
             Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 UsageRange.entries.forEach { option ->
-                    FilterChip(selected = range == option, onClick = { range = option }, label = { Text(option.label) })
+                    FilterChip(selected = range == option, onClick = { range = option }, label = { Text(strings.rangeLabel(option)) })
                 }
             }
             if (providerFilter != null || modelFilter != null) {
@@ -125,50 +131,50 @@ internal fun StatisticsPage(
                     label = { Text(listOf(providerName, modelFilter.orEmpty()).filter { it.isNotBlank() }.joinToString(" · "),
                         maxLines = 1, overflow = TextOverflow.Ellipsis) },
                     trailingIcon = { Icon(PathPilotIcons.Close, null, Modifier.size(18.dp)) },
-                    modifier = Modifier.semantics { contentDescription = "清除模型筛选" })
+                    modifier = Modifier.semantics { contentDescription = strings.getString(R.string.ui_clear_model_filter) })
             }
             if (error != null) Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(error, Modifier.weight(1f), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium)
-                TextButton(onClick = onRetry) { Text("重试") }
+                Text(strings.localize(error), Modifier.weight(1f), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium)
+                TextButton(onClick = onRetry) { Text(strings.getString(R.string.ui_retry)) }
             }
         }
         if (requestsTab) RequestHistoryList(visible, query, { query = it }, outcome, { outcome = it }, onDetails = { details = it })
         else LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             item(key = "summary") { StatisticsMetrics(summary) }
-            if (scoped.isEmpty()) item(key = "empty") { RequestEmptyState("暂无请求记录") }
+            if (scoped.isEmpty()) item(key = "empty") { RequestEmptyState(strings.getString(R.string.ui_no_requests)) }
             else {
                 item(key = "trend") { StatisticsTrend(trend, range) }
                 item(key = "breakdown") {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("用量明细", style = MaterialTheme.typography.titleMedium)
+                        Text(strings.getString(R.string.ui_usage_breakdown), style = MaterialTheme.typography.titleMedium)
                         SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
-                            listOf("供应商", "模型").forEachIndexed { index, label ->
+                            listOf(strings.getString(R.string.ui_providers), strings.getString(R.string.ui_models)).forEachIndexed { index, label ->
                                 SegmentedButton(selected = groupByModel == (index == 1), onClick = { groupByModel = index == 1 },
                                     shape = SegmentedButtonDefaults.itemShape(index, 2),
-                                    modifier = Modifier.semantics { contentDescription = "按${label}查看统计" }) { Text(label) }
+                                    modifier = Modifier.semantics { contentDescription = strings.getString(R.string.ui_statistics_by, label) }) { Text(label) }
                             }
                         }
                     }
                 }
                 if (groupByModel) items(modelUsage, key = { "${it.key.providerId.length}:${it.key.providerId}${it.key.model.length}:${it.key.model}${it.key.upstreamModel}" }) { model ->
-                    StatisticsBreakdownCard(model.key.model.ifBlank { "未指定模型" },
+                    StatisticsBreakdownCard(model.key.model.ifBlank { strings.getString(R.string.ui_unspecified_model) },
                         listOf(model.providerName, model.key.upstreamModel.takeIf { it != model.key.model }.orEmpty())
                             .filter { it.isNotBlank() }.joinToString(" · "), model.summary) {
                         showRequests(model.key.providerId, model.key.model, model.key.upstreamModel)
                     }
                 } else items(providerUsage, key = { it.providerId }) { provider ->
-                    StatisticsBreakdownCard(provider.providerName, null, provider.summary) { showRequests(provider.providerId) }
+                    StatisticsBreakdownCard(provider.providerName.ifBlank { strings.getString(R.string.ui_unmatched_provider) }, null, provider.summary) { showRequests(provider.providerId) }
                 }
             }
         }
     }
-    if (help) AlertDialog(onDismissRequest = { help = false }, title = { Text("统计说明") },
-        text = { Text("统计基于保留的最近 1,000 条请求，按手机本地时间分组。Token 汇总上游已返回的用量，“—”表示未提供。缓存输入属于输入 Token，推理输出属于输出 Token。成功率和平均耗时包含所选范围内的全部请求；耗时为请求总时长。订阅剩余额度不在此统计中。") },
-        confirmButton = { TextButton(onClick = { help = false }) { Text("知道了") } })
-    if (confirmClear) AlertDialog(onDismissRequest = { confirmClear = false }, title = { Text("清空请求记录？") },
-        text = { Text("将删除已保存的请求记录及其用量统计。") },
-        confirmButton = { TextButton(onClick = { confirmClear = false; onClear() }) { Text("清空") } },
-        dismissButton = { TextButton(onClick = { confirmClear = false }) { Text("取消") } })
+    if (help) AlertDialog(onDismissRequest = { help = false }, title = { Text(strings.getString(R.string.ui_statistics_help)) },
+        text = { Text(strings.getString(R.string.ui_statistics_help_text)) },
+        confirmButton = { TextButton(onClick = { help = false }) { Text(strings.getString(R.string.ui_got_it)) } })
+    if (confirmClear) AlertDialog(onDismissRequest = { confirmClear = false }, title = { Text(strings.getString(R.string.ui_clear_history_question)) },
+        text = { Text(strings.getString(R.string.ui_clear_history_effect)) },
+        confirmButton = { TextButton(onClick = { confirmClear = false; onClear() }) { Text(strings.getString(R.string.ui_clear)) } },
+        dismissButton = { TextButton(onClick = { confirmClear = false }) { Text(strings.getString(R.string.ui_cancel)) } })
     details?.let { RequestDetailsSheet(it, onDismiss = { details = null }) }
 }
 
@@ -177,38 +183,39 @@ private fun ColumnScope.RequestHistoryList(
     events: List<RequestEvent>, query: String, onQuery: (String) -> Unit,
     outcome: RequestOutcome?, onOutcome: (RequestOutcome?) -> Unit, onDetails: (RequestEvent) -> Unit,
 ) {
+    val strings = LocalResources.current
     val focus = LocalFocusManager.current
     var statusMenu by remember { mutableStateOf(false) }
     LazyColumn(Modifier.weight(1f), contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item(key = "filters") {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlinedTextField(query, onQuery, Modifier.fillMaxWidth(), label = { Text("搜索模型或供应商") },
+                OutlinedTextField(query, onQuery, Modifier.fillMaxWidth(), label = { Text(strings.getString(R.string.ui_search_requests)) },
                     singleLine = true, leadingIcon = { Icon(Icons.Outlined.Search, null) },
                     trailingIcon = if (query.isNotEmpty()) { {
-                        IconButton(onClick = { onQuery("") }) { Icon(PathPilotIcons.Close, "清除搜索") }
+                        IconButton(onClick = { onQuery("") }) { Icon(PathPilotIcons.Close, strings.getString(R.string.ui_clear_search)) }
                     } } else null,
                     keyboardOptions = KeyboardOptions(autoCorrectEnabled = false, imeAction = ImeAction.Search),
                     keyboardActions = KeyboardActions(onSearch = { focus.clearFocus() }))
                 Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                     Box {
                         OutlinedButton(onClick = { statusMenu = true }) {
-                            Text(outcome?.let(::requestOutcomeLabel) ?: "全部状态")
+                            Text(outcome?.let(strings::outcomeLabel) ?: strings.getString(R.string.ui_all_outcomes))
                             Spacer(Modifier.width(4.dp)); Icon(PathPilotIcons.ExpandMore, null, Modifier.size(18.dp))
                         }
                         DropdownMenu(statusMenu, onDismissRequest = { statusMenu = false }) {
-                            DropdownMenuItem(text = { Text("全部状态") }, onClick = { onOutcome(null); statusMenu = false })
+                            DropdownMenuItem(text = { Text(strings.getString(R.string.ui_all_outcomes)) }, onClick = { onOutcome(null); statusMenu = false })
                             RequestOutcome.entries.forEach { option ->
-                                DropdownMenuItem(text = { Text(requestOutcomeLabel(option)) }, onClick = { onOutcome(option); statusMenu = false })
+                                DropdownMenuItem(text = { Text(strings.outcomeLabel(option)) }, onClick = { onOutcome(option); statusMenu = false })
                             }
                         }
                     }
                     Spacer(Modifier.weight(1f))
-                    Text("${events.size} 条", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(strings.getString(R.string.ui_record_count, events.size), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }
         if (events.isEmpty()) item(key = "empty") {
-            RequestEmptyState(if (query.isBlank() && outcome == null) "暂无请求记录" else "没有匹配的请求")
+            RequestEmptyState(if (query.isBlank() && outcome == null) strings.getString(R.string.ui_no_requests) else strings.getString(R.string.ui_no_matching_requests))
         }
         items(events, key = { it.id }) { event -> RequestHistoryCard(event, onClick = { onDetails(event) }) }
     }
@@ -216,15 +223,16 @@ private fun ColumnScope.RequestHistoryList(
 
 @Composable
 internal fun RequestHistoryCard(event: RequestEvent, onClick: () -> Unit) {
+    val strings = LocalResources.current
     OutlinedCard(onClick = onClick) {
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-                Text(event.model.ifBlank { "未指定模型" }, Modifier.weight(1f),
+                Text(event.model.ifBlank { strings.getString(R.string.ui_unspecified_model) }, Modifier.weight(1f),
                     style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                Text(requestOutcomeLabel(event.outcome), style = MaterialTheme.typography.labelLarge,
+                Text(strings.outcomeLabel(event.outcome), style = MaterialTheme.typography.labelLarge,
                     color = if (event.outcome == RequestOutcome.SUCCESS) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error)
             }
-            Text(event.providerName.ifBlank { event.providerId.ifBlank { "未匹配供应商" } },
+            Text(event.providerName.ifBlank { event.providerId.ifBlank { strings.getString(R.string.ui_unmatched_provider) } },
                 style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1, overflow = TextOverflow.Ellipsis)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
@@ -240,32 +248,34 @@ internal fun RequestHistoryCard(event: RequestEvent, onClick: () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun RequestDetailsSheet(event: RequestEvent, onDismiss: () -> Unit) {
+    val strings = LocalResources.current
     ModalBottomSheet(onDismissRequest = onDismiss, sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)) {
         LazyColumn(contentPadding = PaddingValues(start = 24.dp, end = 24.dp, bottom = 32.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            item { Text("请求详情", style = MaterialTheme.typography.headlineSmall) }
-            item { RequestDetailRow("共享模型", event.model.ifBlank { "未指定" }) }
-            item { RequestDetailRow("供应商", event.providerName.ifBlank { event.providerId.ifBlank { "未匹配" } }) }
-            if (event.upstreamModel.isNotBlank()) item { RequestDetailRow("上游模型", event.upstreamModel) }
-            item { RequestDetailRow("时间", requestTime(event.startedAtEpochMs, full = true)) }
-            item { RequestDetailRow("耗时", formatRequestDuration(event.durationMs)) }
-            item { RequestDetailRow("接口", event.endpoint) }
-            item { RequestDetailRow("返回方式", if (event.streaming) "流式" else "非流式") }
-            item { RequestDetailRow("结果", requestOutcomeLabel(event.outcome)) }
-            item { RequestDetailRow("HTTP 状态", event.status.toString()) }
-            event.errorCode?.let { code -> item { RequestDetailRow("错误码", code) } }
+            item { Text(strings.getString(R.string.ui_request_details), style = MaterialTheme.typography.headlineSmall) }
+            item { RequestDetailRow(strings.getString(R.string.ui_shared_model), event.model.ifBlank { strings.getString(R.string.ui_unspecified) }) }
+            item { RequestDetailRow(strings.getString(R.string.ui_providers), event.providerName.ifBlank { event.providerId.ifBlank { strings.getString(R.string.ui_unmatched) } }) }
+            if (event.upstreamModel.isNotBlank()) item { RequestDetailRow(strings.getString(R.string.ui_upstream_model), event.upstreamModel) }
+            item { RequestDetailRow(strings.getString(R.string.ui_time), requestTime(event.startedAtEpochMs, full = true)) }
+            item { RequestDetailRow(strings.getString(R.string.ui_duration), formatRequestDuration(event.durationMs)) }
+            item { RequestDetailRow(strings.getString(R.string.ui_endpoint), event.endpoint) }
+            item { RequestDetailRow(strings.getString(R.string.ui_response_mode), if (event.streaming) strings.getString(R.string.ui_streaming) else strings.getString(R.string.ui_non_streaming)) }
+            item { RequestDetailRow(strings.getString(R.string.ui_outcome), strings.outcomeLabel(event.outcome)) }
+            item { RequestDetailRow(strings.getString(R.string.ui_http_status), event.status.toString()) }
+            event.errorCode?.let { code -> item { RequestDetailRow(strings.getString(R.string.ui_error_code), code) } }
             item { HorizontalDivider() }
-            item { Text("Token 用量", style = MaterialTheme.typography.titleMedium) }
-            item { RequestDetailRow("输入", formatTokenCount(event.usage?.inputTokens)) }
-            item { RequestDetailRow("输出", formatTokenCount(event.usage?.outputTokens)) }
-            item { RequestDetailRow("合计", formatTokenCount(UsageAnalytics.totalTokens(event.usage))) }
-            item { RequestDetailRow("缓存输入", formatTokenCount(event.usage?.cachedInputTokens)) }
-            item { RequestDetailRow("推理输出", formatTokenCount(event.usage?.reasoningOutputTokens)) }
+            item { Text(strings.getString(R.string.ui_token_usage), style = MaterialTheme.typography.titleMedium) }
+            item { RequestDetailRow(strings.getString(R.string.ui_input), strings.tokenCount(event.usage?.inputTokens)) }
+            item { RequestDetailRow(strings.getString(R.string.ui_output), strings.tokenCount(event.usage?.outputTokens)) }
+            item { RequestDetailRow(strings.getString(R.string.ui_total), strings.tokenCount(UsageAnalytics.totalTokens(event.usage))) }
+            item { RequestDetailRow(strings.getString(R.string.ui_cached_input), strings.tokenCount(event.usage?.cachedInputTokens)) }
+            item { RequestDetailRow(strings.getString(R.string.ui_reasoning_output), strings.tokenCount(event.usage?.reasoningOutputTokens)) }
         }
     }
 }
 
 @Composable
 private fun RequestDetailRow(label: String, value: String) {
+    val strings = LocalResources.current
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(16.dp), verticalAlignment = Alignment.Top) {
         Text(label, Modifier.width(80.dp), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text(value, Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
@@ -274,6 +284,7 @@ private fun RequestDetailRow(label: String, value: String) {
 
 @Composable
 private fun RequestEmptyState(message: String) {
+    val strings = LocalResources.current
     Box(Modifier.fillMaxWidth().padding(vertical = 32.dp), contentAlignment = Alignment.Center) {
         Text(message, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }

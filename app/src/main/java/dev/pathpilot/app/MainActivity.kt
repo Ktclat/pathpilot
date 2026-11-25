@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.font.FontFamily
@@ -37,7 +38,10 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.pathpilot.app.runtime.*
+import dev.pathpilot.app.settings.AppPreferences
+import dev.pathpilot.app.McpPage
 import dev.pathpilot.app.ui.theme.PathPilotTheme
+import dev.pathpilot.app.ui.i18n.localize
 import dev.pathpilot.app.ui.icons.PathPilotIcons
 import dev.pathpilot.app.ui.providers.ProviderEditor
 import dev.pathpilot.core.providers.ProviderSetup
@@ -47,44 +51,66 @@ import dev.pathpilot.core.codex.*
 import kotlinx.coroutines.*
 
 class MainActivity : ComponentActivity() {
+    private val openMcp = mutableStateOf(false)
+    override fun attachBaseContext(newBase: Context) { super.attachBaseContext(AppLanguageController.wrapContext(newBase)) }
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        if (intent.getBooleanExtra("open_mcp", false)) openMcp.value = true
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent { PathPilotTheme { PathPilotApp() } }
+        openMcp.value = intent.getBooleanExtra("open_mcp", false)
+        setContent { PathPilotApp(openMcp.value, onMcpIntentHandled = { openMcp.value = false; intent.removeExtra("open_mcp") }) }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Composable private fun PathPilotApp() {
+@Composable private fun PathPilotApp(openMcp: Boolean, onMcpIntentHandled: () -> Unit) {
+    val strings = LocalResources.current
     val context = LocalContext.current.applicationContext
     var store by remember { mutableStateOf<AppStore?>(null) }
     var loadFailed by remember { mutableStateOf(false) }
     var attempt by remember { mutableIntStateOf(0) }
     LaunchedEffect(attempt) {
         loadFailed = false
-        try { store = withContext(Dispatchers.IO) { AppStore.get(context) } }
+        try {
+            store = withContext(Dispatchers.IO) {
+                AppStore.get(context).also { loaded ->
+                    if (Build.VERSION.SDK_INT >= 33 && loaded.storageError.value == null) {
+                        val selected = AppLanguageController.current(context)
+                        if (selected != loaded.preferences.value.language) loaded.setPreferences(loaded.preferences.value.copy(language = selected))
+                    }
+                }
+            }
+        }
         catch (cancelled: CancellationException) { throw cancelled }
         catch (_: Exception) { loadFailed = true }
     }
-    if (store != null) PathPilotContent(requireNotNull(store))
+    val preferences = store?.preferences?.collectAsStateWithLifecycle()?.value ?: AppPreferences()
+    PathPilotTheme(preferences) {
+    if (store != null) PathPilotContent(requireNotNull(store), openMcp, onMcpIntentHandled)
     else Surface(Modifier.fillMaxSize()) {
         Column(Modifier.padding(32.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
             Text("PathPilot", style = MaterialTheme.typography.headlineLarge, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(24.dp))
             if (loadFailed) {
-                Text("无法读取配置，请重试")
-                TextButton(onClick = { attempt++ }) { Text("重试") }
+                Text(strings.getString(R.string.ui_config_load_failed))
+                TextButton(onClick = { attempt++ }) { Text(strings.getString(R.string.ui_retry)) }
             } else {
                 CircularProgressIndicator()
                 Spacer(Modifier.height(16.dp))
-                Text("正在加载…")
+                Text(strings.getString(R.string.ui_loading))
             }
         }
+    }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Composable private fun PathPilotContent(store: AppStore) {
+@Composable private fun PathPilotContent(store: AppStore, openMcp: Boolean, onMcpIntentHandled: () -> Unit) {
+    val strings = LocalResources.current
     val context = LocalContext.current
     val config by store.config.collectAsStateWithLifecycle()
     val runtime by RouterRuntime.state.collectAsStateWithLifecycle()
@@ -92,6 +118,11 @@ class MainActivity : ComponentActivity() {
     val sessions by store.authenticatedCodexProviders.collectAsStateWithLifecycle()
     val history by store.requestHistory.state.collectAsStateWithLifecycle()
     var tab by rememberSaveable { mutableIntStateOf(0) }
+    var mcpVisible by rememberSaveable { mutableStateOf(false) }
+    LaunchedEffect(openMcp) {
+        if (openMcp) { tab = 4; mcpVisible = true; onMcpIntentHandled() }
+    }
+    BackHandler(enabled = tab == 4 && mcpVisible) { mcpVisible = false }
     var statisticsReturnTab by rememberSaveable { mutableStateOf<Int?>(null) }
     var statisticsEntry by rememberSaveable { mutableIntStateOf(0) }
     var statisticsRequests by rememberSaveable { mutableStateOf(false) }
@@ -112,7 +143,7 @@ class MainActivity : ComponentActivity() {
     var notificationPending by rememberSaveable { mutableStateOf(false) }
     val snackbar = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
-    fun notify(message: String) { scope.launch { snackbar.showSnackbar(message) } }
+    fun notify(message: String) { scope.launch { snackbar.showSnackbar(strings.localize(message)) } }
     fun update(onSuccess: () -> Unit = {}, transform: (RouterConfig) -> RouterConfig) {
         if (saving) return
         saving = true
@@ -125,9 +156,9 @@ class MainActivity : ComponentActivity() {
             } catch (error: Exception) {
                 android.util.Log.e("PathPilot", "Configuration save failed: ${error.javaClass.simpleName}\n${error.stackTrace.joinToString("\n")}")
                 saveError = when (error) {
-                    is IllegalArgumentException -> error.message ?: "配置无效"
-                    is java.io.IOException -> "无法写入配置，请重试"
-                    else -> "保存失败，请重试"
+                    is IllegalArgumentException -> error.message ?: strings.getString(R.string.ui_invalid_config)
+                    is java.io.IOException -> strings.getString(R.string.ui_config_write_failed)
+                    else -> strings.getString(R.string.ui_save_failed_retry)
                 }
             } finally { saving = false }
         }
@@ -180,13 +211,13 @@ class MainActivity : ComponentActivity() {
         statisticsReturnTab = null
     }
     BackHandler(enabled = tab == 3) { leaveStatistics() }
-    val tabs = listOf("共享", "供应商", "模型", "统计", "设置")
+    val tabs = listOf(strings.getString(R.string.main_share_tab), strings.getString(R.string.ui_providers), strings.getString(R.string.ui_models), strings.getString(R.string.ui_statistics_tab), strings.getString(R.string.ui_settings))
     val icons = listOf(PathPilotIcons.Share, PathPilotIcons.Providers, PathPilotIcons.Routes, PathPilotIcons.Usage, PathPilotIcons.Settings)
     Scaffold(
-        topBar = { if (tab != 2 && tab != 3) TopAppBar(title = { Text(tabs[tab]) }, actions = {
+        topBar = { if (tab != 2 && tab != 3 && !(tab == 4 && mcpVisible)) TopAppBar(title = { Text(tabs[tab]) }, actions = {
             if (tab == 1 && config.providers.isNotEmpty()) {
                 IconButton(enabled = !saving, onClick = { addProvider = true }) {
-                    Icon(PathPilotIcons.Add, "添加供应商")
+                    Icon(PathPilotIcons.Add, strings.getString(R.string.ui_add_provider))
                 }
             }
         }) },
@@ -199,13 +230,13 @@ class MainActivity : ComponentActivity() {
     ) { padding ->
         Column(Modifier.padding(padding).fillMaxSize()) {
             if (saving) LinearProgressIndicator(Modifier.fillMaxWidth())
-            storageError?.let { Text(it, Modifier.padding(horizontal = 20.dp, vertical = 8.dp), color = MaterialTheme.colorScheme.error) }
+            storageError?.let { Text(strings.localize(it), Modifier.padding(horizontal = 20.dp, vertical = 8.dp), color = MaterialTheme.colorScheme.error) }
             when (tab) {
                 0 -> SharingScreen(config, runtime, sessions, saving || storageError != null, notificationPending,
                     onSharingChange = ::setSharing, onProviders = { tab = 1; if (config.providers.isEmpty()) addProvider = true }, onRoutes = { modelProviderId = null; tab = 2 },
                     history = history, onRequests = { openStatistics(requests = true) },
                     onRequest = { openStatistics(requests = true, requestId = it.id) },
-                    onCopy = { label, value -> copy(context, label, value); notify("已复制") })
+                    onCopy = { label, value -> copy(context, label, value, secret = value == config.accessKey); notify(strings.getString(R.string.ui_copied)) })
                 1 -> ProvidersScreen(config, sessions, saving,
                     onAdd = { fetchModelsOnOpen = false; addProvider = true }, onEdit = { fetchModelsOnOpen = false; providerEditorId = it.id },
                     onToggle = { provider, enabled -> update { c -> c.copy(providers = c.providers.map { if (it.id == provider.id) it.copy(enabled = enabled) else it }) } },
@@ -228,10 +259,8 @@ class MainActivity : ComponentActivity() {
                     onClear = { scope.launch { withContext(Dispatchers.IO) { store.requestHistory.clear() } } },
                     onRetry = { scope.launch { withContext(Dispatchers.IO) { store.requestHistory.reload() } } },
                 ) }
-                4 -> SettingsScreen(config, runtime.running || runtime.starting || runtime.stopping || notificationPending, saving,
-                    onPort = { port, done -> update(onSuccess = done) { it.copy(port = port) } },
-                    onProxy = { proxy, done -> update(onSuccess = done) { it.copy(outboundProxy = proxy) } },
-                    onRotate = { done -> update(onSuccess = { done(); notify("密钥已更新") }) { it.copy(accessKey = AccessKeys.generate()) } })
+                4 -> if (mcpVisible) McpPage(store, onBack = { mcpVisible = false })
+                    else SettingsScreen(store, onMcp = { mcpVisible = true }, onMessage = ::notify)
             }
         }
     }
@@ -246,7 +275,7 @@ class MainActivity : ComponentActivity() {
                 addProvider = false; providerEditorId = null; fetchModelsOnOpen = false
                 tab = 1
                 if (provider.kind == ProviderKind.CODEX && provider.id !in store.authenticatedCodexProviders.value) codexLoginProviderId = provider.id
-                else notify(if (models.isEmpty()) "已保存" else "供应商与模型已保存")
+                else notify(strings.getString(if (models.isEmpty()) R.string.ui_saved else R.string.ui_provider_models_saved))
             }) { ProviderRoutes.addSelected(it, provider, models) }
         },
         onDelete = { provider -> update(onSuccess = { providerEditorId = null; fetchModelsOnOpen = false }) { c ->
@@ -269,31 +298,31 @@ class MainActivity : ComponentActivity() {
             tab = 1
         })
     }
-    saveError?.let { message -> AlertDialog(onDismissRequest = { saveError = null }, title = { Text("未能保存") },
-        text = { Text(message) }, confirmButton = { TextButton(onClick = { saveError = null }) { Text("返回编辑") } }) }
+    saveError?.let { message -> AlertDialog(onDismissRequest = { saveError = null }, title = { Text(strings.getString(R.string.ui_save_failed)) },
+        text = { Text(strings.localize(message)) }, confirmButton = { TextButton(onClick = { saveError = null }) { Text(strings.getString(R.string.ui_back_to_editing)) } }) }
 }
 
-@Composable private fun CopyRow(label: String, value: String, onCopy: (String) -> Unit, secret: Boolean = false) {
-    var visible by remember { mutableStateOf(false) }
+@Composable private fun CopyRow(label: String, value: String, onCopy: (String) -> Unit) {
+    val strings = LocalResources.current
     OutlinedCard {
         Column(Modifier.padding(16.dp)) {
-            Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(label, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(if (secret && !visible) "••••••••••••••••" else value, modifier = Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium, fontFamily = FontFamily.Monospace)
-                if (secret) IconButton(onClick = { visible = !visible }) { Icon(if (visible) PathPilotIcons.VisibilityOff else PathPilotIcons.Visibility, if (visible) "隐藏密钥" else "显示密钥") }
-                IconButton(onClick = { onCopy(value) }) { Icon(PathPilotIcons.Copy, "复制$label") }
+                Text(value, Modifier.weight(1f), style = MaterialTheme.typography.bodyLarge, fontFamily = FontFamily.Monospace)
+                IconButton(onClick = { onCopy(value) }) { Icon(PathPilotIcons.Copy, strings.getString(R.string.ui_copy_value, label)) }
             }
         }
     }
 }
-private fun copy(context: Context, label: String, value: String) {
+private fun copy(context: Context, label: String, value: String, secret: Boolean = false) {
     val clip = ClipData.newPlainText(label, value)
-    if (Build.VERSION.SDK_INT >= 33 && label.contains("密钥")) clip.description.extras = android.os.PersistableBundle().apply { putBoolean("android.content.extra.IS_SENSITIVE", true) }
+    if (Build.VERSION.SDK_INT >= 33 && secret) clip.description.extras = android.os.PersistableBundle().apply { putBoolean("android.content.extra.IS_SENSITIVE", true) }
     (context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(clip)
 }
-private fun kindLabel(kind: ProviderKind) = when (kind) { ProviderKind.CODEX -> "ChatGPT / Codex 订阅"; ProviderKind.DEEPSEEK -> "DeepSeek API"; ProviderKind.OPENAI_COMPATIBLE -> "OpenAI 兼容 API" }
+private fun kindLabel(kind: ProviderKind, strings: android.content.res.Resources) = when (kind) { ProviderKind.CODEX -> strings.getString(R.string.ui_codex_subscription); ProviderKind.DEEPSEEK -> "DeepSeek API"; ProviderKind.OPENAI_COMPATIBLE -> strings.getString(R.string.ui_openai_compatible) }
 
 @Composable private fun RouteDialog(existing: RouteConfig?, config: RouterConfig, saving: Boolean, initialProviderId: String?, onDismiss: () -> Unit, onSave: (RouteConfig) -> Unit, onDelete: (RouteConfig) -> Unit) {
+    val strings = LocalResources.current
     var providerId by remember { mutableStateOf(existing?.providerId ?: initialProviderId ?: config.providers.firstOrNull()?.id.orEmpty()) }
     val selected = config.providers.find { it.id == providerId }
     fun defaultAlias(kind: ProviderKind?) = when (kind) { ProviderKind.DEEPSEEK -> "deepseek-chat"; ProviderKind.CODEX -> "codex"; else -> "" }
@@ -303,11 +332,11 @@ private fun kindLabel(kind: ProviderKind) = when (kind) { ProviderKind.CODEX -> 
     var menu by remember { mutableStateOf(false) }
     val duplicate = config.routes.any { it.alias == alias.trim() && it.alias != existing?.alias }
     val modelError = ProviderSetup.validateModelId(model)
-    AlertDialog(onDismissRequest = onDismiss, title = { Text(if (existing == null) "添加模型" else "编辑模型") }, text = {
+    AlertDialog(onDismissRequest = onDismiss, title = { Text(if (existing == null) strings.getString(R.string.ui_add_model) else strings.getString(R.string.ui_edit_model)) }, text = {
         Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             if (saving) LinearProgressIndicator(Modifier.fillMaxWidth())
             Box {
-                OutlinedButton(enabled = !saving, onClick = { menu = true }) { Text(selected?.name ?: "选择供应商"); Icon(PathPilotIcons.ExpandMore, null) }
+                OutlinedButton(enabled = !saving, onClick = { menu = true }) { Text(selected?.name ?: strings.getString(R.string.ui_choose_provider)); Icon(PathPilotIcons.ExpandMore, null) }
                 DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) { config.providers.forEach { p -> DropdownMenuItem(text = { Text(p.name) }, onClick = {
                     if (existing == null) {
                         if (alias == defaultAlias(selected?.kind)) alias = defaultAlias(p.kind)
@@ -316,14 +345,15 @@ private fun kindLabel(kind: ProviderKind) = when (kind) { ProviderKind.CODEX -> 
                     providerId = p.id; menu = false
                 }) } }
             }
-            OutlinedTextField(alias, { alias = it }, enabled = !saving, label = { Text("共享模型名") }, supportingText = { Text(if (duplicate) "名称已存在" else "客户端请求中的 model") }, isError = duplicate, singleLine = true)
-            OutlinedTextField(model, { model = it }, enabled = !saving, label = { Text("上游模型 ID") }, supportingText = { Text(if (model.isNotBlank() && modelError != null) modelError else if (selected?.kind == ProviderKind.CODEX) "填写订阅可用的 Codex 模型 ID" else "填写供应商支持的模型 ID") }, isError = model.isNotBlank() && modelError != null, singleLine = true)
-            if (existing != null) TextButton(enabled = !saving, onClick = { onDelete(existing) }) { Text("删除模型", color = MaterialTheme.colorScheme.error) }
+            OutlinedTextField(alias, { alias = it }, enabled = !saving, label = { Text(strings.getString(R.string.ui_shared_model_name)) }, supportingText = { Text(if (duplicate) strings.getString(R.string.ui_name_exists) else strings.getString(R.string.ui_model_request_field)) }, isError = duplicate, singleLine = true)
+            OutlinedTextField(model, { model = it }, enabled = !saving, label = { Text(strings.getString(R.string.ui_upstream_model_id)) }, supportingText = { Text(if (model.isNotBlank() && modelError != null) strings.localize(modelError) else if (selected?.kind == ProviderKind.CODEX) strings.getString(R.string.ui_enter_codex_model) else strings.getString(R.string.ui_enter_provider_model)) }, isError = model.isNotBlank() && modelError != null, singleLine = true)
+            if (existing != null) TextButton(enabled = !saving, onClick = { onDelete(existing) }) { Text(strings.getString(R.string.ui_delete_model), color = MaterialTheme.colorScheme.error) }
         }
-    }, confirmButton = { TextButton(enabled = !saving && selected != null && alias.trim().matches(Regex("[A-Za-z0-9._:/-]{1,128}")) && modelError == null && !duplicate, onClick = { onSave(RouteConfig(alias.trim(), providerId, model.trim(), existing?.enabled ?: true)) }) { Text(if (saving) "正在保存…" else "保存") } }, dismissButton = { TextButton(enabled = !saving, onClick = onDismiss) { Text("取消") } })
+    }, confirmButton = { TextButton(enabled = !saving && selected != null && alias.trim().matches(Regex("[A-Za-z0-9._:/-]{1,128}")) && modelError == null && !duplicate, onClick = { onSave(RouteConfig(alias.trim(), providerId, model.trim(), existing?.enabled ?: true)) }) { Text(if (saving) strings.getString(R.string.ui_saving) else strings.getString(R.string.ui_save)) } }, dismissButton = { TextButton(enabled = !saving, onClick = onDismiss) { Text(strings.getString(R.string.ui_cancel)) } })
 }
 
 @Composable private fun CodexLoginDialog(provider: ProviderConfig, store: AppStore, onDismiss: () -> Unit, onSuccess: () -> Unit) {
+    val strings = LocalResources.current
     val context = LocalContext.current
     val loginModel: CodexLoginViewModel = viewModel()
     val state by loginModel.state.collectAsStateWithLifecycle()
@@ -336,25 +366,25 @@ private fun kindLabel(kind: ProviderKind) = when (kind) { ProviderKind.CODEX -> 
         }
     }
     fun close() { if (!savingTokens) { loginModel.cancel(); onDismiss() } }
-    AlertDialog(onDismissRequest = ::close, title = { Text("登录 ChatGPT / Codex") }, text = {
+    AlertDialog(onDismissRequest = ::close, title = { Text(strings.getString(R.string.ui_sign_in_codex)) }, text = {
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             when (state.phase) {
-                CodexLoginPhase.AUTH_ERROR, CodexLoginPhase.SAVE_ERROR -> Text(state.error.orEmpty(), color = MaterialTheme.colorScheme.error)
+                CodexLoginPhase.AUTH_ERROR, CodexLoginPhase.SAVE_ERROR -> Text(strings.localize(state.error.orEmpty()), color = MaterialTheme.colorScheme.error)
                 CodexLoginPhase.SAVING, CodexLoginPhase.COMPLETE -> {
-                    LinearProgressIndicator(Modifier.fillMaxWidth()); Text("正在保存授权…")
+                    LinearProgressIndicator(Modifier.fillMaxWidth()); Text(strings.getString(R.string.ui_saving_authorization))
                 }
                 CodexLoginPhase.POLLING -> state.challenge?.let { challenge ->
-                    Text("在浏览器中输入授权码，完成登录后返回。")
-                    CopyRow("设备授权码", challenge.userCode, { copy(context, "设备授权码", it) })
-                    Button(onClick = { try { context.startActivity(Intent(Intent.ACTION_VIEW, challenge.verificationUrl.toUri())) } catch (_: Exception) { loginModel.browserUnavailable() } }, modifier = Modifier.fillMaxWidth()) { Text("打开登录页面"); Spacer(Modifier.width(8.dp)); Icon(PathPilotIcons.OpenInNew, null) }
+                    Text(strings.getString(R.string.ui_browser_authorization_help))
+                    CopyRow(strings.getString(R.string.ui_device_code), challenge.userCode, { copy(context, strings.getString(R.string.ui_device_code), it) })
+                    Button(onClick = { try { context.startActivity(Intent(Intent.ACTION_VIEW, challenge.verificationUrl.toUri())) } catch (_: Exception) { loginModel.browserUnavailable() } }, modifier = Modifier.fillMaxWidth()) { Text(strings.getString(R.string.ui_open_sign_in)); Spacer(Modifier.width(8.dp)); Icon(PathPilotIcons.OpenInNew, null) }
                     LinearProgressIndicator(Modifier.fillMaxWidth())
-                    Text("等待登录…", style = MaterialTheme.typography.bodySmall)
+                    Text(strings.getString(R.string.ui_waiting_sign_in), style = MaterialTheme.typography.bodySmall)
                 }
-                else -> { LinearProgressIndicator(Modifier.fillMaxWidth()); Text("正在获取授权码…") }
+                else -> { LinearProgressIndicator(Modifier.fillMaxWidth()); Text(strings.getString(R.string.ui_fetching_device_code)) }
             }
         }
     }, confirmButton = {
-        if (state.phase == CodexLoginPhase.SAVE_ERROR) TextButton(onClick = loginModel::retrySave) { Text("重试保存") }
-        else if (state.phase == CodexLoginPhase.AUTH_ERROR) TextButton(onClick = loginModel::retryAuthorization) { Text("重新授权") }
-    }, dismissButton = { TextButton(enabled = !savingTokens, onClick = ::close) { Text("关闭") } })
+        if (state.phase == CodexLoginPhase.SAVE_ERROR) TextButton(onClick = loginModel::retrySave) { Text(strings.getString(R.string.ui_retry_save)) }
+        else if (state.phase == CodexLoginPhase.AUTH_ERROR) TextButton(onClick = loginModel::retryAuthorization) { Text(strings.getString(R.string.ui_authorize_again)) }
+    }, dismissButton = { TextButton(enabled = !savingTokens, onClick = ::close) { Text(strings.getString(R.string.ui_close)) } })
 }

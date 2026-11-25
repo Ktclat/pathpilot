@@ -301,7 +301,7 @@ class ProviderEditorViewModel() : ViewModel() {
         probeError = null, modelFilter = "",
     )
     private fun defaults() = mapOf(
-        ProviderKind.CODEX to ProviderDraft("Codex 订阅", CodexBackend.BASE_URL),
+        ProviderKind.CODEX to ProviderDraft("Codex", CodexBackend.BASE_URL),
         ProviderKind.DEEPSEEK to ProviderDraft("DeepSeek", "https://api.deepseek.com/v1"),
         ProviderKind.OPENAI_COMPATIBLE to ProviderDraft("", "https://api.openai.com/v1"),
     )

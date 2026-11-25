@@ -1,5 +1,6 @@
 package dev.pathpilot.app
 
+import androidx.compose.ui.platform.LocalResources
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -29,6 +30,7 @@ import dev.pathpilot.core.RequestEvent
     requestEvents: List<RequestEvent> = emptyList(),
     onViewUsage: ((ProviderConfig, RouteConfig?) -> Unit)? = null,
 ) {
+    val strings = LocalResources.current
     val provider = config.providers.find { it.id == selectedProviderId }
     LaunchedEffect(selectedProviderId, provider?.id) {
         if (selectedProviderId != null && provider == null) onSelectProvider(null)
@@ -36,18 +38,18 @@ import dev.pathpilot.core.RequestEvent
     BackHandler(enabled = provider != null) { onSelectProvider(null) }
     Column(Modifier.fillMaxSize()) {
         TopAppBar(
-            title = { Text(provider?.name ?: "模型", maxLines = 1, overflow = TextOverflow.Ellipsis) },
+            title = { Text(provider?.name ?: strings.getString(R.string.ui_models), maxLines = 1, overflow = TextOverflow.Ellipsis) },
             navigationIcon = {
                 if (provider != null) IconButton(onClick = { onSelectProvider(null) }) {
-                    Icon(PathPilotIcons.Back, "返回供应商列表")
+                    Icon(PathPilotIcons.Back, strings.getString(R.string.ui_back_to_providers))
                 }
             },
             actions = {
                 if (provider != null && onViewUsage != null) IconButton(onClick = { onViewUsage(provider, null) }) {
-                    Icon(PathPilotIcons.Usage, "查看供应商用量")
+                    Icon(PathPilotIcons.Usage, strings.getString(R.string.ui_view_provider_usage))
                 }
                 if (provider != null) IconButton(enabled = !saving, onClick = { onAddModel(provider.id) }) {
-                    Icon(PathPilotIcons.Add, "添加模型")
+                    Icon(PathPilotIcons.Add, strings.getString(R.string.ui_add_model))
                 }
             },
             // The outer app scaffold already supplies status-bar and navigation-bar insets.

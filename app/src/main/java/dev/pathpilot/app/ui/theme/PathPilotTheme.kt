@@ -1,5 +1,7 @@
 package dev.pathpilot.app.ui.theme
 
+import dev.pathpilot.app.settings.AppPreferences
+import dev.pathpilot.app.settings.ThemeMode
 import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Color as AndroidColor
@@ -125,12 +127,16 @@ private val DarkColors = darkColorScheme(
 
 /** Follow the native system palette and theme; only the Activity owns the secure-window policy. */
 @Composable
-fun PathPilotTheme(content: @Composable () -> Unit) {
-    val dark = isSystemInDarkTheme()
+fun PathPilotTheme(preferences: AppPreferences = AppPreferences(), content: @Composable () -> Unit) {
+    val dark = when (preferences.themeMode) {
+        ThemeMode.SYSTEM -> isSystemInDarkTheme()
+        ThemeMode.LIGHT -> false
+        ThemeMode.DARK -> true
+    }
     val context = LocalContext.current
     val colors = when {
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && dark -> dynamicDarkColorScheme(context)
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> dynamicLightColorScheme(context)
+        preferences.dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && dark -> dynamicDarkColorScheme(context)
+        preferences.dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> dynamicLightColorScheme(context)
         dark -> DarkColors
         else -> LightColors
     }

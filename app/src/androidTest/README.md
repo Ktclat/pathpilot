@@ -85,3 +85,34 @@ adb shell am instrument -w -r -e class \
 ```
 
 以上测试不代表真实订阅请求或账号余额结果。网络观测由 core 中回环 HTTP 测试覆盖。结果须同时核对 runner、APK SHA 和当次截图；系统弹窗遮挡的图片保留为异常证据，不能作为界面展示图。
+
+## 设置、备份与 MCP
+
+v0.1.10 新增测试均要求隔离的 `.capture` 包，不访问真实账号或外部 MCP：
+
+- `settings.BackupStoreTest`：5 项，Android Keystore/AtomicFile 的导出恢复、可选订阅登录状态、保留本机连接配置、写入失败原子性、损坏配置恢复及旧版迁移。使用独立 `noBackupFilesDir`，不改生产单例。
+- `ui.settings.SettingsFlowTest#themeMonetAndLanguageChoicesPersistInTheNativeActivity`：生产 MainActivity 的主题、莫奈取色、中英切换及 Activity 重建后保留。
+- `ui.settings.SettingsFlowTest#exportUsesTheAndroidDocumentPickerAndCanBeCancelled`：生产 MainActivity 实际打开 Android CreateDocument 文件器，截图并取消。
+- `ui.settings.BackupFlowTest`：生产 SettingsScreen/ViewModel 和真实加密文件读写。测试只替换 ActivityResultRegistry 返回的私有文件 URI；验证错误密码不改配置、恢复前预览及默认保留本机端口。该项不替代上面的系统文件器检查。
+- `ui.settings.McpFlowTest`：生产 MainActivity 添加 Bearer 连接、实际获取工具、禁用工具、启动独立前台共享服务；通过真实 HTTP 客户端验证 initialize/list/call、工具白名单及停用 MCP 后模型服务继续可用。上游是测试进程内的 MockWebServer。
+
+先按上文构建安装 capture APK，然后以默认 360dp / font_scale=1.0 运行 9 项：
+
+```sh
+adb shell am instrument -w -r -e class \
+  'dev.pathpilot.app.settings.BackupStoreTest,dev.pathpilot.app.ui.settings.SettingsFlowTest#themeMonetAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.SettingsFlowTest#exportUsesTheAndroidDocumentPickerAndCanBeCancelled,dev.pathpilot.app.ui.settings.BackupFlowTest,dev.pathpilot.app.ui.settings.McpFlowTest' \
+  dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
+```
+
+大字体检查单独运行，真实设置为 320–360dp 和 font_scale=1.5；配置不符合时用例失败，不会跳过计入通过：
+
+```sh
+adb shell wm density 360
+adb shell settings put system font_scale 1.5
+adb shell am force-stop dev.pathpilot.app.capture
+adb shell am instrument -w -r -e class \
+  'dev.pathpilot.app.ui.settings.SettingsFlowTest#largeSystemFontKeepsSettingsAndMcpControlsReachable' \
+  dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
+```
+
+原图位于 `externalFilesDir/settings-e2e/`。测试结束恢复此前记录的 density/font_scale，并清理隔离包。语言用例启动 Activity 前同时设置 AppStore 和 Android 13+ 的应用 LocaleManager；用例中的用户语言切换走实际设置界面。

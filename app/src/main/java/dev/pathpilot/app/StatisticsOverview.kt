@@ -1,5 +1,7 @@
 package dev.pathpilot.app
 
+import dev.pathpilot.app.ui.i18n.tokenCount
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -31,16 +33,17 @@ import java.util.Locale
 
 @Composable
 internal fun StatisticsMetrics(summary: UsageSummary) {
+    val strings = LocalResources.current
     var tokensOpen by remember { mutableStateOf(false) }
     val successRate = summary.successRate?.let {
         NumberFormat.getPercentInstance().apply { maximumFractionDigits = 1 }.format(it)
     }
     val metrics = listOf(
-        Triple("请求数", formatTokenCount(summary.requestCount.toLong()), formatTokenCount(summary.requestCount.toLong())),
-        Triple("Token", compactCount(summary.totalTokens), formatTokenCount(summary.totalTokens)),
-        Triple("成功率", successRate ?: "—", successRate ?: "暂无请求"),
-        Triple("平均耗时", summary.averageDurationMs?.let(::formatRequestDuration) ?: "—",
-            summary.averageDurationMs?.let(::formatRequestDuration) ?: "暂无请求"),
+        Triple(strings.getString(R.string.ui_request_count), strings.tokenCount(summary.requestCount.toLong()), strings.tokenCount(summary.requestCount.toLong())),
+        Triple("Token", compactCount(summary.totalTokens), strings.tokenCount(summary.totalTokens)),
+        Triple(strings.getString(R.string.ui_success_rate), successRate ?: "—", successRate ?: strings.getString(R.string.ui_no_request_samples)),
+        Triple(strings.getString(R.string.ui_average_duration), summary.averageDurationMs?.let(::formatRequestDuration) ?: "—",
+            summary.averageDurationMs?.let(::formatRequestDuration) ?: strings.getString(R.string.ui_no_request_samples)),
     )
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         val columns = if (LocalDensity.current.fontScale >= 1.3f) 1 else 2
@@ -49,7 +52,7 @@ internal fun StatisticsMetrics(summary: UsageSummary) {
                 row.forEach { (label, value, spoken) ->
                     val content: @Composable ColumnScope.() -> Unit = {
                         Column(Modifier.fillMaxWidth().padding(16.dp).clearAndSetSemantics {
-                            contentDescription = "$label，$spoken"
+                            contentDescription = strings.getString(R.string.ui_metric_description, label, spoken)
                         }, verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Text(label, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             Text(value, style = MaterialTheme.typography.headlineSmall.copy(fontFeatureSettings = "tnum"))
@@ -62,37 +65,38 @@ internal fun StatisticsMetrics(summary: UsageSummary) {
             }
         }
         if (summary.requestCount > 0) {
-            Text("成功 ${summary.successCount} · 失败 ${summary.errorCount} · 中断 ${summary.interruptedCount}",
+            Text(strings.getString(R.string.ui_outcome_counts, summary.successCount, summary.errorCount, summary.interruptedCount),
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (summary.totalTokensReportedCount < summary.requestCount) Text(
-                "${summary.totalTokensReportedCount}/${summary.requestCount} 条请求返回总 Token",
+                strings.getString(R.string.ui_total_token_coverage, summary.totalTokensReportedCount, summary.requestCount),
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
-    if (tokensOpen) AlertDialog(onDismissRequest = { tokensOpen = false }, title = { Text("Token 用量") },
+    if (tokensOpen) AlertDialog(onDismissRequest = { tokensOpen = false }, title = { Text(strings.getString(R.string.ui_token_usage)) },
         text = {
             Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                listOf("合计" to summary.totalTokens, "输入" to summary.inputTokens, "输出" to summary.outputTokens,
-                    "缓存输入" to summary.cachedInputTokens, "推理输出" to summary.reasoningOutputTokens).forEach { (label, value) ->
+                listOf(strings.getString(R.string.ui_total) to summary.totalTokens, strings.getString(R.string.ui_input) to summary.inputTokens, strings.getString(R.string.ui_output) to summary.outputTokens,
+                    strings.getString(R.string.ui_cached_input) to summary.cachedInputTokens, strings.getString(R.string.ui_reasoning_output) to summary.reasoningOutputTokens).forEach { (label, value) ->
                     Column {
                         Text(label, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text(formatTokenCount(value), style = MaterialTheme.typography.bodyLarge)
+                        Text(strings.tokenCount(value), style = MaterialTheme.typography.bodyLarge)
                     }
                 }
-                Text("${summary.totalTokensReportedCount}/${summary.requestCount} 条请求返回总 Token", style = MaterialTheme.typography.bodySmall)
+                Text(strings.getString(R.string.ui_total_token_coverage, summary.totalTokensReportedCount, summary.requestCount), style = MaterialTheme.typography.bodySmall)
             }
-        }, confirmButton = { TextButton(onClick = { tokensOpen = false }) { Text("完成") } })
+        }, confirmButton = { TextButton(onClick = { tokensOpen = false }) { Text(strings.getString(R.string.ui_done)) } })
 }
 
 @Composable
 internal fun StatisticsBreakdownCard(title: String, subtitle: String?, summary: UsageSummary, onClick: () -> Unit) {
+    val strings = LocalResources.current
     OutlinedCard(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(title, style = MaterialTheme.typography.titleMedium, maxLines = 2, overflow = TextOverflow.Ellipsis)
             if (!subtitle.isNullOrBlank()) Text(subtitle, style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 2, overflow = TextOverflow.Ellipsis)
-            Text("${summary.requestCount} 次请求 · 已知 Token ${compactCount(summary.totalTokens)}", style = MaterialTheme.typography.bodyMedium)
-            Text("${summary.successCount} 次成功 · 平均 ${summary.averageDurationMs?.let(::formatRequestDuration) ?: "—"}",
+            Text(strings.getString(R.string.ui_requests_known_tokens, summary.requestCount, compactCount(summary.totalTokens)), style = MaterialTheme.typography.bodyMedium)
+            Text(strings.getString(R.string.ui_success_average, summary.successCount, summary.averageDurationMs?.let(::formatRequestDuration) ?: "—"),
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
@@ -100,6 +104,7 @@ internal fun StatisticsBreakdownCard(title: String, subtitle: String?, summary: 
 
 @Composable
 internal fun StatisticsTrend(buckets: List<UsageTrendBucket>, range: UsageRange) {
+    val strings = LocalResources.current
     if (buckets.isEmpty()) return
     var tokens by rememberSaveable { mutableStateOf(false) }
     var selected by rememberSaveable(range, buckets.size) { mutableIntStateOf(buckets.indexOfLast { it.requestCount > 0 }.coerceAtLeast(0)) }
@@ -111,21 +116,21 @@ internal fun StatisticsTrend(buckets: List<UsageTrendBucket>, range: UsageRange)
     val secondary = MaterialTheme.colorScheme.primaryContainer
     val unknown = MaterialTheme.colorScheme.outline
     val baseline = MaterialTheme.colorScheme.outlineVariant
-    val label = if (tokens) "Token" else "请求"
-    val selectionText = "${trendPeriod(current, range)} · ${formatTokenCount(values[selectedIndex])} $label"
+    val label = if (tokens) "Token" else strings.getString(R.string.ui_requests)
+    val selectionText = "${trendPeriod(current, range)} · ${strings.tokenCount(values[selectedIndex])} ${label}"
     OutlinedCard(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Text("趋势", style = MaterialTheme.typography.titleMedium)
+            Text(strings.getString(R.string.ui_trend), style = MaterialTheme.typography.titleMedium)
             SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
-                listOf("请求", "Token").forEachIndexed { index, option ->
+                listOf(strings.getString(R.string.ui_requests), "Token").forEachIndexed { index, option ->
                     SegmentedButton(selected = tokens == (index == 1), onClick = { tokens = index == 1 },
                         shape = SegmentedButtonDefaults.itemShape(index, 2),
-                        modifier = Modifier.semantics { contentDescription = "趋势：$option" }) { Text(option) }
+                        modifier = Modifier.semantics { contentDescription = strings.getString(R.string.ui_trend_metric, option) }) { Text(option) }
                 }
             }
             Canvas(Modifier.fillMaxWidth().height(100.dp).pointerInput(buckets, tokens) {
                 detectTapGestures { point -> selected = (point.x / size.width * buckets.size).toInt().coerceIn(buckets.indices) }
-            }.semantics { contentDescription = "$label 趋势，${buckets.size} 个时间段。使用下方按钮逐项查看。" }) {
+            }.semantics { contentDescription = strings.getString(R.string.ui_trend_accessibility, label, buckets.size) }) {
                 val slot = size.width / buckets.size
                 val width = (slot * 0.65f).coerceAtMost(28.dp.toPx())
                 drawLine(baseline, Offset(0f, size.height), Offset(size.width, size.height), 1.dp.toPx())
@@ -146,16 +151,16 @@ internal fun StatisticsTrend(buckets: List<UsageTrendBucket>, range: UsageRange)
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(onClick = { selected = selectedIndex - 1 }, enabled = selectedIndex > 0) {
-                    Icon(Icons.AutoMirrored.Outlined.KeyboardArrowLeft, "上一个时间段")
+                    Icon(Icons.AutoMirrored.Outlined.KeyboardArrowLeft, strings.getString(R.string.ui_previous_period))
                 }
                 Text(selectionText, Modifier.weight(1f).semantics { contentDescription = selectionText },
                     style = MaterialTheme.typography.bodySmall)
                 IconButton(onClick = { selected = selectedIndex + 1 }, enabled = selectedIndex < buckets.lastIndex) {
-                    Icon(Icons.AutoMirrored.Outlined.KeyboardArrowRight, "下一个时间段")
+                    Icon(Icons.AutoMirrored.Outlined.KeyboardArrowRight, strings.getString(R.string.ui_next_period))
                 }
             }
             if (tokens && current.totalTokensReportedCount < current.requestCount) {
-                Text("${current.totalTokensReportedCount}/${current.requestCount} 条请求返回总 Token",
+                Text(strings.getString(R.string.ui_total_token_coverage, current.totalTokensReportedCount, current.requestCount),
                     style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
@@ -166,7 +171,7 @@ private fun compactCount(value: Long?): String = when {
     value == null -> "—"
     value >= 1_000_000_000 -> String.format(Locale.getDefault(), "%.1fB", value / 1_000_000_000.0)
     value >= 1_000_000 -> String.format(Locale.getDefault(), "%.1fM", value / 1_000_000.0)
-    else -> formatTokenCount(value)
+    else -> NumberFormat.getIntegerInstance().format(value)
 }
 
 private fun trendPeriod(bucket: UsageTrendBucket, range: UsageRange): String {
