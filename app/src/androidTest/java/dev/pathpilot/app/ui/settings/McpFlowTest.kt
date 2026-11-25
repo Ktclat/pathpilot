@@ -15,7 +15,6 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextReplacement
 import androidx.test.core.app.ActivityScenario
-import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import dev.pathpilot.app.MainActivity
@@ -92,7 +91,7 @@ class McpFlowTest {
         compose.onNodeWithText("MCP URL").performTextReplacement(upstream.url)
         compose.onNodeWithText("Bearer").performScrollTo().performClick()
         compose.onNodeWithText("Token").performScrollTo().performTextReplacement(upstream.token)
-        closeSoftKeyboard()
+        closeSettingsKeyboard()
         compose.captureSettingsScreenshot("09-mcp-editor")
         compose.onNodeWithText("保存").performScrollTo().performClick()
         compose.waitUntil(30_000) { store.mcp.value.connections.size == 1 }

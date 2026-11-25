@@ -1,7 +1,6 @@
 package dev.pathpilot.app.ui.settings
 
 import android.accessibilityservice.AccessibilityService
-import androidx.test.espresso.Espresso.closeSoftKeyboard
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.*
@@ -88,7 +87,7 @@ class SettingsFlowTest {
         compose.onNodeWithText("导出备份").performClick()
         compose.onNodeWithText("密码").performTextReplacement("offline-picker-password")
         compose.onNodeWithText("确认密码").performTextReplacement("offline-picker-password")
-        closeSoftKeyboard()
+        closeSettingsKeyboard()
         compose.onNodeWithText("继续").performClick()
         val automation = InstrumentationRegistry.getInstrumentation().uiAutomation
         compose.waitUntil(60_000) {

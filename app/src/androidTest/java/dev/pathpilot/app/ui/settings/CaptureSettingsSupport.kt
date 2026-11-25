@@ -5,7 +5,11 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.os.LocaleList
 import androidx.compose.ui.test.junit4.ComposeTestRule
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import androidx.test.runner.lifecycle.Stage
 import dev.pathpilot.app.runtime.AppStore
 import dev.pathpilot.app.settings.AppLanguage
 import dev.pathpilot.app.settings.AppPreferences
@@ -43,4 +47,13 @@ internal fun ComposeTestRule.captureSettingsScreenshot(name: String) {
         check(bitmap.compress(Bitmap.CompressFormat.PNG, 100, output))
     }
     bitmap.recycle()
+}
+
+internal fun closeSettingsKeyboard() {
+    val instrumentation = InstrumentationRegistry.getInstrumentation()
+    instrumentation.runOnMainSync {
+        val activity = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED).single()
+        WindowCompat.getInsetsController(activity.window, activity.window.decorView).hide(WindowInsetsCompat.Type.ime())
+    }
+    instrumentation.waitForIdleSync()
 }
