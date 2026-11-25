@@ -56,8 +56,13 @@ fun ProviderEditor(
     onSave: (ProviderConfig, List<String>) -> Unit,
     onDelete: (ProviderConfig) -> Unit,
     proxy: OutboundProxyConfig = OutboundProxyConfig(),
+    codexSignedIn: Boolean = false,
+    resolveCodexCredentials: ((ProviderConfig) -> dev.pathpilot.core.CodexCredentials)? = null,
+    onLogin: () -> Unit = {},
+    fetchModelsOnOpen: Boolean = false,
+    onModelsFetchStarted: () -> Unit = {},
+    model: ProviderEditorViewModel = viewModel(),
 ) {
-    val model: ProviderEditorViewModel = viewModel()
     val state by model.state.collectAsStateWithLifecycle()
     val activity = LocalContext.current.activity()
     val scroll = rememberScrollState()
@@ -65,6 +70,13 @@ fun ProviderEditor(
     val focus = LocalFocusManager.current
     val fields = remember { EditorFieldTargets() }
     LaunchedEffect(existing?.id, proxy) { model.begin(existing, proxy) }
+    LaunchedEffect(existing?.id, state.editing?.id, state.active, fetchModelsOnOpen, codexSignedIn) {
+        if (fetchModelsOnOpen && codexSignedIn && existing != null && state.active && state.editing?.id == existing.id) {
+            model.resetCodexModels()
+            model.probe(resolveCodexCredentials)
+            onModelsFetchStarted()
+        }
+    }
     // Root removes the editor after a successful save. Preserve the activity-scoped draft only
     // during configuration recreation; normal dismiss/save must release all in-memory keys.
     DisposableEffect(model, activity) {
@@ -106,7 +118,7 @@ fun ProviderEditor(
     }
     fun probe() {
         focus.clearFocus()
-        model.probe()
+        model.probe(resolveCodexCredentials)
         val draft = model.state.value.draft
         val validation = ProviderSetup.validate(draft.name, draft.baseUrl, draft.apiKey, model.state.value.kind)
         val target = if (validation.keyError != null) fields.key else if (validation.urlError != null) fields.url else null
@@ -172,8 +184,8 @@ fun ProviderEditor(
                             }
                         } else {
                             FormValidationSummary(state)
-                            ProviderFields(state, saving, model, fields)
-                            ModelSelection(state, saving, model, fields.models, onProbe = ::probe)
+                            ProviderFields(state, saving, model, fields, codexSignedIn, onLogin)
+                            ModelSelection(state, saving, model, fields.models, codexSignedIn, onProbe = ::probe)
                             if (existing != null) {
                                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                                 TextButton(enabled = !saving, onClick = { model.confirmDelete(true) },
@@ -238,7 +250,9 @@ fun ProviderEditor(
 }
 
 @OptIn(ExperimentalFoundationApi::class)
-@Composable private fun ProviderFields(state: ProviderEditorState, saving: Boolean, model: ProviderEditorViewModel, fields: EditorFieldTargets) {
+@Composable private fun ProviderFields(state: ProviderEditorState, saving: Boolean, model: ProviderEditorViewModel,
+    fields: EditorFieldTargets, codexSignedIn: Boolean, onLogin: () -> Unit,
+) {
     val draft = state.draft
     val validation = ProviderSetup.validate(draft.name, draft.baseUrl, draft.apiKey, state.kind)
     val nameError = validation.nameError.takeIf { draft.showErrors }
@@ -254,8 +268,13 @@ fun ProviderEditor(
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
         )
         if (state.kind == ProviderKind.CODEX) {
-            if (state.editing == null) Text("保存后登录 ChatGPT 订阅。", style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (state.editing != null) Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Text(if (codexSignedIn) "已登录" else "未登录", Modifier.weight(1f),
+                    style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                TextButton(enabled = !saving && state.draft.probePhase != ProbePhase.RUNNING, onClick = onLogin) {
+                    Text(if (codexSignedIn) "重新登录" else "登录")
+                }
+            }
         } else {
             OutlinedTextField(
                 value = draft.apiKey, onValueChange = model::setKey, enabled = !saving,
@@ -286,22 +305,25 @@ fun ProviderEditor(
 }
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
-@Composable private fun ModelSelection(state: ProviderEditorState, saving: Boolean, model: ProviderEditorViewModel, field: EditorFieldTarget, onProbe: () -> Unit) {
+@Composable private fun ModelSelection(state: ProviderEditorState, saving: Boolean, model: ProviderEditorViewModel,
+    field: EditorFieldTarget, codexSignedIn: Boolean, onProbe: () -> Unit,
+) {
     val draft = state.draft
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Text(if (state.editing == null) "模型路由" else "添加模型路由", Modifier.weight(1f),
                 style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
-            if (state.kind != ProviderKind.CODEX) {
-                if (draft.probePhase == ProbePhase.RUNNING) TextButton(enabled = !saving, onClick = model::cancelProbe) {
-                    CircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp)
-                    Spacer(Modifier.width(8.dp)); Text("取消获取")
-                } else TextButton(enabled = !saving, onClick = onProbe) {
-                    Icon(PathPilotIcons.Refresh, null, Modifier.size(18.dp)); Spacer(Modifier.width(6.dp)); Text("获取模型")
-                }
+            if (draft.probePhase == ProbePhase.RUNNING) TextButton(enabled = !saving, onClick = model::cancelProbe) {
+                CircularProgressIndicator(Modifier.size(16.dp), strokeWidth = 2.dp)
+                Spacer(Modifier.width(8.dp)); Text("取消获取")
+            } else TextButton(enabled = !saving && (state.kind != ProviderKind.CODEX || (state.editing != null && codexSignedIn)), onClick = onProbe) {
+                Icon(PathPilotIcons.Refresh, null, Modifier.size(18.dp)); Spacer(Modifier.width(6.dp)); Text("获取模型")
             }
         }
-        if (draft.probePhase == ProbePhase.SUCCESS) Text("已获取 ${draft.discoveredModels.size} 个模型",
+        if (state.kind == ProviderKind.CODEX && !codexSignedIn) Text(
+            if (state.editing == null) "保存并登录后可获取模型" else "登录后可获取模型",
+            style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        if (draft.probePhase == ProbePhase.SUCCESS) Text(if (draft.discoveredModels.isEmpty()) "未返回可选模型，可手动填写" else "已获取 ${draft.discoveredModels.size} 个模型",
             style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         if (draft.probePhase == ProbePhase.FAILED) Text(draft.probeError.orEmpty(),
             style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
@@ -320,7 +342,7 @@ fun ProviderEditor(
         if (draft.discoveredModels.isNotEmpty()) {
             if (draft.probePhase != ProbePhase.SUCCESS && draft.probePhase != ProbePhase.RUNNING) Text("上次获取的结果",
                 style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            if (draft.discoveredModels.size > 8) OutlinedTextField(
+            if (draft.discoveredModels.size > 8 || draft.modelFilter.isNotBlank()) OutlinedTextField(
                 draft.modelFilter, model::setModelFilter, enabled = !saving, modifier = Modifier.fillMaxWidth(),
                 label = { Text("筛选模型") }, singleLine = true, keyboardOptions = KeyboardOptions(autoCorrectEnabled = false),
             )

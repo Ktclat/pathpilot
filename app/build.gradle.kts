@@ -21,8 +21,9 @@ android {
         applicationId = "dev.pathpilot.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 6
-        versionName = "0.1.5"
+        versionCode = 7
+        versionName = "0.1.6"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk { abiFilters += if (uiCapture) "x86_64" else "arm64-v8a" }
     }
     buildTypes {
@@ -56,4 +57,10 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2026.09.00"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
+    if (uiCapture) debugImplementation("androidx.compose.ui:ui-test-manifest")
 }

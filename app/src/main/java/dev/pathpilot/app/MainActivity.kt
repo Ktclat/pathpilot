@@ -91,6 +91,7 @@ class MainActivity : ComponentActivity() {
     val sessions by store.authenticatedCodexProviders.collectAsStateWithLifecycle()
     var tab by rememberSaveable { mutableIntStateOf(0) }
     var providerEditorId by rememberSaveable { mutableStateOf<String?>(null) }
+    var fetchModelsOnOpen by rememberSaveable { mutableStateOf(false) }
     var addProvider by rememberSaveable { mutableStateOf(false) }
     var routeEditorAlias by rememberSaveable { mutableStateOf<String?>(null) }
     var addRoute by rememberSaveable { mutableStateOf(false) }
@@ -168,9 +169,10 @@ class MainActivity : ComponentActivity() {
                     onSharingChange = ::setSharing, onProviders = { tab = 1; if (config.providers.isEmpty()) addProvider = true }, onRoutes = { tab = 2; if (config.routes.isEmpty()) newRoute() },
                     onCopy = { label, value -> copy(context, label, value); notify("已复制") })
                 1 -> ProvidersScreen(config, sessions, saving,
-                    onAdd = { addProvider = true }, onEdit = { providerEditorId = it.id },
+                    onAdd = { fetchModelsOnOpen = false; addProvider = true }, onEdit = { fetchModelsOnOpen = false; providerEditorId = it.id },
                     onToggle = { provider, enabled -> update { c -> c.copy(providers = c.providers.map { if (it.id == provider.id) it.copy(enabled = enabled) else it }) } },
-                    onLogin = { codexLoginProviderId = it.id }, onRoute = { newRoute(it.id) })
+                    onLogin = { codexLoginProviderId = it.id }, onRoute = { newRoute(it.id) },
+                    onModels = { providerEditorId = it.id; fetchModelsOnOpen = true })
                 2 -> RoutesScreen(config, saving, onAdd = { newRoute() }, onEdit = { routeEditorAlias = it.alias },
                     onToggle = { route, enabled -> update { c -> c.copy(routes = c.routes.map { if (it.alias == route.alias) it.copy(enabled = enabled) else it }) } })
                 3 -> SettingsScreen(config, runtime.running || runtime.starting || runtime.stopping || notificationPending, saving,
@@ -182,16 +184,19 @@ class MainActivity : ComponentActivity() {
     }
     val providerEditor = config.providers.find { it.id == providerEditorId }
     if (addProvider || providerEditor != null) ProviderEditor(existing = providerEditor, saving = saving, proxy = config.outboundProxy,
-        onDismiss = { if (!saving) { addProvider = false; providerEditorId = null } },
+        codexSignedIn = providerEditor?.id in sessions, resolveCodexCredentials = store::resolveCodexCredentials,
+        onLogin = { codexLoginProviderId = providerEditor?.id }, fetchModelsOnOpen = fetchModelsOnOpen,
+        onModelsFetchStarted = { fetchModelsOnOpen = false },
+        onDismiss = { if (!saving) { addProvider = false; providerEditorId = null; fetchModelsOnOpen = false } },
         onSave = { provider, models ->
             update(onSuccess = {
-                addProvider = false; providerEditorId = null
+                addProvider = false; providerEditorId = null; fetchModelsOnOpen = false
                 tab = 1
                 if (provider.kind == ProviderKind.CODEX && provider.id !in store.authenticatedCodexProviders.value) codexLoginProviderId = provider.id
                 else notify(if (models.isEmpty()) "已保存" else "供应商与路由已保存")
             }) { ProviderRoutes.addSelected(it, provider, models) }
         },
-        onDelete = { provider -> update(onSuccess = { providerEditorId = null }) { c ->
+        onDelete = { provider -> update(onSuccess = { providerEditorId = null; fetchModelsOnOpen = false }) { c ->
             c.copy(providers = c.providers.filterNot { it.id == provider.id }, routes = c.routes.filterNot { it.providerId == provider.id })
         } },
     )
@@ -204,7 +209,12 @@ class MainActivity : ComponentActivity() {
         onDelete = { route -> update(onSuccess = { routeEditorAlias = null }) { c -> c.copy(routes = c.routes.filterNot { it.alias == route.alias }) } },
     )
     config.providers.find { it.id == codexLoginProviderId }?.let { provider ->
-        CodexLoginDialog(provider, store, onDismiss = { codexLoginProviderId = null }, onSuccess = { codexLoginProviderId = null; notify("已登录") })
+        CodexLoginDialog(provider, store, onDismiss = { codexLoginProviderId = null }, onSuccess = {
+            codexLoginProviderId = null
+            providerEditorId = provider.id
+            fetchModelsOnOpen = true
+            tab = 1
+        })
     }
     saveError?.let { message -> AlertDialog(onDismissRequest = { saveError = null }, title = { Text("未能保存") },
         text = { Text(message) }, confirmButton = { TextButton(onClick = { saveError = null }) { Text("返回编辑") } }) }

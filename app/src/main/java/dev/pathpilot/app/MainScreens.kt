@@ -145,6 +145,7 @@ import kotlinx.coroutines.withContext
 @Composable internal fun ProvidersScreen(config: RouterConfig, sessions: Set<String>, saving: Boolean,
     onAdd: () -> Unit, onEdit: (ProviderConfig) -> Unit, onToggle: (ProviderConfig, Boolean) -> Unit,
     onLogin: (ProviderConfig) -> Unit, onRoute: (ProviderConfig) -> Unit,
+    onModels: (ProviderConfig) -> Unit,
 ) {
     LazyColumn(contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         if (config.providers.isEmpty()) item { EmptyPage("还没有供应商", "添加供应商", saving, onAdd) }
@@ -164,6 +165,7 @@ import kotlinx.coroutines.withContext
                     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                         Text("${config.routes.count { it.providerId == provider.id }} 条路由", Modifier.weight(1f), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         if (provider.kind == ProviderKind.CODEX) TextButton(enabled = !saving, onClick = { onLogin(provider) }) { Text(if (provider.id in sessions) "重新登录" else "登录") }
+                        if (provider.kind == ProviderKind.CODEX && provider.id in sessions) TextButton(enabled = !saving, onClick = { onModels(provider) }) { Text("获取模型") }
                         TextButton(enabled = !saving, onClick = { onRoute(provider) }) { Text("添加路由") }
                     }
                 }

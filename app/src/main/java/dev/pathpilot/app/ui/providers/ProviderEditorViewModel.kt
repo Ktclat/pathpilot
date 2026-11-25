@@ -2,15 +2,19 @@ package dev.pathpilot.app.ui.providers
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.pathpilot.core.CodexCredentials
 import dev.pathpilot.core.ProviderConfig
 import dev.pathpilot.core.ProviderKind
 import dev.pathpilot.core.codex.CodexBackend
+import dev.pathpilot.core.codex.CodexAuthException
+import dev.pathpilot.core.codex.CodexModelsClient
 import dev.pathpilot.core.network.OutboundProxyConfig
 import dev.pathpilot.core.providers.ProviderModelsClient
 import dev.pathpilot.core.providers.ProviderProbeException
 import dev.pathpilot.core.providers.ProviderProbeResult
 import dev.pathpilot.core.providers.ProviderSetup
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -64,6 +68,11 @@ internal interface ProviderModelProbe {
     fun cancel()
 }
 
+internal interface CodexModelProbe {
+    suspend fun probe(credentials: CodexCredentials): ProviderProbeResult
+    fun cancel()
+}
+
 private class HttpProviderModelProbe(proxy: OutboundProxyConfig) : ProviderModelProbe {
     private val client = ProviderModelsClient(proxyProvider = { proxy })
     override suspend fun probe(baseUrl: String, apiKey: String): ProviderProbeResult =
@@ -71,15 +80,28 @@ private class HttpProviderModelProbe(proxy: OutboundProxyConfig) : ProviderModel
     override fun cancel() = client.cancel()
 }
 
+private class HttpCodexModelProbe(proxy: OutboundProxyConfig) : CodexModelProbe {
+    private val client = CodexModelsClient(proxyProvider = { proxy })
+    override suspend fun probe(credentials: CodexCredentials): ProviderProbeResult =
+        withContext(Dispatchers.IO) { client.probe(credentials.accessToken, credentials.accountId) }
+    override fun cancel() = client.cancel()
+}
+
 /** Activity-scoped, memory-only drafts. Each provider type owns an independent key and URL. */
 class ProviderEditorViewModel() : ViewModel() {
     private var probeFactory: (OutboundProxyConfig) -> ProviderModelProbe = { HttpProviderModelProbe(it) }
+    private var codexProbeFactory: (OutboundProxyConfig) -> CodexModelProbe = { HttpCodexModelProbe(it) }
+    private var credentialDispatcher: CoroutineDispatcher = Dispatchers.IO
     internal constructor(factory: () -> ProviderModelProbe) : this() { probeFactory = { factory() } }
     internal constructor(factory: (OutboundProxyConfig) -> ProviderModelProbe) : this() { probeFactory = factory }
+    internal constructor(codexFactory: (OutboundProxyConfig) -> CodexModelProbe, credentialDispatcher: CoroutineDispatcher) : this() {
+        codexProbeFactory = codexFactory
+        this.credentialDispatcher = credentialDispatcher
+    }
     private val mutableState = MutableStateFlow(ProviderEditorState())
     internal val state = mutableState.asStateFlow()
     private var baseline = emptyMap<ProviderKind, ProviderDraft>()
-    private var probeClient: ProviderModelProbe? = null
+    private var cancelProbeClient: (() -> Unit)? = null
     private var probeJob: Job? = null
     private var probeGeneration = 0L
     private var proxy = OutboundProxyConfig()
@@ -137,6 +159,14 @@ class ProviderEditorViewModel() : ViewModel() {
     }
     internal fun removeManual(model: String) = updateDraft { it.copy(manualModels = it.manualModels - model, modelError = null) }
 
+    /** Login can replace the account without changing the saved provider ID. */
+    internal fun resetCodexModels() {
+        if (!mutableState.value.active || mutableState.value.kind != ProviderKind.CODEX) return
+        stopProbe()
+        updateDraft { it.copy(discoveredModels = emptyList(), selectedDiscovered = emptySet(),
+            probePhase = ProbePhase.IDLE, probeError = null, modelFilter = "") }
+    }
+
     internal fun addManualModels(): Boolean {
         val draft = mutableState.value.draft
         if (draft.manualInput.isBlank()) return true
@@ -152,22 +182,36 @@ class ProviderEditorViewModel() : ViewModel() {
         return true
     }
 
-    internal fun probe() {
+    internal fun probe(resolveCodexCredentials: ((ProviderConfig) -> CodexCredentials)? = null) {
         val snapshot = mutableState.value
-        if (snapshot.kind == ProviderKind.CODEX) return
+        if (!snapshot.active) return
         val draft = snapshot.draft
         val validation = ProviderSetup.validate(draft.name, draft.baseUrl, draft.apiKey, snapshot.kind)
         updateDraft { it.copy(showErrors = true) }
         if (validation.urlError != null || validation.keyError != null) return
         stopProbe()
+        if (snapshot.kind == ProviderKind.CODEX && (snapshot.editing == null || resolveCodexCredentials == null)) {
+            updateDraft { it.copy(probePhase = ProbePhase.FAILED, probeError =
+                if (snapshot.editing == null) "保存并登录此供应商后获取模型" else "请先登录此 Codex 供应商") }
+            return
+        }
         val generation = probeGeneration
         val kind = snapshot.kind
-        val client = probeFactory(proxy)
-        probeClient = client
+        val client = if (kind == ProviderKind.CODEX) null else probeFactory(proxy)
+        val codexClient = if (kind == ProviderKind.CODEX) codexProbeFactory(proxy) else null
+        cancelProbeClient = { client?.cancel(); codexClient?.cancel() }
         updateDraft { it.copy(probePhase = ProbePhase.RUNNING, probeError = null) }
         probeJob = viewModelScope.launch {
+            var resolvingCodex = false
             try {
-                val result = client.probe(requireNotNull(validation.normalizedBaseUrl), draft.apiKey.trim())
+                val result = if (codexClient != null) {
+                    resolvingCodex = true
+                    val credentials = withContext(credentialDispatcher) {
+                        requireNotNull(resolveCodexCredentials)(requireNotNull(snapshot.editing))
+                    }
+                    resolvingCodex = false
+                    codexClient.probe(credentials)
+                } else requireNotNull(client).probe(requireNotNull(validation.normalizedBaseUrl), draft.apiKey.trim())
                 if (probeGeneration != generation || mutableState.value.kind != kind) return@launch
                 updateDraft {
                     it.copy(probePhase = ProbePhase.SUCCESS, discoveredModels = result.models,
@@ -181,10 +225,16 @@ class ProviderEditorViewModel() : ViewModel() {
                     // A retry against unchanged credentials must not erase the user's choices.
                     // Editing the URL/key already clears results before a different account is probed.
                     it.copy(probePhase = ProbePhase.FAILED,
-                        probeError = if (error is ProviderProbeException) error.userMessage else "连接测试未完成，请检查网络后重试。")
+                        probeError = when {
+                            error is ProviderProbeException -> error.userMessage
+                            error is CodexAuthException && error.httpStatus == 401 -> "Codex 登录已过期，请重新登录"
+                            resolvingCodex -> "无法读取或刷新 Codex 登录信息，请重试"
+                            kind == ProviderKind.CODEX -> "获取 Codex 模型失败，请重试"
+                            else -> "连接测试未完成，请检查网络后重试。"
+                        })
                 }
             } finally {
-                if (probeGeneration == generation) { probeClient = null; probeJob = null }
+                if (probeGeneration == generation) { cancelProbeClient = null; probeJob = null }
             }
         }
     }
@@ -228,8 +278,8 @@ class ProviderEditorViewModel() : ViewModel() {
 
     private fun stopProbe() {
         probeGeneration++
-        probeClient?.cancel()
-        probeClient = null
+        cancelProbeClient?.invoke()
+        cancelProbeClient = null
         probeJob?.cancel()
         probeJob = null
         if (mutableState.value.active) updateDraft {
