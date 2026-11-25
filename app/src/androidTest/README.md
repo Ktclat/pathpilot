@@ -30,7 +30,7 @@
 
 `dev.pathpilot.app.ui.statistics.StatisticsFlowTest` 挂载生产 `StatisticsPage`，使用标有「离线测试」的请求元数据。五项流程覆盖模型下钻、HTTP 200 中断详情、搜索/状态筛选与清空确认、未知 Token 和真实零用量的区别，以及供应商下钻保留日期范围。
 
-`dev.pathpilot.app.ui.statistics.StatisticsNavigationTest` 启动生产 `MainActivity`，验证五项底部导航、共享首页、独立统计空态和返回行为。大字体用例在真实系统 `font_scale=1.5`、320–360dp 宽度下验证导航文字无溢出，指标、趋势和长模型名称可通过滚动到达。该类只在独立 `.capture` 包写入离线请求元数据；每例结束清空对应测试数据库，不修改供应商或账号。
+`dev.pathpilot.app.ui.statistics.StatisticsNavigationTest` 启动生产 `MainActivity`，验证五项底部导航、共享首页、独立统计空态和返回行为。大字体用例在真实系统 `font_scale=1.5`、320–360dp 宽度下验证本机/局域网按钮等高、导航文字无溢出，以及指标、趋势和长模型名称可通过滚动到达。该类只在独立 `.capture` 包写入离线请求元数据；每例结束清空对应测试数据库，不修改供应商或账号。
 
 先构建并安装目标和测试 APK：
 
@@ -62,7 +62,17 @@ adb shell am instrument -w -r -e class \
   dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
 ```
 
-大字体用例在不符配置的普通测试运行中跳过；专门审查时必须核对其状态为通过，不能将跳过计为已验证。原始 `UiAutomation` 截图写入 `externalFilesDir/statistics-e2e/`，包括共享首页、统计概览、模型分组、请求和详情、空态，以及大字体指标/趋势/分组。截图无缩放或裁剪。
+大字体用例在不符配置的普通测试运行中跳过；专门审查时必须核对其状态为通过，不能将跳过计为已验证。原始 `UiAutomation` 截图写入 `externalFilesDir/statistics-e2e/`，包括共享首页、统计概览、模型分组、请求和详情、空态，以及大字体共享页/指标/趋势/分组。截图无缩放或裁剪。
+
+## 趋势状态恢复
+
+`dev.pathpilot.app.ui.statistics.StatisticsRestorationTest` 使用 `StateRestorationTester` 保存生产 `StatisticsTrend` 的末桶选择，在销毁旧 composition 时将六个时间桶缩为一个，再恢复保存状态。断言唯一时间桶的请求读数、前后按钮禁用和 Token 切换，覆盖保存的索引大于新历史长度的恢复场景。只用离线时间桶，不访问 AppStore 或网络。
+
+```sh
+adb shell am instrument -w -r -e class \
+  'dev.pathpilot.app.ui.statistics.StatisticsRestorationTest#restoredSelectionHandlesFewerTrendBuckets' \
+  dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
+```
 
 ## 持久历史
 

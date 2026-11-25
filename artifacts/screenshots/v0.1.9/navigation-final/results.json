@@ -1,0 +1,70 @@
+{
+  "target_sha256": "3f2902abc541032ed8d2685a51d73de51424ba6aa25ed777f5cd31177b1cb03e",
+  "test_sha256": "0c70d7d2c980d86352ccc7f60e0279e795b12b9a62e5c596ef519b1bd2fb656b",
+  "host_started_at": "2026-11-25T05:47:38.181758+00:00",
+  "device_started_epoch": 1795585656,
+  "mode": "navigation",
+  "attempt": "1",
+  "command": [
+    "/workspace/toolchains/android-sdk/platform-tools/adb",
+    "-s",
+    "emulator-5554",
+    "shell",
+    "am",
+    "instrument",
+    "-w",
+    "-r",
+    "-e",
+    "class",
+    "dev.pathpilot.app.ui.statistics.StatisticsNavigationTest#statisticsIsAStandaloneDestinationAndSharingStaysFocused",
+    "dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner"
+  ],
+  "timed_out": false,
+  "device": {
+    "font_scale": "1.0",
+    "display_size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "api": "35"
+  },
+  "scope": "Offline metadata; production StatisticsPage flow and MainActivity navigation. No external model request or real account.",
+  "exit_code": 0,
+  "host_finished_at": "2026-11-25T05:49:10.586348+00:00",
+  "junit_summary": [
+    "OK (1 test)"
+  ],
+  "test_results": [
+    {
+      "name": "statisticsIsAStandaloneDestinationAndSharingStaysFocused",
+      "status_code": 0
+    }
+  ],
+  "elapsed_seconds": 79.968,
+  "passed": true,
+  "screenshots": {
+    "00-sharing-home.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/00-sharing-home.png",
+      "device_mtime_epoch": 1795585695,
+      "size": 73170,
+      "created_this_run": true,
+      "sha256": "d5cadc97315599fb2f8e98d2b024ee9feaf585863f5400334a981065eb313d9f",
+      "path": "artifacts/screenshots/v0.1.9/navigation-final/00-sharing-home.png"
+    },
+    "05-statistics-empty.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/05-statistics-empty.png",
+      "device_mtime_epoch": 1795585711,
+      "size": 64857,
+      "created_this_run": true,
+      "sha256": "01c364e24c80531c0237d5b52d4b1d97fc385db2b9f4ff940fce645061e7cb0b",
+      "path": "artifacts/screenshots/v0.1.9/navigation-final/05-statistics-empty.png"
+    },
+    "09-statistics-main.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/09-statistics-main.png",
+      "device_mtime_epoch": 1795585737,
+      "size": 81415,
+      "created_this_run": true,
+      "sha256": "d71556766a12b1f5069a70baeade0fa78264e518b460be6a8723e516fcc80b9a",
+      "path": "artifacts/screenshots/v0.1.9/navigation-final/09-statistics-main.png"
+    }
+  },
+  "all_screenshots_created_this_run": true
+}

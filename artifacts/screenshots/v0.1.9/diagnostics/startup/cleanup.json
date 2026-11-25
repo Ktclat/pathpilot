@@ -1,0 +1,102 @@
+{
+  "started_at": "2026-11-25T05:55:53.197218+00:00",
+  "actions": [
+    {
+      "command": [
+        "shell",
+        "wm",
+        "density",
+        "reset"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "shell",
+        "settings",
+        "put",
+        "system",
+        "font_scale",
+        "1.0"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "shell",
+        "wm",
+        "density"
+      ],
+      "exit_code": 0,
+      "stdout": "Physical density: 320",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "shell",
+        "settings",
+        "get",
+        "system",
+        "font_scale"
+      ],
+      "exit_code": 0,
+      "stdout": "1.0",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "shell",
+        "am",
+        "force-stop",
+        "dev.pathpilot.app.capture"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "shell",
+        "am",
+        "force-stop",
+        "dev.pathpilot.app.capture.test"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "shell",
+        "pm",
+        "clear",
+        "dev.pathpilot.app.capture"
+      ],
+      "exit_code": 0,
+      "stdout": "Success",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "shell",
+        "pm",
+        "clear",
+        "dev.pathpilot.app.capture.test"
+      ],
+      "exit_code": 0,
+      "stdout": "Success",
+      "stderr": ""
+    }
+  ],
+  "emulator_pid": 37004,
+  "emulator_command": "/workspace/toolchains/android-sdk/emulator/qemu/linux-x86_64/qemu-system-x86_64-headless -avd pathpilot-api35 -no-window -no-audio -no-boot-anim -no-snapshot -no-metrics -gpu swiftshader_indirect -accel off -cores 2 -memory 3072 -port 5554 ",
+  "stop_signal": "SIGTERM",
+  "process_state": "Z",
+  "adb_devices": "List of devices attached",
+  "stopped": true,
+  "finished_at": "2026-11-25T05:56:05.351955+00:00"
+}

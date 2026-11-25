@@ -1,0 +1,59 @@
+{
+  "target_sha256": "6470512915fe7b604c1e86e014815657b4fa257311020dece074b6a848cb59f7",
+  "test_sha256": "dddb9afec36d9416647034e3353441b9e292729069148516560b713f7a20b838",
+  "host_started_at": "2026-11-25T05:38:02.811361+00:00",
+  "device_started_epoch": 1795585081,
+  "mode": "large",
+  "attempt": "1",
+  "command": [
+    "/workspace/toolchains/android-sdk/platform-tools/adb",
+    "-s",
+    "emulator-5554",
+    "shell",
+    "am",
+    "instrument",
+    "-w",
+    "-r",
+    "-e",
+    "class",
+    "dev.pathpilot.app.ui.statistics.StatisticsNavigationTest#largeSystemFontKeepsNavigationMetricsAndTrendReachable",
+    "dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner"
+  ],
+  "timed_out": false,
+  "device": {
+    "font_scale": "1.5",
+    "display_size": "Physical size: 720x1280",
+    "density": "Physical density: 320\nOverride density: 360",
+    "api": "35"
+  },
+  "scope": "Offline metadata; production StatisticsPage flow and MainActivity navigation. No external model request or real account.",
+  "exit_code": 0,
+  "host_finished_at": "2026-11-25T05:39:21.298484+00:00",
+  "junit_summary": [
+    "FAILURES!!!",
+    "Tests run: 1,  Failures: 1"
+  ],
+  "test_results": [
+    {
+      "name": "largeSystemFontKeepsNavigationMetricsAndTrendReachable",
+      "status_code": -2
+    }
+  ],
+  "elapsed_seconds": 52.588,
+  "passed": false,
+  "screenshots": {
+    "06-statistics-large-font.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/06-statistics-large-font.png",
+      "missing": true
+    },
+    "07-trend-large-font.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/07-trend-large-font.png",
+      "missing": true
+    },
+    "08-models-large-font.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/08-models-large-font.png",
+      "missing": true
+    }
+  },
+  "all_screenshots_created_this_run": false
+}

@@ -1,0 +1,106 @@
+[
+  {
+    "command": [
+      "shell",
+      "input",
+      "keyevent",
+      "82"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "finished": "2026-11-25T05:26:25.885673+00:00"
+  },
+  {
+    "command": [
+      "install",
+      "-r",
+      "/workspace/pathpilot/artifacts/PathPilot-0.1.9-ui-capture.apk"
+    ],
+    "exit": 0,
+    "stdout": "Performing Streamed Install\nSuccess\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:27:14.226025+00:00"
+  },
+  {
+    "command": [
+      "install",
+      "-r",
+      "/workspace/pathpilot/artifacts/PathPilot-0.1.9-ui-tests.apk"
+    ],
+    "exit": 0,
+    "stdout": "Performing Streamed Install\nSuccess\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:27:32.867146+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "pm",
+      "clear",
+      "dev.pathpilot.app.capture"
+    ],
+    "exit": 0,
+    "stdout": "Success\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:27:36.466920+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "pm",
+      "clear",
+      "dev.pathpilot.app.capture.test"
+    ],
+    "exit": 0,
+    "stdout": "Success\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:27:38.909937+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "package",
+      "compile",
+      "-m",
+      "speed",
+      "-f",
+      "dev.pathpilot.app.capture"
+    ],
+    "exit": 0,
+    "stdout": "Success\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:29:16.341538+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "package",
+      "compile",
+      "-m",
+      "speed",
+      "-f",
+      "dev.pathpilot.app.capture.test"
+    ],
+    "exit": 0,
+    "stdout": "Success\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:29:33.446829+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "am",
+      "start",
+      "-W",
+      "-n",
+      "dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity"
+    ],
+    "exit": 0,
+    "stdout": "Starting: Intent { cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity }\nStatus: ok\nLaunchState: COLD\nActivity: dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity\nTotalTime: 15636\nWaitTime: 15826\nComplete\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:29:51.645665+00:00"
+  }
+]

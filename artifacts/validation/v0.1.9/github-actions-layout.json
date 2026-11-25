@@ -1,0 +1,27 @@
+{
+  "id": "45555631259",
+  "state": {
+    "status": "WORKFLOW_RUN_STATUS_COMPLETED",
+    "conclusion": "WORKFLOW_RUN_CONCLUSION_SUCCESS"
+  },
+  "createdAt": {
+    "timestamp": "2026-11-25T05:44:15Z",
+    "isToday": true,
+    "isCurrentYear": true
+  },
+  "runUrl": "https://github.com/Ktclat/pathpilot/actions/runs/45555631259",
+  "description": {
+    "primaryText": "Commit",
+    "linkText": "5fcc65c",
+    "linkUrl": "/Ktclat/pathpilot/commit/5fcc65cfad97cc942996d4a06895dd96bb5b1740",
+    "action": "pushed",
+    "showActor": true,
+    "actorName": "Ktclat",
+    "actorUrl": "/Ktclat",
+    "actorType": "WORKFLOW_RUN_ACTOR_TYPE_USER",
+    "actorHovercard": {
+      "type": "WORKFLOW_RUN_HOVERCARD_TYPE_USER",
+      "url": "/users/Ktclat/hovercard"
+    }
+  }
+}

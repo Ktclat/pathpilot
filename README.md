@@ -52,7 +52,7 @@ source /workspace/toolchains/pathpilot-env.sh
 
 正常安装包允许系统截图，密钥默认隐藏。云端 x86_64 模拟器使用 `./gradlew -PuiCapture=true :app:assembleDebug` 构建独立 `dev.pathpilot.app.capture` 测试包；数据与正常 ARM64 包隔离，该开关禁止 Release 任务。常规构建只输出 ARM64。
 
-截图来自模拟器实际运行界面：[0.1.8 用量与请求截图](artifacts/screenshots/v0.1.8/README.md) · [0.1.7 分组模型截图](artifacts/screenshots/v0.1.7/README.md) · [0.1.6 Codex 离线联调截图](artifacts/screenshots/v0.1.6/README.md) · [0.1.5 截图](artifacts/screenshots/v0.1.5/README.md) · [0.1.4 截图](artifacts/screenshots/v0.1.4/README.md) · [0.1.3 截图](artifacts/screenshots/v0.1.3/README.md) · [0.1.2 截图](artifacts/screenshots/v0.1.2/README.md) · [0.1.1 截图](artifacts/screenshots/v0.1.1/README.md)。运行条件、结果与限制见 [验证记录](docs/validation.md)。
+截图来自模拟器实际运行界面：[0.1.9 统计页与大字体截图](artifacts/screenshots/v0.1.9/README.md) · [0.1.8 用量与请求截图](artifacts/screenshots/v0.1.8/README.md) · [0.1.7 分组模型截图](artifacts/screenshots/v0.1.7/README.md) · [0.1.6 Codex 离线联调截图](artifacts/screenshots/v0.1.6/README.md) · [0.1.5 截图](artifacts/screenshots/v0.1.5/README.md) · [0.1.4 截图](artifacts/screenshots/v0.1.4/README.md) · [0.1.3 截图](artifacts/screenshots/v0.1.3/README.md) · [0.1.2 截图](artifacts/screenshots/v0.1.2/README.md) · [0.1.1 截图](artifacts/screenshots/v0.1.1/README.md)。运行条件、结果与限制见 [验证记录](docs/validation.md)。
 
 测试使用本机 MockWebServer 和真实 HTTP 路由监听，覆盖鉴权、路由、SSE、订阅请求适配及 OAuth 刷新。它们不会访问付费推理服务。实际测试结果与尚未完成的设备/账号验证见 [验证记录](docs/validation.md)。
 

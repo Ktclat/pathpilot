@@ -1,0 +1,122 @@
+{
+  "target_sha256": "6470512915fe7b604c1e86e014815657b4fa257311020dece074b6a848cb59f7",
+  "test_sha256": "dddb9afec36d9416647034e3353441b9e292729069148516560b713f7a20b838",
+  "host_started_at": "2026-11-25T05:31:19.218846+00:00",
+  "device_started_epoch": 1795584677,
+  "mode": "normal",
+  "attempt": "1",
+  "command": [
+    "/workspace/toolchains/android-sdk/platform-tools/adb",
+    "-s",
+    "emulator-5554",
+    "shell",
+    "am",
+    "instrument",
+    "-w",
+    "-r",
+    "-e",
+    "class",
+    "dev.pathpilot.app.ui.statistics.StatisticsFlowTest,dev.pathpilot.app.ui.statistics.StatisticsNavigationTest#statisticsIsAStandaloneDestinationAndSharingStaysFocused",
+    "dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner"
+  ],
+  "timed_out": false,
+  "device": {
+    "font_scale": "1.0",
+    "display_size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "api": "35"
+  },
+  "scope": "Offline metadata; production StatisticsPage flow and MainActivity navigation. No external model request or real account.",
+  "exit_code": 0,
+  "host_finished_at": "2026-11-25T05:37:24.014937+00:00",
+  "junit_summary": [
+    "OK (6 tests)"
+  ],
+  "test_results": [
+    {
+      "name": "providerDrilldownKeepsTheChosenDateRange",
+      "status_code": 0
+    },
+    {
+      "name": "modelUsageOpensOnlyThatModelsRequests",
+      "status_code": 0
+    },
+    {
+      "name": "missingTokenAndReportedZeroStayDifferent",
+      "status_code": 0
+    },
+    {
+      "name": "interruptedHttp200ShowsOutcomeAndUnknownUsageInDetails",
+      "status_code": 0
+    },
+    {
+      "name": "statusAndSearchFilterRequestsAndClearRequiresConfirmation",
+      "status_code": 0
+    },
+    {
+      "name": "statisticsIsAStandaloneDestinationAndSharingStaysFocused",
+      "status_code": 0
+    }
+  ],
+  "elapsed_seconds": 325.942,
+  "passed": true,
+  "screenshots": {
+    "00-sharing-home.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/00-sharing-home.png",
+      "device_mtime_epoch": 1795585023,
+      "size": 76382,
+      "created_this_run": true,
+      "sha256": "cbe24f3ca19ed9fc10c55f1428291196d9bee45f55e185cb69614fdd90b8f04d",
+      "path": "artifacts/screenshots/v0.1.9/normal-attempt1/00-sharing-home.png"
+    },
+    "01-statistics-overview.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/01-statistics-overview.png",
+      "device_mtime_epoch": 1795584856,
+      "size": 71435,
+      "created_this_run": true,
+      "sha256": "d4b7ddf361f94dab7734d9e530b2d31062063897dbc3d69f5921d2dd52b72842",
+      "path": "artifacts/screenshots/v0.1.9/normal-attempt1/01-statistics-overview.png"
+    },
+    "02-model-breakdown.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/02-model-breakdown.png",
+      "device_mtime_epoch": 1795584874,
+      "size": 68362,
+      "created_this_run": true,
+      "sha256": "3390f45e28c47e5b9dc0bb13140d79552dc9daa64c22429aa9447bdc4a00dbea",
+      "path": "artifacts/screenshots/v0.1.9/normal-attempt1/02-model-breakdown.png"
+    },
+    "03-recent-requests.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/03-recent-requests.png",
+      "device_mtime_epoch": 1795584937,
+      "size": 77248,
+      "created_this_run": true,
+      "sha256": "6532ba25fbd7d18f55b9d6bafc54337c8fc2d9770d6a55a6dde7389ac72c2636",
+      "path": "artifacts/screenshots/v0.1.9/normal-attempt1/03-recent-requests.png"
+    },
+    "04-request-details.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/04-request-details.png",
+      "device_mtime_epoch": 1795584949,
+      "size": 87137,
+      "created_this_run": true,
+      "sha256": "152cf06ef3f3aaf4848a017176c920ca12203ca0575951cf0a51761ef8c30ff3",
+      "path": "artifacts/screenshots/v0.1.9/normal-attempt1/04-request-details.png"
+    },
+    "05-statistics-empty.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/05-statistics-empty.png",
+      "device_mtime_epoch": 1795585027,
+      "size": 64737,
+      "created_this_run": true,
+      "sha256": "215a00b93152847311bff1c9e9fd7428f704bcec1bc454d44a098b511c4e222c",
+      "path": "artifacts/screenshots/v0.1.9/normal-attempt1/05-statistics-empty.png"
+    },
+    "09-statistics-main.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/09-statistics-main.png",
+      "device_mtime_epoch": 1795585037,
+      "size": 81246,
+      "created_this_run": true,
+      "sha256": "35fd8668ab3972772c4ea869d5015b731ace74dc0091741f07d87754f7f4ec0c",
+      "path": "artifacts/screenshots/v0.1.9/normal-attempt1/09-statistics-main.png"
+    }
+  },
+  "all_screenshots_created_this_run": true
+}

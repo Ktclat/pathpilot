@@ -1,0 +1,78 @@
+{
+  "target_sha256": "3f2902abc541032ed8d2685a51d73de51424ba6aa25ed777f5cd31177b1cb03e",
+  "test_sha256": "0c70d7d2c980d86352ccc7f60e0279e795b12b9a62e5c596ef519b1bd2fb656b",
+  "host_started_at": "2026-11-25T05:49:36.226349+00:00",
+  "device_started_epoch": 1795585774,
+  "mode": "large",
+  "attempt": "2",
+  "command": [
+    "/workspace/toolchains/android-sdk/platform-tools/adb",
+    "-s",
+    "emulator-5554",
+    "shell",
+    "am",
+    "instrument",
+    "-w",
+    "-r",
+    "-e",
+    "class",
+    "dev.pathpilot.app.ui.statistics.StatisticsNavigationTest#largeSystemFontKeepsNavigationMetricsAndTrendReachable",
+    "dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner"
+  ],
+  "timed_out": false,
+  "device": {
+    "font_scale": "1.5",
+    "display_size": "Physical size: 720x1280",
+    "density": "Physical density: 320\nOverride density: 360",
+    "api": "35"
+  },
+  "scope": "Offline metadata; production StatisticsPage flow and MainActivity navigation. No external model request or real account.",
+  "exit_code": 0,
+  "host_finished_at": "2026-11-25T05:52:13.117569+00:00",
+  "junit_summary": [
+    "OK (1 test)"
+  ],
+  "test_results": [
+    {
+      "name": "largeSystemFontKeepsNavigationMetricsAndTrendReachable",
+      "status_code": 0
+    }
+  ],
+  "elapsed_seconds": 110.171,
+  "passed": true,
+  "screenshots": {
+    "06-statistics-large-font.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/06-statistics-large-font.png",
+      "device_mtime_epoch": 1795585872,
+      "size": 73851,
+      "created_this_run": true,
+      "sha256": "bc1a5c6c42100dc5337f3d86a4a5e4b2965ffb336dc90b0a2b14aaf32f3d56df",
+      "path": "artifacts/screenshots/v0.1.9/large-attempt2/06-statistics-large-font.png"
+    },
+    "07-trend-large-font.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/07-trend-large-font.png",
+      "device_mtime_epoch": 1795585889,
+      "size": 92472,
+      "created_this_run": true,
+      "sha256": "698ee2f4dba983eed48cd04e0a2c5773fa81114fc0f8f3a9cbb5aefa2b279c36",
+      "path": "artifacts/screenshots/v0.1.9/large-attempt2/07-trend-large-font.png"
+    },
+    "08-models-large-font.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/08-models-large-font.png",
+      "device_mtime_epoch": 1795585922,
+      "size": 115850,
+      "created_this_run": true,
+      "sha256": "a6af586a5d47b27a968bb875e3e8ade5c9e076f381f64437151ef4c3e53a18a1",
+      "path": "artifacts/screenshots/v0.1.9/large-attempt2/08-models-large-font.png"
+    },
+    "10-sharing-large-font.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e/10-sharing-large-font.png",
+      "device_mtime_epoch": 1795585850,
+      "size": 91377,
+      "created_this_run": true,
+      "sha256": "bcd71a331522b9320c8f40a3f747682754dce494312369576cd0b2c90813d596",
+      "path": "artifacts/screenshots/v0.1.9/large-attempt2/10-sharing-large-font.png"
+    }
+  },
+  "all_screenshots_created_this_run": true
+}

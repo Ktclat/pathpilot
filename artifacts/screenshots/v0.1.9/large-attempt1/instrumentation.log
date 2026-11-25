@@ -1,0 +1,47 @@
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.statistics.StatisticsNavigationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+dev.pathpilot.app.ui.statistics.StatisticsNavigationTest:
+INSTRUMENTATION_STATUS: test=largeSystemFontKeepsNavigationMetricsAndTrendReachable
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.statistics.StatisticsNavigationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: Navigation label 共享 overflows horizontally
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at dev.pathpilot.app.ui.statistics.StatisticsNavigationTest.assertNavigationTextFits(StatisticsNavigationTest.kt:134)
+	at dev.pathpilot.app.ui.statistics.StatisticsNavigationTest.largeSystemFontKeepsNavigationMetricsAndTrendReachable(StatisticsNavigationTest.kt:113)
+
+INSTRUMENTATION_STATUS: stream=
+Error in largeSystemFontKeepsNavigationMetricsAndTrendReachable(dev.pathpilot.app.ui.statistics.StatisticsNavigationTest):
+java.lang.AssertionError: Navigation label 共享 overflows horizontally
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at dev.pathpilot.app.ui.statistics.StatisticsNavigationTest.assertNavigationTextFits(StatisticsNavigationTest.kt:134)
+	at dev.pathpilot.app.ui.statistics.StatisticsNavigationTest.largeSystemFontKeepsNavigationMetricsAndTrendReachable(StatisticsNavigationTest.kt:113)
+
+INSTRUMENTATION_STATUS: test=largeSystemFontKeepsNavigationMetricsAndTrendReachable
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 52.588
+There was 1 failure:
+1) largeSystemFontKeepsNavigationMetricsAndTrendReachable(dev.pathpilot.app.ui.statistics.StatisticsNavigationTest)
+java.lang.AssertionError: Navigation label 共享 overflows horizontally
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertFalse(Assert.java:65)
+	at dev.pathpilot.app.ui.statistics.StatisticsNavigationTest.assertNavigationTextFits(StatisticsNavigationTest.kt:134)
+	at dev.pathpilot.app.ui.statistics.StatisticsNavigationTest.largeSystemFontKeepsNavigationMetricsAndTrendReachable(StatisticsNavigationTest.kt:113)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

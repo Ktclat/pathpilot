@@ -1,0 +1,120 @@
+[
+  {
+    "command": [
+      "shell",
+      "wm",
+      "density",
+      "reset"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "finished": "2026-11-25T05:44:54.159599+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "settings",
+      "put",
+      "system",
+      "font_scale",
+      "1.0"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "finished": "2026-11-25T05:44:56.257104+00:00"
+  },
+  {
+    "command": [
+      "install",
+      "-r",
+      "/workspace/pathpilot/artifacts/PathPilot-0.1.9-ui-capture.apk"
+    ],
+    "exit": 0,
+    "stdout": "Performing Streamed Install\nSuccess\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:45:25.829705+00:00"
+  },
+  {
+    "command": [
+      "install",
+      "-r",
+      "/workspace/pathpilot/artifacts/PathPilot-0.1.9-ui-tests.apk"
+    ],
+    "exit": 0,
+    "stdout": "Performing Streamed Install\nSuccess\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:45:37.537433+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "pm",
+      "clear",
+      "dev.pathpilot.app.capture"
+    ],
+    "exit": 0,
+    "stdout": "Success\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:45:40.477455+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "pm",
+      "clear",
+      "dev.pathpilot.app.capture.test"
+    ],
+    "exit": 0,
+    "stdout": "Success\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:45:43.072021+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "package",
+      "compile",
+      "-m",
+      "speed",
+      "-f",
+      "dev.pathpilot.app.capture"
+    ],
+    "exit": 0,
+    "stdout": "Success\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:46:24.350618+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "package",
+      "compile",
+      "-m",
+      "speed",
+      "-f",
+      "dev.pathpilot.app.capture.test"
+    ],
+    "exit": 0,
+    "stdout": "Success\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:46:29.204490+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "am",
+      "start",
+      "-W",
+      "-n",
+      "dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity"
+    ],
+    "exit": 0,
+    "stdout": "Starting: Intent { cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity }\nStatus: ok\nLaunchState: COLD\nActivity: dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity\nTotalTime: 7799\nWaitTime: 7890\nComplete\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:46:37.689653+00:00"
+  }
+]

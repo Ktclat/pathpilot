@@ -1,0 +1,82 @@
+[
+  {
+    "command": [
+      "shell",
+      "wm",
+      "density",
+      "reset"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "finished": "2026-11-25T05:52:58.530716+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "settings",
+      "put",
+      "system",
+      "font_scale",
+      "1.0"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "finished": "2026-11-25T05:53:00.174501+00:00"
+  },
+  {
+    "command": [
+      "install",
+      "-r",
+      "/workspace/pathpilot/artifacts/PathPilot-0.1.9-ui-capture.apk"
+    ],
+    "exit": 0,
+    "stdout": "Performing Streamed Install\nSuccess\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:53:14.974859+00:00"
+  },
+  {
+    "command": [
+      "install",
+      "-r",
+      "/workspace/pathpilot/artifacts/PathPilot-0.1.9-ui-tests.apk"
+    ],
+    "exit": 0,
+    "stdout": "Performing Streamed Install\nSuccess\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:53:24.433976+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "package",
+      "compile",
+      "-m",
+      "speed",
+      "-f",
+      "dev.pathpilot.app.capture"
+    ],
+    "exit": 0,
+    "stdout": "Success\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:54:04.025524+00:00"
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "package",
+      "compile",
+      "-m",
+      "speed",
+      "-f",
+      "dev.pathpilot.app.capture.test"
+    ],
+    "exit": 0,
+    "stdout": "Success\n",
+    "stderr": "",
+    "finished": "2026-11-25T05:54:09.764764+00:00"
+  }
+]

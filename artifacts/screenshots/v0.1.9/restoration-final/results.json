@@ -1,0 +1,45 @@
+{
+  "target_sha256": "ccf6b38a1abdf2b98f39fb9b2bd52374678209077a1752a8e895983aead8df1b",
+  "test_sha256": "f91f4dded1a9437b4a61be64c04886d9612ee9e55f728a30dd939a8e229b1b09",
+  "host_started_at": "2026-11-25T05:54:10.280727+00:00",
+  "device_started_epoch": 1795586049,
+  "mode": "restoration",
+  "attempt": "1",
+  "command": [
+    "/workspace/toolchains/android-sdk/platform-tools/adb",
+    "-s",
+    "emulator-5554",
+    "shell",
+    "am",
+    "instrument",
+    "-w",
+    "-r",
+    "-e",
+    "class",
+    "dev.pathpilot.app.ui.statistics.StatisticsRestorationTest#restoredSelectionHandlesFewerTrendBuckets",
+    "dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner"
+  ],
+  "timed_out": false,
+  "device": {
+    "font_scale": "1.0",
+    "display_size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "api": "35"
+  },
+  "scope": "Production StatisticsTrend + StateRestorationTester. Saved selection restored against fewer offline time buckets; no AppStore or network.",
+  "exit_code": 0,
+  "host_finished_at": "2026-11-25T05:54:55.775508+00:00",
+  "junit_summary": [
+    "OK (1 test)"
+  ],
+  "test_results": [
+    {
+      "name": "restoredSelectionHandlesFewerTrendBuckets",
+      "status_code": 0
+    }
+  ],
+  "elapsed_seconds": 35.342,
+  "passed": true,
+  "screenshots": {},
+  "all_screenshots_created_this_run": true
+}
