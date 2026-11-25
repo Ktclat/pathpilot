@@ -88,4 +88,10 @@
     <string name="mcp_stop_to_change_port">停止 MCP 共享后修改端口</string>
     <string name="mcp_error_fetch">获取工具失败</string>
     <string name="mcp_token_invalid">Token 不能包含空格或控制字符</string>
+    <string name="mcp_call_tool_disabled">工具未共享</string>
+    <string name="mcp_call_invalid_params">参数无效</string>
+    <string name="mcp_call_tool_error">工具执行出错</string>
+    <string name="mcp_call_connection_failed">连接失败</string>
+    <string name="mcp_call_protocol_error">协议错误</string>
+    <string name="mcp_call_rpc_error">JSON-RPC %1$d</string>
 </resources>

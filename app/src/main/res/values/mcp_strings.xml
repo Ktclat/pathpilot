@@ -88,4 +88,10 @@
     <string name="mcp_stop_to_change_port">Stop MCP sharing to change its port</string>
     <string name="mcp_error_fetch">Unable to get tools</string>
     <string name="mcp_token_invalid">Use a token without spaces or control characters</string>
+    <string name="mcp_call_tool_disabled">Tool is not shared</string>
+    <string name="mcp_call_invalid_params">Invalid parameters</string>
+    <string name="mcp_call_tool_error">Tool execution failed</string>
+    <string name="mcp_call_connection_failed">Connection failed</string>
+    <string name="mcp_call_protocol_error">Protocol error</string>
+    <string name="mcp_call_rpc_error">JSON-RPC %1$d</string>
 </resources>

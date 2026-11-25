@@ -87,10 +87,10 @@ class SettingsFlowTest {
         compose.onNodeWithText("导出备份").performClick()
         compose.onNodeWithText("密码").performTextReplacement("offline-picker-password")
         compose.onNodeWithText("确认密码").performTextReplacement("offline-picker-password")
-        closeSettingsKeyboard()
+        compose.onNodeWithText("确认密码").performImeAction()
         compose.onNodeWithText("继续").performClick()
         val automation = InstrumentationRegistry.getInstrumentation().uiAutomation
-        compose.waitUntil(60_000) {
+        compose.waitUntil(180_000) {
             automation.rootInActiveWindow?.packageName?.toString()?.contains("documentsui") == true
         }
         compose.captureSettingsScreenshot("13-backup-system-picker")

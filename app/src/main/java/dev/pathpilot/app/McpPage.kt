@@ -365,7 +365,22 @@ private fun McpCallRow(event: McpCallEvent) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(Instant.ofEpochMilli(event.startedAtEpochMs).atZone(ZoneId.systemDefault())
                     .format(DateTimeFormatter.ofPattern("HH:mm:ss")), style = MaterialTheme.typography.bodySmall)
-                event.errorCode?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error) }
+                event.errorCode?.let { code ->
+                    val number = code.substringAfter('_', "").toIntOrNull()
+                    val label = when (code) {
+                        "tool_disabled" -> stringResource(R.string.mcp_call_tool_disabled)
+                        "invalid_params" -> stringResource(R.string.mcp_call_invalid_params)
+                        "tool_error" -> stringResource(R.string.mcp_call_tool_error)
+                        "connection_failed" -> stringResource(R.string.mcp_call_connection_failed)
+                        "protocol_error" -> stringResource(R.string.mcp_call_protocol_error)
+                        else -> when {
+                            code.startsWith("http_") && number != null -> stringResource(R.string.mcp_error_http, number)
+                            code.startsWith("rpc_") && number != null -> stringResource(R.string.mcp_call_rpc_error, number)
+                            else -> code
+                        }
+                    }
+                    Text(label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                }
             }
         }
     }

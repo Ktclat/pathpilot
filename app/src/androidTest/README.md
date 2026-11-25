@@ -1,5 +1,14 @@
 # Codex 模型获取：离线 UI 集成测试
 
+本文早期供应商、模型与统计用例使用中文控件标签。v0.1.10 开始支持应用语言；运行这些旧类前，先安装 `.capture` 包并选择简体中文。Android 13+ 可用平台命令（已在 API 35 核对 `cmd locale help`）：
+
+```sh
+adb shell cmd locale set-app-locales dev.pathpilot.app.capture --user 0 --locales zh-CN
+adb shell cmd locale get-app-locales dev.pathpilot.app.capture --user 0
+```
+
+Android 8–12 在 App 设置中选择「语言 → 简体中文」。设置/MCP 新用例自行通过 AppStore 与原生 `LocaleManager.applicationLocales` 设置初始语言，不依赖这一手动前置。
+
 `CodexModelsFlowTest` 使用生产 `ProvidersScreen`、`ProviderEditor`、`ProviderEditorViewModel`、`CodexModelsClient` 与 `ProviderRoutes.addSelected`。只替换凭据解析来源和 HTTP 目的地：凭据是测试常量，OkHttp interceptor 把 Codex 模型目录请求送到 Android 设备内的 MockWebServer 回环端口。请求经过真实 HTTP 连接和生产 JSON 解析，测试不会联系 ChatGPT，也不读取设备里保存的账号。
 
 测试覆盖已登录入口获取目录、选择模型并保存路由，401 失败显示与重试，以及未登录时进入登录且不发送目录请求。目录中的模型 ID 是固定 mock 数据，不表示真实账号的可用模型；`supported_in_api=false` 的订阅目录项仍应可选。所有 fixture 只存在于 androidTest APK。

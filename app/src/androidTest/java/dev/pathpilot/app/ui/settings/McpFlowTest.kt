@@ -11,6 +11,7 @@ import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextReplacement
@@ -91,13 +92,15 @@ class McpFlowTest {
         compose.onNodeWithText("MCP URL").performTextReplacement(upstream.url)
         compose.onNodeWithText("Bearer").performScrollTo().performClick()
         compose.onNodeWithText("Token").performScrollTo().performTextReplacement(upstream.token)
-        closeSettingsKeyboard()
+        compose.onNodeWithText("Token").performImeAction()
         compose.captureSettingsScreenshot("09-mcp-editor")
         compose.onNodeWithText("保存").performScrollTo().performClick()
         compose.waitUntil(30_000) { store.mcp.value.connections.size == 1 }
         val connection = store.mcp.value.connections.single()
         assertEquals(upstream.url, connection.url)
         assertEquals(upstream.token, connection.bearerToken)
+        compose.onNodeWithContentDescription("MCP 共享").assertIsDisplayed()
+        compose.captureSettingsScreenshot("10a-mcp-access")
 
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("获取工具"))
         compose.onNodeWithText("获取工具").performClick()
@@ -134,6 +137,8 @@ class McpFlowTest {
         compose.waitUntil(30_000) { McpRuntime.state.value.recentCalls.any { it.toolName == "offline_status" && it.success } }
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("最近调用"))
         compose.captureSettingsScreenshot("12-mcp-calls")
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("offline_status"))
+        compose.captureSettingsScreenshot("12a-mcp-success-call")
 
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasContentDescription("MCP 共享"))
         compose.onNodeWithContentDescription("MCP 共享").performClick()
