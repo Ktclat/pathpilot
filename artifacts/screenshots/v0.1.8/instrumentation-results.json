@@ -1,0 +1,108 @@
+{
+  "target_sha256": "effce74033079d9ab341afcacadd053b6db3caf4635ecc3a4fea200a19618e44",
+  "test_sha256": "ccbe81afc5d88c8384087a072d4f5eb4bab98961099985c8b33f888e258a710d",
+  "host_started_at": "2026-11-25T04:49:59.748399+00:00",
+  "device_started_epoch": 1795582198,
+  "command": [
+    "/workspace/toolchains/android-sdk/platform-tools/adb",
+    "-s",
+    "emulator-5554",
+    "shell",
+    "am",
+    "instrument",
+    "-w",
+    "-r",
+    "-e",
+    "class",
+    "dev.pathpilot.app.ui.usage.UsageRequestsFlowTest,dev.pathpilot.app.runtime.RequestHistoryStoreTest",
+    "dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner"
+  ],
+  "timed_out": false,
+  "ui_scope": "Three tests mount production UsageRequestsPage with explicit offline RequestEvent metadata; no account or network.",
+  "storage_scope": "Six SQLite tests use separate UUID-named files in capture noBackupFilesDir and remove their temporary databases after every test.",
+  "exit_code": 0,
+  "host_finished_at": "2026-11-25T04:53:25.158530+00:00",
+  "junit_summary": [
+    "OK (9 tests)"
+  ],
+  "test_results": [
+    {
+      "name": "modelUsageOpensOnlyThatModelsRequests",
+      "status_code": 0
+    },
+    {
+      "name": "interruptedHttp200ShowsOutcomeAndUnknownUsageInDetails",
+      "status_code": 0
+    },
+    {
+      "name": "statusAndSearchFilterRequestsAndClearRequiresConfirmation",
+      "status_code": 0
+    },
+    {
+      "name": "newRequestPrunesHistoryByStartTimeAndKeepsOnlyLatestThousand",
+      "status_code": 0
+    },
+    {
+      "name": "malformedStoredRowReportsErrorWithoutReplacingKnownHistory",
+      "status_code": 0
+    },
+    {
+      "name": "failedWriteReportsErrorAndReloadRetriesThePendingRequest",
+      "status_code": 0
+    },
+    {
+      "name": "duplicateEventDoesNotReplaceOrDoubleCountOriginalRequest",
+      "status_code": 0
+    },
+    {
+      "name": "reopeningRestoresModelUsageAndInterruptedOutcomeInTimeOrder",
+      "status_code": 0
+    },
+    {
+      "name": "clearingHistoryPersistsAcrossStoreRecreation",
+      "status_code": 0
+    }
+  ],
+  "elapsed_seconds": 194.322,
+  "passed": true,
+  "screenshots": {
+    "01-model-usage.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/usage-requests-e2e/01-model-usage.png",
+      "device_mtime_epoch": 1795582234,
+      "size": 79404,
+      "created_this_run": true,
+      "sha256": "3c45e8790c94ffe390869ee60d67b2ebafc0574c28aafec72b5219375500c37f"
+    },
+    "02-recent-requests.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/usage-requests-e2e/02-recent-requests.png",
+      "device_mtime_epoch": 1795582283,
+      "size": 77878,
+      "created_this_run": true,
+      "sha256": "69bbcf395fe61f5d47ac7c05a1b4a90e6c8be8d55d959262396e4e6ec80dea57"
+    },
+    "03-request-details.png": {
+      "remote_path": "/sdcard/Android/data/dev.pathpilot.app.capture/files/usage-requests-e2e/03-request-details.png",
+      "device_mtime_epoch": 1795582299,
+      "size": 86916,
+      "created_this_run": true,
+      "sha256": "3ba2d0c854163f81b63b439dbf0460eba552bbdb739445d0abd9bb8ecf619553"
+    }
+  },
+  "all_screenshots_created_this_run": true,
+  "visual_validation": {
+    "accepted": true,
+    "method": "All three original PNGs were individually inspected with view_image by the device agent and parent; no system dialog obscures them."
+  },
+  "preparation": {
+    "emulator_api": 35,
+    "emulator_abi": "x86_64",
+    "software_emulation": true,
+    "target_and_test_precompiled": true,
+    "actual_vm_starts": 1,
+    "startup_dialogs_closed_once_each": [
+      "Quickstep",
+      "System UI"
+    ],
+    "runner_started_after_clear_screenshot": true
+  }
+}

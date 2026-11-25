@@ -1,0 +1,24 @@
+{
+  "started_at": "2026-11-25T04:56:08.893660+00:00",
+  "packages": [
+    {
+      "package": "dev.pathpilot.app.capture",
+      "exit_code": 0,
+      "stdout": "Success",
+      "stderr": ""
+    },
+    {
+      "package": "dev.pathpilot.app.capture.test",
+      "exit_code": 0,
+      "stdout": "Success",
+      "stderr": ""
+    }
+  ],
+  "owned_emulator_pid": 30167,
+  "process_exit_state": "Z (zombie)",
+  "stopped": true,
+  "avd_userdata_preserved": true,
+  "capture_and_test_data_cleared": true,
+  "finished_at": "2026-11-25T04:56:14.603351+00:00",
+  "adb_devices": "List of devices attached"
+}

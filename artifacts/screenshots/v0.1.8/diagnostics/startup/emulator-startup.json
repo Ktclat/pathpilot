@@ -1,0 +1,26 @@
+{
+  "preflight_pid": 29719,
+  "preflight_error": "Software CPU emulation requires ANDROID_I_WANT_MY_TCG=yes",
+  "vm_started_pid": 30167,
+  "software_emulation_opt_in": true,
+  "command": [
+    "/workspace/toolchains/android-sdk/emulator/emulator",
+    "-avd",
+    "pathpilot-api35",
+    "-no-window",
+    "-no-audio",
+    "-no-boot-anim",
+    "-no-snapshot",
+    "-no-metrics",
+    "-gpu",
+    "swiftshader_indirect",
+    "-accel",
+    "off",
+    "-cores",
+    "2",
+    "-memory",
+    "3072",
+    "-port",
+    "5554"
+  ]
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "step": "install target",
+    "started_at": "2026-11-25T04:45:49.421359+00:00",
+    "finished_at": "2026-11-25T04:46:07.291759+00:00",
+    "exit_code": 0,
+    "stdout": "Performing Streamed Install\nSuccess",
+    "stderr": ""
+  },
+  {
+    "step": "install test",
+    "started_at": "2026-11-25T04:46:07.291806+00:00",
+    "finished_at": "2026-11-25T04:46:12.536532+00:00",
+    "exit_code": 0,
+    "stdout": "Performing Streamed Install\nSuccess",
+    "stderr": ""
+  },
+  {
+    "step": "compile target",
+    "started_at": "2026-11-25T04:46:12.536620+00:00",
+    "finished_at": "2026-11-25T04:46:57.705539+00:00",
+    "exit_code": 0,
+    "stdout": "Success",
+    "stderr": ""
+  },
+  {
+    "step": "compile test",
+    "started_at": "2026-11-25T04:46:57.705668+00:00",
+    "finished_at": "2026-11-25T04:47:02.843552+00:00",
+    "exit_code": 0,
+    "stdout": "Success",
+    "stderr": ""
+  }
+]
