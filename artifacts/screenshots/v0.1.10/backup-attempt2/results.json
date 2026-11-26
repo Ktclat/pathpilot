@@ -1,0 +1,57 @@
+{
+  "startedUtc": "2026-11-25T11:01:40Z",
+  "classes": "dev.pathpilot.app.ui.settings.SettingsFlowTest#exportUsesTheAndroidDocumentPickerAndCanBeCancelled,dev.pathpilot.app.ui.settings.BackupFlowTest",
+  "gitBase": "22f1fca9d0c3eb6060ec90ccd590a3b922b12d50",
+  "worktreeDiffSha256": "20d2a6720ff79c4596f085e162a44f8fb3e8137dc2fca24132833e9a07a7d883",
+  "apkSha256": {
+    "capture.apk": "b2b03a65d426a4aa9ca86b9361a0444058546779ce606b7d4bf8d71e7b4453e5",
+    "capture-test.apk": "7c6b4c7b41687f500d0f95c260d1eccf458da5342ea576a28e3997af00312e14"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0"
+  },
+  "sourceManifestSha256": "aa2522c98faffe60f7dc92f57f7a35a174ec47eb9016c6bb0e4bb98b062bd03e",
+  "elapsedSeconds": 573.021,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "2",
+      "stream": ".",
+      "test": "exportUsesTheAndroidDocumentPickerAndCanBeCancelled",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.BackupFlowTest",
+      "current": "2",
+      "id": "AndroidJUnitRunner",
+      "numtests": "2",
+      "stream": ".",
+      "test": "exportUnlockPreviewAndRestoreUseTheEncryptedFile",
+      "statusCode": 0
+    }
+  ],
+  "images": [
+    {
+      "name": "07-backup-export.png",
+      "bytes": 67802,
+      "sha256": "5e406e367885b4174b3a0423201857ed9bea0cbe66a66d0a94eb0bc69d635056"
+    },
+    {
+      "name": "08-backup-preview.png",
+      "bytes": 86068,
+      "sha256": "c69806934e947feaab3c3604db8417f3c76357a32f53c03cebcfbba8019853ec"
+    },
+    {
+      "name": "13-backup-system-picker.png",
+      "bytes": 38074,
+      "sha256": "3bae9969ee913415a95cabfdadf4be2d1cafef1eac2611a15b434c3d7900a22e"
+    }
+  ]
+}

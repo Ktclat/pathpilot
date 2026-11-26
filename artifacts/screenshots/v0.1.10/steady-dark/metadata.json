@@ -1,0 +1,27 @@
+{
+  "sourceCommit": "747af3f6be1edaafec02ea96f42b3f23c2ece2bb",
+  "captureApkSha256": "ed102536f0f633336d9e036c307d215b5efa5f1699c258092768c4aa8ac82bc2",
+  "device": "Android 15 API 35, x86_64 TCG, 720x1280, density 320, font_scale 1.0",
+  "observations": {
+    "01-dark-persisted.png": "App theme set to Dark via settings; Monet remains enabled. Window dump was captured immediately before this image and can precede theme appearance propagation.",
+    "02-dark-relaunched.png": "App force-stopped then cold-started successfully (TotalTime 9093 ms), Settings reopened. Status and navigation backgrounds dark, status text white, three-button navigation icons dark gray. MainActivity window has no LIGHT_STATUS_BARS/LIGHT_NAVIGATION_BARS appearance bits.",
+    "03-system-night.png": "Same dark app theme with platform cmd uimode night yes: system navigation icons become light. Original platform mode no restored after capture."
+  },
+  "images": [
+    {
+      "name": "01-dark-persisted.png",
+      "sha256": "c4e0ee30e7a9076ee97403f8bb28760bdb9031af5ba28f8b0bb268ce0711443b"
+    },
+    {
+      "name": "02-dark-relaunched.png",
+      "sha256": "97e43a54211a5c3c3f287aa40b97b0f497ba66de77c4f5cdc3a1569267dd82d9"
+    },
+    {
+      "name": "03-system-night.png",
+      "sha256": "9aca90d617c1f22607426ab8e08b01db1fc43149793f05a4eba46085d71ec2bc"
+    }
+  ],
+  "originalSystemNight": "no",
+  "restoredSystemNight": "no",
+  "productionThemeChanged": false
+}

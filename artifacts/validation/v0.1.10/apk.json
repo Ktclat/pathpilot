@@ -1,0 +1,12 @@
+{
+  "file": "artifacts/PathPilot-0.1.10-arm64.apk",
+  "sha256": "ec799e15a21fc8674ceaa7c13bdd042c8bdbc7e67334ae725f1779ba9330684d",
+  "bytes": 21114149,
+  "abis": [
+    "arm64-v8a"
+  ],
+  "package": "package: name='dev.pathpilot.app' versionCode='11' versionName='0.1.10' platformBuildVersionName='17' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='17'",
+  "production_source_commit": "853a3fe",
+  "signing": "development debug",
+  "capture": false
+}

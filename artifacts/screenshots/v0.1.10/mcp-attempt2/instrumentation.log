@@ -1,0 +1,98 @@
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.McpFlowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+dev.pathpilot.app.ui.settings.McpFlowTest:
+INSTRUMENTATION_STATUS: test=connectionToolsAndIndependentSharingReachAnActualHttpUpstream
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.McpFlowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: Failed to perform IME action.
+Failed to assert the following: (NOT (ImeAction = 'Default'))
+Semantics of the node:
+Node #340 at (l=48.0, t=530.0, r=672.0, b=658.0)px
+ContentDataType = 'AndroidContentDataType(androidAutofillType=1)'
+ContentType = 'androidx.compose.ui.autofill.AndroidContentType@2de76de'
+EditableText = '••••••••••••••••••••••••••'
+FillableData = 'androidx.compose.ui.autofill.AndroidFillableData@3dec9aa'
+Focused = 'true'
+ImeAction = 'Default'
+InputText = 'offline-mcp-upstream-token'
+IsEditable = 'true'
+Text = '[Token]'
+TextSelectionRange = 'TextRange(26, 26)'
+[Password]
+Actions = [ClearTextSubstitution, GetTextLayoutResult, InsertTextAtCursor, MagnifierPositionInRoot, OnClick, OnFillData, OnLongClick, PasteText, PerformImeAction, RequestFocus, SetSelection, SetText, SetTextSubstitution, ShowTextSubstitution]
+MergeDescendants = 'true'
+Has 1 child, 8 siblings
+Selector used: (Text + InputText + EditableText contains 'Token' (ignoreCase: false))
+
+	at androidx.compose.ui.test.AssertionsKt.assert(Assertions.kt:293)
+	at androidx.compose.ui.test.TextActionsKt.performImeAction(TextActions.kt:100)
+	at dev.pathpilot.app.ui.settings.McpFlowTest.connectionToolsAndIndependentSharingReachAnActualHttpUpstream(McpFlowTest.kt:95)
+
+INSTRUMENTATION_STATUS: stream=
+Error in connectionToolsAndIndependentSharingReachAnActualHttpUpstream(dev.pathpilot.app.ui.settings.McpFlowTest):
+java.lang.AssertionError: Failed to perform IME action.
+Failed to assert the following: (NOT (ImeAction = 'Default'))
+Semantics of the node:
+Node #340 at (l=48.0, t=530.0, r=672.0, b=658.0)px
+ContentDataType = 'AndroidContentDataType(androidAutofillType=1)'
+ContentType = 'androidx.compose.ui.autofill.AndroidContentType@2de76de'
+EditableText = '••••••••••••••••••••••••••'
+FillableData = 'androidx.compose.ui.autofill.AndroidFillableData@3dec9aa'
+Focused = 'true'
+ImeAction = 'Default'
+InputText = 'offline-mcp-upstream-token'
+IsEditable = 'true'
+Text = '[Token]'
+TextSelectionRange = 'TextRange(26, 26)'
+[Password]
+Actions = [ClearTextSubstitution, GetTextLayoutResult, InsertTextAtCursor, MagnifierPositionInRoot, OnClick, OnFillData, OnLongClick, PasteText, PerformImeAction, RequestFocus, SetSelection, SetText, SetTextSubstitution, ShowTextSubstitution]
+MergeDescendants = 'true'
+Has 1 child, 8 siblings
+Selector used: (Text + InputText + EditableText contains 'Token' (ignoreCase: false))
+
+	at androidx.compose.ui.test.AssertionsKt.assert(Assertions.kt:293)
+	at androidx.compose.ui.test.TextActionsKt.performImeAction(TextActions.kt:100)
+	at dev.pathpilot.app.ui.settings.McpFlowTest.connectionToolsAndIndependentSharingReachAnActualHttpUpstream(McpFlowTest.kt:95)
+
+INSTRUMENTATION_STATUS: test=connectionToolsAndIndependentSharingReachAnActualHttpUpstream
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 116.896
+There was 1 failure:
+1) connectionToolsAndIndependentSharingReachAnActualHttpUpstream(dev.pathpilot.app.ui.settings.McpFlowTest)
+java.lang.AssertionError: Failed to perform IME action.
+Failed to assert the following: (NOT (ImeAction = 'Default'))
+Semantics of the node:
+Node #340 at (l=48.0, t=530.0, r=672.0, b=658.0)px
+ContentDataType = 'AndroidContentDataType(androidAutofillType=1)'
+ContentType = 'androidx.compose.ui.autofill.AndroidContentType@2de76de'
+EditableText = '••••••••••••••••••••••••••'
+FillableData = 'androidx.compose.ui.autofill.AndroidFillableData@3dec9aa'
+Focused = 'true'
+ImeAction = 'Default'
+InputText = 'offline-mcp-upstream-token'
+IsEditable = 'true'
+Text = '[Token]'
+TextSelectionRange = 'TextRange(26, 26)'
+[Password]
+Actions = [ClearTextSubstitution, GetTextLayoutResult, InsertTextAtCursor, MagnifierPositionInRoot, OnClick, OnFillData, OnLongClick, PasteText, PerformImeAction, RequestFocus, SetSelection, SetText, SetTextSubstitution, ShowTextSubstitution]
+MergeDescendants = 'true'
+Has 1 child, 8 siblings
+Selector used: (Text + InputText + EditableText contains 'Token' (ignoreCase: false))
+
+	at androidx.compose.ui.test.AssertionsKt.assert(Assertions.kt:293)
+	at androidx.compose.ui.test.TextActionsKt.performImeAction(TextActions.kt:100)
+	at dev.pathpilot.app.ui.settings.McpFlowTest.connectionToolsAndIndependentSharingReachAnActualHttpUpstream(McpFlowTest.kt:95)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

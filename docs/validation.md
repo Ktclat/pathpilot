@@ -20,8 +20,8 @@ $ANDROID_HOME/build-tools/36.0.0/apksigner verify artifacts/PathPilot-0.1.10-arm
 
 本地完整构建已通过：核心 110 项、App 51 项 JVM 测试全部通过；Lint 0 错误、42 条警告。APK ZIP、包名、ARM64-only 与签名验证通过，actionlint 通过。首轮 Lint 发现资源读取未感知配置、整数占位符与 StateFlow 读取问题，已修正后重新执行，不计首轮为通过。
 
-交付包 `artifacts/PathPilot-0.1.10-arm64.apk`，版本 `0.1.10` / versionCode 11，包名 `dev.pathpilot.app`，仅含 `arm64-v8a`。SHA-256：`7ea0b31c23eb1d09b4787be9d9e56c51706392c1b11d9cbb7c2b6242af7240cd`。这是常规 debug APK；截图包独立，不用于交付。
+交付包 `artifacts/PathPilot-0.1.10-arm64.apk`，版本 `0.1.10` / versionCode 11，包名 `dev.pathpilot.app`，仅含 `arm64-v8a`。SHA-256：`ec799e15a21fc8674ceaa7c13bdd042c8bdbc7e67334ae725f1779ba9330684d`。这是常规 debug APK；截图包独立，不用于交付。
 
-[Gradle 日志](../artifacts/validation/v0.1.10/gradle-final.log) · [JVM 结果](../artifacts/validation/v0.1.10/jvm-results.json) · [Lint XML](../artifacts/validation/v0.1.10/lint-results-debug.xml)。模拟器验证与源码 CI 正在进行，完成后补入此页。
+[Gradle 日志](../artifacts/validation/v0.1.10/gradle-reviewed.log) · [JVM 结果](../artifacts/validation/v0.1.10/jvm-results.json) · [Lint XML](../artifacts/validation/v0.1.10/lint-results-debug.xml)。最终生产源码 `853a3fe` 的 [Actions](https://github.com/Ktclat/pathpilot/actions/runs/45598564026) 和输入窗口测试修正 `22f1fca` 的 [Actions](https://github.com/Ktclat/pathpilot/actions/runs/45599744622) 均通过；此前 `5832341`、`747af3f` 的源码构建也通过。[CI 状态与提交](../artifacts/validation/v0.1.10/actions.json)已记录。模拟器已确认 9 项不同用例通过：5 项存储、主题与语言、MCP HTTP 联调、系统文件器、备份文件往返恢复；大字体验证尚待补齐。详见[原始截图与分批记录](../artifacts/screenshots/v0.1.10/README.md)。
 
 核心测试覆盖真实 loopback HTTP 的 MCP 初始化、分页、JSON/SSE、独立鉴权、工具开关、会话隔离和停止取消；备份 JVM 测试覆盖加解密、损坏文件、版本和配置校验。测试使用离线夹具，不使用真实订阅或外部 MCP 账号。

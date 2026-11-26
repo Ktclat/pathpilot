@@ -1,0 +1,162 @@
+{
+  "startedUtc": "2026-11-25T10:24:19Z",
+  "classes": "dev.pathpilot.app.settings.BackupStoreTest,dev.pathpilot.app.ui.settings.SettingsFlowTest#themeMonetAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.SettingsFlowTest#exportUsesTheAndroidDocumentPickerAndCanBeCancelled,dev.pathpilot.app.ui.settings.BackupFlowTest,dev.pathpilot.app.ui.settings.McpFlowTest",
+  "gitBase": "747af3f6be1edaafec02ea96f42b3f23c2ece2bb",
+  "worktreeDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "apkSha256": {
+    "capture.apk": "ed102536f0f633336d9e036c307d215b5efa5f1699c258092768c4aa8ac82bc2",
+    "capture-test.apk": "cb2c142a51c34bf2f7d4af14bdd9e72579ba51db27057ba025d2966fdd96d414"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0"
+  },
+  "sourceManifestSha256": "25b0b723e7804f915820d409d9fd7ae9029648bdbc20487c8c47e6f0953fd533",
+  "elapsedSeconds": 648.289,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.settings.BackupStoreTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "9",
+      "stream": ".",
+      "test": "aValidBackupCanReplaceAnUnreadableConfiguration",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.settings.BackupStoreTest",
+      "current": "2",
+      "id": "AndroidJUnitRunner",
+      "numtests": "9",
+      "stream": ".",
+      "test": "oldEncryptedConfigurationMigratesWithoutRotatingTheNewMcpKeyOnEveryOpen",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.settings.BackupStoreTest",
+      "current": "3",
+      "id": "AndroidJUnitRunner",
+      "numtests": "9",
+      "stream": ".",
+      "test": "defaultRestoreKeepsLocalConnectionSettingsAndUnexportedMatchingLogin",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.settings.BackupStoreTest",
+      "current": "4",
+      "id": "AndroidJUnitRunner",
+      "numtests": "9",
+      "stream": ".",
+      "test": "encryptedBackupRestoresProvidersPreferencesMcpAndOptionalSessionsAcrossReopen",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.settings.BackupStoreTest",
+      "current": "5",
+      "id": "AndroidJUnitRunner",
+      "numtests": "9",
+      "stream": ".",
+      "test": "failedAtomicRestoreKeepsPublishedStateAndDurableConfiguration",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+      "current": "6",
+      "id": "AndroidJUnitRunner",
+      "numtests": "9",
+      "stack": "androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 60000 ms",
+      "stream": "",
+      "test": "exportUsesTheAndroidDocumentPickerAndCanBeCancelled",
+      "statusCode": -2
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+      "current": "7",
+      "id": "AndroidJUnitRunner",
+      "numtests": "9",
+      "stream": ".",
+      "test": "themeMonetAndLanguageChoicesPersistInTheNativeActivity",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.BackupFlowTest",
+      "current": "8",
+      "id": "AndroidJUnitRunner",
+      "numtests": "9",
+      "stack": "androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 60000 ms",
+      "stream": "",
+      "test": "exportUnlockPreviewAndRestoreUseTheEncryptedFile",
+      "statusCode": -2
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.McpFlowTest",
+      "current": "9",
+      "id": "AndroidJUnitRunner",
+      "numtests": "9",
+      "stream": ".",
+      "test": "connectionToolsAndIndependentSharingReachAnActualHttpUpstream",
+      "statusCode": 0
+    }
+  ],
+  "images": [
+    {
+      "name": "01-settings-light.png",
+      "bytes": 68957,
+      "sha256": "d8db1abab2684cc6cdd394f7c692252dafb05e47cc96cd3eae5621ae9fb018a3"
+    },
+    {
+      "name": "02-theme-picker.png",
+      "bytes": 60736,
+      "sha256": "3c4fb52b84c487be3dd18f4e5984a915660d297e13c5f490e87f76e417648416"
+    },
+    {
+      "name": "03-settings-dark.png",
+      "bytes": 64900,
+      "sha256": "0ce86ca0bd0dc6e27c2e9a634830d15ce9661a4e66777805c29c429b0eacb710"
+    },
+    {
+      "name": "04-language-picker.png",
+      "bytes": 59663,
+      "sha256": "50aa4a6bb09c07e3ab434245f85adf018e9f1d69ffebd10a179c41616d92f5a5"
+    },
+    {
+      "name": "05-settings-english.png",
+      "bytes": 67606,
+      "sha256": "b7ad72f58893e41629cdd04cf1d3a34fe9d69721b7ab3a2b687154aba6efaac6"
+    },
+    {
+      "name": "06-settings-backup-english.png",
+      "bytes": 65737,
+      "sha256": "f015407fb465effde7c7a584c742891cb896cb58784b391f01c84f21a32f3636"
+    },
+    {
+      "name": "07-backup-export.png",
+      "bytes": 75005,
+      "sha256": "5d5a06a427a35b22bc48b3fda14de0022cb4b8665571b6835d1730e1ad6ee9ad"
+    },
+    {
+      "name": "09-mcp-editor.png",
+      "bytes": 65117,
+      "sha256": "c36a875434ed8d440e6a192ce897e8523a796a97bad844b023aa3bb256ba6922"
+    },
+    {
+      "name": "10-mcp-tools.png",
+      "bytes": 97219,
+      "sha256": "46d0da41440741f11fbd0712873c24393c0302b7b8b8a062ccdb500749c6c16d"
+    },
+    {
+      "name": "11-mcp-sharing.png",
+      "bytes": 63088,
+      "sha256": "07311b756ee3e6d0b99e903abe529fb814769de5fbd56d3c3484d6b25732f557"
+    },
+    {
+      "name": "12-mcp-calls.png",
+      "bytes": 83929,
+      "sha256": "ff7eff90f47e15519694c52967be40cfe582853eb1e876ae3a525dca15916032"
+    }
+  ]
+}

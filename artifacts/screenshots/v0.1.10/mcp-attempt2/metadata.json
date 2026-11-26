@@ -1,0 +1,18 @@
+{
+  "startedUtc": "2026-11-25T10:50:40Z",
+  "classes": "dev.pathpilot.app.ui.settings.McpFlowTest",
+  "gitBase": "853a3fecf0d43bec59952cce1636f8dca06c21ef",
+  "worktreeDiffSha256": "20d2a6720ff79c4596f085e162a44f8fb3e8137dc2fca24132833e9a07a7d883",
+  "apkSha256": {
+    "capture.apk": "b2b03a65d426a4aa9ca86b9361a0444058546779ce606b7d4bf8d71e7b4453e5",
+    "capture-test.apk": "4a15b3e1f3d255a7dd47cf596b652ecc7fa158fed9b3fa7bb4f630a117dd410d"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0"
+  },
+  "sourceManifestSha256": "e529fa661da32953a65c20b39e23e9dc5c8f1a0ea1d3bfeb0b59c3f9b49e9635"
+}

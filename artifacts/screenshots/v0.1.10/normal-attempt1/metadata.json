@@ -1,0 +1,18 @@
+{
+  "startedUtc": "2026-11-25T10:24:19Z",
+  "classes": "dev.pathpilot.app.settings.BackupStoreTest,dev.pathpilot.app.ui.settings.SettingsFlowTest#themeMonetAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.SettingsFlowTest#exportUsesTheAndroidDocumentPickerAndCanBeCancelled,dev.pathpilot.app.ui.settings.BackupFlowTest,dev.pathpilot.app.ui.settings.McpFlowTest",
+  "gitBase": "747af3f6be1edaafec02ea96f42b3f23c2ece2bb",
+  "worktreeDiffSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "apkSha256": {
+    "capture.apk": "ed102536f0f633336d9e036c307d215b5efa5f1699c258092768c4aa8ac82bc2",
+    "capture-test.apk": "cb2c142a51c34bf2f7d4af14bdd9e72579ba51db27057ba025d2966fdd96d414"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0"
+  },
+  "sourceManifestSha256": "25b0b723e7804f915820d409d9fd7ae9029648bdbc20487c8c47e6f0953fd533"
+}
