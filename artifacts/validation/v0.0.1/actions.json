@@ -1,0 +1,42 @@
+[
+  {
+    "sha": "ee2b4dd",
+    "url": "https://github.com/Ktclat/pathpilot/actions/runs/45863708697",
+    "state": {
+      "status": "WORKFLOW_RUN_STATUS_COMPLETED",
+      "conclusion": "WORKFLOW_RUN_CONCLUSION_SUCCESS"
+    }
+  },
+  {
+    "sha": "db21b5c",
+    "url": "https://github.com/Ktclat/pathpilot/actions/runs/45862481921",
+    "state": {
+      "status": "WORKFLOW_RUN_STATUS_COMPLETED",
+      "conclusion": "WORKFLOW_RUN_CONCLUSION_SUCCESS"
+    }
+  },
+  {
+    "sha": "4e19d6e",
+    "url": "https://github.com/Ktclat/pathpilot/actions/runs/45860616781",
+    "state": {
+      "status": "WORKFLOW_RUN_STATUS_COMPLETED",
+      "conclusion": "WORKFLOW_RUN_CONCLUSION_SUCCESS"
+    }
+  },
+  {
+    "sha": "5898bfe",
+    "url": "https://github.com/Ktclat/pathpilot/actions/runs/45858907257",
+    "state": {
+      "status": "WORKFLOW_RUN_STATUS_COMPLETED",
+      "conclusion": "WORKFLOW_RUN_CONCLUSION_SUCCESS"
+    }
+  },
+  {
+    "sha": "b637973",
+    "url": "https://github.com/Ktclat/pathpilot/actions/runs/45856393702",
+    "state": {
+      "status": "WORKFLOW_RUN_STATUS_COMPLETED",
+      "conclusion": "WORKFLOW_RUN_CONCLUSION_SUCCESS"
+    }
+  }
+]

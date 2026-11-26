@@ -33,8 +33,8 @@ MCP 连接名称明确带有「离线测试」。地址和工具来自 Android �
 | [normal-attempt1](normal-attempt1/results.json) | `747af3f` | 360dp、字体 1.0。9 项中 7 项通过、2 项等待失败；runner 637.633 秒。 |
 | [mcp-attempt2](mcp-attempt2/results.json) | `853a3fe` | 1 项失败，116.896 秒；测试对 `ImeAction.Default` 调用 `performImeAction()` 被 Compose 拒绝。 |
 | [mcp-attempt3](mcp-attempt3/results.json) | `22f1fca` | 1 项通过，170.688 秒；实际输入窗口隐藏键盘后完成全部 MCP 流程。 |
-
 | [backup-attempt2](backup-attempt2/results.json) | `22f1fca` | 2 项通过，573.021 秒；系统文件选择器，以及导出、错误密码、解锁、预览和恢复。 |
+| [large-final](large-final/results.json) | `22f1fca` 的旧 APK | 2026-11-26 恢复环境后补测，测试进程启动超时，runner 在执行用例前退出；0 项执行，0 张用例截图。 |
 
 每批的 `results.json` 包含 APK SHA-256、源码 manifest、设备配置、逐例状态和图片 SHA；`instrumentation.log` 保存原始 runner 输出。`source-files.json` 记录当次源码文件校验值。测试 APK 与生产 APK 分开记录，不能用截图包代替常规 ARM64 交付。
 
@@ -50,4 +50,4 @@ MCP 连接名称明确带有「离线测试」。地址和工具来自 Android �
 
 模拟器第一次启动、安装本轮 App 前出现 Quickstep 和 System UI ANR。实际弹窗原图保留在 [boot](boot/)；逐个查看并关闭后恢复桌面，再安装、预编译与启动 App。首批不是在这些弹窗遮挡下运行。
 
-备份复测已完成；截至环境恢复后读回结果，共 9 项不同用例通过。大字体结果和最终设备清理记录在对应批次完成后补齐。
+备份复测已完成；截至环境恢复后读回结果，共 9 项不同用例通过。旧 APK 大字体补测在启动阶段失败，详见 [诊断记录](large-final/diagnosis.json)，未记为通过。本轮后续使用新提交的 APK 检查大字体；设备清理在新版本验证记录中归档。

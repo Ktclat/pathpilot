@@ -1,0 +1,29 @@
+{
+  "captureUtc": "2026-11-26T16:41:49.820296+00:00",
+  "sourceCommit": "4e19d6e5365defe5df9cc080da1a5f5e65d9f9cb",
+  "versionName": "0.0.1-4e19d6e",
+  "versionCode": 12,
+  "package": "dev.pathpilot.app.capture",
+  "device": {
+    "api": 35,
+    "abi": "x86_64",
+    "pixels": "720x1280",
+    "density": 320,
+    "fontScale": 1.0,
+    "systemNightMode": "no"
+  },
+  "preferences": {
+    "theme": "DARK",
+    "dynamicColor": false,
+    "language": "zh-CN"
+  },
+  "sha256": "1850bac8a5e7416dbf9c2ec7d0565d3b589fca3b6110bf450486fb0baa9bb7bb",
+  "apkSha256": "f627cd48eee30d924f2afa3239e0ce1ca9c67ee1dab10dbb9edc56a7b280da36",
+  "startup": {
+    "amStartStatus": "ok",
+    "totalTimeMs": 10027,
+    "afterSpeedCompilation": true,
+    "settleSecondsBeforeScreenshot": 15
+  },
+  "context": "Existing isolated capture preferences from manual dark-system-bars diagnostic; test model port retained. Normal test batch resets preferences through production AppStore."
+}

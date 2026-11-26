@@ -1,0 +1,42 @@
+{
+  "batches": [
+    {
+      "source": "4e19d6e5365defe5df9cc080da1a5f5e65d9f9cb",
+      "results": "artifacts/screenshots/v0.0.1-4e19d6e/large-final/results.json",
+      "passed": 2,
+      "executions": 2,
+      "images": 9
+    },
+    {
+      "source": "4e19d6e5365defe5df9cc080da1a5f5e65d9f9cb",
+      "results": "artifacts/screenshots/v0.0.1-4e19d6e/model-flows-final/results.json",
+      "passed": 6,
+      "executions": 6,
+      "images": 7
+    },
+    {
+      "source": "4e19d6e5365defe5df9cc080da1a5f5e65d9f9cb",
+      "results": "artifacts/screenshots/v0.0.1-4e19d6e/normal-attempt1/results.json",
+      "passed": 3,
+      "executions": 3,
+      "images": 20
+    },
+    {
+      "source": "4e19d6e5365defe5df9cc080da1a5f5e65d9f9cb",
+      "results": "artifacts/screenshots/v0.0.1-4e19d6e/statistics-final/results.json",
+      "passed": 1,
+      "executions": 1,
+      "images": 4
+    },
+    {
+      "source": "ee2b4dd539aecad2a98f22b4c33dee15f300c6d6",
+      "results": "artifacts/screenshots/v0.0.1-ee2b4dd/catalog-final/results.json",
+      "passed": 4,
+      "executions": 4,
+      "images": 7
+    }
+  ],
+  "passedExecutions": 16,
+  "uniqueCases": 13,
+  "note": "4e19d6e navigation baseline plus ee2b4dd provider fixes; Codex three cases run in both builds."
+}

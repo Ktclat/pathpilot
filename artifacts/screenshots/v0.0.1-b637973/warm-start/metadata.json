@@ -1,0 +1,25 @@
+{
+  "captureUtc": "2026-11-26T16:14:52.743147+00:00",
+  "sourceCommit": "b637973",
+  "versionName": "0.0.1-b637973",
+  "versionCode": 12,
+  "package": "dev.pathpilot.app.capture",
+  "device": {
+    "api": 35,
+    "abi": "x86_64",
+    "pixels": "720x1280",
+    "density": 320,
+    "fontScale": 1.0,
+    "systemNightMode": "no"
+  },
+  "appearance": "Dark app appearance observed in original screenshot; existing capture preferences retained on APK update.",
+  "sha256": "c22c184558d994c96480fccb725f4b47011e5d8c3bea9277049382acae29e934",
+  "apkSha256": "31474b267a7ef3ccf5ae5b07011bc74b28963de92f865c3d60e5f8b67918666e",
+  "startup": {
+    "amStartStatus": "ok",
+    "totalTimeMs": 9670,
+    "afterSpeedCompilation": true,
+    "settleSecondsBeforeScreenshot": 20
+  },
+  "systemBars": "AVD three-button icons retain system day appearance, consistent with earlier v0.1.10 comparison. No product workaround applied."
+}

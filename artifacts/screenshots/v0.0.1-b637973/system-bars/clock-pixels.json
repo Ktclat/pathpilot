@@ -1,0 +1,266 @@
+{
+  "method": "Read original PNG RGB values only; images were not modified.",
+  "findings": "All five primary screenshots have gray clock text (100,99,102) on light background (250,248,255).",
+  "checks": [
+    {
+      "image": "../normal-attempt1/17-primary-0.png",
+      "sha256": "c9cae14e7c0ab73e89c8e16dd9192a6901eccd0022f880724730b3c192d90940",
+      "clockRoi": [
+        70,
+        8,
+        145,
+        42
+      ],
+      "mostCommonRgb": [
+        {
+          "rgb": [
+            250,
+            248,
+            255
+          ],
+          "pixels": 2053
+        },
+        {
+          "rgb": [
+            100,
+            99,
+            102
+          ],
+          "pixels": 225
+        },
+        {
+          "rgb": [
+            190,
+            189,
+            194
+          ],
+          "pixels": 21
+        },
+        {
+          "rgb": [
+            160,
+            159,
+            163
+          ],
+          "pixels": 16
+        },
+        {
+          "rgb": [
+            150,
+            149,
+            153
+          ],
+          "pixels": 16
+        }
+      ]
+    },
+    {
+      "image": "../normal-attempt1/18-primary-1.png",
+      "sha256": "836ebee6dd0bae6804c514b83b98de2b6b09817bff469079c208fec7b28e3e7b",
+      "clockRoi": [
+        70,
+        8,
+        145,
+        42
+      ],
+      "mostCommonRgb": [
+        {
+          "rgb": [
+            250,
+            248,
+            255
+          ],
+          "pixels": 2053
+        },
+        {
+          "rgb": [
+            100,
+            99,
+            102
+          ],
+          "pixels": 225
+        },
+        {
+          "rgb": [
+            190,
+            189,
+            194
+          ],
+          "pixels": 21
+        },
+        {
+          "rgb": [
+            160,
+            159,
+            163
+          ],
+          "pixels": 16
+        },
+        {
+          "rgb": [
+            150,
+            149,
+            153
+          ],
+          "pixels": 16
+        }
+      ]
+    },
+    {
+      "image": "../normal-attempt1/19-primary-2.png",
+      "sha256": "6208496b3c872172d454e204cd9affafe58f3c7a7d2329a21df80377ffac8dfd",
+      "clockRoi": [
+        70,
+        8,
+        145,
+        42
+      ],
+      "mostCommonRgb": [
+        {
+          "rgb": [
+            250,
+            248,
+            255
+          ],
+          "pixels": 2118
+        },
+        {
+          "rgb": [
+            100,
+            99,
+            102
+          ],
+          "pixels": 190
+        },
+        {
+          "rgb": [
+            160,
+            159,
+            163
+          ],
+          "pixels": 25
+        },
+        {
+          "rgb": [
+            190,
+            189,
+            194
+          ],
+          "pixels": 19
+        },
+        {
+          "rgb": [
+            150,
+            149,
+            153
+          ],
+          "pixels": 16
+        }
+      ]
+    },
+    {
+      "image": "../normal-attempt1/20-primary-3.png",
+      "sha256": "84829d2957b8390027f2f888e68905a7f61b45653c43a84f8a37d29703338afc",
+      "clockRoi": [
+        70,
+        8,
+        145,
+        42
+      ],
+      "mostCommonRgb": [
+        {
+          "rgb": [
+            250,
+            248,
+            255
+          ],
+          "pixels": 2118
+        },
+        {
+          "rgb": [
+            100,
+            99,
+            102
+          ],
+          "pixels": 190
+        },
+        {
+          "rgb": [
+            160,
+            159,
+            163
+          ],
+          "pixels": 25
+        },
+        {
+          "rgb": [
+            190,
+            189,
+            194
+          ],
+          "pixels": 19
+        },
+        {
+          "rgb": [
+            150,
+            149,
+            153
+          ],
+          "pixels": 16
+        }
+      ]
+    },
+    {
+      "image": "../normal-attempt1/21-primary-4.png",
+      "sha256": "d9d396db26b7d94c755e3825accfac674ff27e5725bd16eab5ff6d66da670350",
+      "clockRoi": [
+        70,
+        8,
+        145,
+        42
+      ],
+      "mostCommonRgb": [
+        {
+          "rgb": [
+            250,
+            248,
+            255
+          ],
+          "pixels": 2118
+        },
+        {
+          "rgb": [
+            100,
+            99,
+            102
+          ],
+          "pixels": 190
+        },
+        {
+          "rgb": [
+            160,
+            159,
+            163
+          ],
+          "pixels": 25
+        },
+        {
+          "rgb": [
+            190,
+            189,
+            194
+          ],
+          "pixels": 19
+        },
+        {
+          "rgb": [
+            150,
+            149,
+            153
+          ],
+          "pixels": 16
+        }
+      ]
+    }
+  ]
+}

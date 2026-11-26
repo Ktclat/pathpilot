@@ -1,0 +1,38 @@
+{
+  "capturedUtc": "2026-11-26T16:32:12.243045+00:00",
+  "sourceCommit": "b637973",
+  "package": "dev.pathpilot.app.capture",
+  "device": {
+    "api": 35,
+    "pixels": "720x1280",
+    "density": 320,
+    "fontScale": 1.0,
+    "systemNightMode": "no"
+  },
+  "steps": [
+    "After large test restored density override and font scale.",
+    "Launched MainActivity and waited for configured sharing screen.",
+    "Opened Settings, chose Dark through Theme picker.",
+    "Switched wallpaper colors off, kept same running Activity and waited 15 seconds.",
+    "Captured original screenshot and dumpsys window without restarting app or changing system night mode."
+  ],
+  "observations": [
+    "Steady dark backgrounds cover both system bars; white status and navigation controls visible.",
+    "MainActivity window is fullscreen (720x1280), visible, with no LIGHT_STATUS_BARS or LIGHT_NAVIGATION_BARS appearance flags.",
+    "No persistent white system-bar background reproduced in this manual steady-state check; earlier test recreation screenshot remains archived."
+  ],
+  "files": [
+    {
+      "sha256": "8b3bec16f46420b3e94d9684b7b5b8b7f908252c43ac83301eefc21db5fb9807",
+      "name": "02-dark-dynamic.png"
+    },
+    {
+      "sha256": "483f6df5a2c62b6325f181db0b2f03e6759da684518446a5d8b78487a619aed6",
+      "name": "03-dark-fixed-steady.png"
+    },
+    {
+      "sha256": "75ba3be568349e4f03f6e20c2fd940f9a1b0a22d889b7f6fff9bb31ab2cddefa",
+      "name": "dark-fixed-window.txt"
+    }
+  ]
+}

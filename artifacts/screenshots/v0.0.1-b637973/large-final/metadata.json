@@ -1,0 +1,19 @@
+{
+  "startedUtc": "2026-11-26T16:25:03Z",
+  "classes": "dev.pathpilot.app.ui.settings.SettingsFlowTest#largeSystemFontKeepsSettingsAndMcpControlsReachable",
+  "gitBase": "b6379733c5d9f9fc30b7ddd4ba24630c15120977",
+  "worktreeDiffSha256": "e0f27e2a6a8adb509ad6f142f518400817db491416926dfdb2f2a5ac6abc86d5",
+  "apkSha256": {
+    "capture.apk": "31474b267a7ef3ccf5ae5b07011bc74b28963de92f865c3d60e5f8b67918666e",
+    "capture-test.apk": "064b698f02c46e816cfa0eae0975c641bdafce4f25d2c5d004f428402ead5a0b"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320\nOverride density: 360",
+    "fontScale": "1.5"
+  },
+  "sourceEvidence": "Same archived APKs as normal-attempt1; source manifest copied from that build, not current worktree.",
+  "sourceManifestSha256": "b78282bbe5d08e4cc02f85019ba6b36cda2e8e3c5b4c73ad59b94616171becc9"
+}

@@ -1,0 +1,205 @@
+{
+  "recordedUtc": "2026-11-26T17:17:50.682112+00:00",
+  "sourceCommit": "ee2b4dd539aecad2a98f22b4c33dee15f300c6d6",
+  "package": "dev.pathpilot.app.capture",
+  "versionName": "0.0.1-ee2b4dd",
+  "versionCode": 12,
+  "captureApkSha256": "4cf8e85ffa679b6178028c7635c2e8faeac32d780ec0e8e6b315d88d1a0a5e1a",
+  "device": {
+    "serial": "emulator-5554",
+    "sdk": 35,
+    "abi": "x86_64",
+    "emulator": "pathpilot-api35; TCG, no KVM",
+    "resolution": "720x1280",
+    "density": 320,
+    "fontScale": 1.0,
+    "systemNightMode": "no",
+    "language": "zh-CN"
+  },
+  "captureMethod": "adb exec-out screencap -p; original pixels; no image editing",
+  "preferences": {
+    "monet": false,
+    "initialTheme": "dark"
+  },
+  "sequence": [
+    "Cold start into saved dark theme, wait 15 seconds, capture01 and window/activity dumps.",
+    "Open Settings and theme dialog, capture02; Launcher3 service dump while popup visible.",
+    "Select Light, wait 15 seconds, capture03/window/taskbar.",
+    "Select Dark in the same MainActivity, wait15 seconds, capture04/window/activity/taskbar.",
+    "Scroll Settings and open About, capture05; no browser launch.",
+    "Open Models > Add provider > DeepSeek, wait15 seconds, capture06/fullscreen Dialog window; no API key entered, provider not saved."
+  ],
+  "windowEvidence": {
+    "sameMainActivityWindowFor01And03And04": "b6bef64",
+    "darkEditorFocusedDialogWindow": "52029e8",
+    "mainWindowAppearance": {
+      "01": "No LIGHT_STATUS_BARS or LIGHT_NAVIGATION_BARS in window attrs.",
+      "03": "LIGHT_STATUS_BARS and LIGHT_NAVIGATION_BARS in window attrs; legacy vsysui light flags also present.",
+      "04": "No LIGHT_STATUS_BARS or LIGHT_NAVIGATION_BARS in window attrs.",
+      "06": "Focused Dialog has neither LIGHT_STATUS_BARS nor LIGHT_NAVIGATION_BARS."
+    },
+    "decorViewSystemUiVisibility": "Not directly exposed by saved dumpsys activity top output. Window attrs above are separate evidence.",
+    "navigationHost": "Launcher3 Taskbar (window4ed1b26)",
+    "taskbarDumpService": "com.android.launcher3/com.android.quickstep.TouchInteractionService",
+    "taskbarDarkIntensity": {
+      "02_darkPicker": 0.0,
+      "03_light": 1.0,
+      "04_dark": 0.0
+    },
+    "taskbarOnBackgroundNavButtonColorOverride": {
+      "02": 1.0,
+      "03": 1.0,
+      "04": 1.0
+    }
+  },
+  "pixelMeasurements": [
+    {
+      "image": "01-cold-dark-steady.png",
+      "homePixelAt359x1232": [
+        69,
+        70,
+        79,
+        255
+      ],
+      "navigationBackgroundAt10x1232": [
+        27,
+        36,
+        28,
+        255
+      ]
+    },
+    {
+      "image": "03-light-steady.png",
+      "homePixelAt359x1232": [
+        69,
+        70,
+        79,
+        255
+      ],
+      "navigationBackgroundAt10x1232": [
+        235,
+        240,
+        231,
+        255
+      ]
+    },
+    {
+      "image": "04-toggled-dark-steady.png",
+      "homePixelAt359x1232": [
+        69,
+        70,
+        79,
+        255
+      ],
+      "navigationBackgroundAt10x1232": [
+        27,
+        36,
+        28,
+        255
+      ]
+    },
+    {
+      "image": "06-provider-editor-dark-steady.png",
+      "homePixelAt359x1232": [
+        69,
+        70,
+        79,
+        255
+      ],
+      "navigationBackgroundAt10x1232": [
+        16,
+        24,
+        17,
+        255
+      ]
+    }
+  ],
+  "observations": [
+    "Dark status-bar clock and icons are white/readable, including final full-screen ProviderEditor. Final automated light editor screenshots also show readable gray status clock.",
+    "Home button remains RGB(69,70,79) in dark/light/dark stable screenshots; dark background RGB(27,36,28) yields low contrast on this emulator.",
+    "App appearance flags and Launcher3 dark intensity follow selected theme. The drawing override remains1.0; this is recorded evidence, not a proven root cause.",
+    "Previous b637973 steady dark capture had white Home pixels on the same AVD; current cold-state rendering differs. Cross-device reproduction remains unverified. No app theme workaround or system component restart was performed."
+  ],
+  "files": [
+    {
+      "name": "01-cold-dark-activity.txt",
+      "bytes": 87548,
+      "sha256": "c5a9c734d4bb326275d0fb5246e1ee05045ceccfd5cb11a036ebb7b08f7726d0"
+    },
+    {
+      "name": "01-cold-dark-steady.png",
+      "bytes": 78209,
+      "sha256": "625633202ffe9a40502d6c4ac1cc6bd09c450a5a866080e9aae05bbd15a32b26"
+    },
+    {
+      "name": "01-cold-dark-window.txt",
+      "bytes": 53272,
+      "sha256": "30e6a8d5427b2f7429eb2613843ab6c5906d5bfdef2d437359e1887bb61ddcfb"
+    },
+    {
+      "name": "02-theme-picker-dark.png",
+      "bytes": 62994,
+      "sha256": "4be07d99f5ca27a556af33d202d9a25fd453157c59e42c763b4f259c6fb5653a"
+    },
+    {
+      "name": "02-theme-picker-taskbar.txt",
+      "bytes": 25602,
+      "sha256": "572f41f056949940a4ddfb1afb96518cc3f5c0de6d5b561b25e784dfb18c322a"
+    },
+    {
+      "name": "03-light-steady.png",
+      "bytes": 70833,
+      "sha256": "96c3e909126a27493c888594b4378d6db12d3ef97b3cac4dc10642d09055fd60"
+    },
+    {
+      "name": "03-light-taskbar.txt",
+      "bytes": 25598,
+      "sha256": "c1f1751301afb5e4f7fc5dcf6604127d3d013c28c3f462e16c743a7e1a1f58cb"
+    },
+    {
+      "name": "03-light-window.txt",
+      "bytes": 53445,
+      "sha256": "acd329891b8881af69881f28d21315d5d18b073ae18ce1b3b615b534209c648d"
+    },
+    {
+      "name": "04-toggled-dark-activity.txt",
+      "bytes": 87865,
+      "sha256": "97c558753a733edda699d8ff925808d0d005cd928117a43282a95be3b3ad91e1"
+    },
+    {
+      "name": "04-toggled-dark-steady.png",
+      "bytes": 70289,
+      "sha256": "637e0800ebf4e32df679e5c26b085054989556f254c94a0c3efe1149af3d7d65"
+    },
+    {
+      "name": "04-toggled-dark-taskbar.txt",
+      "bytes": 25602,
+      "sha256": "572f41f056949940a4ddfb1afb96518cc3f5c0de6d5b561b25e784dfb18c322a"
+    },
+    {
+      "name": "04-toggled-dark-window.txt",
+      "bytes": 53272,
+      "sha256": "69b7e03a7bcfe279d9e95ef7eb01d02cf8f8d64d143e5f52b60d180ff6fcd523"
+    },
+    {
+      "name": "05-about-final-version.png",
+      "bytes": 69011,
+      "sha256": "c140779625fb063a5ff6d638c065b3c1d2f5bdf160eaf3093f5c9e0dff670e43"
+    },
+    {
+      "name": "05-package-version.txt",
+      "bytes": 7232,
+      "sha256": "97bb07099f96bf59dd5c3a3fe387b7598c0f32def2d51c9c62dc8bdf4df89cee"
+    },
+    {
+      "name": "06-provider-editor-dark-steady.png",
+      "bytes": 72702,
+      "sha256": "341d89c1b54627eb9bf643a11ad1ef096e843cf94aa2a1add8a1e04ee59e80fa"
+    },
+    {
+      "name": "06-provider-editor-dark-window.txt",
+      "bytes": 54556,
+      "sha256": "244b4352b9ed6d92216cef5b44f0e00da7dddad4aa98118e3f492560de4ffbab"
+    }
+  ]
+}

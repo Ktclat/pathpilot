@@ -1,0 +1,59 @@
+{
+  "startedUtc": "2026-11-26T16:25:03Z",
+  "classes": "dev.pathpilot.app.ui.settings.SettingsFlowTest#largeSystemFontKeepsSettingsAndMcpControlsReachable",
+  "gitBase": "b6379733c5d9f9fc30b7ddd4ba24630c15120977",
+  "worktreeDiffSha256": "e0f27e2a6a8adb509ad6f142f518400817db491416926dfdb2f2a5ac6abc86d5",
+  "apkSha256": {
+    "capture.apk": "31474b267a7ef3ccf5ae5b07011bc74b28963de92f865c3d60e5f8b67918666e",
+    "capture-test.apk": "064b698f02c46e816cfa0eae0975c641bdafce4f25d2c5d004f428402ead5a0b"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320\nOverride density: 360",
+    "fontScale": "1.5"
+  },
+  "sourceEvidence": "Same archived APKs as normal-attempt1; source manifest copied from that build, not current worktree.",
+  "sourceManifestSha256": "b78282bbe5d08e4cc02f85019ba6b36cda2e8e3c5b4c73ad59b94616171becc9",
+  "elapsedSeconds": 215.617,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "1",
+      "stream": ".",
+      "test": "largeSystemFontKeepsSettingsAndMcpControlsReachable",
+      "statusCode": 0
+    }
+  ],
+  "images": [
+    {
+      "name": "14-settings-large-font.png",
+      "bytes": 64654,
+      "sha256": "89b16c138c108a0dac92c8481f0782c5239232c2d3d5c164bbbc4eca91e6dc7a"
+    },
+    {
+      "name": "14a-navigation-large-font.png",
+      "bytes": 94815,
+      "sha256": "f486b903fa81b664d61d7a9bc63e347310a97e9429eab0e6aa79d17506bcf20e"
+    },
+    {
+      "name": "15-backup-large-font.png",
+      "bytes": 73668,
+      "sha256": "3a73e70e2134d029a69a1d6e76e8955820f5b496985ddbc7d149b65f796cdea0"
+    },
+    {
+      "name": "16-mcp-editor-large-font.png",
+      "bytes": 58654,
+      "sha256": "b1ccdfcf962d2203916825052250a6346c75e42dfaebec71db5423bc5f8b3b16"
+    },
+    {
+      "name": "16a-mcp-root-large-font.png",
+      "bytes": 85980,
+      "sha256": "333bf4e0ad816d632225ecd6ecf48264068f7efbfca6520fd2e0adf9e9d884f4"
+    }
+  ]
+}

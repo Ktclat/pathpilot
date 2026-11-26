@@ -1,0 +1,151 @@
+{
+  "startedUtc": "2026-11-26T16:42:17Z",
+  "classes": "dev.pathpilot.app.ui.settings.SettingsFlowTest#fourPrimaryPagesPreserveListsAndUseSecondaryDetails,dev.pathpilot.app.ui.settings.SettingsFlowTest#themeMonetAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.McpFlowTest#connectionToolsAndIndependentSharingReachAnActualHttpUpstream",
+  "gitBase": "4e19d6e5365defe5df9cc080da1a5f5e65d9f9cb",
+  "worktreeDiffSha256": "7345a7f1628798ba2ea6a471b9b7e0e2cec6d4381173b21eb239a760e3df63da",
+  "apkSha256": {
+    "capture.apk": "f627cd48eee30d924f2afa3239e0ce1ca9c67ee1dab10dbb9edc56a7b280da36",
+    "capture-test.apk": "c30a12fea484db1184c11504c922b1f17adbd5361aea01cfc4fd10b3f96d5777"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0"
+  },
+  "sourceManifestSha256": "6d9380b7ce97a40b61e5230842f755bceb824c72d4c6b6cadcdb0fb0b1a14337",
+  "elapsedSeconds": 299.465,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "3",
+      "stream": ".",
+      "test": "fourPrimaryPagesPreserveListsAndUseSecondaryDetails",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+      "current": "2",
+      "id": "AndroidJUnitRunner",
+      "numtests": "3",
+      "stream": ".",
+      "test": "themeMonetAndLanguageChoicesPersistInTheNativeActivity",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.McpFlowTest",
+      "current": "3",
+      "id": "AndroidJUnitRunner",
+      "numtests": "3",
+      "stream": ".",
+      "test": "connectionToolsAndIndependentSharingReachAnActualHttpUpstream",
+      "statusCode": 0
+    }
+  ],
+  "images": [
+    {
+      "name": "01-settings-light.png",
+      "bytes": 66420,
+      "sha256": "0b71c0bfd7e8d1f41923e21302a2f81738699cd20d9725c9aa16786500f36042"
+    },
+    {
+      "name": "02-theme-picker.png",
+      "bytes": 58025,
+      "sha256": "451061aa56d0cd402ca77d0652c9c39896526efe564c9fe442d806fc03bb6d3d"
+    },
+    {
+      "name": "03-settings-dark.png",
+      "bytes": 63322,
+      "sha256": "042f2aae8bbd7304ce7adf78289fe77371d0c05e2449f10349d9ccc65082cb83"
+    },
+    {
+      "name": "04-language-picker.png",
+      "bytes": 58066,
+      "sha256": "ac677f99a387a027c00faf741dad4f97d9db05e1a78702ae884bf3542f18156d"
+    },
+    {
+      "name": "05-settings-english.png",
+      "bytes": 67740,
+      "sha256": "911338057a2f6dab2f1cb61d07a8f5638479d91bcbd78ed8dca19f0fd10778e1"
+    },
+    {
+      "name": "06-settings-backup-english.png",
+      "bytes": 70138,
+      "sha256": "9c82efa9f03d2cacc6b14ce2c07106f5adc5931fe76713fd27348f4e099dcd7b"
+    },
+    {
+      "name": "09-mcp-editor.png",
+      "bytes": 57620,
+      "sha256": "bdca15dd9db1cc3b0cdf6610c5c38e7bb8a42611404edd949474577b227927ad"
+    },
+    {
+      "name": "09a-mcp-root.png",
+      "bytes": 38711,
+      "sha256": "22e500985e817a8f7c674dadda5bf9eea89eed73fe6be89e8cf45b55da5fba56"
+    },
+    {
+      "name": "10-mcp-tools.png",
+      "bytes": 86007,
+      "sha256": "cdabf3cad814ccf08b9b5bb7677cea9ee5a235348f9121a8648ded576c9d9a04"
+    },
+    {
+      "name": "10a-mcp-access.png",
+      "bytes": 76996,
+      "sha256": "f5c7e4cdc58945ebe2376a3c46e23d4a4849a01a01c1210e16dc2975e8f41617"
+    },
+    {
+      "name": "11-mcp-sharing.png",
+      "bytes": 59251,
+      "sha256": "53c48edc9558b4596881efee79c8290e64f33dafb33993e01fe49811c20cb38e"
+    },
+    {
+      "name": "12-mcp-calls.png",
+      "bytes": 79709,
+      "sha256": "a340f98e2a2c12d76dede4ab29b650ad61d9ce0fec90cf849a82043ab8706eb3"
+    },
+    {
+      "name": "12a-mcp-success-call.png",
+      "bytes": 81638,
+      "sha256": "60698e8f547db89f2043018ec820a854e33a2329777d6d78d7a670da13688301"
+    },
+    {
+      "name": "17-primary-0.png",
+      "bytes": 71101,
+      "sha256": "c92a3411f47aa0308337471a20d83a6d7d35fef1d9563845182aad1d729aac0a"
+    },
+    {
+      "name": "18-primary-1.png",
+      "bytes": 101567,
+      "sha256": "cbab6fe601dea1c04cc9d1405c8899974fc6299e0da922abf5bf755b6fb17ccf"
+    },
+    {
+      "name": "19-primary-2.png",
+      "bytes": 60015,
+      "sha256": "07467c726912197d133071c8e85515276c0ff16161e423f3b339b7cd7bd00ba3"
+    },
+    {
+      "name": "20-primary-3.png",
+      "bytes": 66420,
+      "sha256": "0b71c0bfd7e8d1f41923e21302a2f81738699cd20d9725c9aa16786500f36042"
+    },
+    {
+      "name": "21-statistics-secondary.png",
+      "bytes": 49014,
+      "sha256": "a26ca8feaa712db60355d00b676a15e9d14a849a5419d2ff2bfdf7c911216a55"
+    },
+    {
+      "name": "21a-provider-models-secondary.png",
+      "bytes": 55673,
+      "sha256": "4f9c734eda11ced6c5d83ae136e94779193756e02248bd1a978517ef13fd1504"
+    },
+    {
+      "name": "22-mcp-notification-entry.png",
+      "bytes": 80455,
+      "sha256": "01c6b2f404a0c7c044455597e05a37bf019a3ef48c122713dd5fcf1c6a3a4a8c"
+    }
+  ]
+}

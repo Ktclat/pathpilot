@@ -1,0 +1,114 @@
+{
+  "startedUtc": "2026-11-26T16:51:38Z",
+  "classes": "dev.pathpilot.app.ui.providers.CodexModelsFlowTest,dev.pathpilot.app.ui.models.ProviderModelsFlowTest",
+  "gitBase": "4e19d6e5365defe5df9cc080da1a5f5e65d9f9cb",
+  "worktreeDiffSha256": "7345a7f1628798ba2ea6a471b9b7e0e2cec6d4381173b21eb239a760e3df63da",
+  "apkSha256": {
+    "capture.apk": "f627cd48eee30d924f2afa3239e0ce1ca9c67ee1dab10dbb9edc56a7b280da36",
+    "capture-test.apk": "c30a12fea484db1184c11504c922b1f17adbd5361aea01cfc4fd10b3f96d5777"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0"
+  },
+  "sourceEvidence": "Same archived APK pair as normal-attempt1; source manifest copied from that build, not current worktree.",
+  "sourceManifestSha256": "6d9380b7ce97a40b61e5230842f755bceb824c72d4c6b6cadcdb0fb0b1a14337",
+  "elapsedSeconds": 238.269,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.ui.providers.CodexModelsFlowTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "6",
+      "stream": ".",
+      "test": "expiredLoginShowsErrorAndCanRetryModelFetch",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.providers.CodexModelsFlowTest",
+      "current": "2",
+      "id": "AndroidJUnitRunner",
+      "numtests": "6",
+      "stream": ".",
+      "test": "signedInProviderFetchesCatalogSelectsModelAndSavesRoute",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.providers.CodexModelsFlowTest",
+      "current": "3",
+      "id": "AndroidJUnitRunner",
+      "numtests": "6",
+      "stream": ".",
+      "test": "signedOutProviderRequestsLoginWithoutCallingCatalog",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.models.ProviderModelsFlowTest",
+      "current": "4",
+      "id": "AndroidJUnitRunner",
+      "numtests": "6",
+      "stream": ".",
+      "test": "providerMasterSwitchPreservesEveryIndividualModelPreference",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.models.ProviderModelsFlowTest",
+      "current": "5",
+      "id": "AndroidJUnitRunner",
+      "numtests": "6",
+      "stream": ".",
+      "test": "firstLevelShowsProvidersAndDetailContainsOnlyTheirModels",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.models.ProviderModelsFlowTest",
+      "current": "6",
+      "id": "AndroidJUnitRunner",
+      "numtests": "6",
+      "stream": ".",
+      "test": "aliasAndUpstreamSearchCombineWithEnabledFilterAndScopedToggle",
+      "statusCode": 0
+    }
+  ],
+  "images": [
+    {
+      "name": "01-provider-entry.png",
+      "bytes": 55460,
+      "sha256": "5f138e94beee12082dcf75594483315a90978729987af5ee877cf6111f77402e"
+    },
+    {
+      "name": "01-provider-groups.png",
+      "bytes": 58039,
+      "sha256": "cbdd49abfcad6f4647ef28b43f0d55375b9709b821c4b2f58c998b9b6154f1a5"
+    },
+    {
+      "name": "01a-provider-settings.png",
+      "bytes": 72765,
+      "sha256": "789d2fe366049b54c2b276a697223f0089e74c140bf6af710e33764d49ac47af"
+    },
+    {
+      "name": "02-model-selection.png",
+      "bytes": 76745,
+      "sha256": "3cdb03cb60fa8298687d1b85cc151b8f667fa27f5d5c81cbe42fb963ed1f967d"
+    },
+    {
+      "name": "02-provider-models.png",
+      "bytes": 81731,
+      "sha256": "0a031fcbc83aafb85dfcae1108ff7772d895c59f34ddf3998f6c9245dfb1dd82"
+    },
+    {
+      "name": "03-auth-error.png",
+      "bytes": 80255,
+      "sha256": "178b23a8b9faed8a9621081f01722f1a7871c82a354591556926a3652aaffae1"
+    },
+    {
+      "name": "03-provider-disabled.png",
+      "bytes": 89073,
+      "sha256": "cf5cc9908c4b9f5c2eef7096908d65110cfbb8b67559790fc3711cc8f18794de"
+    }
+  ]
+}

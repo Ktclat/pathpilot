@@ -1,0 +1,95 @@
+{
+  "startedUtc": "2026-11-26T17:04:13Z",
+  "classes": "dev.pathpilot.app.ui.providers.ApiModelsFlowTest,dev.pathpilot.app.ui.providers.CodexModelsFlowTest",
+  "gitBase": "ee2b4dd539aecad2a98f22b4c33dee15f300c6d6",
+  "worktreeDiffSha256": "a462cb46d3b4668e46a05befa115635c21d50879265d8a52574a702bc92fb038",
+  "apkSha256": {
+    "capture.apk": "4cf8e85ffa679b6178028c7635c2e8faeac32d780ec0e8e6b315d88d1a0a5e1a",
+    "capture-test.apk": "db3003a9d68743c8c3fb7602fa697fd48bdba7050177181ed71c305485a8ed47"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0"
+  },
+  "sourceManifestSha256": "ec70ea4dc3c28783ace016b62122711e81aa71cf3b749311d576d68c1dfc2e30",
+  "elapsedSeconds": 192.663,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.ui.providers.ApiModelsFlowTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "4",
+      "stream": ".",
+      "test": "providerFetchOpensCatalogWithoutASecondClickAndSavesItsModel",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.providers.CodexModelsFlowTest",
+      "current": "2",
+      "id": "AndroidJUnitRunner",
+      "numtests": "4",
+      "stream": ".",
+      "test": "expiredLoginShowsErrorAndCanRetryModelFetch",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.providers.CodexModelsFlowTest",
+      "current": "3",
+      "id": "AndroidJUnitRunner",
+      "numtests": "4",
+      "stream": ".",
+      "test": "signedInProviderFetchesCatalogSelectsModelAndSavesRoute",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.providers.CodexModelsFlowTest",
+      "current": "4",
+      "id": "AndroidJUnitRunner",
+      "numtests": "4",
+      "stream": ".",
+      "test": "signedOutProviderRequestsLoginWithoutCallingCatalog",
+      "statusCode": 0
+    }
+  ],
+  "images": [
+    {
+      "name": "01-provider-entry.png",
+      "bytes": 55554,
+      "sha256": "9f9b012c8132757f79b36822e5437554c57800a31305bc33f0220e431645e9eb"
+    },
+    {
+      "name": "01a-provider-settings.png",
+      "bytes": 74882,
+      "sha256": "95b3a1183100db30620a0fe6be78af907b944a1b8e8ae3b8c11cdb934da8db56"
+    },
+    {
+      "name": "02-model-selection.png",
+      "bytes": 78764,
+      "sha256": "967e4246c8713c172503d24f1c67df00c3a7d03b664f7fa1cccf43ff44bfc805"
+    },
+    {
+      "name": "03-auth-error.png",
+      "bytes": 82539,
+      "sha256": "36042ccecc74ec958018f0c2f3d39c07d5ca82f975f70a8688ad23520a259f38"
+    },
+    {
+      "name": "23-api-provider-models.png",
+      "bytes": 55569,
+      "sha256": "addda4a9b1f1f11080b097aa1a7b8a359f7f668c2b57980867b76ad0aff96460"
+    },
+    {
+      "name": "24-api-model-selection.png",
+      "bytes": 79017,
+      "sha256": "a27dfbb144ad3b894ac4200f6a81e5e7abd5bd1a73a4ebe9b10c1bf93b758146"
+    },
+    {
+      "name": "25-api-model-saved.png",
+      "bytes": 80438,
+      "sha256": "72af0af5068ff399160b0e58779b6186fb27d4501eb82571e93cfa24bce3d07c"
+    }
+  ]
+}

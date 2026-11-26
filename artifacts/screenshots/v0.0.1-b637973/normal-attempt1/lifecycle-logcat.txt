@@ -1,0 +1,152 @@
+--------- beginning of system
+11-26 16:02:50.133   598   629 W ActivityTaskManager: Skip updateConfiguration because mWindowManager isn't set
+11-26 16:02:57.123   598   598 I ActivityTaskManager: Config changes=20005df8 {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port ?uimode ?night finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.2 ?fontWeightAdjustment}
+11-26 16:03:18.313   598   598 I ActivityTaskManager: Config changes=200 {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.4 ?fontWeightAdjustment}
+11-26 16:03:24.586   598   598 I ActivityTaskManager: Config changes=10008100 {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.6 fontWeightAdjustment=0}
+11-26 16:03:44.684   598   598 W ActivityTaskManager: callingPackage for (uid=-1, pid=0) has no WPC
+11-26 16:03:46.139   598   598 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.android.settings/.FallbackHome (has extras)} with LAUNCH_MULTIPLE from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=0
+--------- beginning of main
+11-26 16:03:56.852   598   629 I ActivityTaskManager: Displayed com.android.settings/.FallbackHome for user 0: +11s417ms
+11-26 16:04:20.390   598   632 I ActivityTaskManager: Config changes=100 {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.8 fontWeightAdjustment=0}
+11-26 16:04:25.556   598  1000 V ActivityTaskManager: Sending to IME proc com.android.inputmethod.latin new config {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} s.9 fontWeightAdjustment=0}
+11-26 16:04:41.102   598   629 I ActivityTaskManager: Restoring recents for user 0
+11-26 16:04:55.043   598   629 I ActivityTaskManager: Config changes=80000000 {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.2 s.18 fontWeightAdjustment=0}
+11-26 16:04:55.356   598   629 V ActivityTaskManager: Sending to IME proc com.android.inputmethod.latin new config {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.2 s.25 fontWeightAdjustment=0}
+11-26 16:04:56.167   598   629 W ActivityTaskManager: Current config: {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.2 s.18 fontWeightAdjustment=0} unchanged for IME proc com.android.inputmethod.latin
+11-26 16:04:58.370   598   632 W ActivityTaskManager: Activity top resumed state loss timeout for ActivityRecord{c20538b u0 com.android.settings/.FallbackHome t5 f}}
+11-26 16:04:58.374   598   632 W ActivityTaskManager: Activity pause timeout for ActivityRecord{c20538b u0 com.android.settings/.FallbackHome t5 f}}
+11-26 16:04:58.407   598  1431 W ActivityTaskManager: callingPackage for (uid=-1, pid=0) has no WPC
+11-26 16:05:01.007   598  1431 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.android.launcher3/.uioverrides.QuickstepLauncher (has extras)} with LAUNCH_SINGLE_TASK from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=0
+11-26 16:05:07.805   598   632 W ActivityTaskManager: Launch timeout has expired, giving up wake lock!
+11-26 16:05:34.573   598   629 I ActivityTaskManager: Displayed com.android.launcher3/.uioverrides.QuickstepLauncher for user 0: +34s47ms
+11-26 16:05:52.133   598  1377 I ActivityTaskManager: Config changes=1d00 {1.0 ?mcc0mnc [en_US] ldltr sw320dp w320dp h569dp 360dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.2 s.33 fontWeightAdjustment=0}
+11-26 16:05:52.403   598  1377 V ActivityTaskManager: Sending to IME proc com.android.inputmethod.latin new config {1.0 ?mcc0mnc [en_US] ldltr sw320dp w320dp h526dp 360dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1184) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.2 s.47 fontWeightAdjustment=0}
+11-26 16:05:57.389   598   632 I ActivityTaskManager: Config changes=40000000 {1.5 ?mcc0mnc [en_US] ldltr sw320dp w320dp h569dp 360dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.2 s.56 fontWeightAdjustment=0}
+11-26 16:05:57.553   598   632 V ActivityTaskManager: Sending to IME proc com.android.inputmethod.latin new config {1.5 ?mcc0mnc [en_US] ldltr sw320dp w320dp h526dp 360dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1184) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.2 s.70 fontWeightAdjustment=0}
+11-26 16:08:18.985   598  1266 I ActivityTaskManager: Config changes=1d00 {1.5 ?mcc0mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.2 s.79 fontWeightAdjustment=0}
+11-26 16:08:19.237   598  1266 V ActivityTaskManager: Sending to IME proc com.android.inputmethod.latin new config {1.5 ?mcc0mnc [en_US] ldltr sw360dp w360dp h586dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1172) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.2 s.109 fontWeightAdjustment=0}
+11-26 16:08:23.669   598   632 I ActivityTaskManager: Config changes=40000000 {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.2 s.118 fontWeightAdjustment=0}
+11-26 16:08:23.703   598   632 V ActivityTaskManager: Sending to IME proc com.android.inputmethod.latin new config {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h586dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1172) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.2 s.148 fontWeightAdjustment=0}
+11-26 16:08:28.821   598   629 I ActivityTaskManager: Config changes=80000000 {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.157 fontWeightAdjustment=0}
+11-26 16:08:29.103   598   629 V ActivityTaskManager: Sending to IME proc com.android.inputmethod.latin new config {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h586dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1172) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.188 fontWeightAdjustment=0}
+11-26 16:08:29.719   598   629 W ActivityTaskManager: Current config: {1.0 ?mcc0mnc [en_US] ldltr sw360dp w360dp h586dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1172) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.157 fontWeightAdjustment=0} unchanged for IME proc com.android.inputmethod.latin
+11-26 16:08:56.040   598   630 W ActivityTaskManager:   Not force finishing home activity com.android.launcher3/.uioverrides.QuickstepLauncher
+11-26 16:08:57.387   598  1520 W ActivityTaskManager: Failed for dead process. ClientTransactionItem=WindowContextInfoChangeItem{clientToken=null, info=null} owner=ProcessRecord{7473e91 1248:com.android.launcher3/u0a121}
+11-26 16:09:43.206   598  2038 W ActivityTaskManager: Failed for dead process. ClientTransactionItem=WindowContextInfoChangeItem{clientToken=null, info=null} owner=ProcessRecord{bfa04d8 915:com.android.systemui/u0a123}
+11-26 16:09:43.536   598   630 D ActivityTaskManager: Top Process State changed to PROCESS_STATE_TOP_SLEEPING
+11-26 16:09:45.618   598   632 W ActivityTaskManager: Activity top resumed state loss timeout for ActivityRecord{c0f493a u0 com.android.launcher3/.uioverrides.QuickstepLauncher t35}
+11-26 16:09:45.625   598   632 W ActivityTaskManager: Activity pause timeout for ActivityRecord{c0f493a u0 com.android.launcher3/.uioverrides.QuickstepLauncher t35}
+11-26 16:10:38.290   598  1400 W ActivityTaskManager: Failed for dead process. ClientTransactionItem=WindowContextInfoChangeItem{clientToken=null, info=null} owner=ProcessRecord{a936f94 2519:com.android.systemui/u0a123}
+11-26 16:11:04.929   598   621 I ActivityTaskManager: Config changes=3 {1.0 310mcc260mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.196 fontWeightAdjustment=0}
+11-26 16:11:05.031   598   621 V ActivityTaskManager: Sending to IME proc com.android.inputmethod.latin new config {1.0 310mcc260mnc [en_US] ldltr sw360dp w360dp h592dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1184) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.228 fontWeightAdjustment=0}
+11-26 16:11:16.617   598  2463 D ActivityTaskManager: Top Process State changed to PROCESS_STATE_TOP
+11-26 16:13:53.846   598   621 W ActivityTaskManager: callingPackage for (uid=2000, pid=2950) has no WPC
+11-26 16:13:54.036   598   621 I ActivityTaskManager: START u0 {flg=0x10000000 cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity} with LAUNCH_MULTIPLE from uid 2000 (BAL_ALLOW_PERMISSION) result code=0
+11-26 16:13:55.242   598  2462 W ActivityTaskManager: takeTaskSnapshot: taskId=11 not found or not visible
+11-26 16:14:03.608   598   629 I ActivityTaskManager: Displayed dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity for user 0: +9s670ms
+11-26 16:14:04.646   598   632 W ActivityTaskManager: Launch timeout has expired, giving up wake lock!
+11-26 16:15:12.973   598   621 W ActivityTaskManager: Force removing ActivityRecord{d34f087 u0 dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity t44 f}}: app died, no saved state
+11-26 16:15:13.890   598   633 W ActivityTaskManager: Unable to send transaction to client proc dev.pathpilot.app.capture: no app thread
+11-26 16:15:16.338   598   633 W ActivityTaskManager: Unable to send transaction to client proc dev.pathpilot.app.capture: no app thread
+11-26 16:15:22.544  3067  3082 I TestRunner: run started: 3 tests
+11-26 16:15:22.570  3067  3082 I TestRunner: started: primaryPagesOpenSettingsAndReturnToTheSameDestination(dev.pathpilot.app.ui.settings.SettingsFlowTest)
+11-26 16:15:25.435   598  1399 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity} with LAUNCH_MULTIPLE from uid 10149 (BAL_ALLOW_PERMISSION) result code=0
+11-26 16:15:26.885   598  1000 W ActivityTaskManager: takeTaskSnapshot: taskId=11 not found or not visible
+11-26 16:15:33.731   598   629 I ActivityTaskManager: Displayed dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity for user 0: +8s142ms
+11-26 16:17:55.502   598  1399 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity} with LAUNCH_MULTIPLE from uid 10149 (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+11-26 16:18:03.818   598   632 W ActivityTaskManager: Activity top resumed state loss timeout for ActivityRecord{c6cd9b1 u0 dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity t46 f}}
+11-26 16:18:03.847   598   632 W ActivityTaskManager: Activity pause timeout for ActivityRecord{c6cd9b1 u0 dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity t46 f}}
+11-26 16:18:03.858   598   629 I ActivityTaskManager: Displayed dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +7s720ms
+11-26 16:18:05.051  3067  3082 I TestRunner: finished: primaryPagesOpenSettingsAndReturnToTheSameDestination(dev.pathpilot.app.ui.settings.SettingsFlowTest)
+11-26 16:18:05.407  3067  3082 I TestRunner: started: themeMonetAndLanguageChoicesPersistInTheNativeActivity(dev.pathpilot.app.ui.settings.SettingsFlowTest)
+11-26 16:18:08.345   598  1520 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity} with LAUNCH_MULTIPLE from uid 10149 (BAL_ALLOW_PERMISSION) result code=0
+11-26 16:18:09.326   598  2038 W ActivityTaskManager: takeTaskSnapshot: taskId=11 not found or not visible
+11-26 16:18:09.416   598  1520 W ActivityTaskManager: takeTaskSnapshot: taskId=46 not found or not visible
+11-26 16:18:12.382   598   629 I ActivityTaskManager: Displayed dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity for user 0: +3s930ms
+11-26 16:18:59.543   598  1520 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity} with LAUNCH_MULTIPLE from uid 10149 (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+11-26 16:19:04.127   598   629 I ActivityTaskManager: Displayed dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +3s461ms
+11-26 16:19:04.532  3067  3082 I TestRunner: finished: themeMonetAndLanguageChoicesPersistInTheNativeActivity(dev.pathpilot.app.ui.settings.SettingsFlowTest)
+11-26 16:19:04.689  3067  3082 I TestRunner: started: connectionToolsAndIndependentSharingReachAnActualHttpUpstream(dev.pathpilot.app.ui.settings.McpFlowTest)
+11-26 16:19:08.078   598  2038 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity} with LAUNCH_MULTIPLE from uid 10149 (BAL_ALLOW_PERMISSION) result code=0
+11-26 16:19:10.126   598  1432 W ActivityTaskManager: takeTaskSnapshot: taskId=11 not found or not visible
+11-26 16:19:10.170   598  1432 W ActivityTaskManager: takeTaskSnapshot: taskId=48 not found or not visible
+11-26 16:19:12.979   598   629 I ActivityTaskManager: Displayed dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity for user 0: +3s697ms
+11-26 16:20:26.145   598  2038 I ActivityTaskManager: START u0 {flg=0x30000000 cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity (has extras)} with LAUNCH_MULTIPLE from uid 10149 (BAL_ALLOW_VISIBLE_WINDOW) result code=3
+11-26 16:20:32.457   598  2038 I ActivityTaskManager: START u0 {flg=0x30000000 cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity (has extras)} with LAUNCH_MULTIPLE from uid 10149 (BAL_ALLOW_VISIBLE_WINDOW) result code=3
+11-26 16:20:34.376   598  2038 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity} with LAUNCH_MULTIPLE from uid 10149 (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+11-26 16:20:37.733   598   629 I ActivityTaskManager: Displayed dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +3s343ms
+11-26 16:21:22.530  3067  3082 E TestRunner: failed: connectionToolsAndIndependentSharingReachAnActualHttpUpstream(dev.pathpilot.app.ui.settings.McpFlowTest)
+11-26 16:21:22.576  3067  3082 E TestRunner: ----- begin exception -----
+11-26 16:21:22.576  3067  3082 E TestRunner: java.lang.AssertionError: Activity never becomes requested state "[DESTROYED]" (last lifecycle transition = "PAUSED")
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.test.core.app.ActivityScenario.close(ActivityScenario.java:421)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at dev.pathpilot.app.ui.settings.McpFlowTest.clean(McpFlowTest.kt:81)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at java.lang.reflect.Method.invoke(Native Method)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.test.internal.runner.junit4.statement.RunAfters.evaluate(RunAfters.java:80)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$testWithDisposal$1.evaluate(AndroidComposeTestRule.android.kt:426)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1$evaluate$1.invokeSuspend(AndroidComposeTestRule.android.kt:448)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1$evaluate$1.invoke(Unknown Source:8)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1$evaluate$1.invoke(Unknown Source:4)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1$1$1$1.invokeSuspend(ComposeUiTest.android.kt:689)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1$1$1$1.invoke(Unknown Source:8)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1$1$1$1.invoke(Unknown Source:2)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.EspressoLink.withStrategy(EspressoLink.android.kt:69)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1.invokeSuspend(ComposeUiTest.android.kt:686)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1.invoke(Unknown Source:8)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1.invoke(Unknown Source:4)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt__TestBuildersKt$runTest$2$1$1.invokeSuspend(TestBuilders.kt:318)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:101)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.test.TestDispatcher.processEvent$kotlinx_coroutines_test(TestDispatcher.kt:24)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.test.TestCoroutineScheduler.tryRunNextTaskUnless$kotlinx_coroutines_test(TestCoroutineScheduler.kt:99)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt__TestBuildersKt$runTest$2$1$workRunner$1.invokeSuspend(TestBuilders.kt:327)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:101)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:263)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:95)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:69)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:1)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:47)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:1)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersJvmKt.createTestResult(TestBuildersJvm.kt:10)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt__TestBuildersKt.runTest-8Mi8wO0(TestBuilders.kt:310)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt.runTest-8Mi8wO0(Unknown Source:1)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt__TestBuildersKt.runTest-8Mi8wO0(TestBuilders.kt:168)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt.runTest-8Mi8wO0(Unknown Source:1)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.runTest(ComposeUiTest.android.kt:665)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1.evaluate(AndroidComposeTestRule.android.kt:447)
+11-26 16:21:22.576  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at androidx.test.ext.junit.runners.AndroidJUnit4.run(AndroidJUnit4.java:162)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.Suite.runChild(Suite.java:128)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.Suite.runChild(Suite.java:27)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:68)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:59)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:467)
+11-26 16:21:22.595  3067  3082 E TestRunner: 	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2594)
+11-26 16:21:22.596  3067  3082 E TestRunner: ----- end exception -----
+11-26 16:21:22.662  3067  3082 I TestRunner: finished: connectionToolsAndIndependentSharingReachAnActualHttpUpstream(dev.pathpilot.app.ui.settings.McpFlowTest)
+11-26 16:21:22.757  3067  3082 I TestRunner: run finished: 3 tests, 1 failed, 0 ignored

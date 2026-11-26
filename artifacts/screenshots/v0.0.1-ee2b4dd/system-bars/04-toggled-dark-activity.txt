@@ -1,0 +1,798 @@
+TASK null id=35 userId=0 displayId=0(type=INTERNAL)
+  ACTIVITY com.android.launcher3/.uioverrides.QuickstepLauncher c0f493a pid=2335 userId=0 uid=10121 displayId=0(type=INTERNAL)
+    Local Activity 601ede5 State:
+      mResumed=false mStopped=true mFinished=false
+      mIsInMultiWindowMode=false mIsInPictureInPictureMode=false
+      mChangingConfigurations=false
+      mCurrentConfig={1.0 310mcc260mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=home mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.18 fontWeightAdjustment=0}
+      mLoadersStarted=true
+      Active Fragments in 6146bec:
+        #0: QsbFragment{41c0bb5 #0 id=0xffffffff qsb_view}
+          mFragmentId=#ffffffff mContainerId=#7f0902a5 mTag=qsb_view
+          mState=3 mIndex=0 mWho=android:fragment:0 mBackStackNesting=0
+          mAdded=true mRemoving=false mFromLayout=true mInLayout=true
+          mHidden=false mDetached=false mMenuVisible=true mHasMenu=false
+          mRetainInstance=false mRetaining=false mUserVisibleHint=true
+          mFragmentManager=FragmentManager{6146bec in HostCallbacks{e80524a}}
+          mHost=android.app.Activity$HostCallbacks@e80524a
+          mSavedViewState={2131296874=Bundle[{jail={2131230792=android.view.AbsSavedState$1@4f1c5bb, 2131230793=android.view.AbsSavedState$1@4f1c5bb, 2131230796=android.view.AbsSavedState$1@4f1c5bb, 2131230797=android.view.AbsSavedState$1@4f1c5bb, 2131230822=android.view.AbsSavedState$1@4f1c5bb, 2131230823=android.view.AbsSavedState$1@4f1c5bb, 2131230824=android.view.AbsSavedState$1@4f1c5bb, 2131230825=android.view.AbsSavedState$1@4f1c5bb, 2131296874=android.view.AbsSavedState$1@4f1c5bb}, inflation_id=-1}]}
+          mView=android.widget.FrameLayout{ed25ad8 V.E...... .......D 0,0-688,238}
+          Child FragmentManager{24eae31 in QsbFragment{41c0bb5}}:
+            FragmentManager misc state:
+              mHost=android.app.Activity$HostCallbacks@e80524a
+              mContainer=android.app.Fragment$1@f794916
+              mParent=QsbFragment{41c0bb5 #0 id=0xffffffff qsb_view}
+              mCurState=3 mStateSaved=true mDestroyed=false
+      Added Fragments:
+        #0: QsbFragment{41c0bb5 #0 id=0xffffffff qsb_view}
+      FragmentManager misc state:
+        mHost=android.app.Activity$HostCallbacks@e80524a
+        mContainer=android.app.Activity$HostCallbacks@e80524a
+        mCurState=3 mStateSaved=true mDestroyed=false
+    ViewRoot:
+      mAdded=true
+      mRemoved=false
+      mStopped=true
+      mPausedForTransition=false
+      mConsumeBatchedInputScheduled=false
+      mConsumeBatchedInputImmediatelyScheduled=false
+      mPendingInputEventCount=0
+      mProcessInputEventsScheduled=false
+      mTraversalScheduled=false
+      mReportNextDraw=false
+      mLastPerformTraversalsFailedReason=view_not_visible
+      mLastReportedMergedConfiguration={mGlobalConfig={1.0 310mcc260mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.498 fontWeightAdjustment=0} mOverrideConfig={1.0 310mcc260mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=home mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.18 fontWeightAdjustment=0}}
+      mLastConfigurationFromResources={1.0 310mcc260mnc [en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=home mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.18 fontWeightAdjustment=0}
+      mLastReportedActivityWindowInfo=ActivityWindowInfo{isEmbedded=false, taskBounds=Rect(0, 0 - 720, 1280), taskFragmentBounds=Rect(0, 0 - 720, 1280)}
+      mIsAmbientMode=false
+      mUnbufferedInputSource=0
+      mAttachInfo=       AttachInfo:
+        mHasWindowFocus=false
+        mWindowVisibility=8
+        mInTouchMode=true
+        mUnbufferedDispatchRequested=false
+      android.view.ViewRootImpl$NativePreImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$ImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$NativePostImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$WindowInputEventReceiver
+       mInputChannel: 95bd207 com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher (client)
+       mSeqMap: {}
+       mReceiverPtr:
+        mInputConsumer:
+          mResampleTouch = true
+          mChannel = 95bd207 com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher (client)
+          mMsgDeferred: false
+          Batches:
+              <empty>
+          mSeqChains:
+              <empty>
+          mConsumeTimes:
+              <empty>
+          
+        mBatchedInputEventPending: false
+        mOutboundQueue:
+          <empty>
+        
+    Choreographer:
+      mFrameScheduled=false
+      mLastFrameTime=4110963 (368667 ms ago)
+    InsetsController:
+        InsetsState
+          mDisplayFrame=Rect(0, 0 - 720, 1280)
+          mDisplayCutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}
+          mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}
+          mRoundedCornerFrame=Rect(0, 0 - 720, 1280)
+          mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(518, 0 - 682, 48) rotation=0}
+          mDisplayShape=DisplayShape{ spec=42744253 displayWidth=720 displayHeight=1280 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}
+            InsetsSource id=e8090000 type=statusBars frame=[0,0][720,48] visible=true flags= sideHint=TOP boundingRects=null
+            InsetsSource id=e8090005 type=mandatorySystemGestures frame=[0,0][720,48] visible=true flags= sideHint=TOP boundingRects=null
+            InsetsSource id=e8090006 type=tappableElement frame=[0,0][720,48] visible=true flags= sideHint=TOP boundingRects=null
+            InsetsSource id=3 type=ime frame=[0,0][0,0] visible=false flags= sideHint=NONE boundingRects=null
+            InsetsSource id=62d60001 type=navigationBars frame=[0,1184][720,1280] visible=true flags=INSETS_ROUNDED_CORNER sideHint=BOTTOM boundingRects=null
+            InsetsSource id=62d60004 type=systemGestures frame=[0,0][0,0] visible=true flags= sideHint=NONE boundingRects=null
+            InsetsSource id=62d60005 type=mandatorySystemGestures frame=[0,1184][720,1280] visible=true flags= sideHint=BOTTOM boundingRects=null
+            InsetsSource id=62d60006 type=tappableElement frame=[0,1184][720,1280] visible=true flags= sideHint=BOTTOM boundingRects=null
+            InsetsSource id=62d60024 type=systemGestures frame=[0,0][0,0] visible=true flags= sideHint=NONE boundingRects=null
+        mIsPredictiveBackImeHideAnimInProgress=false
+    WindowOnBackDispatcher:
+        Top Callback: com.android.launcher3.uioverrides.QuickstepLauncher$2@ed3065d
+        Callbacks: 
+          Callback: android.app.Activity$$ExternalSyntheticLambda0@bc58834 Priority=-1
+          Callback: com.android.launcher3.uioverrides.QuickstepLauncher$2@ed3065d Priority=0
+    ImeBackAnimationController:
+        mLastProgress=0.0
+        mTriggerBack=false
+        mIsPreCommitAnimationInProgress=false
+        mStartRootScrollY=0
+        isBackAnimationAllowed=true
+        isAdjustPan=false
+        isHideAnimationInProgress=false
+    View Hierarchy:
+      com.android.internal.policy.DecorView{346da80 I.E...... R.....ID 0,0-720,1280 aid=4}[QuickstepLauncher]
+        android.widget.LinearLayout{d80a775 V.E...... .......D 0,0-720,1280}
+          android.view.ViewStub{7ed0297 G.E...... ......I. 0,0-0,0 #10201cb android:id/action_mode_bar_stub}
+          android.widget.FrameLayout{37f1eac V.E...... .......D 0,0-720,1280 #1020002 android:id/content}
+            com.android.launcher3.LauncherRootView{112a45f V.E...... .......D 0,0-720,1280 #7f0901b4 app:id/launcher}
+              com.android.launcher3.dragndrop.DragLayer{5cb4fe V.E...... .......D 0,0-720,1280 #7f090122 app:id/drag_layer}
+                com.android.launcher3.views.AccessibilityActionsView{e7e4c84 V.E...... ........ 0,48-720,1184}
+                com.android.launcher3.Workspace{abe38b9 V.ED..... .......D 0,0-720,1280 #7f09039d app:id/workspace}
+                  com.android.launcher3.CellLayout{92efc6d V.ED..... .......D 0,48-720,1046}
+                    com.android.launcher3.ShortcutAndWidgetContainer{338e0a2 V.E...... .......D 16,22-704,976}
+                      com.android.launcher3.qsb.QsbContainerView{2f53133 V.E...... .......D 0,0-688,238 #7f0902a5 app:id/search_container_workspace}
+                        android.widget.FrameLayout{ed25ad8 V.E...... .......D 0,0-688,238}
+                          com.android.launcher3.qsb.QsbWidgetHostView{7d5acf0 VFE...... R.....ID 0,0-688,238 #7f09026a app:id/qsb_widget}
+                            android.widget.RelativeLayout{24bf269 V.E...... .......D 0,0-688,238}
+                              android.widget.LinearLayout{46864ee V.E...... ......ID 0,44-688,193 #7f080049 app:id/search_plate}
+                                android.widget.ImageView{d47ad8f V.ED..C.. ......ID 19,26-115,122 #7f080048 app:id/search_icon}
+                                android.widget.TextView{a00a81c VFED..C.. ......ID 115,31-660,118 #7f08004c app:id/search_widget_text}
+                                android.widget.LinearLayout{7284c25 G.E...... ......I. 0,0-0,0 #7f080068 app:id/voice_search_hint_container}
+                                  android.widget.ImageView{cf9e1fa VFED..C.. ......ID 0,0-0,0 #7f080067 app:id/voice_search_hint_close_button}
+                                  android.widget.LinearLayout{a9b93ab VFE...C.. ......I. 0,0-0,0 #7f080066 app:id/voice_search_hint}
+                                    android.widget.TextView{c7e2a08 V.ED..... ......I. 0,0-0,0}
+                                    android.widget.TextView{cb685a1 V.ED..... ......ID 0,0-0,0 #7f080069 app:id/voice_search_hint_text}
+                                android.widget.ImageButton{1f423c6 GFED..C.. ......I. 0,0-0,0 #7f08004d app:id/search_widget_voice_btn}
+                      com.android.launcher3.views.DoubleShadowBubbleTextView{8fdbf87 VFED..CL. ......ID 172,714-344,952 #5}
+                com.android.launcher3.Hotseat{dcfdeb4 V.ED..... .......D 0,1072-720,1280 #7f090188 app:id/hotseat}
+                  com.android.launcher3.ShortcutAndWidgetContainer{a94dadd V.E...... .......D 16,0-704,108}
+                    com.android.launcher3.views.DoubleShadowBubbleTextView{ffeb652 VFED..CL. ......ID 0,0-172,108 #1}
+                    com.android.launcher3.views.DoubleShadowBubbleTextView{6ccd23 VFED..CL. ......ID 172,0-344,108 #2}
+                    com.android.launcher3.views.DoubleShadowBubbleTextView{e63220 VFED..CL. ......ID 344,0-516,108 #3}
+                    com.android.launcher3.views.DoubleShadowBubbleTextView{a0947d9 VFED..CL. ......ID 516,0-688,108 #4}
+                  android.view.View{4ade59e V.ED..... ........ 360,96-360,96}
+                com.android.launcher3.pageindicators.PageIndicatorDots{35187f V.ED..... ........ 0,1024-720,1072 #7f090245 app:id/page_indicator}
+                com.android.launcher3.DropTargetBar{54c504c I.E...... ......ID 8,112-712,224 #7f090123 app:id/drop_target_bar}
+                  com.android.launcher3.DeleteDropTarget{8bd8895 V.ED..... ......ID 84,0-320,112 #7f090106 app:id/delete_target_text}
+                  com.android.launcher3.SecondaryDropTarget{8ebdaa V.ED..... ......ID 376,0-621,112 #7f09035c app:id/uninstall_target_text}
+                com.android.launcher3.views.ScrimView{60cbd9b V.ED..... ......ID 0,0-720,1280 #7f090296 app:id/scrim_view}
+                com.android.quickstep.views.LauncherRecentsView{6142538 I.ED..... ......I. 0,0-720,1280 #7f090243 app:id/overview_panel}
+                com.android.quickstep.views.OverviewActionsView{b3b1911 V.E...... ........ 0,944-720,1280 #7f090242 app:id/overview_actions_view}
+                  android.widget.LinearLayout{df30a76 I.E...... ......ID 236,48-483,144 #7f090042 app:id/action_buttons}
+                    android.widget.Button{aef9877 VFED..C.. ......ID 0,0-247,96 #7f09005d app:id/action_screenshot}
+                    android.widget.Button{b825ce4 GFED..C.. ......I. 0,0-0,0 #7f09005f app:id/action_split}
+                  android.widget.Button{b27354d IFED..C.. ......I. 219,48-501,144 #7f09005c app:id/action_save_app_pair}
+                com.android.launcher3.allapps.LauncherAllAppsContainerView{87d5802 G.ED..... ......I. 0,0-0,0 #7f090090 app:id/apps_view}
+                  android.widget.FrameLayout{1bb4513 G.E...... ......I. 0,0-0,0 #7f0900ab app:id/bottom_sheet_background}
+                    android.view.View{b7a6350 V.ED..... ......I. 0,0-0,0 #7f0900ad app:id/bottom_sheet_handle_area}
+                    android.view.View{d3ed949 V.ED..... ......I. 0,0-0,0 #7f0900ac app:id/bottom_sheet_handle}
+                  com.android.launcher3.allapps.SearchRecyclerView{16cf24e GFED..... ......I. 0,0-0,0 #7f0902af app:id/search_results_list_view}
+                  com.android.launcher3.allapps.AllAppsRecyclerView{38b1f6f VFED..... ......I. 0,0-0,0 #7f09008e app:id/apps_list_view}
+                  com.android.launcher3.allapps.FloatingHeaderView{a25a415 V.E...... ......I. 0,0-0,0 #7f090070 app:id/all_apps_header}
+                    com.android.launcher3.appprediction.PredictionRowView{4aa647c G.E...... ......I. 0,0-0,0 #7f09025b app:id/prediction_row}
+                      com.android.launcher3.BubbleTextView{b12c105 GFED..CL. ......I. 0,0-0,0 #7f090194 app:id/icon}
+                      com.android.launcher3.BubbleTextView{ca9e55a GFED..CL. ......I. 0,0-0,0 #7f090194 app:id/icon}
+                      com.android.launcher3.BubbleTextView{5d4438b GFED..CL. ......I. 0,0-0,0 #7f090194 app:id/icon}
+                      com.android.launcher3.BubbleTextView{774c68 GFED..CL. ......I. 0,0-0,0 #7f090194 app:id/icon}
+                    com.android.launcher3.appprediction.AppsDividerView{c836881 G.ED..... ......I. 0,0-0,0 #7f09008d app:id/apps_divider_view}
+                    com.android.launcher3.workprofile.PersonalWorkSlidingTabStrip{290fd26 G.E...... ......I. 0,0-0,0 #7f090300 app:id/tabs}
+                      android.widget.Button{6418d67 VFED..C.. ......I. 0,0-0,0 #7f0902fd app:id/tab_personal}
+                      android.widget.Button{7a8c714 VFED..C.. ......I. 0,0-0,0 #7f0902fe app:id/tab_work}
+                  android.widget.TextView{cfd0bbd V.ED..... ......ID 0,0-0,0 #7f09013e app:id/fast_scroller_popup}
+                  com.android.launcher3.views.RecyclerViewFastScroller{27fc5b2 V.ED..... ......I. 0,0-0,0 #7f09013d app:id/fast_scroller}
+                  com.android.launcher3.allapps.search.AppsSearchContainerLayout{84f9903 VFED..CL. ......I. 0,0-0,0 #7f0902a3 app:id/search_container_all_apps}
+    Looper (main, tid 2) {5d54080}
+      (Total messages: 0, polling=false, quitting=false)
+    ResourcesManager:
+      total apks: 6
+      resources: 10
+      resource impls: 7
+    1 dumpables:
+    #0: AutofillManager
+        AutofillManager:
+          sessionId: 2147483647
+          state: UNKNOWN
+          context: com.android.launcher3.uioverrides.QuickstepLauncher@601ede5
+          service client: null
+          client: android.view.autofill.AutofillClientController@873a6b9 (android.os.BinderProxy@1a5006f)
+          enabled: false
+          enabledAugmentedOnly: false
+          hasService: true
+          hasCallback: false
+          onInvisibleCalled false
+          last autofilled data: null
+          id of last fill UI shown: null
+          tracked views: null
+          fillable ids: null
+          entered ids: null
+          save trigger id: null
+          save on finish(): false
+          options: logLvl=2, compatMode=false, augmented=false, appDisabledExpiration=0
+          fill dialog enabled: false
+          fill dialog enabled hints: []
+          compat mode enabled: false
+          debug: true verbose: false
+        Autofill Compat Mode: false
+    Misc:
+    	deviceProfile isTransposed=false
+    	orientation=1
+    	mSystemUiController: mStates=[10, 0, 0, 0, 0]
+    	mActivityFlags: 
+    	mForceInvisible: 0
+    	mWorkspaceLoading=false
+    	mPendingRequestArgs=null mPendingActivityResult=null
+    	mRotationHelper: [mStateHandlerRequest=0, mCurrentStateRequest=0, mLastActivityFlags=5, mIgnoreAutoRotateSettings=false, mHomeRotationEnabled=false, mForceAllowRotationForTesting=false, mDestroyed=false]
+    	mAppWidgetHolder.isListening: false
+    DragLayer:
+    	dragLayerAlpha : [1.0]
+    StateManager:
+    	mLastStableState:Normal
+    	mCurrentStableState:Normal
+    	mState:Normal
+    	mRestState:null
+    	isInTransition:false
+    PopupDataProvider:
+    	mPackageUserToDotInfos:{}
+    DeviceProfile:
+    	1 dp = 2.0 px
+    	isTablet:false
+    	isPhone:true
+    	transposeLayoutWithOrientation:true
+    	isGestureMode:false
+    	isLandscape:false
+    	isMultiWindowMode:false
+    	isTwoPanels:false
+    	isLeftRightSplit:false
+    	windowX: 0.0px (0.0dp)
+    	windowY: 0.0px (0.0dp)
+    	widthPx: 720.0px (360.0dp)
+    	heightPx: 1280.0px (640.0dp)
+    	availableWidthPx: 720.0px (360.0dp)
+    	availableHeightPx: 1136.0px (568.0dp)
+    	mInsets.left: 0.0px (0.0dp)
+    	mInsets.top: 48.0px (24.0dp)
+    	mInsets.right: 0.0px (0.0dp)
+    	mInsets.bottom: 96.0px (48.0dp)
+    	aspectRatio:1.7777778
+    	isResponsiveGrid:false
+    	isScalableGrid:false
+    	inv.numRows: 4
+    	inv.numColumns: 4
+    	inv.numSearchContainerColumns: 4
+    	minCellSize: PointF(0.0, 0.0)dp
+    	cellWidthPx: 106.0px (53.0dp)
+    	cellHeightPx: 153.0px (76.5dp)
+    	getCellSize().x: 172.0px (86.0dp)
+    	getCellSize().y: 238.0px (119.0dp)
+    	cellLayoutBorderSpacePx Horizontal: 0.0px (0.0dp)
+    	cellLayoutBorderSpacePx Vertical: 0.0px (0.0dp)
+    	cellLayoutPaddingPx.left: 16.0px (8.0dp)
+    	cellLayoutPaddingPx.top: 22.0px (11.0dp)
+    	cellLayoutPaddingPx.right: 16.0px (8.0dp)
+    	cellLayoutPaddingPx.bottom: 22.0px (11.0dp)
+    	iconSizePx: 96.0px (48.0dp)
+    	iconTextSizePx: 26.0px (13.0dp)
+    	iconDrawablePaddingPx: 10.0px (5.0dp)
+    	numFolderRows: 3
+    	numFolderColumns: 4
+    	folderCellWidthPx: 132.0px (66.0dp)
+    	folderCellHeightPx: 155.0px (77.5dp)
+    	folderChildIconSizePx: 96.0px (48.0dp)
+    	folderChildTextSizePx: 26.0px (13.0dp)
+    	folderChildDrawablePaddingPx: 4.0px (2.0dp)
+    	folderCellLayoutBorderSpacePx.x: 0.0px (0.0dp)
+    	folderCellLayoutBorderSpacePx.y: 0.0px (0.0dp)
+    	folderContentPaddingLeftRight: 16.0px (8.0dp)
+    	folderTopPadding: 48.0px (24.0dp)
+    	folderFooterHeight: 112.0px (56.0dp)
+    	bottomSheetTopPadding: 70.0px (35.0dp)
+    	bottomSheetOpenDuration: 267
+    	bottomSheetCloseDuration: 267
+    	bottomSheetWorkspaceScale: 1.0
+    	bottomSheetDepth: 0.0
+    	allAppsShiftRange: 600.0px (300.0dp)
+    	allAppsOpenDuration: 600
+    	allAppsCloseDuration: 300
+    	allAppsIconSizePx: 103.0px (51.5dp)
+    	allAppsIconTextSizePx: 26.0px (13.0dp)
+    	allAppsIconDrawablePaddingPx: 16.0px (8.0dp)
+    	allAppsCellHeightPx: 240.0px (120.0dp)
+    	allAppsCellWidthPx: 135.0px (67.5dp)
+    	allAppsBorderSpacePxX: 32.0px (16.0dp)
+    	allAppsBorderSpacePxY: 32.0px (16.0dp)
+    	numShownAllAppsColumns: 4
+    	allAppsPadding.top: 0.0px (0.0dp)
+    	allAppsPadding.left: 0.0px (0.0dp)
+    	allAppsPadding.right: 0.0px (0.0dp)
+    	allAppsLeftRightMargin: 0.0px (0.0dp)
+    	hotseatBarSizePx: 208.0px (104.0dp)
+    	mHotseatColumnSpan: 4
+    	mHotseatWidthPx: 0.0px (0.0dp)
+    	hotseatCellHeightPx: 108.0px (54.0dp)
+    	hotseatBarBottomSpacePx: 112.0px (56.0dp)
+    	mHotseatBarEdgePaddingPx: 0.0px (0.0dp)
+    	mHotseatBarWorkspaceSpacePx: 0.0px (0.0dp)
+    	hotseatBarEndOffset: 0.0px (0.0dp)
+    	hotseatQsbSpace: 0.0px (0.0dp)
+    	hotseatQsbHeight: 0.0px (0.0dp)
+    	springLoadedHotseatBarTopMarginPx: 152.0px (76.0dp)
+    	getHotseatLayoutPadding(context).top: 0.0px (0.0dp)
+    	getHotseatLayoutPadding(context).bottom: 100.0px (50.0dp)
+    	getHotseatLayoutPadding(context).left: 16.0px (8.0dp)
+    	getHotseatLayoutPadding(context).right: 16.0px (8.0dp)
+    	numShownHotseatIcons: 4
+    	hotseatBorderSpace: 0.0px (0.0dp)
+    	isQsbInline: false
+    	hotseatQsbWidth: 0.0px (0.0dp)
+    	isTaskbarPresent:false
+    	isTaskbarPresentInApps:true
+    	taskbarHeight: 0.0px (0.0dp)
+    	stashedTaskbarHeight: 0.0px (0.0dp)
+    	taskbarBottomMargin: 0.0px (0.0dp)
+    	taskbarIconSize: 0.0px (0.0dp)
+    	desiredWorkspaceHorizontalMarginPx: 16.0px (8.0dp)
+    	workspacePadding.left: 0.0px (0.0dp)
+    	workspacePadding.top: 0.0px (0.0dp)
+    	workspacePadding.right: 0.0px (0.0dp)
+    	workspacePadding.bottom: 138.0px (69.0dp)
+    	iconScale: 1.0px (0.5dp)
+    	cellScaleToFit : 1.0px (0.5dp)
+    	extraSpace: 342.0px (171.0dp)
+    	unscaled extraSpace: 342.0px (171.0dp)
+    	maxEmptySpace: 0.0px (0.0dp)
+    	workspaceTopPadding: 0.0px (0.0dp)
+    	workspaceBottomPadding: 0.0px (0.0dp)
+    	overviewTaskMarginPx: 32.0px (16.0dp)
+    	overviewTaskIconSizePx: 96.0px (48.0dp)
+    	overviewTaskIconDrawableSizePx: 88.0px (44.0dp)
+    	overviewTaskIconDrawableSizeGridPx: 0.0px (0.0dp)
+    	overviewTaskThumbnailTopMarginPx: 128.0px (64.0dp)
+    	overviewActionsTopMarginPx: 48.0px (24.0dp)
+    	overviewActionsHeight: 96.0px (48.0dp)
+    	overviewActionsClaimedSpaceBelow: 96.0px (48.0dp)
+    	overviewActionsButtonSpacing: 72.0px (36.0dp)
+    	overviewPageSpacing: 32.0px (16.0dp)
+    	overviewRowSpacing: 0.0px (0.0dp)
+    	overviewGridSideMargin: 0.0px (0.0dp)
+    	dropTargetBarTopMarginPx: 64.0px (32.0dp)
+    	dropTargetBarSizePx: 112.0px (56.0dp)
+    	dropTargetBarBottomMarginPx: 32.0px (16.0dp)
+    	getCellLayoutSpringLoadShrunkTop(): 256.0px (128.0dp)
+    	getCellLayoutSpringLoadShrunkBottom(): 920.0px (460.0dp)
+    	workspaceSpringLoadedMinNextPageVisiblePx: 96.0px (48.0dp)
+    	getWorkspaceSpringLoadScale(): 0.66533065px (0.33266532dp)
+    	getCellLayoutHeight(): 998.0px (499.0dp)
+    	getCellLayoutWidth(): 720.0px (360.0dp)
+    	AllAppsStore Apps[] size: 14
+    	Package index and name: 0/com.android.calendar
+    	Package index and name: 1/com.android.camera2
+    	Package index and name: 2/com.android.contacts
+    	Package index and name: 3/com.android.deskclock
+    	Package index and name: 4/com.android.dialer
+    	Package index and name: 5/com.android.documentsui
+    	Package index and name: 6/com.android.gallery3d
+    	Package index and name: 7/com.android.messaging
+    	Package index and name: 8/com.android.quicksearchbox
+    	Package index and name: 9/com.android.settings
+    	Package index and name: 10/com.android.stk
+    	Package index and name: 11/dev.pathpilot.app
+    	Package index and name: 12/dev.pathpilot.app.capture
+    	Package index and name: 13/org.chromium.webview_shell
+
+--- logfile: log-0 ---
+11/24/26 11:21 AM LauncherProvider Migration failed: resetting launcher database
+11/24/26 11:22 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 11:22 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 11:23 AM SessionCommitReceiver Removing PromiseIcon for package: dev.pathpilot.app, install reason: 0, alreadyAddedPromiseIcon: false
+11/24/26 11:25 AM ModelWriter removing items from db . Reason: [removed because the corresponding package or component is removed. mOp=2 removedPackages=[com.android.devicelockcontroller] removedComponents=[]]
+11/24/26 11:26 AM ModelWriter removing items from db . Reason: [removed because the corresponding package or component is removed. mOp=2 removedPackages=[com.android.devicelockcontroller] removedComponents=[]]
+11/24/26 11:26 AM ModelWriter removing items from db . Reason: [removed because the corresponding package or component is removed. mOp=2 removedPackages=[com.android.devicelockcontroller] removedComponents=[]]
+11/24/26 11:26 AM ModelWriter removing items from db . Reason: [removed because the corresponding package or component is removed. mOp=2 removedPackages=[com.android.devicelockcontroller] removedComponents=[]]
+                                                                                                                                                                                                 11/24/26 11:38 AM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 11:38 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 11:38 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 11:39 AM SessionCommitReceiver Removing PromiseIcon for package: dev.pathpilot.app.capture, install reason: 0, alreadyAddedPromiseIcon: false
+11/24/26 11:41 AM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 11:42 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 11:42 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 11:42 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 11:42 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 11:42 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 11:42 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 11:42 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 11:42 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 1:00 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 1:01 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 1:01 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 1:01 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 1:27 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 1:28 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 1:28 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 1:28 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 1:28 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 1:28 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 1:28 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 3:08 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 3:09 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 3:09 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 3:09 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 3:09 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 3:09 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 3:51 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 3:52 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 3:52 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 3:54 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 3:55 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 3:55 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 4:19 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 4:20 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 4:20 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 4:21 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 4:21 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 4:21 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 5:03 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 5:04 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 5:04 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 5:09 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/24/26 5:10 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 5:10 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 5:10 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 5:10 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 5:10 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 5:10 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/24/26 5:10 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/24/26 5:10 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+
+--- logfile: log-1 ---
+11/25/26 12:52 AM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/25/26 12:53 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 12:53 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 12:54 AM ModelWriter removing items from db . Reason: [removed because the corresponding package or component is removed. mOp=2 removedPackages=[] removedComponents=[{com.android.stk/com.android.stk.StkMain}]]
+11/25/26 12:57 AM SessionCommitReceiver Removing PromiseIcon for package: dev.pathpilot.app.capture.test, install reason: 0, alreadyAddedPromiseIcon: false
+11/25/26 12:57 AM BaseIconCache Default icon returned for dev.pathpilot.app.capture.test
+11/25/26 1:26 AM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/25/26 1:26 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 1:26 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 1:40 AM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/25/26 1:40 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 1:40 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 1:40 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 1:40 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 4:42 AM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/25/26 4:43 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 4:43 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 4:48 AM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/25/26 4:48 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 4:48 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 4:48 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 4:48 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:26 AM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/25/26 5:27 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:27 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:30 AM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/25/26 5:31 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:31 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:37 AM DisplayController (CHANGE_SUPPORTED_BOUNDS) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 54 - 0, 108), availableSize=Point(720, 1118), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 63 - 108, 0), availableSize=Point(1172, 657), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 108), availableSize=Point(720, 1027), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(108, 63 - 0, 0), availableSize=Point(1172, 657), rotationHint=3}]}
+11/25/26 5:38 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:38 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:38 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:38 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:44 AM DisplayController (CHANGE_SUPPORTED_BOUNDS) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/25/26 5:45 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:45 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:45 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:45 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:45 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:45 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:45 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:45 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:49 AM DisplayController (CHANGE_SUPPORTED_BOUNDS) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 54 - 0, 108), availableSize=Point(720, 1118), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 63 - 108, 0), availableSize=Point(1172, 657), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 108), availableSize=Point(720, 1027), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(108, 63 - 0, 0), availableSize=Point(1172, 657), rotationHint=3}]}
+11/25/26 5:49 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:49 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:49 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:49 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:49 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:49 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:49 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:49 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:49 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:49 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:52 AM DisplayController (CHANGE_SUPPORTED_BOUNDS) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/25/26 5:53 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:53 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:53 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:53 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 5:53 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 5:53 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 10:10 AM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/25/26 10:11 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 10:11 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 10:12 AM ModelWriter removing items from db . Reason: [removed because the corresponding package or component is removed. mOp=2 removedPackages=[] removedComponents=[{com.android.stk/com.android.stk.StkMain}]]
+11/25/26 10:14 AM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/25/26 10:14 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 10:14 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/25/26 10:14 AM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/25/26 10:14 AM LoaderTask No pinned shortcuts found for user UserHandle{0}
+
+--- logfile: log-2 ---
+11/26/26 4:04 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/26/26 4:05 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:05 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:05 PM DisplayController (CHANGE_SUPPORTED_BOUNDS) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 54 - 0, 108), availableSize=Point(720, 1118), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 63 - 108, 0), availableSize=Point(1172, 657), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 108), availableSize=Point(720, 1027), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(108, 63 - 0, 0), availableSize=Point(1172, 657), rotationHint=3}]}
+11/26/26 4:05 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:05 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:06 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:06 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:06 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:06 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:06 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:06 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:08 PM DisplayController (CHANGE_SUPPORTED_BOUNDS) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/26/26 4:08 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:08 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:08 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:08 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:08 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:08 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:08 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:08 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:08 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:08 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:08 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:08 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:09 PM DisplayController (CTOR) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/26/26 4:09 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:09 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:24 PM DisplayController (CHANGE_SUPPORTED_BOUNDS) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 54 - 0, 108), availableSize=Point(720, 1118), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 63 - 108, 0), availableSize=Point(1172, 657), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 108), availableSize=Point(720, 1027), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(108, 63 - 0, 0), availableSize=Point(1172, 657), rotationHint=3}]}
+11/26/26 4:25 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:25 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:25 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:25 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:25 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:25 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:29 PM DisplayController (CHANGE_SUPPORTED_BOUNDS) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/26/26 4:29 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:29 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:29 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:29 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:29 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:29 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:56 PM DisplayController (CHANGE_SUPPORTED_BOUNDS) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 54 - 0, 108), availableSize=Point(720, 1118), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 63 - 108, 0), availableSize=Point(1172, 657), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 108), availableSize=Point(720, 1027), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(108, 63 - 0, 0), availableSize=Point(1172, 657), rotationHint=3}]}
+11/26/26 4:56 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:56 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 4:56 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 4:56 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 5:01 PM DisplayController (CHANGE_SUPPORTED_BOUNDS) perDisplayBounds: {CachedDisplayInfo{size=Point(720, 1280), cutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}, rotation=0}=[WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 48 - 0, 96), availableSize=Point(720, 1136), rotationHint=0}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(0, 56 - 96, 0), availableSize=Point(1184, 664), rotationHint=1}, WindowBounds{bounds=Rect(0, 0 - 720, 1280), insets=Rect(0, 145 - 0, 96), availableSize=Point(720, 1039), rotationHint=2}, WindowBounds{bounds=Rect(0, 0 - 1280, 720), insets=Rect(96, 56 - 0, 0), availableSize=Point(1184, 664), rotationHint=3}]}
+11/26/26 5:01 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 5:01 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+11/26/26 5:01 PM LoaderTask loadWorkspace: Packages with active install sessions: []
+11/26/26 5:01 PM LoaderTask No pinned shortcuts found for user UserHandle{0}
+    Data Model:
+     ---- workspace items 
+    	ItemInfo(id=1 type=APP container=# com.android.launcher3.logger.LauncherAtom$ContainerInfo@1a1bf6a
+hotseat {
+  index: 0
+} targetComponent=ComponentInfo{com.android.dialer/com.android.dialer.main.impl.MainActivity} screen=0 cell(0,0) span(1,1) minSpan(1,1) rank=0 user=UserHandle{0} title=Phone supportsMultiInstance=false nonResizeable=false)
+    	ItemInfo(id=2 type=APP container=# com.android.launcher3.logger.LauncherAtom$ContainerInfo@1a1ca63
+hotseat {
+  index: 1
+} targetComponent=ComponentInfo{com.android.messaging/com.android.messaging.ui.conversationlist.ConversationListActivity} screen=1 cell(1,0) span(1,1) minSpan(1,1) rank=0 user=UserHandle{0} title=Messaging supportsMultiInstance=false nonResizeable=false)
+    	ItemInfo(id=3 type=APP container=# com.android.launcher3.logger.LauncherAtom$ContainerInfo@1a1d55c
+hotseat {
+  index: 2
+} targetComponent=ComponentInfo{org.chromium.webview_shell/org.chromium.webview_shell.WebViewBrowserActivity} screen=2 cell(2,0) span(1,1) minSpan(1,1) rank=0 user=UserHandle{0} title=WebView Browser Tester supportsMultiInstance=false nonResizeable=false)
+    	ItemInfo(id=4 type=APP container=# com.android.launcher3.logger.LauncherAtom$ContainerInfo@1a1e055
+hotseat {
+  index: 3
+} targetComponent=ComponentInfo{com.android.camera2/com.android.camera.CameraLauncher} screen=3 cell(3,0) span(1,1) minSpan(1,1) rank=0 user=UserHandle{0} title=Camera supportsMultiInstance=false nonResizeable=true)
+    	ItemInfo(id=5 type=APP container=# com.android.launcher3.logger.LauncherAtom$ContainerInfo@1a425e2
+workspace {
+  grid_x: 1
+  grid_y: 3
+  page_index: 0
+} targetComponent=ComponentInfo{com.android.gallery3d/com.android.gallery3d.app.GalleryActivity} screen=0 cell(1,3) span(1,1) minSpan(1,1) rank=0 user=UserHandle{0} title=Gallery supportsMultiInstance=false nonResizeable=false)
+     ---- appwidget items 
+     ---- collection items 
+     ---- extra items 
+    	FixedContainerItems: id=-111 itemCount=0
+    	FixedContainerItems: id=-103 itemCount=0
+    	FixedContainerItems: id=-102 itemCount=0
+     ---- items id map 
+    	ItemInfo(id=1 type=APP container=# com.android.launcher3.logger.LauncherAtom$ContainerInfo@1a1bf6a
+hotseat {
+  index: 0
+} targetComponent=ComponentInfo{com.android.dialer/com.android.dialer.main.impl.MainActivity} screen=0 cell(0,0) span(1,1) minSpan(1,1) rank=0 user=UserHandle{0} title=Phone supportsMultiInstance=false nonResizeable=false)
+    	ItemInfo(id=2 type=APP container=# com.android.launcher3.logger.LauncherAtom$ContainerInfo@1a1ca63
+hotseat {
+  index: 1
+} targetComponent=ComponentInfo{com.android.messaging/com.android.messaging.ui.conversationlist.ConversationListActivity} screen=1 cell(1,0) span(1,1) minSpan(1,1) rank=0 user=UserHandle{0} title=Messaging supportsMultiInstance=false nonResizeable=false)
+    	ItemInfo(id=3 type=APP container=# com.android.launcher3.logger.LauncherAtom$ContainerInfo@1a1d55c
+hotseat {
+  index: 2
+} targetComponent=ComponentInfo{org.chromium.webview_shell/org.chromium.webview_shell.WebViewBrowserActivity} screen=2 cell(2,0) span(1,1) minSpan(1,1) rank=0 user=UserHandle{0} title=WebView Browser Tester supportsMultiInstance=false nonResizeable=false)
+    	ItemInfo(id=4 type=APP container=# com.android.launcher3.logger.LauncherAtom$ContainerInfo@1a1e055
+hotseat {
+  index: 3
+} targetComponent=ComponentInfo{com.android.camera2/com.android.camera.CameraLauncher} screen=3 cell(3,0) span(1,1) minSpan(1,1) rank=0 user=UserHandle{0} title=Camera supportsMultiInstance=false nonResizeable=true)
+    	ItemInfo(id=5 type=APP container=# com.android.launcher3.logger.LauncherAtom$ContainerInfo@1a425e2
+workspace {
+  grid_x: 1
+  grid_y: 3
+  page_index: 0
+} targetComponent=ComponentInfo{com.android.gallery3d/com.android.gallery3d.app.GalleryActivity} screen=0 cell(1,3) span(1,1) minSpan(1,1) rank=0 user=UserHandle{0} title=Gallery supportsMultiInstance=false nonResizeable=false)
+    ActivityTracker:
+    	mCurrentActivity=com.android.launcher3.uioverrides.QuickstepLauncher@601ede5
+    	mCallbacks=[]
+    DepthController
+    	mMaxBlurRadius=23
+    	mCrossWindowBlursEnabled=true
+    	mSurface=null
+    	mStateDepth=0.0
+    	mWidgetDepth=0.0
+    	mCurrentBlur=0
+    	mInEarlyWakeUp=false
+    	mIgnoreStateChangesDuringMultiWindowAnimation=false
+    	mPauseBlurs=false
+    	mWaitingOnSurfaceValidity=false
+
+QuickstepLauncher:
+    	mOrientationState: [this=RecentsOrientedState@58058751 mOrientationHandler=PortraitPagedViewHandler@91642122 mDisplayRotation=0 mTouchRotation=0 mRecentsActivityRotation=0 mRecentsRotation=0 isRecentsActivityRotationAllowed=false mSystemRotation=false mStateId=37248 mFlags=291]
+     SplitSelectDataHolder
+    	initialStagePosition= -1
+    	initialTaskId= -1
+    	secondTaskId= -1
+    	initialUser= null
+    	secondUser= null
+    	initialIntent= null
+    	secondIntent= null
+    	secondPendingIntent= null
+    	itemInfo= null
+    	splitEvent= null
+    	initialShortcut= null
+    	secondShortcut= null
+    HotseatPredictionController
+    	Flags: 
+    	mHotSeatItemsCount: 4
+    	mPredictedItems: []
+    PredictionRowView
+    	mPredictionsEnabled: false
+    	mPredictionUiUpdatePaused: false
+    	mNumPredictedAppsPerRow: 4
+    	mPredictedApps: []
+
+TASK 10149:dev.pathpilot.app.capture id=90 userId=0 displayId=0(type=INTERNAL)
+  ACTIVITY dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity ff40a3b pid=4983 userId=0 uid=10149 displayId=0(type=INTERNAL)
+    Local Activity 1d5603e State:
+      mResumed=true mStopped=false mFinished=false
+      mIsInMultiWindowMode=false mIsInPictureInPictureMode=false
+      mChangingConfigurations=false
+      mCurrentConfig={1.0 310mcc260mnc [zh_CN,en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.2 fontWeightAdjustment=0}
+      mLoadersStarted=true
+      Active Fragments in 29bb583:
+        #0: ReportFragment{3ec6300 #0 androidx.lifecycle.LifecycleDispatcher.report_fragment_tag}
+          mFragmentId=#0 mContainerId=#0 mTag=androidx.lifecycle.LifecycleDispatcher.report_fragment_tag
+          mState=5 mIndex=0 mWho=android:fragment:0 mBackStackNesting=0
+          mAdded=true mRemoving=false mFromLayout=false mInLayout=false
+          mHidden=false mDetached=false mMenuVisible=true mHasMenu=false
+          mRetainInstance=false mRetaining=false mUserVisibleHint=true
+          mFragmentManager=FragmentManager{29bb583 in HostCallbacks{3d05739}}
+          mHost=android.app.Activity$HostCallbacks@3d05739
+          Child FragmentManager{95eb17e in ReportFragment{3ec6300}}:
+            FragmentManager misc state:
+              mHost=android.app.Activity$HostCallbacks@3d05739
+              mContainer=android.app.Fragment$1@cda26df
+              mParent=ReportFragment{3ec6300 #0 androidx.lifecycle.LifecycleDispatcher.report_fragment_tag}
+              mCurState=5 mStateSaved=false mDestroyed=false
+      Added Fragments:
+        #0: ReportFragment{3ec6300 #0 androidx.lifecycle.LifecycleDispatcher.report_fragment_tag}
+      FragmentManager misc state:
+        mHost=android.app.Activity$HostCallbacks@3d05739
+        mContainer=android.app.Activity$HostCallbacks@3d05739
+        mCurState=5 mStateSaved=false mDestroyed=false
+    ViewRoot:
+      mAdded=true
+      mRemoved=false
+      mStopped=false
+      mPausedForTransition=false
+      mConsumeBatchedInputScheduled=false
+      mConsumeBatchedInputImmediatelyScheduled=false
+      mPendingInputEventCount=0
+      mProcessInputEventsScheduled=false
+      mTraversalScheduled=false
+      mReportNextDraw=false
+      mLastReportedMergedConfiguration={mGlobalConfig={1.0 310mcc260mnc [zh_CN,en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.470 fontWeightAdjustment=0} mOverrideConfig={1.0 310mcc260mnc [zh_CN,en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.2 fontWeightAdjustment=0}}
+      mLastConfigurationFromResources={1.0 310mcc260mnc [zh_CN,en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.2 fontWeightAdjustment=0}
+      mLastReportedActivityWindowInfo=ActivityWindowInfo{isEmbedded=false, taskBounds=Rect(0, 0 - 720, 1280), taskFragmentBounds=Rect(0, 0 - 720, 1280)}
+      mIsAmbientMode=false
+      mUnbufferedInputSource=0
+      mAttachInfo=       AttachInfo:
+        mHasWindowFocus=true
+        mWindowVisibility=0
+        mInTouchMode=true
+        mUnbufferedDispatchRequested=false
+      android.view.ViewRootImpl$NativePreImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$ImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$NativePostImeInputStage: mQueueLength=0
+      android.view.ViewRootImpl$WindowInputEventReceiver
+       mInputChannel: b6bef64 dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity (client)
+       mSeqMap: {}
+       mReceiverPtr:
+        mInputConsumer:
+          mResampleTouch = true
+          mChannel = b6bef64 dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity (client)
+          mMsgDeferred: false
+          Batches:
+              <empty>
+          mSeqChains:
+              <empty>
+          mConsumeTimes:
+              <empty>
+          
+        mBatchedInputEventPending: false
+        mOutboundQueue:
+          <empty>
+        
+    Choreographer:
+      mFrameScheduled=false
+      mLastFrameTime=4465097 (14873 ms ago)
+    InsetsController:
+        InsetsState
+          mDisplayFrame=Rect(0, 0 - 720, 1280)
+          mDisplayCutout=DisplayCutout{insets=Rect(0, 0 - 0, 0) waterfall=Insets{left=0, top=0, right=0, bottom=0} boundingRect={Bounds=[Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0), Rect(0, 0 - 0, 0)]} cutoutPathParserInfo={CutoutPathParserInfo{displayWidth=0 displayHeight=0 physicalDisplayWidth=0 physicalDisplayHeight=0 density={0.0} cutoutSpec={} rotation={0} scale={0.0} physicalPixelDisplaySizeRatio={0.0}}} sideOverrides=null}
+          mRoundedCorners=RoundedCorners{[RoundedCorner{position=TopLeft, radius=0, center=Point(0, 0)}, RoundedCorner{position=TopRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomRight, radius=0, center=Point(0, 0)}, RoundedCorner{position=BottomLeft, radius=0, center=Point(0, 0)}]}
+          mRoundedCornerFrame=Rect(0, 0 - 720, 1280)
+          mPrivacyIndicatorBounds=PrivacyIndicatorBounds {static bounds=Rect(518, 0 - 682, 48) rotation=0}
+          mDisplayShape=DisplayShape{ spec=42744253 displayWidth=720 displayHeight=1280 physicalPixelDisplaySizeRatio=1.0 rotation=0 offsetX=0 offsetY=0 scale=1.0}
+            InsetsSource id=e8090000 type=statusBars frame=[0,0][720,48] visible=true flags= sideHint=TOP boundingRects=null
+            InsetsSource id=e8090005 type=mandatorySystemGestures frame=[0,0][720,48] visible=true flags= sideHint=TOP boundingRects=null
+            InsetsSource id=e8090006 type=tappableElement frame=[0,0][720,48] visible=true flags= sideHint=TOP boundingRects=null
+            InsetsSource id=3 type=ime frame=[0,0][0,0] visible=false flags= sideHint=NONE boundingRects=null
+            InsetsSource id=62d60001 type=navigationBars frame=[0,1184][720,1280] visible=true flags=INSETS_ROUNDED_CORNER sideHint=BOTTOM boundingRects=null
+            InsetsSource id=62d60004 type=systemGestures frame=[0,0][0,0] visible=true flags= sideHint=NONE boundingRects=null
+            InsetsSource id=62d60005 type=mandatorySystemGestures frame=[0,1184][720,1280] visible=true flags= sideHint=BOTTOM boundingRects=null
+            InsetsSource id=62d60006 type=tappableElement frame=[0,1184][720,1280] visible=true flags= sideHint=BOTTOM boundingRects=null
+            InsetsSource id=62d60024 type=systemGestures frame=[0,0][0,0] visible=true flags= sideHint=NONE boundingRects=null
+        mIsPredictiveBackImeHideAnimInProgress=false
+    WindowOnBackDispatcher:
+        Top Callback: android.view.ViewRootImpl$$ExternalSyntheticLambda11@e2cbd53
+        Callbacks: 
+          Callback: android.view.ViewRootImpl$$ExternalSyntheticLambda11@e2cbd53 Priority=0
+    ImeBackAnimationController:
+        mLastProgress=0.0
+        mTriggerBack=false
+        mIsPreCommitAnimationInProgress=false
+        mStartRootScrollY=0
+        isBackAnimationAllowed=true
+        isAdjustPan=true
+        isHideAnimationInProgress=false
+    View Hierarchy:
+      com.android.internal.policy.DecorView{34af2c V.E...... R....... 0,0-720,1280 aid=0}[MainActivity]
+        android.widget.FrameLayout{bd62df5 V.E...... ........ 0,0-720,1280}
+          android.widget.FrameLayout{cb0678a V.E...... ........ 0,0-720,1280 #1020002 android:id/content}
+            androidx.compose.ui.platform.ComposeView{56451fb V.E...... ........ 0,0-720,1280}
+              androidx.compose.ui.platform.AndroidComposeView{e406ddb VFED..... ........ 0,0-720,1280 aid=1073741824}
+                android.view.View{fd39218 V.ED..... ........ 0,0-0,0}
+                androidx.compose.material3.ripple.RippleContainer{cdbeb63 V.E...... ......I. 0,0-0,0}
+                  androidx.compose.material3.ripple.RippleHostView{d250573 V.ED..... ......I. 0,0-112,64}
+                  androidx.compose.material3.ripple.RippleHostView{7986aaa V.ED..... ......I. 0,0-656,144}
+          android.view.ViewStub{a28b471 G.E...... ......I. 0,0-0,0 #10201cb android:id/action_mode_bar_stub}
+    Looper (main, tid 2) {ab57256}
+      (Total messages: 0, polling=false, quitting=false)
+    ResourcesManager:
+      total apks: 5
+      resources: 3
+      resource impls: 2
+    1 dumpables:
+    #0: AutofillManager
+        AutofillManager:
+          sessionId: 2147483647
+          state: UNKNOWN
+          context: dev.pathpilot.app.MainActivity@1d5603e
+          service client: null
+          client: android.view.autofill.AutofillClientController@c9c12d7 (android.os.BinderProxy@e025e4d)
+          enabled: false
+          enabledAugmentedOnly: false
+          hasService: true
+          hasCallback: false
+          onInvisibleCalled false
+          last autofilled data: null
+          id of last fill UI shown: null
+          tracked views: null
+          fillable ids: null
+          entered ids: null
+          save trigger id: null
+          save on finish(): false
+          options: logLvl=2, compatMode=false, augmented=false, appDisabledExpiration=0
+          fill dialog enabled: false
+          fill dialog enabled hints: []
+          compat mode enabled: false
+          debug: true verbose: false
+        Autofill Compat Mode: false

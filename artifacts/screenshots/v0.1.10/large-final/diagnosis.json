@@ -1,0 +1,28 @@
+{
+  "outcome": "runner_startup_failure",
+  "testsStarted": 0,
+  "testsPassed": 0,
+  "reason": "ActivityManager killed capture process 1863 after startup ANR before TestRunner began tests.",
+  "observedMessage": "failed to complete startup",
+  "crashBufferEmpty": true,
+  "nextAction": "Keep failed batch; wait for boot to settle and validate newly built APK after precompiling. Do not count this attempt as UI pass.",
+  "systemDialogImages": [
+    {
+      "file": "launcher-anr.png",
+      "sha256": "bf2fbe87bd55cef156cb7184721e41347efe417e33005d7c3f1063e08d1309db"
+    },
+    {
+      "file": "systemui-anr.png",
+      "sha256": "1d99c604dbd9df19e535528fe61ff5f6cfd9d94dc27419e7fd9beced53cc98a6"
+    }
+  ],
+  "settingsRestored": {
+    "density": "320 (physical; override reset)",
+    "fontScale": "1.0",
+    "night": "no"
+  },
+  "installedApkSha256": {
+    "dev.pathpilot.app.capture": "b2b03a65d426a4aa9ca86b9361a0444058546779ce606b7d4bf8d71e7b4453e5",
+    "dev.pathpilot.app.capture.test": "7c6b4c7b41687f500d0f95c260d1eccf458da5342ea576a28e3997af00312e14"
+  }
+}

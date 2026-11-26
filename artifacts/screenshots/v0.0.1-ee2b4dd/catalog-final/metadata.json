@@ -1,0 +1,18 @@
+{
+  "startedUtc": "2026-11-26T17:04:13Z",
+  "classes": "dev.pathpilot.app.ui.providers.ApiModelsFlowTest,dev.pathpilot.app.ui.providers.CodexModelsFlowTest",
+  "gitBase": "ee2b4dd539aecad2a98f22b4c33dee15f300c6d6",
+  "worktreeDiffSha256": "a462cb46d3b4668e46a05befa115635c21d50879265d8a52574a702bc92fb038",
+  "apkSha256": {
+    "capture.apk": "4cf8e85ffa679b6178028c7635c2e8faeac32d780ec0e8e6b315d88d1a0a5e1a",
+    "capture-test.apk": "db3003a9d68743c8c3fb7602fa697fd48bdba7050177181ed71c305485a8ed47"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0"
+  },
+  "sourceManifestSha256": "ec70ea4dc3c28783ace016b62122711e81aa71cf3b749311d576d68c1dfc2e30"
+}

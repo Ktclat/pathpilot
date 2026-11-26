@@ -1,47 +1,10 @@
-# Codex 模型获取：离线 UI 集成测试
+# Android 设备测试与截图
 
-本文早期供应商、模型与统计用例使用中文控件标签。v0.1.10 开始支持应用语言；运行这些旧类前，先安装 `.capture` 包并选择简体中文。Android 13+ 可用平台命令（已在 API 35 核对 `cmd locale help`）：
+设备测试运行生产 Compose 页面、Android 存储和服务；上游数据使用离线夹具或设备内的 MockWebServer。实际批次结果与原图见 [验证记录](../../../docs/validation.md) 和 [截图索引](../../../artifacts/screenshots/README.md)。
 
-```sh
-adb shell cmd locale set-app-locales dev.pathpilot.app.capture --user 0 --locales zh-CN
-adb shell cmd locale get-app-locales dev.pathpilot.app.capture --user 0
-```
+## 构建与设备准备
 
-Android 8–12 在 App 设置中选择「语言 → 简体中文」。设置/MCP 新用例自行通过 AppStore 与原生 `LocaleManager.applicationLocales` 设置初始语言，不依赖这一手动前置。
-
-`CodexModelsFlowTest` 使用生产 `ProvidersScreen`、`ProviderEditor`、`ProviderEditorViewModel`、`CodexModelsClient` 与 `ProviderRoutes.addSelected`。只替换凭据解析来源和 HTTP 目的地：凭据是测试常量，OkHttp interceptor 把 Codex 模型目录请求送到 Android 设备内的 MockWebServer 回环端口。请求经过真实 HTTP 连接和生产 JSON 解析，测试不会联系 ChatGPT，也不读取设备里保存的账号。
-
-测试覆盖已登录入口获取目录、选择模型并保存路由，401 失败显示与重试，以及未登录时进入登录且不发送目录请求。目录中的模型 ID 是固定 mock 数据，不表示真实账号的可用模型；`supported_in_api=false` 的订阅目录项仍应可选。所有 fixture 只存在于 androidTest APK。
-
-运行（截图专用 x86_64 包，不能作为常规 ARM64 交付包）：
-
-```sh
-./gradlew -PuiCapture=true :app:connectedDebugAndroidTest \
-  -Pandroid.testInstrumentationRunnerArguments.class=dev.pathpilot.app.ui.providers.CodexModelsFlowTest
-```
-
-测试直接挂载真实供应商页面和编辑器，不启动后台共享服务，也不测试账号登录协议。三个 PNG 来自 UiAutomation 对实际运行界面的截图，写入目标应用 externalFilesDir 下的 `codex-models-e2e/`：
-
-- `01-provider-entry.png`：已登录供应商的获取模型入口。
-- `02-model-selection.png`：回环 HTTP 成功后选择一个模型。
-- `03-auth-error.png`：回环 HTTP 返回 401 的错误状态，之后继续测试重试成功。
-
-截图展示的是明确离线 mock 场景，不是实际订阅账号结果。测试宿主仅负责页面切换与真实路由更新回调；不增加产品界面 mock 标记或生产测试数据。文件存在不代表本次测试通过，应同时核对当前 instrumentation 结果和截图时间。
-
-## 按供应商管理模型
-
-`dev.pathpilot.app.ui.models.ProviderModelsFlowTest` 挂载生产 `ModelRoutesPage`，只由测试持有本地配置与选中供应商 ID。覆盖一级供应商、二级模型隔离和返回；共享名称/上游 ID 搜索、启用筛选、单模型切换；供应商总开关关闭及恢复时保留每个模型设置。
-
-该流程无需网络或账号。原始截图写入测试包的 `externalFilesDir/provider-models-e2e/`：`01-provider-groups.png`、`02-provider-models.png`、`03-provider-disabled.png`。它验证真实页面及状态回调，不包含 AppStore 跨重启持久化或真实上游模型可用性。
-
-
-## 统计、请求详情与主导航
-
-`dev.pathpilot.app.ui.statistics.StatisticsFlowTest` 挂载生产 `StatisticsPage`，使用标有「离线测试」的请求元数据。五项流程覆盖模型下钻、HTTP 200 中断详情、搜索/状态筛选与清空确认、未知 Token 和真实零用量的区别，以及供应商下钻保留日期范围。
-
-`dev.pathpilot.app.ui.statistics.StatisticsNavigationTest` 启动生产 `MainActivity`，验证五项底部导航、共享首页、独立统计空态和返回行为。大字体用例在真实系统 `font_scale=1.5`、320–360dp 宽度下验证本机/局域网按钮等高、导航文字无溢出，以及指标、趋势和长模型名称可通过滚动到达。该类只在独立 `.capture` 包写入离线请求元数据；每例结束清空对应测试数据库，不修改供应商或账号。
-
-先构建并安装目标和测试 APK：
+云端模拟器使用独立 `dev.pathpilot.app.capture` 应用和 `dev.pathpilot.app.capture.test` 测试包。`uiCapture=true` 只启用 x86_64 debug 截图构建，常规交付 APK 仍只有 ARM64。截图构建复用 APK 输出目录，开始前先保存已验证的常规 ARM64 APK。
 
 ```sh
 ./gradlew -PuiCapture=true :app:assembleDebug :app:assembleDebugAndroidTest
@@ -49,79 +12,134 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 adb install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
 ```
 
-默认字体下运行六项流程：
+以下设备配置命令对应 Android 15 / API 35、720×1280 模拟器：density 320 为 360dp，density 360 为 320dp。修改前在同一 shell 保存原值，结束后按本文末尾恢复。
 
 ```sh
+capture_density_override="$(adb shell wm density | sed -n 's/^Override density: //p' | tr -d '\r')"
+capture_font_scale="$(adb shell settings get system font_scale | tr -d '\r')"
+adb shell wm density 320
 adb shell settings put system font_scale 1.0
+```
+
+## 用例范围
+
+下表类名均以 `dev.pathpilot.app.` 为前缀。截图目录相对于目标应用的 `externalFilesDir`。
+
+| 测试类 | 用例数 | 验证对象 | 截图目录 |
+| --- | ---: | --- | --- |
+| `ui.providers.CodexModelsFlowTest` | 3 | 生产 `ModelRoutesPage`、供应商编辑器和目录客户端：登录入口、获取/选择/保存模型、401 与重试；仅替换凭据来源和 HTTP 目的地 | `codex-models-e2e/` |
+| `ui.providers.ApiModelsFlowTest` | 1 | 生产 `MainActivity`：从 API 供应商模型页点击一次即获取目录，核对 HTTP 请求、选择模型并保存路由 | `settings-e2e/`（23、24、25） |
+| `ui.models.ProviderModelsFlowTest` | 3 | 供应商一级、模型二级、搜索/启用筛选、供应商开关保留模型开关 | `provider-models-e2e/` |
+| `ui.statistics.StatisticsFlowTest` | 5 | 统计组件的模型/供应商下钻、状态和搜索筛选、清空确认、HTTP 200 中断、未知及零 Token | `statistics-e2e/` |
+| `ui.statistics.StatisticsNavigationTest` | 1 普通 + 1 大字体 | 生产 `MainActivity`：四项主导航、从模型/最近请求打开统计并返回，以及放大字体布局 | `statistics-e2e/` |
+| `ui.statistics.StatisticsRestorationTest` | 1 | 趋势选择恢复时，保存索引超出缩短后的时间桶列表 | — |
+| `runtime.RequestHistoryStoreTest` | 6 | 真实 SQLite：重开、去重、保留 1,000 条、清空、写入失败重试和损坏记录 | — |
+| `settings.BackupStoreTest` | 5 | Android Keystore / AtomicFile：加密恢复、可选会话、保留本机连接设置、写入原子性、损坏配置和迁移 | — |
+| `ui.settings.SettingsFlowTest` | 3 普通 + 1 大字体 | 生产 `MainActivity`：四页导航及返回/滚动状态、主题和语言持久化、原生文件器、放大字体设置/MCP | `settings-e2e/` |
+| `ui.settings.BackupFlowTest` | 1 | 生产设置页面/ViewModel 与真实加密文件往返；仅替换文件选择结果 URI | `settings-e2e/` |
+| `ui.settings.McpFlowTest` | 1 | 生产页面、前台服务与真实回环 HTTP：连接、工具选择、鉴权、允许/拒绝调用、模型/MCP 独立启停和通知入口 | `settings-e2e/` |
+
+`CodexModelsFlowTest` 的订阅目录为固定测试数据，未执行真实账号登录。`BackupFlowTest` 的文件 URI 替换不覆盖 Android 文件选择器；原生 `CreateDocument` 由 `SettingsFlowTest#exportUsesTheAndroidDocumentPickerAndCanBeCancelled` 单独验证。SQLite 和备份存储测试使用独立目录；涉及应用单例的设备流程限制在 `.capture` 包。
+
+## 四页导航回归：普通字体 10 项
+
+当前主导航是「共享 / 模型 / MCP / 设置」，统计从模型顶栏及请求入口打开；供应商模型详情、MCP 连接详情和统计隐藏主导航。以下两批共选择 10 项，与本轮导航、供应商合并和公共控件的变化对应。
+
+设置和 MCP 用例在启动 Activity 前通过 AppStore 及平台语言接口设置中文。先运行这 3 项：
+
+```sh
 adb shell am instrument -w -r -e class \
-  'dev.pathpilot.app.ui.statistics.StatisticsFlowTest,dev.pathpilot.app.ui.statistics.StatisticsNavigationTest#statisticsIsAStandaloneDestinationAndSharingStaysFocused' \
+  'dev.pathpilot.app.ui.settings.SettingsFlowTest#fourPrimaryPagesPreserveListsAndUseSecondaryDetails,dev.pathpilot.app.ui.settings.SettingsFlowTest#themeMonetAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.McpFlowTest' \
   dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
 ```
 
-随后单独运行真实大字体检查。在 720×1280 模拟器上，density=360 对应 320dp 宽度。操作前记录设备原始 density 与 font_scale，测试后恢复原值：
+以下 Codex、供应商模型及统计用例使用中文标签，不自行设置初始语言。运行前显式设置应用语言；主题/语言用例可能已切换为 English，不能依赖上批结束时的状态。以下命令适用于 Android 13+：
 
 ```sh
-adb shell wm density
-adb shell settings get system font_scale
-adb shell wm density 360
-adb shell settings put system font_scale 1.5
+adb shell cmd locale set-app-locales dev.pathpilot.app.capture --user 0 --locales zh-CN
+adb shell cmd locale get-app-locales dev.pathpilot.app.capture --user 0
 adb shell am force-stop dev.pathpilot.app.capture
 adb shell am instrument -w -r -e class \
-  'dev.pathpilot.app.ui.statistics.StatisticsNavigationTest#largeSystemFontKeepsNavigationMetricsAndTrendReachable' \
+  'dev.pathpilot.app.ui.statistics.StatisticsNavigationTest#statisticsOpensFromModelsAndReturnsToItsSource,dev.pathpilot.app.ui.providers.CodexModelsFlowTest,dev.pathpilot.app.ui.models.ProviderModelsFlowTest' \
   dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
 ```
 
-大字体用例在不符配置的普通测试运行中跳过；专门审查时必须核对其状态为通过，不能将跳过计为已验证。原始 `UiAutomation` 截图写入 `externalFilesDir/statistics-e2e/`，包括共享首页、统计概览、模型分组、请求和详情、空态，以及大字体共享页/指标/趋势/分组。截图无缩放或裁剪。
+第二批为统计导航 1 项、Codex 模型目录 3 项、供应商模型 3 项。
 
-## 趋势状态恢复
-
-`dev.pathpilot.app.ui.statistics.StatisticsRestorationTest` 使用 `StateRestorationTester` 保存生产 `StatisticsTrend` 的末桶选择，在销毁旧 composition 时将六个时间桶缩为一个，再恢复保存状态。断言唯一时间桶的请求读数、前后按钮禁用和 Token 切换，覆盖保存的索引大于新历史长度的恢复场景。只用离线时间桶，不访问 AppStore 或网络。
+备份加密、系统文件器、完整统计组件、趋势状态恢复及持久历史不包含在这 10 项中；相关实现变化时，按表选择对应类或方法运行。例如：
 
 ```sh
 adb shell am instrument -w -r -e class \
-  'dev.pathpilot.app.ui.statistics.StatisticsRestorationTest#restoredSelectionHandlesFewerTrendBuckets' \
+  'dev.pathpilot.app.settings.BackupStoreTest,dev.pathpilot.app.ui.settings.BackupFlowTest,dev.pathpilot.app.ui.settings.SettingsFlowTest#exportUsesTheAndroidDocumentPickerAndCanBeCancelled' \
   dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
 ```
 
-## 持久历史
+## 大字体：2 项
 
-`dev.pathpilot.app.runtime.RequestHistoryStoreTest` 使用设备真实 SQLite 和独立 UUID 测试目录，六项检查覆盖跨实例重读、ID 去重、最新 1,000 条保留、清空、写入失败后重试、损坏记录的错误呈现。各例结束删除其测试目录，不操作用户实际数据库。
-
-```sh
-adb shell am instrument -w -r -e class \
-  dev.pathpilot.app.runtime.RequestHistoryStoreTest \
-  dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
-```
-
-以上测试不代表真实订阅请求或账号余额结果。网络观测由 core 中回环 HTTP 测试覆盖。结果须同时核对 runner、APK SHA 和当次截图；系统弹窗遮挡的图片保留为异常证据，不能作为界面展示图。
-
-## 设置、备份与 MCP
-
-v0.1.10 新增测试均要求隔离的 `.capture` 包，不访问真实账号或外部 MCP：
-
-- `settings.BackupStoreTest`：5 项，Android Keystore/AtomicFile 的导出恢复、可选订阅登录状态、保留本机连接配置、写入失败原子性、损坏配置恢复及旧版迁移。使用独立 `noBackupFilesDir`，不改生产单例。
-- `ui.settings.SettingsFlowTest#themeMonetAndLanguageChoicesPersistInTheNativeActivity`：生产 MainActivity 的主题、莫奈取色、中英切换及 Activity 重建后保留。
-- `ui.settings.SettingsFlowTest#exportUsesTheAndroidDocumentPickerAndCanBeCancelled`：生产 MainActivity 实际打开 Android CreateDocument 文件器，截图并取消。
-- `ui.settings.BackupFlowTest`：生产 SettingsScreen/ViewModel 和真实加密文件读写。测试只替换 ActivityResultRegistry 返回的私有文件 URI；验证错误密码不改配置、恢复前预览及默认保留本机端口。该项不替代上面的系统文件器检查。
-- `ui.settings.McpFlowTest`：生产 MainActivity 添加 Bearer 连接、实际获取工具、禁用工具、启动独立前台共享服务；通过真实 HTTP 客户端验证 initialize/list/call、工具白名单及停用 MCP 后模型服务继续可用。上游是测试进程内的 MockWebServer。
-
-先按上文构建安装 capture APK，然后以默认 360dp / font_scale=1.0 运行 9 项：
-
-```sh
-adb shell am instrument -w -r -e class \
-  'dev.pathpilot.app.settings.BackupStoreTest,dev.pathpilot.app.ui.settings.SettingsFlowTest#themeMonetAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.SettingsFlowTest#exportUsesTheAndroidDocumentPickerAndCanBeCancelled,dev.pathpilot.app.ui.settings.BackupFlowTest,dev.pathpilot.app.ui.settings.McpFlowTest' \
-  dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
-```
-
-大字体检查单独运行，真实设置为 320–360dp 和 font_scale=1.5；配置不符合时用例失败，不会跳过计入通过：
+单独设置真实系统字号和宽度，再运行设置/MCP、共享/统计两项布局检查：
 
 ```sh
 adb shell wm density 360
 adb shell settings put system font_scale 1.5
+adb shell cmd locale set-app-locales dev.pathpilot.app.capture --user 0 --locales zh-CN
 adb shell am force-stop dev.pathpilot.app.capture
 adb shell am instrument -w -r -e class \
-  'dev.pathpilot.app.ui.settings.SettingsFlowTest#largeSystemFontKeepsSettingsAndMcpControlsReachable' \
+  'dev.pathpilot.app.ui.settings.SettingsFlowTest#largeSystemFontKeepsSettingsAndMcpControlsReachable,dev.pathpilot.app.ui.statistics.StatisticsNavigationTest#largeSystemFontKeepsNavigationMetricsAndTrendReachable' \
   dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
 ```
 
-原图位于 `externalFilesDir/settings-e2e/`。测试结束恢复此前记录的 density/font_scale，并清理隔离包。语言用例启动 Activity 前同时设置 AppStore 和 Android 13+ 的应用 LocaleManager；用例中的用户语言切换走实际设置界面。
+检查四个导航标签的文字边界、地址分段按钮等高、备份和 MCP 编辑控件可达，以及统计指标、趋势和长模型名。统计大字体用例在配置不符时会跳过，设置大字体用例会断言失败；专门验收时须确认两项均有通过状态。
+
+## API 模型自动获取：定向回归 4 项
+
+`ee2b4dd` 包含 API 供应商自动获取修复，以及编辑器 Dialog 系统栏明暗修复。API 供应商在二级模型页点击「获取模型」后直接读取目录，无需在编辑器再点一次；Codex 仍要求已登录。重新构建并安装两个截图 APK 后，运行新增的 API 用例及原 Codex 3 项，并核对编辑器截图中的系统栏：
+
+```sh
+adb shell wm density 320
+adb shell settings put system font_scale 1.0
+adb shell cmd locale set-app-locales dev.pathpilot.app.capture --user 0 --locales zh-CN
+adb shell am force-stop dev.pathpilot.app.capture
+adb shell am instrument -w -r -e class \
+  'dev.pathpilot.app.ui.providers.ApiModelsFlowTest,dev.pathpilot.app.ui.providers.CodexModelsFlowTest' \
+  dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
+```
+
+`ApiModelsFlowTest` 在启动 Activity 前自行设置中文并保存测试前配置；结束时恢复配置。它通过设备回环 HTTP 核对 `GET /v1/models`、Bearer 请求头及请求次数为 1，再选择目录模型并确认路由保存。原图位于 `settings-e2e/23-api-provider-models.png`、`24-api-model-selection.png` 和 `25-api-model-saved.png`。
+
+四页导航的 10 项普通字体和 2 项大字体属于 `4e19d6e` 的验证范围；这 4 项属于修复后的独立批次，须各自记录 APK 和源码版本。其中 Codex 3 项是回归复跑，不重复计入独立用例总数。
+
+## 截图与结果归档
+
+PNG 由 `UiAutomation.takeScreenshot()` 从实际运行窗口导出，保留原始像素。拉取示例：
+
+```sh
+mkdir -p artifacts/screenshots/local-run
+adb pull /sdcard/Android/data/dev.pathpilot.app.capture/files/settings-e2e artifacts/screenshots/local-run/
+adb pull /sdcard/Android/data/dev.pathpilot.app.capture/files/statistics-e2e artifacts/screenshots/local-run/
+adb pull /sdcard/Android/data/dev.pathpilot.app.capture/files/codex-models-e2e artifacts/screenshots/local-run/
+adb pull /sdcard/Android/data/dev.pathpilot.app.capture/files/provider-models-e2e artifacts/screenshots/local-run/
+```
+
+各测试目录会复用图片名。每批运行前先归档并清空上一批截图目录，结束后保存当批原图、完整 runner 输出、逐例结果、源码提交/未提交改动、两个 APK 的 SHA-256，以及系统版本、ABI、尺寸、density 和 font_scale。图片存在或 `adb` 进程退出码为 0，均不能替代用例通过状态；统计时区分通过、失败和跳过。
+
+先查看截图，再记录 UI 结论。系统弹窗遮挡、ANR 或失败批次保留原始证据；修复后只重跑受影响用例，用新目录记录，不覆盖首次失败。共享密钥默认隐藏，夹具留在测试 APK，不把截图包作为 ARM64 交付产物。
+
+结束后恢复本次修改的设备配置，并在完成归档后清理测试数据：
+
+```sh
+if [ -n "$capture_density_override" ]; then
+  adb shell wm density "$capture_density_override"
+else
+  adb shell wm density reset
+fi
+if [ "$capture_font_scale" = null ]; then
+  adb shell settings delete system font_scale
+else
+  adb shell settings put system font_scale "$capture_font_scale"
+fi
+adb shell am force-stop dev.pathpilot.app.capture
+adb shell pm clear dev.pathpilot.app.capture
+adb shell pm clear dev.pathpilot.app.capture.test
+```
+
+仓库级构建、截图和提交要求见 [贡献指南](../../../CONTRIBUTING.md)。

@@ -1,0 +1,48 @@
+{
+  "startedUtc": "2026-11-26T16:22:45Z",
+  "classes": "dev.pathpilot.app.ui.statistics.StatisticsNavigationTest#statisticsIsAStandaloneDestinationAndSharingStaysFocused",
+  "gitBase": "b6379733c5d9f9fc30b7ddd4ba24630c15120977",
+  "worktreeDiffSha256": "166a193ed49c8b2c7bbf8da7b0e82697a43aa836f2c4e62500f7388900a938b2",
+  "apkSha256": {
+    "capture.apk": "31474b267a7ef3ccf5ae5b07011bc74b28963de92f865c3d60e5f8b67918666e",
+    "capture-test.apk": "064b698f02c46e816cfa0eae0975c641bdafce4f25d2c5d004f428402ead5a0b"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0"
+  },
+  "sourceManifestSha256": "b78282bbe5d08e4cc02f85019ba6b36cda2e8e3c5b4c73ad59b94616171becc9",
+  "elapsedSeconds": 99.114,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.ui.statistics.StatisticsNavigationTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "1",
+      "stream": ".",
+      "test": "statisticsIsAStandaloneDestinationAndSharingStaysFocused",
+      "statusCode": 0
+    }
+  ],
+  "images": [
+    {
+      "name": "00-sharing-home.png",
+      "bytes": 75807,
+      "sha256": "655a81713ffdb6dea202c64bd74815b9abeb387eb75d4579c02bc36f7157336a"
+    },
+    {
+      "name": "05-statistics-empty.png",
+      "bytes": 67233,
+      "sha256": "8e58b1d31cfd3b90235035005a620b9322643135c017f068bf3d30c62fc6db78"
+    },
+    {
+      "name": "09-statistics-main.png",
+      "bytes": 83389,
+      "sha256": "7566b26b17c4f237c167184f9eb7d919929d1da8a6536dce738e26ab5b3eb5f6"
+    }
+  ]
+}

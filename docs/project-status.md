@@ -1,39 +1,37 @@
 # 项目状态
 
-更新日期：2026-11-26。此页区分已验证基线与当前改动；详细结果和原始证据见 [验证记录](validation.md)。
+更新日期：2026-11-27（香港时间）。最终源码 [`ee2b4dd`](https://github.com/Ktclat/pathpilot/commit/ee2b4dd539aecad2a98f22b4c33dee15f300c6d6) 已推送 `main`，ARM64 APK 版本为 **`0.0.1-ee2b4dd`**，`versionCode` 12。详细构建与设备证据见 [验证记录](validation.md)。
 
-## 已验证基线
+## 本轮实现
 
-最后确认已推送的提交为 [`22f1fca`](https://github.com/Ktclat/pathpilot/commit/22f1fca9d0c3eb6060ec90ccd590a3b922b12d50)，应用版本 `0.1.10`，`versionCode` 为 11。
-
-| 检查 | 已确认结果 |
+| 工作 | 当前行为 |
 | --- | --- |
-| JVM 测试 | 核心 110 项、App 51 项通过 |
+| 导航 | 共享、模型、MCP、设置四个主页面；详情和统计隐藏主导航 |
+| 模型管理 | 一级供应商，二级统一管理配置、登录、获取模型及共享模型；修复 API 来源自动获取目录被 Codex 登录判断阻止 |
+| 统计 | 模型首页右上角进入；最近请求与具体模型仍可跳转，返回保留来源层级 |
+| 界面一致性 | 复用共享开关、地址和密钥控件，中文与英文同步；修复浅色供应商编辑 Dialog 的白色系统栏文字 |
+| 版本与构建 | `0.0.1-<实际提交前7位>`；APK 与发布标签使用同一实际版本 |
+| 文档与 MCP | 补齐架构、贡献、验证归档及 GitHub PAT/客户端接入方法，核查官方、Codex、Magpie 和 CC Switch 实现 |
+
+## 验证状态
+
+| 检查 | 状态 |
+| --- | --- |
+| 本地 Gradle | 最终完整检查及截图包构建通过 |
+| JVM | 核心 110 项、App 51 项，0 失败、0 错误 |
 | Android Lint | 0 错误、42 条警告 |
-| 常规 APK | ARM64-only，包名、ZIP 与签名检查通过 |
-| GitHub Actions | [`22f1fca` 构建](https://github.com/Ktclat/pathpilot/actions/runs/45599744622)通过 |
-| 模拟器 | API 35、x86_64 隔离截图包；9 项不同用例已通过 |
+| 最终 ARM64 APK | `ee2b4dd` 已构建；ZIP、包名、签名和 ARM64-only 检查通过 |
+| 工作流与资源 | actionlint、506 对双语资源名称及文档链接检查通过 |
+| GitHub Actions | 最终 [运行 45863708697](https://github.com/Ktclat/pathpilot/actions/runs/45863708697)成功 |
+| 本轮模拟器 | 基线 12 项与最终包 4 次目录执行全部通过，共 13 项不同用例、16 次执行；最终版本及浅/深色编辑器原图已核对 |
+| Release | 本轮未发布 |
 
-设备结果包括 5 项备份存储测试、主题/Monet/语言、MCP 工具共享、Android 文件选择器及备份 UI 加密文件往返。上次环境断连前启动的备份复测已完成，恢复后从 [`backup-attempt2/results.json`](../artifacts/screenshots/v0.1.10/backup-attempt2/results.json) 确认两项通过。大字体用例尚待完成，不能记为全部设备检查通过。
+前序 `b637973` 的五页导航截图和中途失败保留为历史记录，不作为四页版已通过设备检查的依据。`0.1.10` 的 9 项不同设备用例及大字体启动 ANR 已[归档](validation-0.1.10.md)。
 
-这些测试使用离线配置和回环 HTTP 上游。真实订阅账号、外部 MCP 服务与实体手机跨设备调用的验证范围以具体记录为准。
+## 待完成与能力边界
 
-## 当前整理与改进
-
-以下工作正在进行，完成后以实际提交、构建和截图更新：
-
-| 工作 | 目标 |
-| --- | --- |
-| 仓库文档 | 精简 README，补充架构、贡献与状态文档，关联原始验证记录 |
-| 导航 | MCP 成为主导航目的地；设置从顶栏进入；详情页不重复显示主导航 |
-| 界面一致性 | 共享控件与状态保持一致，删除重复说明，保持双语资源同步 |
-| 版本 | 从 `0.0.1-<实际提交前7位>` 起步，`versionCode` 继续递增到 12 |
-| MCP 来源 | 核查官方远程服务和 Registry，区分一键添加 HTTP 连接与安装本地 stdio 进程 |
-| 设备验证 | 安装本轮 APK，审查受影响页面、返回行为和大字体，保存实际截图 |
-
-## 当前能力边界
-
-- 模型协议：Models、Chat Completions、Responses；各供应商支持范围见 [API 文档](api.md)。
-- MCP：2025-11-25 Streamable HTTP Tools；无认证或静态 Bearer。OAuth、stdio 运行时、Resources、Prompts 和其他协议版本尚未实现。
-- 统计：模型请求最近 1,000 条持久记录；MCP 最近 30 条内存记录。没有订阅余额或估算账单。
-- 分发：ARM64 debug 开发包；本轮尚未发布新的 Release。
+- 当前模拟器的深色三键导航仍呈低对比，应用窗口明暗标记与 Taskbar 明暗值已按主题切换；根因尚未确定，待跨设备复现。未据此增加主题补丁，详见 [原图与对照记录](../artifacts/screenshots/v0.0.1-ee2b4dd/README.md)。
+- GitHub 远程 MCP 的 [PAT 配置方法](android-mcp.md)已有文档；真实服务协商和账号联调受当前环境 CONNECT 403 阻碍，尚未通过兼容验证。
+- 官方 MCP 目录仍是已核查的[接入方案](mcp-catalog-research.md)，未加入目录 UI。MCP 目前实现 2025-11-25 Streamable HTTP Tools，支持无认证或静态 Bearer；OAuth、stdio 运行时、Resources、Prompts 和其他协议版本待适配。
+- 模型协议范围见 [API 文档](api.md)。统计基于模型最近 1,000 条持久记录和 MCP 最近 30 条内存记录，不提供订阅余额或估算账单。
+- 常规分发为 ARM64 debug 开发包；真实订阅账号、外部服务和实体手机跨设备联调按具体结果单独记录。

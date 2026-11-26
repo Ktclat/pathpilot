@@ -1,0 +1,73 @@
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.SettingsFlowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+dev.pathpilot.app.ui.settings.SettingsFlowTest:
+INSTRUMENTATION_STATUS: test=primaryPagesOpenSettingsAndReturnToTheSameDestination
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.SettingsFlowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=primaryPagesOpenSettingsAndReturnToTheSameDestination
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.SettingsFlowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=themeMonetAndLanguageChoicesPersistInTheNativeActivity
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.SettingsFlowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=themeMonetAndLanguageChoicesPersistInTheNativeActivity
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.McpFlowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+dev.pathpilot.app.ui.settings.McpFlowTest:
+INSTRUMENTATION_STATUS: test=connectionToolsAndIndependentSharingReachAnActualHttpUpstream
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.McpFlowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: Activity never becomes requested state "[DESTROYED]" (last lifecycle transition = "PAUSED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.close(ActivityScenario.java:421)
+	at dev.pathpilot.app.ui.settings.McpFlowTest.clean(McpFlowTest.kt:81)
+
+INSTRUMENTATION_STATUS: stream=
+Error in connectionToolsAndIndependentSharingReachAnActualHttpUpstream(dev.pathpilot.app.ui.settings.McpFlowTest):
+java.lang.AssertionError: Activity never becomes requested state "[DESTROYED]" (last lifecycle transition = "PAUSED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.close(ActivityScenario.java:421)
+	at dev.pathpilot.app.ui.settings.McpFlowTest.clean(McpFlowTest.kt:81)
+
+INSTRUMENTATION_STATUS: test=connectionToolsAndIndependentSharingReachAnActualHttpUpstream
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 360.512
+There was 1 failure:
+1) connectionToolsAndIndependentSharingReachAnActualHttpUpstream(dev.pathpilot.app.ui.settings.McpFlowTest)
+java.lang.AssertionError: Activity never becomes requested state "[DESTROYED]" (last lifecycle transition = "PAUSED")
+	at androidx.test.core.app.ActivityScenario.waitForActivityToBecomeAnyOf(ActivityScenario.java:454)
+	at androidx.test.core.app.ActivityScenario.moveToState(ActivityScenario.java:689)
+	at androidx.test.core.app.ActivityScenario.close(ActivityScenario.java:421)
+	at dev.pathpilot.app.ui.settings.McpFlowTest.clean(McpFlowTest.kt:81)
+
+FAILURES!!!
+Tests run: 3,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1
