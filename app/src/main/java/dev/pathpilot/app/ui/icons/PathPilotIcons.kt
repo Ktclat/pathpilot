@@ -21,7 +21,7 @@ import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.QueryStats
 import androidx.compose.material.icons.outlined.Stop
-import androidx.compose.material.icons.outlined.Tune
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material.icons.outlined.WifiTethering
@@ -38,7 +38,7 @@ object PathPilotIcons {
     val Share: ImageVector get() = Icons.Outlined.WifiTethering
     val Providers: ImageVector get() = Icons.Outlined.Dns
     val Routes: ImageVector get() = Icons.AutoMirrored.Outlined.AltRoute
-    val Settings: ImageVector get() = Icons.Outlined.Tune
+    val Settings: ImageVector get() = Icons.Outlined.Settings
     val Add: ImageVector get() = Icons.Outlined.Add
     val Back: ImageVector get() = Icons.AutoMirrored.Outlined.ArrowBack
     val Close: ImageVector get() = Icons.Outlined.Close

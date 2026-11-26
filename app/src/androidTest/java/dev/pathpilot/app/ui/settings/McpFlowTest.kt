@@ -1,8 +1,10 @@
 package dev.pathpilot.app.ui.settings
 
 import android.Manifest
+import android.content.Intent
 import android.os.Build
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasScrollToNodeAction
@@ -66,7 +68,7 @@ class McpFlowTest {
         }
         fixture = OfflineMcpFixture()
         scenario = ActivityScenario.launch(MainActivity::class.java)
-        compose.waitUntil(30_000) { compose.onAllNodes(hasText("设置") and hasClickAction()).fetchSemanticsNodes().isNotEmpty() }
+        compose.waitUntil(30_000) { compose.onAllNodes(hasText("MCP") and hasClickAction()).fetchSemanticsNodes().isNotEmpty() }
     }
 
     @After fun clean() {
@@ -83,9 +85,9 @@ class McpFlowTest {
 
     @Test fun connectionToolsAndIndependentSharingReachAnActualHttpUpstream() {
         val upstream = requireNotNull(fixture)
-        compose.onNode(hasText("设置") and hasClickAction()).performClick()
-        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("MCP"))
-        compose.onNodeWithText("MCP").performClick()
+        compose.onNode(hasText("MCP") and hasClickAction()).performClick().assertIsSelected()
+        compose.onNodeWithContentDescription("返回").assertDoesNotExist()
+        compose.captureSettingsScreenshot("09a-mcp-root")
         compose.onNodeWithContentDescription("添加连接").performClick()
         compose.onNodeWithText("名称").performTextReplacement("工具 · 离线测试")
         compose.onNodeWithText("MCP URL").performTextReplacement(upstream.url)
@@ -98,6 +100,13 @@ class McpFlowTest {
         val connection = store.mcp.value.connections.single()
         assertEquals(upstream.url, connection.url)
         assertEquals(upstream.token, connection.bearerToken)
+        compose.onNode(hasText("MCP") and hasClickAction()).assertDoesNotExist()
+        compose.onNodeWithContentDescription("设置").performClick()
+        compose.onNodeWithText("主题").assertIsDisplayed()
+        compose.onNode(hasText("MCP") and hasClickAction()).assertDoesNotExist()
+        compose.onNodeWithContentDescription("返回").performClick()
+        compose.onNodeWithText(connection.name).assertIsDisplayed()
+        compose.onNode(hasText("MCP") and hasClickAction()).assertDoesNotExist()
         compose.onNodeWithContentDescription("MCP 共享").assertIsDisplayed()
         compose.captureSettingsScreenshot("10a-mcp-access")
 
@@ -111,6 +120,8 @@ class McpFlowTest {
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("offline_status"))
         compose.captureSettingsScreenshot("10-mcp-tools")
         compose.onNodeWithContentDescription("返回").performClick()
+        compose.onNode(hasText("MCP") and hasClickAction()).assertIsSelected()
+        compose.onNodeWithContentDescription("返回").assertDoesNotExist()
 
         RouterService.start(context)
         compose.waitUntil(30_000) { RouterRuntime.state.value.running || RouterRuntime.state.value.lastError != null }
@@ -118,7 +129,7 @@ class McpFlowTest {
         compose.onNodeWithContentDescription("MCP 共享").performClick()
         compose.waitUntil(30_000) { McpRuntime.state.value.running || McpRuntime.state.value.error != null }
         assertTrue(McpRuntime.state.value.toString(), McpRuntime.state.value.running)
-        compose.onNodeWithText("运行中").assertIsDisplayed()
+        compose.onNodeWithText("已开启").assertIsDisplayed()
         compose.captureSettingsScreenshot("11-mcp-sharing")
 
         val settings = store.mcp.value
@@ -149,5 +160,26 @@ class McpFlowTest {
             assertEquals(200, response.code)
         }
         assertFalse(McpRuntime.state.value.running)
+
+        compose.onNode(hasText(connection.name) and hasClickAction()).performClick()
+        compose.onNode(hasText("MCP") and hasClickAction()).assertDoesNotExist()
+        context.startActivity(Intent(context, MainActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            .putExtra("open_mcp", true))
+        compose.waitUntil(30_000) {
+            compose.onAllNodes(hasText("MCP") and hasClickAction()).fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.onNode(hasText("MCP") and hasClickAction()).assertIsSelected()
+        compose.onNodeWithContentDescription("返回").assertDoesNotExist()
+        compose.captureSettingsScreenshot("22-mcp-notification-entry")
+        compose.onNodeWithContentDescription("添加连接").performClick()
+        compose.onNodeWithText("MCP URL").assertIsDisplayed()
+        context.startActivity(Intent(context, MainActivity::class.java)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            .putExtra("open_mcp", true))
+        compose.waitUntil(30_000) {
+            compose.onAllNodes(hasText("MCP URL")).fetchSemanticsNodes().isEmpty()
+        }
+        compose.onNode(hasText("MCP") and hasClickAction()).assertIsSelected()
     }
 }

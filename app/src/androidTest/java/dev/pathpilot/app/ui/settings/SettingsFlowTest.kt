@@ -13,6 +13,8 @@ import dev.pathpilot.app.runtime.AppStore
 import dev.pathpilot.app.settings.AppLanguage
 import dev.pathpilot.app.settings.BackupSnapshot
 import dev.pathpilot.app.settings.ThemeMode
+import dev.pathpilot.core.ProviderConfig
+import dev.pathpilot.core.ProviderKind
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -33,8 +35,8 @@ class SettingsFlowTest {
         original = store.backupSnapshot(includeCodexSessions = true)
         prepareChineseCapture(store)
         scenario = ActivityScenario.launch(MainActivity::class.java)
-        compose.waitUntil(30_000) { compose.onAllNodes(hasText("设置") and hasClickAction()).fetchSemanticsNodes().isNotEmpty() }
-        navigation("设置").performClick()
+        compose.waitUntil(30_000) { compose.onAllNodes(hasContentDescription("设置")).fetchSemanticsNodes().isNotEmpty() }
+        compose.onNodeWithContentDescription("设置").performClick()
     }
 
     @After fun clean() {
@@ -74,12 +76,38 @@ class SettingsFlowTest {
         compose.onNodeWithText("Theme").assertIsDisplayed()
         compose.onNodeWithText("Language").assertIsDisplayed()
         compose.onNodeWithText("Wallpaper colors").assertIsOn()
-        navigation("Settings").assertIsSelected()
+        compose.onNodeWithText("Settings").assertIsDisplayed()
+        navigation("MCP").assertDoesNotExist()
         compose.captureSettingsScreenshot("05-settings-english")
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("About PathPilot"))
         compose.onNodeWithText("Export backup").assertIsDisplayed()
         compose.onNodeWithText("Restore backup").assertIsDisplayed()
         compose.captureSettingsScreenshot("06-settings-backup-english")
+    }
+
+    @Test fun primaryPagesOpenSettingsAndReturnToTheSameDestination() {
+        store.setConfig(store.config.value.copy(
+            providers = (1..12).map { index -> ProviderConfig(
+                id = "navigation-$index", name = "离线供应商 $index", kind = ProviderKind.OPENAI_COMPATIBLE,
+                baseUrl = "https://api.example.test/v1",
+            ) },
+            routes = emptyList(),
+        ))
+        navigation("MCP").assertDoesNotExist()
+        compose.onNodeWithContentDescription("返回").performClick()
+        listOf("共享", "供应商", "模型", "统计", "MCP").forEachIndexed { index, label ->
+            navigation(label).performClick().assertIsSelected()
+            compose.onNodeWithContentDescription("设置").assertIsDisplayed()
+            compose.captureSettingsScreenshot("${17 + index}-primary-$index")
+            if (label == "供应商") compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("离线供应商 12"))
+            compose.onNodeWithContentDescription("设置").performClick()
+            compose.onNodeWithText("主题").assertIsDisplayed()
+            navigation("MCP").assertDoesNotExist()
+            compose.onNodeWithContentDescription("返回").performClick()
+            navigation(label).assertIsSelected()
+            if (label == "供应商") compose.onNodeWithText("离线供应商 12").assertIsDisplayed()
+        }
+        compose.onNodeWithContentDescription("返回").assertDoesNotExist()
     }
 
     @Test fun exportUsesTheAndroidDocumentPickerAndCanBeCancelled() {
@@ -107,7 +135,10 @@ class SettingsFlowTest {
             assertEquals(1.5f, it.resources.configuration.fontScale, 0.01f)
             assertTrue(it.resources.configuration.screenWidthDp in 320..360)
         }
-        listOf("共享", "供应商", "模型", "统计", "设置").forEach { label ->
+        navigation("MCP").assertDoesNotExist()
+        compose.captureSettingsScreenshot("14-settings-large-font")
+        compose.onNodeWithContentDescription("返回").performClick()
+        listOf("共享", "供应商", "模型", "统计", "MCP").forEach { label ->
             navigation(label).assertIsDisplayed()
             val layouts = mutableListOf<TextLayoutResult>()
             compose.onNode(hasText(label) and hasAnyAncestor(hasClickAction()), useUnmergedTree = true)
@@ -118,15 +149,17 @@ class SettingsFlowTest {
                 assertFalse("$label height", result.didOverflowHeight)
             }
         }
-        compose.captureSettingsScreenshot("14-settings-large-font")
+        compose.captureSettingsScreenshot("14a-navigation-large-font")
+        compose.onNodeWithContentDescription("设置").performClick()
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("恢复备份"))
         compose.onNodeWithText("导出备份").performClick()
         compose.onNodeWithText("确认密码").assertIsDisplayed()
         compose.onNodeWithText("取消").assertIsDisplayed()
         compose.captureSettingsScreenshot("15-backup-large-font")
         compose.onNodeWithText("取消").performClick()
-        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("MCP"))
-        compose.onNodeWithText("MCP").performClick()
+        compose.onNodeWithContentDescription("返回").performClick()
+        navigation("MCP").performClick()
+        compose.captureSettingsScreenshot("16a-mcp-root-large-font")
         compose.onNodeWithContentDescription("添加连接").performClick()
         compose.onNodeWithText("名称").assertIsDisplayed()
         compose.onNodeWithText("保存").performScrollTo().assertIsDisplayed()

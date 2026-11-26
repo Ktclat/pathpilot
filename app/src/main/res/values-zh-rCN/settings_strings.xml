@@ -25,8 +25,6 @@
     <string name="settings_rotate_title">重置模型访问密钥？</string>
     <string name="settings_rotate_body">已接入的客户端需要更新密钥。</string>
     <string name="settings_reset">重置</string>
-    <string name="settings_mcp">MCP</string>
-    <string name="settings_mcp_count">%1$d 个连接</string>
     <string name="settings_data">备份</string>
     <string name="settings_export">导出备份</string>
     <string name="settings_import">恢复备份</string>

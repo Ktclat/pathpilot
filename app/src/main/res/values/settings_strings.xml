@@ -25,8 +25,6 @@
     <string name="settings_rotate_title">Reset model API key?</string>
     <string name="settings_rotate_body">Connected clients will need the new key.</string>
     <string name="settings_reset">Reset</string>
-    <string name="settings_mcp">MCP</string>
-    <string name="settings_mcp_count">%1$d connections</string>
     <string name="settings_data">Backup</string>
     <string name="settings_export">Export backup</string>
     <string name="settings_import">Restore backup</string>

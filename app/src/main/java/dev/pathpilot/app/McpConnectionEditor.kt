@@ -66,7 +66,7 @@ internal fun McpConnectionEditor(existing: McpConnection?, saving: Boolean, save
                 keyboardOptions = KeyboardOptions(autoCorrectEnabled = false, keyboardType = KeyboardType.Password),
                 trailingIcon = { IconButton(onClick = { showToken = !showToken }) {
                     Icon(if (showToken) PathPilotIcons.VisibilityOff else PathPilotIcons.Visibility,
-                        stringResource(if (showToken) R.string.mcp_hide_key else R.string.mcp_show_key))
+                        stringResource(if (showToken) R.string.ui_hide_key else R.string.ui_show_key))
                 } }, isError = submitted && !validToken,
                 supportingText = if (submitted && !validToken) { { Text(stringResource(if (token.isBlank()) R.string.mcp_token_required else R.string.mcp_token_invalid)) } } else null)
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {

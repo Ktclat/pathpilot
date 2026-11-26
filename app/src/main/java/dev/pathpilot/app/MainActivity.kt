@@ -22,6 +22,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -39,7 +40,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dev.pathpilot.app.runtime.*
 import dev.pathpilot.app.settings.AppPreferences
-import dev.pathpilot.app.McpPage
+import dev.pathpilot.app.ui.components.SettingsAction
 import dev.pathpilot.app.ui.theme.PathPilotTheme
 import dev.pathpilot.app.ui.i18n.localize
 import dev.pathpilot.app.ui.icons.PathPilotIcons
@@ -118,11 +119,20 @@ class MainActivity : ComponentActivity() {
     val sessions by store.authenticatedCodexProviders.collectAsStateWithLifecycle()
     val history by store.requestHistory.state.collectAsStateWithLifecycle()
     var tab by rememberSaveable { mutableIntStateOf(0) }
-    var mcpVisible by rememberSaveable { mutableStateOf(false) }
+    var settingsVisible by rememberSaveable { mutableStateOf(false) }
+    var mcpConnectionId by rememberSaveable { mutableStateOf<String?>(null) }
+    var mcpEntry by rememberSaveable { mutableIntStateOf(0) }
+    val pageState = rememberSaveableStateHolder()
     LaunchedEffect(openMcp) {
-        if (openMcp) { tab = 4; mcpVisible = true; onMcpIntentHandled() }
+        if (openMcp) {
+            tab = 4
+            settingsVisible = false
+            mcpConnectionId = null
+            mcpEntry++
+            onMcpIntentHandled()
+        }
     }
-    BackHandler(enabled = tab == 4 && mcpVisible) { mcpVisible = false }
+    BackHandler(enabled = settingsVisible) { settingsVisible = false }
     var statisticsReturnTab by rememberSaveable { mutableStateOf<Int?>(null) }
     var statisticsEntry by rememberSaveable { mutableIntStateOf(0) }
     var statisticsRequests by rememberSaveable { mutableStateOf(false) }
@@ -210,18 +220,27 @@ class MainActivity : ComponentActivity() {
         tab = statisticsReturnTab ?: 0
         statisticsReturnTab = null
     }
-    BackHandler(enabled = tab == 3) { leaveStatistics() }
-    val tabs = listOf(strings.getString(R.string.main_share_tab), strings.getString(R.string.ui_providers), strings.getString(R.string.ui_models), strings.getString(R.string.ui_statistics_tab), strings.getString(R.string.ui_settings))
-    val icons = listOf(PathPilotIcons.Share, PathPilotIcons.Providers, PathPilotIcons.Routes, PathPilotIcons.Usage, PathPilotIcons.Settings)
+    BackHandler(enabled = tab == 3 && !settingsVisible) { leaveStatistics() }
+    val tabs = listOf(strings.getString(R.string.main_share_tab), strings.getString(R.string.ui_providers), strings.getString(R.string.ui_models), strings.getString(R.string.ui_statistics_tab), strings.getString(R.string.mcp_title))
+    val icons = listOf(PathPilotIcons.Share, PathPilotIcons.Providers, PathPilotIcons.Routes, PathPilotIcons.Usage, PathPilotIcons.Link)
     Scaffold(
-        topBar = { if (tab != 2 && tab != 3 && !(tab == 4 && mcpVisible)) TopAppBar(title = { Text(tabs[tab]) }, actions = {
-            if (tab == 1 && config.providers.isNotEmpty()) {
-                IconButton(enabled = !saving, onClick = { addProvider = true }) {
-                    Icon(PathPilotIcons.Add, strings.getString(R.string.ui_add_provider))
+        topBar = {
+            if (settingsVisible) TopAppBar(
+                title = { Text(strings.getString(R.string.ui_settings)) },
+                navigationIcon = { IconButton(onClick = { settingsVisible = false }) {
+                    Icon(PathPilotIcons.Back, strings.getString(R.string.ui_back))
+                } },
+            )
+            else if (tab == 0 || tab == 1) TopAppBar(title = { Text(tabs[tab]) }, actions = {
+                if (tab == 1 && config.providers.isNotEmpty()) {
+                    IconButton(enabled = !saving, onClick = { addProvider = true }) {
+                        Icon(PathPilotIcons.Add, strings.getString(R.string.ui_add_provider))
+                    }
                 }
-            }
-        }) },
-        bottomBar = { NavigationBar { tabs.forEachIndexed { index, label ->
+                SettingsAction { settingsVisible = true }
+            })
+        },
+        bottomBar = { if (!settingsVisible && !(tab == 4 && mcpConnectionId != null)) NavigationBar { tabs.forEachIndexed { index, label ->
             NavigationBarItem(selected = tab == index, onClick = { if (index != tab) { if (index == 3) resetStatistics(); tab = index } },
                 icon = { Icon(icons[index], null) },
                 label = { Text(label, Modifier.fillMaxWidth(), textAlign = TextAlign.Center) })
@@ -231,7 +250,9 @@ class MainActivity : ComponentActivity() {
         Column(Modifier.padding(padding).fillMaxSize()) {
             if (saving) LinearProgressIndicator(Modifier.fillMaxWidth())
             storageError?.let { Text(strings.localize(it), Modifier.padding(horizontal = 20.dp, vertical = 8.dp), color = MaterialTheme.colorScheme.error) }
-            when (tab) {
+            if (settingsVisible) pageState.SaveableStateProvider("settings") {
+                SettingsScreen(store, onMessage = ::notify)
+            } else pageState.SaveableStateProvider(tab) { when (tab) {
                 0 -> SharingScreen(config, runtime, sessions, saving || storageError != null, notificationPending,
                     onSharingChange = ::setSharing, onProviders = { tab = 1; if (config.providers.isEmpty()) addProvider = true }, onRoutes = { modelProviderId = null; tab = 2 },
                     history = history, onRequests = { openStatistics(requests = true) },
@@ -244,6 +265,7 @@ class MainActivity : ComponentActivity() {
                     onModels = { providerEditorId = it.id; fetchModelsOnOpen = true },
                     onManageModels = { modelProviderId = it.id; tab = 2 })
                 2 -> ModelRoutesPage(config, saving, modelProviderId, onSelectProvider = { modelProviderId = it },
+                    onSettings = { settingsVisible = true },
                     onAddProvider = { fetchModelsOnOpen = false; addProvider = true }, onAddModel = { newRoute(it) },
                     onEditModel = { routeEditorAlias = it.alias },
                     requestEvents = history.events,
@@ -256,12 +278,13 @@ class MainActivity : ComponentActivity() {
                     initialUpstreamModel = statisticsUpstreamModel,
                     initialRequests = statisticsRequests, initialRequestId = statisticsRequestId,
                     onBack = if (statisticsReturnTab != null) ({ leaveStatistics() }) else null,
+                    onSettings = { settingsVisible = true },
                     onClear = { scope.launch { withContext(Dispatchers.IO) { store.requestHistory.clear() } } },
                     onRetry = { scope.launch { withContext(Dispatchers.IO) { store.requestHistory.reload() } } },
                 ) }
-                4 -> if (mcpVisible) McpPage(store, onBack = { mcpVisible = false })
-                    else SettingsScreen(store, onMcp = { mcpVisible = true }, onMessage = ::notify)
-            }
+                4 -> key(mcpEntry) { McpPage(store, selectedId = mcpConnectionId, onSelectConnection = { mcpConnectionId = it },
+                    onSettings = { settingsVisible = true }) }
+            } }
         }
     }
     val providerEditor = config.providers.find { it.id == providerEditorId }

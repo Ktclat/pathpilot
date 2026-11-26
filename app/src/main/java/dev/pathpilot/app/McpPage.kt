@@ -32,6 +32,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.pathpilot.app.runtime.*
 import dev.pathpilot.app.ui.icons.PathPilotIcons
+import dev.pathpilot.app.ui.components.SettingsAction
 import dev.pathpilot.app.ui.i18n.localize
 import dev.pathpilot.core.AccessKeys
 import dev.pathpilot.core.mcp.*
@@ -47,7 +48,12 @@ import kotlinx.coroutines.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun McpPage(store: AppStore, onBack: () -> Unit) {
+internal fun McpPage(
+    store: AppStore,
+    selectedId: String?,
+    onSelectConnection: (String?) -> Unit,
+    onSettings: () -> Unit,
+) {
     val context = LocalContext.current
     val strings = LocalResources.current
     val config by store.config.collectAsStateWithLifecycle()
@@ -56,7 +62,6 @@ internal fun McpPage(store: AppStore, onBack: () -> Unit) {
     val storageError by store.storageError.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
-    var selectedId by rememberSaveable { mutableStateOf<String?>(null) }
     var editorId by rememberSaveable { mutableStateOf<String?>(null) }
     var adding by rememberSaveable { mutableStateOf(false) }
     var saving by remember { mutableStateOf(false) }
@@ -89,8 +94,10 @@ internal fun McpPage(store: AppStore, onBack: () -> Unit) {
             } finally { saving = false }
         }
     }
-    fun navigateBack() { if (selectedId != null) selectedId = null else onBack() }
-    BackHandler(onBack = ::navigateBack)
+    LaunchedEffect(selectedId, selected?.id) {
+        if (selectedId != null && selected == null) onSelectConnection(null)
+    }
+    BackHandler(enabled = selected != null) { onSelectConnection(null) }
     val permission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
         if (notificationPending) {
             notificationPending = false
@@ -111,23 +118,28 @@ internal fun McpPage(store: AppStore, onBack: () -> Unit) {
     }
     fun copied(value: String, secret: Boolean = false) {
         copyMcpValue(context, value, secret)
-        scope.launch { snackbar.showSnackbar(strings.getString(R.string.mcp_copied)) }
+        scope.launch { snackbar.showSnackbar(strings.getString(R.string.ui_copied)) }
     }
 
     Scaffold(
         topBar = {
             TopAppBar(title = { Text(selected?.name ?: stringResource(R.string.mcp_title), maxLines = 1, overflow = TextOverflow.Ellipsis) },
-                navigationIcon = { IconButton(onClick = ::navigateBack) { Icon(PathPilotIcons.Back, stringResource(R.string.mcp_back)) } },
+                navigationIcon = { if (selected != null) IconButton(onClick = { onSelectConnection(null) }) {
+                    Icon(PathPilotIcons.Back, stringResource(R.string.ui_back))
+                } },
                 actions = {
                     if (selected == null) IconButton(enabled = !busy, onClick = { adding = true }) {
                         Icon(PathPilotIcons.Add, stringResource(R.string.mcp_add_connection))
                     } else IconButton(enabled = !busy, onClick = { editorId = selected.id }) {
                         Icon(PathPilotIcons.Edit, stringResource(R.string.mcp_edit))
                     }
-                    IconButton(onClick = { help = true }) { Icon(Icons.Outlined.Info, stringResource(R.string.mcp_help)) }
+                    SettingsAction(onSettings)
                     Box {
                         IconButton(onClick = { menu = true }) { Icon(Icons.Outlined.MoreVert, stringResource(R.string.mcp_more)) }
                         DropdownMenu(menu, onDismissRequest = { menu = false }) {
+                            DropdownMenuItem(text = { Text(stringResource(R.string.mcp_help)) },
+                                leadingIcon = { Icon(Icons.Outlined.Info, null) },
+                                onClick = { menu = false; help = true })
                             DropdownMenuItem(text = { Column {
                                 Text(stringResource(R.string.mcp_listening_port))
                                 Text(if (active) stringResource(R.string.mcp_stop_to_change_port) else settings.port.toString(),
@@ -170,7 +182,7 @@ internal fun McpPage(store: AppStore, onBack: () -> Unit) {
                     } else {
                         item { Text(stringResource(R.string.mcp_connections), style = MaterialTheme.typography.titleMedium) }
                         items(settings.connections, key = { it.id }) { connection ->
-                            McpConnectionCard(connection, busy, onOpen = { selectedId = connection.id }, onEnabled = { enabled ->
+                            McpConnectionCard(connection, busy, onOpen = { onSelectConnection(connection.id) }, onEnabled = { enabled ->
                                 update({ state -> state.copy(connections = state.connections.map {
                                     if (it.id == connection.id) it.copy(enabled = enabled) else it
                                 }) })
@@ -199,7 +211,7 @@ internal fun McpPage(store: AppStore, onBack: () -> Unit) {
     val existing = settings.connections.find { it.id == editorId }
     if (adding || existing != null) McpConnectionEditor(existing, saving, error?.let(strings::localize), onDismiss = { if (!saving) { adding = false; editorId = null } },
         onSave = { connection -> update({ state -> state.copy(connections = state.connections.filterNot { it.id == connection.id } + connection) }) {
-            adding = false; editorId = null; selectedId = connection.id
+            adding = false; editorId = null; onSelectConnection(connection.id)
         } })
     if (portDialog) McpPortDialog(settings.port, config.port, saving, error?.let(strings::localize), onDismiss = { if (!saving) portDialog = false }) { port ->
         update({ it.copy(port = port) }) { portDialog = false }
@@ -209,7 +221,7 @@ internal fun McpPage(store: AppStore, onBack: () -> Unit) {
             text = { Text(stringResource(R.string.mcp_delete_body, connection.name)) },
             confirmButton = { TextButton(enabled = !saving, onClick = {
                 update({ it.copy(connections = it.connections.filterNot { item -> item.id == connection.id }) }) {
-                    if (selectedId == connection.id) selectedId = null
+                    if (selectedId == connection.id) onSelectConnection(null)
                     deleteId = null
                 }
             }) { Text(stringResource(R.string.mcp_delete)) } },
@@ -227,23 +239,20 @@ internal fun McpPage(store: AppStore, onBack: () -> Unit) {
 
 @Composable
 private fun McpSharingControl(state: McpRuntimeState, pending: Boolean, enabled: Boolean, onChange: (Boolean) -> Unit) {
-    Card {
-        Row(Modifier.fillMaxWidth().padding(20.dp), horizontalArrangement = Arrangement.spacedBy(16.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(PathPilotIcons.Share, null)
-            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(stringResource(R.string.mcp_share_title), style = MaterialTheme.typography.titleMedium)
-                Text(stringResource(when {
-                    state.stopping -> R.string.mcp_stopping
-                    state.starting || pending -> R.string.mcp_starting
-                    state.running -> R.string.mcp_running
-                    else -> R.string.mcp_stopped
-                }), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-            val label = stringResource(R.string.mcp_share_title)
-            Switch(checked = state.running || state.starting || pending, onCheckedChange = onChange, enabled = enabled,
-                modifier = Modifier.semantics { contentDescription = label })
-        }
-    }
+    SharingControlCard(
+        title = stringResource(R.string.mcp_share_title),
+        status = stringResource(when {
+            state.stopping -> R.string.ui_stopping
+            state.starting -> R.string.ui_starting
+            pending -> R.string.ui_waiting_notification
+            state.running -> R.string.ui_on
+            else -> R.string.ui_off
+        }),
+        checked = state.running || state.starting || pending,
+        enabled = enabled,
+        running = state.running,
+        onCheckedChange = onChange,
+    )
 }
 
 @Composable
@@ -329,9 +338,7 @@ private fun McpConnectionDetails(
                     onCheckedChange = { onAllowed(if (it) null else emptySet()) },
                     modifier = Modifier.semantics { contentDescription = label }) })
         }
-        if (tools == null) item { Text(stringResource(R.string.mcp_tools_not_loaded), style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant) }
-        else if (tools!!.isEmpty()) item { Text(stringResource(R.string.mcp_no_tools), style = MaterialTheme.typography.bodyMedium) }
+        if (tools?.isEmpty() == true) item { Text(stringResource(R.string.mcp_no_tools), style = MaterialTheme.typography.bodyMedium) }
         else items(tools.orEmpty(), key = { it.name }) { tool ->
             val allowed = connection.allowedTools?.contains(tool.name) ?: true
             OutlinedCard {

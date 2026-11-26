@@ -50,12 +50,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-internal fun SettingsScreen(store: AppStore, onMcp: () -> Unit, onMessage: (String) -> Unit) {
+internal fun SettingsScreen(store: AppStore, onMessage: (String) -> Unit) {
     val context = LocalContext.current
     val strings = LocalResources.current
     val config by store.config.collectAsStateWithLifecycle()
     val preferences by store.preferences.collectAsStateWithLifecycle()
-    val mcp by store.mcp.collectAsStateWithLifecycle()
     val router by RouterRuntime.state.collectAsStateWithLifecycle()
     val mcpRuntime by McpRuntime.state.collectAsStateWithLifecycle()
     val storageError by store.storageError.collectAsStateWithLifecycle()
@@ -132,8 +131,6 @@ internal fun SettingsScreen(store: AppStore, onMcp: () -> Unit, onMessage: (Stri
                 SettingsRow(stringResource(R.string.settings_proxy), proxyLabel(config.outboundProxy), editable) { dialog = "proxy" }
                 HorizontalDivider()
                 SettingsRow(stringResource(R.string.settings_rotate_key), enabled = editable) { dialog = "rotate" }
-                HorizontalDivider()
-                SettingsRow(stringResource(R.string.settings_mcp), stringResource(R.string.settings_mcp_count, mcp.connections.size), editable, onMcp)
             }
         }
         item {

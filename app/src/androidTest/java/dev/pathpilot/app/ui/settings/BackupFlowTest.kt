@@ -78,7 +78,7 @@ class BackupFlowTest {
                 PathPilotTheme(preferences) {
                     Surface(Modifier.fillMaxSize().safeDrawingPadding()) {
                         CompositionLocalProvider(LocalActivityResultRegistryOwner provides owner) {
-                            SettingsScreen(store, onMcp = {}, onMessage = messages::add)
+                            SettingsScreen(store, onMessage = messages::add)
                         }
                     }
                 }

@@ -58,7 +58,7 @@ class StatisticsNavigationTest {
     }
 
     @Test fun statisticsIsAStandaloneDestinationAndSharingStaysFocused() {
-        listOf("共享", "供应商", "模型", "统计", "设置").forEach { label ->
+        listOf("共享", "供应商", "模型", "统计", "MCP").forEach { label ->
             navigation(label).assertIsDisplayed()
         }
         navigation("共享").assertIsSelected()
@@ -115,7 +115,7 @@ class StatisticsNavigationTest {
 
         navigation("统计").performClick().assertIsSelected()
         screenshot("06-statistics-large-font")
-        listOf("共享", "供应商", "模型", "统计", "设置").forEach { label ->
+        listOf("共享", "供应商", "模型", "统计", "MCP").forEach { label ->
             navigation(label).assertIsDisplayed()
             assertNavigationTextFits(label)
         }

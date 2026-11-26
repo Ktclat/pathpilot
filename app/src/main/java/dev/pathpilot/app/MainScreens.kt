@@ -1,48 +1,25 @@
 package dev.pathpilot.app
 
 import dev.pathpilot.app.ui.i18n.localize
-import android.content.Intent
-import android.provider.Settings
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalResources
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.lifecycle.repeatOnLifecycle
-import dev.pathpilot.app.runtime.LocalAddressSnapshot
 import dev.pathpilot.app.runtime.LocalAddressKind
-import dev.pathpilot.app.runtime.LocalAddresses
 import dev.pathpilot.app.runtime.RuntimeState
 import dev.pathpilot.app.runtime.RequestHistoryState
 import dev.pathpilot.app.ui.icons.PathPilotIcons
 import dev.pathpilot.app.ui.icons.ProviderBrandIcon
 import dev.pathpilot.core.*
-import dev.pathpilot.core.network.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.awaitCancellation
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.withContext
 
 @Composable internal fun SharingScreen(
     config: RouterConfig, runtime: RuntimeState, sessions: Set<String>, saving: Boolean, notificationPending: Boolean,
@@ -50,20 +27,8 @@ import kotlinx.coroutines.withContext
     history: RequestHistoryState, onRequests: () -> Unit, onRequest: (RequestEvent) -> Unit,
 ) {
     val strings = LocalResources.current
-    val context = LocalContext.current.applicationContext
-    val lifecycle = LocalLifecycleOwner.current.lifecycle
-    val localSnapshot by produceState<LocalAddressSnapshot?>(null, context, lifecycle, runtime.running) {
-        lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-            if (runtime.running) awaitCancellation()
-            else while (isActive) {
-                value = withContext(Dispatchers.IO) { LocalAddresses.discover(context) }
-                delay(5_000)
-            }
-        }
-    }
-    val snapshot = if (runtime.running || runtime.stopping)
-        LocalAddressSnapshot(runtime.addresses, runtime.addressWarning) else localSnapshot
-    val addressPort = if (runtime.running) runtime.port else config.port
+    val snapshot = rememberSharingAddresses(runtime.running, runtime.stopping, runtime.addresses, runtime.addressWarning)
+    val addressPort = if (runtime.running || runtime.stopping) runtime.port else config.port
     var onThisDevice by rememberSaveable { mutableStateOf(true) }
     val enabledProviders = config.providers.filter { it.enabled }
     val enabledRoutes = config.routes.filter { it.enabled }
@@ -89,24 +54,24 @@ import kotlinx.coroutines.withContext
     }
     LazyColumn(contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
-            Card(colors = CardDefaults.cardColors(containerColor = if (runtime.running) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainer), shape = MaterialTheme.shapes.extraLarge) {
-                Column(Modifier.padding(horizontal = 16.dp, vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Row(Modifier.fillMaxWidth().heightIn(min = 56.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Icon(PathPilotIcons.Share, null, Modifier.size(28.dp))
-                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text(strings.getString(R.string.ui_model_sharing), style = MaterialTheme.typography.titleMedium)
-                            Text(status, style = MaterialTheme.typography.bodyMedium)
-                        }
-                        Switch(checked = checked, enabled = canToggle, onCheckedChange = onSharingChange,
-                            modifier = Modifier.semantics { contentDescription = strings.getString(R.string.ui_model_sharing_switch) })
-                    }
-                }
-            }
+            SharingControlCard(
+                title = strings.getString(R.string.ui_model_sharing), status = status,
+                checked = checked, enabled = canToggle, running = runtime.running,
+                onCheckedChange = onSharingChange,
+                switchLabel = strings.getString(R.string.ui_model_sharing_switch),
+            )
         }
         runtime.lastError?.let { message -> item { Text(strings.localize(message), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium) } }
         item { SharingAddresses(snapshot, addressPort,
             onThisDevice, { onThisDevice = it }, onCopy) }
-        item { ConnectionField(strings.getString(R.string.ui_access_key), config.accessKey, secret = true, onCopy = { onCopy(strings.getString(R.string.ui_access_key), it) }) }
+        item {
+            OutlinedCard {
+                Column(Modifier.fillMaxWidth().padding(start = 16.dp, top = 12.dp, end = 8.dp, bottom = 8.dp)) {
+                    Text(strings.getString(R.string.ui_access_key), style = MaterialTheme.typography.titleMedium)
+                    AccessKeyRow(config.accessKey, onCopy = { onCopy(strings.getString(R.string.ui_access_key), it) })
+                }
+            }
+        }
         if (setupAction != null) item {
             FilledTonalButton(enabled = !saving, shapes = ButtonDefaults.shapesFor(ButtonDefaults.MediumContainerHeight),
                 modifier = Modifier.fillMaxWidth().heightIn(min = ButtonDefaults.MediumContainerHeight),
@@ -132,22 +97,6 @@ import kotlinx.coroutines.withContext
             }
         }
 
-    }
-}
-
-@Composable private fun ConnectionField(label: String, value: String, secret: Boolean = false, onCopy: (String) -> Unit) {
-    val strings = LocalResources.current
-    var revealed by rememberSaveable { mutableStateOf(false) }
-    OutlinedCard {
-        Column(Modifier.fillMaxWidth().padding(start = 16.dp, top = 12.dp, end = 8.dp, bottom = 8.dp)) {
-            Text(label, style = MaterialTheme.typography.titleMedium)
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                val prefix = when { value.startsWith("sk-") -> "sk-"; value.startsWith("pp_") -> "pp_"; else -> "" }
-                Text(if (secret && !revealed) "${prefix}••••••••••••••••" else value, Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium, fontFamily = FontFamily.Monospace)
-                if (secret) IconButton(onClick = { revealed = !revealed }) { Icon(if (revealed) PathPilotIcons.VisibilityOff else PathPilotIcons.Visibility, if (revealed) strings.getString(R.string.ui_hide_key) else strings.getString(R.string.ui_show_key)) }
-                IconButton(onClick = { onCopy(value) }) { Icon(PathPilotIcons.Copy, strings.getString(R.string.ui_copy_value, label)) }
-            }
-        }
     }
 }
 
@@ -189,7 +138,6 @@ import kotlinx.coroutines.withContext
 }
 
 @Composable private fun EmptyPage(title: String, action: String, saving: Boolean, onAction: () -> Unit) {
-    val strings = LocalResources.current
     Column(Modifier.fillMaxWidth().padding(vertical = 36.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Text(title, style = MaterialTheme.typography.titleMedium)
         FilledTonalButton(enabled = !saving, onClick = onAction, shapes = ButtonDefaults.shapes()) {

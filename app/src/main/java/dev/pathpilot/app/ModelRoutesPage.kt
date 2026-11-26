@@ -10,6 +10,7 @@ import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import dev.pathpilot.app.ui.icons.PathPilotIcons
+import dev.pathpilot.app.ui.components.SettingsAction
 import dev.pathpilot.core.ProviderConfig
 import dev.pathpilot.core.RouteConfig
 import dev.pathpilot.core.RouterConfig
@@ -29,6 +30,7 @@ import dev.pathpilot.core.RequestEvent
     onProviderToggle: (ProviderConfig, Boolean) -> Unit,
     requestEvents: List<RequestEvent> = emptyList(),
     onViewUsage: ((ProviderConfig, RouteConfig?) -> Unit)? = null,
+    onSettings: (() -> Unit)? = null,
 ) {
     val strings = LocalResources.current
     val provider = config.providers.find { it.id == selectedProviderId }
@@ -51,6 +53,7 @@ import dev.pathpilot.core.RequestEvent
                 if (provider != null) IconButton(enabled = !saving, onClick = { onAddModel(provider.id) }) {
                     Icon(PathPilotIcons.Add, strings.getString(R.string.ui_add_model))
                 }
+                onSettings?.let { SettingsAction(it) }
             },
             // The outer app scaffold already supplies status-bar and navigation-bar insets.
             windowInsets = WindowInsets(0, 0, 0, 0),
