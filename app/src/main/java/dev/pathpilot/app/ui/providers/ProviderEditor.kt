@@ -75,8 +75,9 @@ fun ProviderEditor(
     val fields = remember { EditorFieldTargets() }
     LaunchedEffect(existing?.id, proxy) { model.begin(existing, proxy) }
     LaunchedEffect(existing?.id, state.editing?.id, state.active, fetchModelsOnOpen, codexSignedIn) {
-        if (fetchModelsOnOpen && codexSignedIn && existing != null && state.active && state.editing?.id == existing.id) {
-            model.resetCodexModels()
+        if (fetchModelsOnOpen && existing != null && state.active && state.editing?.id == existing.id &&
+            (existing.kind != ProviderKind.CODEX || codexSignedIn)) {
+            if (existing.kind == ProviderKind.CODEX) model.resetCodexModels()
             model.probe(resolveCodexCredentials)
             onModelsFetchStarted()
         }
