@@ -206,6 +206,7 @@ class McpService : Service() {
             .setCategory(Notification.CATEGORY_SERVICE)
             .addAction(Notification.Action.Builder(null, strings.getString(R.string.mcp_stop), stopIntent).build())
         packageManager.getLaunchIntentForPackage(packageName)?.let { launch ->
+            launch.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             launch.putExtra("open_mcp", true)
             builder.setContentIntent(
                 PendingIntent.getActivity(this, 2, launch, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE),

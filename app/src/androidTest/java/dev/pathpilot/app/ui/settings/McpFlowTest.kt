@@ -78,9 +78,12 @@ class McpFlowTest {
             !McpRuntime.state.value.running && !McpRuntime.state.value.starting && !McpRuntime.state.value.stopping &&
                 !RouterRuntime.state.value.running && !RouterRuntime.state.value.starting && !RouterRuntime.state.value.stopping
         }
-        scenario?.close()
-        fixture?.close()
-        if (::original.isInitialized) store.restoreBackup(original, restoreConnectionSettings = true)
+        try {
+            scenario?.close()
+        } finally {
+            fixture?.close()
+            if (::original.isInitialized) store.restoreBackup(original, restoreConnectionSettings = true)
+        }
     }
 
     @Test fun connectionToolsAndIndependentSharingReachAnActualHttpUpstream() {
@@ -163,8 +166,8 @@ class McpFlowTest {
 
         compose.onNode(hasText(connection.name) and hasClickAction()).performClick()
         compose.onNode(hasText("MCP") and hasClickAction()).assertDoesNotExist()
-        context.startActivity(Intent(context, MainActivity::class.java)
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        context.startActivity(requireNotNull(context.packageManager.getLaunchIntentForPackage(context.packageName))
+            .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             .putExtra("open_mcp", true))
         compose.waitUntil(30_000) {
             compose.onAllNodes(hasText("MCP") and hasClickAction()).fetchSemanticsNodes().isNotEmpty()
@@ -174,8 +177,8 @@ class McpFlowTest {
         compose.captureSettingsScreenshot("22-mcp-notification-entry")
         compose.onNodeWithContentDescription("添加连接").performClick()
         compose.onNodeWithText("MCP URL").assertIsDisplayed()
-        context.startActivity(Intent(context, MainActivity::class.java)
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        context.startActivity(requireNotNull(context.packageManager.getLaunchIntentForPackage(context.packageName))
+            .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             .putExtra("open_mcp", true))
         compose.waitUntil(30_000) {
             compose.onAllNodes(hasText("MCP URL")).fetchSemanticsNodes().isEmpty()
