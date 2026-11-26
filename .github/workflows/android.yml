@@ -3,7 +3,7 @@ name: Android ARM64
 on:
   push:
     branches: [main]
-    tags: ['v*-dev.*']
+    tags: ['v*.*.*-*']
   pull_request:
   workflow_dispatch:
     inputs:
@@ -12,11 +12,6 @@ on:
         required: true
         type: boolean
         default: false
-      release_tag:
-        description: '新预发布标签，例如 v0.1.10-dev.1；不会覆盖已有 Release'
-        required: true
-        type: string
-        default: v0.1.10-dev.1
 
 permissions:
   contents: read
@@ -32,6 +27,7 @@ jobs:
     timeout-minutes: 30
     outputs:
       version: ${{ steps.package.outputs.version }}
+      commit: ${{ steps.package.outputs.commit }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -54,15 +50,17 @@ jobs:
           badging="$($sdk_tools/aapt dump badging "$apk")"
           version="$(sed -n "s/.*versionName='\([^']*\)'.*/\1/p" <<< "$badging" | head -n1)"
           test -n "$version"
+          commit="$(git rev-parse --verify HEAD)"
           python3 scripts/verify-apk.py "$apk"
           mkdir -p dist
           cp "$apk" "dist/PathPilot-${version}-arm64-debug.apk"
           (cd dist && sha256sum ./*.apk > SHA256SUMS.txt)
           echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "commit=$commit" >> "$GITHUB_OUTPUT"
           {
             echo "### ARM64 development build"
             echo "Version: $version"
-            echo "Commit: $GITHUB_SHA"
+            echo "Commit: $commit"
             echo "APK signature and arm64-v8a-only packaging verified."
             echo 'Debug signing: this artifact is for development testing.'
           } >> "$GITHUB_STEP_SUMMARY"
@@ -95,13 +93,14 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
-      RELEASE_TAG: ${{ github.event_name == 'push' && github.ref_name || inputs.release_tag }}
+      RELEASE_TAG: ${{ github.event_name == 'push' && github.ref_name || format('v{0}', needs.build.outputs.version) }}
       APP_VERSION: ${{ needs.build.outputs.version }}
-      BUILD_SHA: ${{ github.sha }}
+      BUILD_SHA: ${{ needs.build.outputs.commit }}
       BUILD_REF: ${{ github.ref }}
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ needs.build.outputs.commit }}
           fetch-depth: 0
       - uses: actions/download-artifact@v4
         with:
@@ -111,10 +110,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+-dev\.[0-9]+$ ]] || {
-            echo 'Use a development tag such as v0.1.10-dev.1.' >&2; exit 1;
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+-[0-9a-f]{7}$ ]] || {
+            echo 'Use a version and commit tag such as v0.0.1-a1b2c3d.' >&2; exit 1;
           }
-          [[ "$RELEASE_TAG" == "v${APP_VERSION}-dev."* ]] || {
+          [[ "$RELEASE_TAG" == "v${APP_VERSION}" ]] || {
             echo 'Release tag must match the APK version.' >&2; exit 1;
           }
           (cd dist && sha256sum --check SHA256SUMS.txt)
@@ -130,7 +129,7 @@ jobs:
           # Creation is non-destructive: existing tags/releases are never deleted or replaced.
           gh api "repos/$GH_REPO/git/matching-refs/tags/$RELEASE_TAG" --paginate --jq '.[].ref' > existing-refs.txt
           if [[ "$BUILD_REF" != refs/tags/* ]] && grep -Fxq "refs/tags/$RELEASE_TAG" existing-refs.txt; then
-            echo 'Tag already exists; choose a new development tag.' >&2
+            echo 'This build already has a release tag; inspect the existing release before publishing again.' >&2
             exit 1
           fi
       - name: Create draft, upload verified APK and publish
@@ -141,12 +140,13 @@ jobs:
           PathPilot ${APP_VERSION} 原生 Android 开发预发布版。
 
           - 仅支持 ARM64（arm64-v8a），Android 8.0 / API 26 或更新版本。
-          - Codex 设备授权、DeepSeek/兼容供应商管理、模型路由和局域网共享。
+          - Codex 订阅、DeepSeek/兼容供应商、模型路由、局域网共享与 MCP Tools。
+          - 用量统计、主题与语言设置、加密备份。
           - 本次 Actions 已通过核心测试、Android Lint、APK 签名和 ARM64 架构检查。
           - APK 和 SHA256SUMS.txt 来自同一次成功构建，提交：${BUILD_SHA}。
 
-          本版本为 debug 签名开发包。不同云端构建的 debug 签名可能不同，无法保证覆盖安装；卸载会清除本机配置和授权。正式分发前需配置长期签名密钥。
-          真实账号调用及实体手机局域网联调仍需验证，具体结果见仓库 docs/validation.md。
+          APK 使用 debug 签名。签名密钥与已安装版本不同时需卸载重装，请先导出备份。连续分发需配置固定签名密钥。
+          测试范围、模拟器截图和待验证项见仓库 docs/validation.md。
           EOF_NOTES
           tag_options=()
           if [[ "$BUILD_REF" == refs/tags/* ]]; then tag_options+=(--verify-tag); fi

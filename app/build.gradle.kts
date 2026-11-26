@@ -4,6 +4,11 @@ plugins {
     kotlin("plugin.serialization")
     id("org.jetbrains.kotlin.plugin.compose")
 }
+val sourceCommit = providers.exec {
+    workingDir(rootProject.projectDir)
+    commandLine("git", "rev-parse", "--verify", "HEAD")
+}.standardOutput.asText.get().trim()
+
 // Isolated emulator-only UI capture build; normal APKs target ARM64 exclusively.
 val uiCapture = providers.gradleProperty("uiCapture").map(String::toBoolean).getOrElse(false)
 if (uiCapture) {
@@ -21,8 +26,8 @@ android {
         applicationId = "dev.pathpilot.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 11
-        versionName = "0.1.10"
+        versionCode = 12
+        versionName = "0.0.1-${sourceCommit.take(7)}"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk { abiFilters += if (uiCapture) "x86_64" else "arm64-v8a" }
     }
