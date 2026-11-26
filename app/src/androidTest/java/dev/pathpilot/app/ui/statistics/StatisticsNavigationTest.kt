@@ -57,31 +57,44 @@ class StatisticsNavigationTest {
         store?.requestHistory?.clear()
     }
 
-    @Test fun statisticsIsAStandaloneDestinationAndSharingStaysFocused() {
-        listOf("共享", "供应商", "模型", "统计", "MCP").forEach { label ->
+    @Test fun statisticsOpensFromModelsAndReturnsToItsSource() {
+        listOf("共享", "模型", "MCP", "设置").forEach { label ->
             navigation(label).assertIsDisplayed()
         }
         navigation("共享").assertIsSelected()
         compose.onNodeWithText("今日用量").assertDoesNotExist()
         screenshot("00-sharing-home")
 
-        navigation("统计").performClick().assertIsSelected()
+        navigation("模型").performClick().assertIsSelected()
+        compose.onNodeWithContentDescription("统计").performClick()
+        navigation("设置").assertDoesNotExist()
         compose.onNodeWithContentDescription("统计概览").assertIsDisplayed()
         compose.onNodeWithText("暂无请求记录").assertIsDisplayed()
-        compose.onNodeWithContentDescription("返回").assertDoesNotExist()
+        compose.onNodeWithContentDescription("返回").assertIsDisplayed()
         screenshot("05-statistics-empty")
         compose.onNodeWithContentDescription("查看请求记录").performClick()
-        navigation("统计").assertIsSelected()
+        navigation("设置").assertDoesNotExist()
         compose.runOnIdle { compose.activity.onBackPressedDispatcher.onBackPressed() }
-        navigation("共享").assertIsSelected()
-        compose.onNodeWithText("模型共享").assertIsDisplayed()
+        navigation("模型").assertIsSelected()
+        compose.onNodeWithContentDescription("统计").assertIsDisplayed()
 
         val history = store!!.requestHistory
         offlineStatisticsEvents(System.currentTimeMillis()).forEach(history::record)
         assertNull(history.state.value.error)
-        navigation("统计").performClick().assertIsSelected()
+        compose.onNodeWithContentDescription("统计").performClick()
         compose.onNodeWithContentDescription("请求数，4").assertIsDisplayed()
         screenshot("09-statistics-main")
+        compose.onNodeWithContentDescription("返回").performClick()
+        navigation("模型").assertIsSelected()
+        navigation("共享").performClick()
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("全部"))
+        compose.onNodeWithText("全部").performClick()
+        compose.onNodeWithContentDescription("查看请求记录").assertIsSelected()
+        navigation("设置").assertDoesNotExist()
+        screenshot("09a-sharing-requests")
+        compose.onNodeWithContentDescription("返回").performClick()
+        navigation("共享").assertIsSelected()
+        compose.onNodeWithText("最近请求").assertIsDisplayed()
     }
 
     /** Run separately after setting the actual Android font scale to 1.5 and viewport to 320dp. */
@@ -113,12 +126,14 @@ class StatisticsNavigationTest {
         assertNull(history.state.value.error)
         compose.waitForIdle()
 
-        navigation("统计").performClick().assertIsSelected()
-        screenshot("06-statistics-large-font")
-        listOf("共享", "供应商", "模型", "统计", "MCP").forEach { label ->
+        listOf("共享", "模型", "MCP", "设置").forEach { label ->
             navigation(label).assertIsDisplayed()
             assertNavigationTextFits(label)
         }
+        navigation("模型").performClick()
+        compose.onNodeWithContentDescription("统计").performClick()
+        navigation("设置").assertDoesNotExist()
+        screenshot("06-statistics-large-font")
         compose.onNodeWithContentDescription("请求数，3").assertIsDisplayed()
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasContentDescription("趋势：请求"))
         compose.onNodeWithContentDescription("趋势：请求").assertIsDisplayed()

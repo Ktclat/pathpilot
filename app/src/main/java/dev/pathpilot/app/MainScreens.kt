@@ -10,15 +10,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalResources
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.pathpilot.app.runtime.LocalAddressKind
 import dev.pathpilot.app.runtime.RuntimeState
 import dev.pathpilot.app.runtime.RequestHistoryState
 import dev.pathpilot.app.ui.icons.PathPilotIcons
-import dev.pathpilot.app.ui.icons.ProviderBrandIcon
 import dev.pathpilot.core.*
 
 @Composable internal fun SharingScreen(
@@ -97,51 +93,5 @@ import dev.pathpilot.core.*
             }
         }
 
-    }
-}
-
-@Composable internal fun ProvidersScreen(config: RouterConfig, sessions: Set<String>, saving: Boolean,
-    onAdd: () -> Unit, onEdit: (ProviderConfig) -> Unit, onToggle: (ProviderConfig, Boolean) -> Unit,
-    onLogin: (ProviderConfig) -> Unit, onRoute: (ProviderConfig) -> Unit,
-    onModels: (ProviderConfig) -> Unit,
-    onManageModels: (ProviderConfig) -> Unit,
-) {
-    val strings = LocalResources.current
-    LazyColumn(contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        if (config.providers.isEmpty()) item { EmptyPage(strings.getString(R.string.ui_no_providers), strings.getString(R.string.ui_add_provider), saving, onAdd) }
-        items(config.providers, key = { it.id }) { provider ->
-            OutlinedCard(onClick = { onEdit(provider) }, enabled = !saving) {
-                Column(Modifier.padding(start = 16.dp, top = 10.dp, end = 12.dp, bottom = 4.dp)) {
-                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        ProviderBrandIcon(provider.kind, Modifier.size(28.dp))
-                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                            Text(provider.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                            Text(if (provider.kind == ProviderKind.CODEX) { if (provider.id in sessions) strings.getString(R.string.ui_signed_in) else strings.getString(R.string.ui_signed_out) } else provider.baseUrl,
-                                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                        }
-                        Switch(checked = provider.enabled, enabled = !saving, onCheckedChange = { onToggle(provider, it) },
-                            modifier = Modifier.semantics { contentDescription = strings.getString(R.string.ui_enable_named, provider.name) })
-                    }
-                    Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                        TextButton(enabled = !saving, modifier = Modifier.weight(1f),
-                            contentPadding = PaddingValues(horizontal = 0.dp), onClick = { onManageModels(provider) }) {
-                            Text(strings.getString(R.string.ui_model_count, config.routes.count { it.providerId == provider.id }))
-                        }
-                        if (provider.kind == ProviderKind.CODEX) TextButton(enabled = !saving, onClick = { onLogin(provider) }) { Text(if (provider.id in sessions) strings.getString(R.string.ui_sign_in_again) else strings.getString(R.string.ui_sign_in)) }
-                        if (provider.kind == ProviderKind.CODEX && provider.id in sessions) TextButton(enabled = !saving, onClick = { onModels(provider) }) { Text(strings.getString(R.string.ui_fetch_models)) }
-                        if (provider.kind != ProviderKind.CODEX) TextButton(enabled = !saving, onClick = { onRoute(provider) }) { Text(strings.getString(R.string.ui_add_model)) }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable private fun EmptyPage(title: String, action: String, saving: Boolean, onAction: () -> Unit) {
-    Column(Modifier.fillMaxWidth().padding(vertical = 36.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text(title, style = MaterialTheme.typography.titleMedium)
-        FilledTonalButton(enabled = !saving, onClick = onAction, shapes = ButtonDefaults.shapes()) {
-            Icon(PathPilotIcons.Add, null); Spacer(Modifier.width(8.dp)); Text(action)
-        }
     }
 }

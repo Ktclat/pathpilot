@@ -29,7 +29,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.pathpilot.app.ui.icons.PathPilotIcons
-import dev.pathpilot.app.ui.components.SettingsAction
 import dev.pathpilot.core.RequestEvent
 import dev.pathpilot.core.RequestOutcome
 import java.time.Instant
@@ -49,7 +48,6 @@ internal fun StatisticsPage(
     initialRequests: Boolean = false,
     initialRequestId: String? = null,
     onBack: (() -> Unit)? = null,
-    onSettings: (() -> Unit)? = null,
     onClear: () -> Unit,
     onRetry: () -> Unit,
 ) {
@@ -104,7 +102,6 @@ internal fun StatisticsPage(
             navigationIcon = { if (onBack != null) IconButton(onClick = onBack) { Icon(PathPilotIcons.Back, strings.getString(R.string.ui_back)) } },
             actions = {
                 IconButton(onClick = { help = true }) { Icon(Icons.Outlined.Info, strings.getString(R.string.ui_statistics_help)) }
-                onSettings?.let { SettingsAction(it) }
                 Box {
                     IconButton(onClick = { menu = true }) { Icon(Icons.Outlined.MoreVert, strings.getString(R.string.ui_more_actions)) }
                     DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {

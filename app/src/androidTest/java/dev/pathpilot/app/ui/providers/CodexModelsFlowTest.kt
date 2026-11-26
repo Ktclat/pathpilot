@@ -3,6 +3,7 @@ package dev.pathpilot.app.ui.providers
 import android.graphics.Bitmap
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -14,11 +15,12 @@ import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.pathpilot.app.ProvidersScreen
+import dev.pathpilot.app.ModelRoutesPage
 import dev.pathpilot.app.ui.theme.PathPilotTheme
 import dev.pathpilot.core.CodexCredentials
 import dev.pathpilot.core.ProviderConfig
@@ -76,7 +78,7 @@ class CodexModelsFlowTest {
         server = MockWebServer().apply { start(InetAddress.getByName("127.0.0.1"), 0) }
         transport = OkHttpClient.Builder().addInterceptor { chain ->
             val original = chain.request()
-            // Fail closed if production ever changes to an unexpected destination or endpoint.
+            // Route the production catalog endpoint to the local fixture.
             check(original.url.host == "chatgpt.com")
             check(original.url.encodedPath == "/backend-api/codex/models")
             originalUrl.set(original.url.toString())
@@ -111,10 +113,17 @@ class CodexModelsFlowTest {
         server.enqueue(catalog())
         mount(signedIn = true, showEditorInitially = false)
         compose.onNodeWithText("已登录").assertIsDisplayed()
+        compose.onNodeWithText(provider.name).performClick()
         compose.onNodeWithText("获取模型").assertIsDisplayed()
         screenshot("01-provider-entry")
 
-        // Exercise the actual provider-list action, including the editor's automatic first fetch.
+        compose.onNodeWithContentDescription("编辑供应商").performClick()
+        compose.onNodeWithText("编辑供应商").assertIsDisplayed()
+        screenshot("01a-provider-settings")
+        compose.onNodeWithContentDescription("关闭编辑").performClick()
+        compose.onNodeWithContentDescription("返回供应商列表").assertIsDisplayed()
+
+        // Fetch from the provider child page through the production editor and catalog client.
         compose.onNodeWithText("获取模型").performClick()
         awaitModels()
         assertCatalogRequest()
@@ -129,7 +138,7 @@ class CodexModelsFlowTest {
         assertEquals("", saved.providers.single().apiKey)
         assertEquals(provider.id, saved.routes.single().providerId)
         assertEquals(MODEL_A, saved.routes.single().upstreamModel)
-        compose.onNodeWithText("1 个模型").assertIsDisplayed()
+        compose.onNodeWithText("1 个模型 · 已启用 1 个").assertIsDisplayed()
         assertEquals(1, server.requestCount)
         assertEquals(1, resolvedCredentials.get())
         assertEquals(1, autoFetchStarts.get())
@@ -175,10 +184,11 @@ class CodexModelsFlowTest {
         }) else null
         compose.setContent {
             PathPilotTheme {
-                Surface(Modifier.fillMaxSize()) {
+                Surface(Modifier.fillMaxSize().safeDrawingPadding()) {
                     var config by remember { mutableStateOf(initial) }
                     var editing by remember { mutableStateOf(showEditorInitially) }
                     var fetchOnOpen by remember { mutableStateOf(false) }
+                    var selectedProviderId by remember { mutableStateOf<String?>(null) }
                     if (editing) ProviderEditor(
                         existing = provider,
                         saving = false,
@@ -195,17 +205,20 @@ class CodexModelsFlowTest {
                         onModelsFetchStarted = { autoFetchStarts.incrementAndGet(); fetchOnOpen = false },
                         onLogin = { loginRequests.incrementAndGet() },
                         model = model,
-                    ) else ProvidersScreen(
+                    ) else ModelRoutesPage(
                         config = config,
-                        sessions = if (signedIn) setOf(provider.id) else emptySet(),
+                        authenticatedProviders = if (signedIn) setOf(provider.id) else emptySet(),
                         saving = false,
-                        onAdd = {},
-                        onEdit = { editing = true },
-                        onToggle = { _, _ -> },
+                        selectedProviderId = selectedProviderId,
+                        onSelectProvider = { selectedProviderId = it },
+                        onAddProvider = {},
+                        onEditProvider = { editing = true },
+                        onAddModel = {},
+                        onEditModel = {},
+                        onModelToggle = { _, _ -> },
+                        onProviderToggle = { _, _ -> },
                         onLogin = { loginRequests.incrementAndGet() },
-                        onRoute = {},
-                        onModels = { fetchOnOpen = true; editing = true },
-                        onManageModels = {},
+                        onFetchModels = { fetchOnOpen = true; editing = true },
                     )
                 }
             }

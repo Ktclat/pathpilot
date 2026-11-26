@@ -13,7 +13,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -24,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import dev.pathpilot.app.ui.icons.PathPilotIcons
 import dev.pathpilot.app.ui.icons.ProviderBrandIcon
 import dev.pathpilot.core.ProviderConfig
+import dev.pathpilot.core.ProviderKind
 import dev.pathpilot.core.RouteConfig
 import dev.pathpilot.core.RouterConfig
 import dev.pathpilot.core.RequestEvent
@@ -35,6 +35,8 @@ internal fun ProviderModelGroupsScreen(
     saving: Boolean,
     onOpen: (ProviderConfig) -> Unit,
     onAddProvider: () -> Unit,
+    authenticatedProviders: Set<String> = emptySet(),
+    onProviderToggle: (ProviderConfig, Boolean) -> Unit,
 ) {
     val strings = LocalResources.current
     val modelsByProvider = remember(config.routes) { config.routes.groupBy { it.providerId } }
@@ -58,12 +60,18 @@ internal fun ProviderModelGroupsScreen(
                     Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(provider.name, style = MaterialTheme.typography.titleMedium,
                             maxLines = 2, overflow = TextOverflow.Ellipsis)
+                        Text(if (provider.kind == ProviderKind.CODEX)
+                            strings.getString(if (provider.id in authenticatedProviders) R.string.ui_signed_in else R.string.ui_signed_out)
+                            else provider.baseUrl,
+                            style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1, overflow = TextOverflow.Ellipsis)
                         Text(if (provider.enabled) strings.getString(R.string.ui_models_enabled_count, models.size, models.count { it.enabled })
                             else strings.getString(R.string.ui_models_provider_disabled, models.size),
                             style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
-                    Icon(PathPilotIcons.Back, null, Modifier.size(20.dp).rotate(180f),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Switch(checked = provider.enabled, enabled = !saving,
+                        onCheckedChange = { onProviderToggle(provider, it) },
+                        modifier = Modifier.semantics { contentDescription = strings.getString(R.string.ui_enable_named_provider, provider.name) })
                 }
             }
         }
@@ -83,6 +91,9 @@ internal fun ProviderModelsScreen(
     onEdit: (RouteConfig) -> Unit,
     onToggle: (RouteConfig, Boolean) -> Unit,
     onProviderToggle: (Boolean) -> Unit,
+    signedIn: Boolean = false,
+    onFetchModels: (() -> Unit)? = null,
+    onLogin: (() -> Unit)? = null,
     requestEvents: List<RequestEvent> = emptyList(),
     onViewUsage: ((RouteConfig) -> Unit)? = null,
 ) {
@@ -125,7 +136,24 @@ internal fun ProviderModelsScreen(
                     }
                     if (!provider.enabled) Text(strings.getString(R.string.ui_provider_disabled_models_retained),
                         style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(if (provider.kind == ProviderKind.CODEX)
+                        strings.getString(if (signedIn) R.string.ui_signed_in else R.string.ui_signed_out)
+                        else provider.baseUrl,
+                        style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 2, overflow = TextOverflow.Ellipsis)
                 }
+            }
+        }
+        item(key = "model-actions") {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Text(strings.getString(R.string.ui_models), Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
+                val needsLogin = provider.kind == ProviderKind.CODEX && !signedIn
+                val action = if (needsLogin) onLogin else onFetchModels
+                action?.let { onClick -> TextButton(enabled = !saving, onClick = onClick) {
+                    Icon(if (needsLogin) PathPilotIcons.Account else PathPilotIcons.Refresh, null, Modifier.size(18.dp))
+                    Spacer(Modifier.width(8.dp))
+                    Text(strings.getString(if (needsLogin) R.string.ui_sign_in else R.string.ui_fetch_models))
+                } }
             }
         }
         if (models.isNotEmpty() || query.isNotBlank() || filter != ModelFilter.ALL) item(key = "model-filters") {

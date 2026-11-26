@@ -35,8 +35,8 @@ class SettingsFlowTest {
         original = store.backupSnapshot(includeCodexSessions = true)
         prepareChineseCapture(store)
         scenario = ActivityScenario.launch(MainActivity::class.java)
-        compose.waitUntil(30_000) { compose.onAllNodes(hasContentDescription("设置")).fetchSemanticsNodes().isNotEmpty() }
-        compose.onNodeWithContentDescription("设置").performClick()
+        compose.waitUntil(30_000) { compose.onAllNodes(hasText("设置") and hasClickAction()).fetchSemanticsNodes().isNotEmpty() }
+        navigation("设置").performClick()
     }
 
     @After fun clean() {
@@ -76,8 +76,8 @@ class SettingsFlowTest {
         compose.onNodeWithText("Theme").assertIsDisplayed()
         compose.onNodeWithText("Language").assertIsDisplayed()
         compose.onNodeWithText("Wallpaper colors").assertIsOn()
-        compose.onNodeWithText("Settings").assertIsDisplayed()
-        navigation("MCP").assertDoesNotExist()
+        navigation("Settings").assertIsSelected()
+        navigation("MCP").assertIsDisplayed()
         compose.captureSettingsScreenshot("05-settings-english")
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("About PathPilot"))
         compose.onNodeWithText("Export backup").assertIsDisplayed()
@@ -85,7 +85,7 @@ class SettingsFlowTest {
         compose.captureSettingsScreenshot("06-settings-backup-english")
     }
 
-    @Test fun primaryPagesOpenSettingsAndReturnToTheSameDestination() {
+    @Test fun fourPrimaryPagesPreserveListsAndUseSecondaryDetails() {
         store.setConfig(store.config.value.copy(
             providers = (1..12).map { index -> ProviderConfig(
                 id = "navigation-$index", name = "离线供应商 $index", kind = ProviderKind.OPENAI_COMPATIBLE,
@@ -93,21 +93,34 @@ class SettingsFlowTest {
             ) },
             routes = emptyList(),
         ))
-        navigation("MCP").assertDoesNotExist()
-        compose.onNodeWithContentDescription("返回").performClick()
-        listOf("共享", "供应商", "模型", "统计", "MCP").forEachIndexed { index, label ->
+        listOf("共享", "模型", "MCP", "设置").forEachIndexed { index, label ->
             navigation(label).performClick().assertIsSelected()
-            compose.onNodeWithContentDescription("设置").assertIsDisplayed()
+            navigation("供应商").assertDoesNotExist()
+            navigation("统计").assertDoesNotExist()
+            compose.onNodeWithContentDescription("设置").assertDoesNotExist()
+            compose.onNodeWithContentDescription("返回").assertDoesNotExist()
             compose.captureSettingsScreenshot("${17 + index}-primary-$index")
-            if (label == "供应商") compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("离线供应商 12"))
-            compose.onNodeWithContentDescription("设置").performClick()
-            compose.onNodeWithText("主题").assertIsDisplayed()
-            navigation("MCP").assertDoesNotExist()
-            compose.onNodeWithContentDescription("返回").performClick()
-            navigation(label).assertIsSelected()
-            if (label == "供应商") compose.onNodeWithText("离线供应商 12").assertIsDisplayed()
         }
-        compose.onNodeWithContentDescription("返回").assertDoesNotExist()
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("关于 PathPilot"))
+        compose.onNodeWithText("关于 PathPilot").assertIsDisplayed()
+        navigation("模型").performClick()
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("离线供应商 12"))
+        compose.onNodeWithContentDescription("统计").performClick()
+        navigation("设置").assertDoesNotExist()
+        compose.onNodeWithContentDescription("统计概览").assertIsDisplayed()
+        compose.captureSettingsScreenshot("21-statistics-secondary")
+        compose.onNodeWithContentDescription("返回").performClick()
+        navigation("模型").assertIsSelected()
+        compose.onNodeWithText("离线供应商 12").assertIsDisplayed()
+        compose.onNodeWithText("离线供应商 12").performClick()
+        navigation("设置").assertDoesNotExist()
+        compose.onNodeWithContentDescription("返回供应商列表").assertIsDisplayed()
+        compose.captureSettingsScreenshot("21a-provider-models-secondary")
+        compose.onNodeWithContentDescription("返回供应商列表").performClick()
+        navigation("模型").assertIsSelected()
+        compose.onNodeWithText("离线供应商 12").assertIsDisplayed()
+        navigation("设置").performClick().assertIsSelected()
+        compose.onNodeWithText("关于 PathPilot").assertIsDisplayed()
     }
 
     @Test fun exportUsesTheAndroidDocumentPickerAndCanBeCancelled() {
@@ -135,10 +148,9 @@ class SettingsFlowTest {
             assertEquals(1.5f, it.resources.configuration.fontScale, 0.01f)
             assertTrue(it.resources.configuration.screenWidthDp in 320..360)
         }
-        navigation("MCP").assertDoesNotExist()
+        navigation("设置").assertIsSelected()
         compose.captureSettingsScreenshot("14-settings-large-font")
-        compose.onNodeWithContentDescription("返回").performClick()
-        listOf("共享", "供应商", "模型", "统计", "MCP").forEach { label ->
+        listOf("共享", "模型", "MCP", "设置").forEach { label ->
             navigation(label).assertIsDisplayed()
             val layouts = mutableListOf<TextLayoutResult>()
             compose.onNode(hasText(label) and hasAnyAncestor(hasClickAction()), useUnmergedTree = true)
@@ -150,14 +162,12 @@ class SettingsFlowTest {
             }
         }
         compose.captureSettingsScreenshot("14a-navigation-large-font")
-        compose.onNodeWithContentDescription("设置").performClick()
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("恢复备份"))
         compose.onNodeWithText("导出备份").performClick()
         compose.onNodeWithText("确认密码").assertIsDisplayed()
         compose.onNodeWithText("取消").assertIsDisplayed()
         compose.captureSettingsScreenshot("15-backup-large-font")
         compose.onNodeWithText("取消").performClick()
-        compose.onNodeWithContentDescription("返回").performClick()
         navigation("MCP").performClick()
         compose.captureSettingsScreenshot("16a-mcp-root-large-font")
         compose.onNodeWithContentDescription("添加连接").performClick()

@@ -32,7 +32,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.pathpilot.app.runtime.*
 import dev.pathpilot.app.ui.icons.PathPilotIcons
-import dev.pathpilot.app.ui.components.SettingsAction
 import dev.pathpilot.app.ui.i18n.localize
 import dev.pathpilot.core.AccessKeys
 import dev.pathpilot.core.mcp.*
@@ -52,7 +51,6 @@ internal fun McpPage(
     store: AppStore,
     selectedId: String?,
     onSelectConnection: (String?) -> Unit,
-    onSettings: () -> Unit,
 ) {
     val context = LocalContext.current
     val strings = LocalResources.current
@@ -133,7 +131,6 @@ internal fun McpPage(
                     } else IconButton(enabled = !busy, onClick = { editorId = selected.id }) {
                         Icon(PathPilotIcons.Edit, stringResource(R.string.mcp_edit))
                     }
-                    SettingsAction(onSettings)
                     Box {
                         IconButton(onClick = { menu = true }) { Icon(Icons.Outlined.MoreVert, stringResource(R.string.mcp_more)) }
                         DropdownMenu(menu, onDismissRequest = { menu = false }) {
