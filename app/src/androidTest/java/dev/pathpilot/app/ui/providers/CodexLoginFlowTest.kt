@@ -6,8 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.test.assertDoesNotExist
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -238,7 +239,8 @@ class CodexLoginFlowTest {
         model = ViewModelProvider(activity, factory)[CodexLoginViewModel::class.java]
         model.begin(account)
         activity.setContent {
-            PathPilotTheme(store.preferences.value) {
+            val preferences by store.preferences.collectAsStateWithLifecycle()
+            PathPilotTheme(preferences) {
                 Surface(Modifier.fillMaxSize().safeDrawingPadding()) {
                     CodexLoginDialog(provider, store,
                         onDismiss = { dismissCallbacks.incrementAndGet() },
