@@ -38,8 +38,27 @@ adb shell settings put system font_scale 1.0
 | `ui.settings.SettingsFlowTest` | 3 普通 + 1 大字体 | 生产 `MainActivity`：四页导航及返回/滚动状态、主题和语言持久化、原生文件器、放大字体设置/MCP | `settings-e2e/` |
 | `ui.settings.BackupFlowTest` | 1 | 生产设置页面/ViewModel 与真实加密文件往返；仅替换文件选择结果 URI | `settings-e2e/` |
 | `ui.settings.McpFlowTest` | 1 | 生产页面、前台服务与真实回环 HTTP：连接、工具选择、鉴权、允许/拒绝调用、模型/MCP 独立启停和通知入口 | `settings-e2e/` |
+| `ui.settings.McpPresetFlowTest` | 2 | 生产 MCP 页面与 AppStore：预设自动添加/获取、失败重试、令牌校验、账户去重；仅重定向 HTTP 目的地 | `settings-e2e/`（37–42） |
 
 `CodexModelsFlowTest` 的订阅目录为固定测试数据，未执行真实账号登录。`BackupFlowTest` 的文件 URI 替换不覆盖 Android 文件选择器；原生 `CreateDocument` 由 `SettingsFlowTest#exportUsesTheAndroidDocumentPickerAndCanBeCancelled` 单独验证。SQLite 和备份存储测试使用独立目录；涉及应用单例的设备流程限制在 `.capture` 包。
+
+## 主题与 MCP 预设：定向回归 5 项
+
+普通字号下运行 4 项：主题配色、动态取色和语言重建持久化；两个 MCP 预设流程；原 MCP 自定义连接与共享流程。各类在启动界面前自行设置中文。
+
+这三个测试类使用 Compose UI Test 1.12.1 的 `junit4.v2.createEmptyComposeRule`：重组任务由 `StandardTestDispatcher` 排队，再由测试框架在主线程调度，避免旧版 `UnconfinedTestDispatcher` 在 IO 恢复线程立即执行重组。断言、空闲同步及超时保持不变。
+
+```sh
+adb shell wm density 320
+adb shell settings put system font_scale 1.0
+adb shell am instrument -w -r -e class \
+  'dev.pathpilot.app.ui.settings.SettingsFlowTest#themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.McpPresetFlowTest,dev.pathpilot.app.ui.settings.McpFlowTest' \
+  dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
+```
+
+另用 density 360 / font scale 1.5 运行 `SettingsFlowTest#largeSystemFontKeepsSettingsAndMcpControlsReachable`，检查主题色板、动态取色、MCP 预设目录及令牌表单的滚动和操作。
+
+主题用例运行生产 MainActivity，截图为 26–32；大字体新增 33–36。预设用例在 Compose 测试宿主中挂载生产 `McpPage`，将真实 `McpClient` 的 HTTP 目的地重定向到 MockWebServer，保存的配置仍为官方 URL。它验证免凭据来源自动获取、503 后保留连接并重试、GitHub/Context7 必填令牌与 Bearer 请求，以及同 URL 相同令牌复用、不同令牌独立保存；不会调用远程工具或开启共享。截图为 37–42，不作为真实外部服务联调的依据。
 
 ## 四页导航回归：普通字体 10 项
 
@@ -49,7 +68,7 @@ adb shell settings put system font_scale 1.0
 
 ```sh
 adb shell am instrument -w -r -e class \
-  'dev.pathpilot.app.ui.settings.SettingsFlowTest#fourPrimaryPagesPreserveListsAndUseSecondaryDetails,dev.pathpilot.app.ui.settings.SettingsFlowTest#themeMonetAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.McpFlowTest' \
+  'dev.pathpilot.app.ui.settings.SettingsFlowTest#fourPrimaryPagesPreserveListsAndUseSecondaryDetails,dev.pathpilot.app.ui.settings.SettingsFlowTest#themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.McpFlowTest' \
   dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner
 ```
 
