@@ -60,8 +60,8 @@ jobs:
           mkdir -p "$ANDROID_AVD_HOME"
           adb="$ANDROID_HOME/platform-tools/adb"
           emu="$ANDROID_HOME/emulator/emulator"
-          cli="$RUNNER_TEMP/pathpilot-android-cli-16111833/cmdline-tools/bin/avdmanager"
-          printf 'no\n' | "$cli" create avd --name pathpilot_history --package 'system-images;android-35;default;x86_64' --device pixel_2
+          cli="$ANDROID_HOME/cmdline-tools/pathpilot-16111833/bin/avdmanager"
+          printf 'no\n' | "$cli" create avd --name pathpilot_history --package 'system-images;android-35;default;x86_64' --device pixel_2 2>&1 | tee "$ev/avd-create.txt"
           emulator=''
           cleanup() {
             if [[ -n "$emulator" ]] && kill -0 "$emulator" 2>/dev/null; then

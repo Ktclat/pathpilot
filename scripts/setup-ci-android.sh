@@ -13,6 +13,10 @@ printf '%s  %s\n' \
   0877a1d048fe4a24efe2eff536ca4223f7adeb58648bb81909d33c446918cfa8 \
   "$archive" | sha256sum --check --status
 unzip -oq "$archive" -d "$cli_root"
+# avdmanager discovers installed system images relative to the SDK tool directory.
+sdk_cli_dir="$ANDROID_HOME/cmdline-tools/pathpilot-16111833"
+mkdir -p "$sdk_cli_dir"
+cp -a "$cli_root/cmdline-tools/." "$sdk_cli_dir/"
 python3 - "$cli_root/cmdline-tools/bin/sdkmanager" "$ANDROID_HOME" <<'PY'
 import subprocess
 import sys

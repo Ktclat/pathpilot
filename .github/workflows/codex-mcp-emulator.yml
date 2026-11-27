@@ -102,7 +102,7 @@ jobs:
           mkdir -p "$ANDROID_AVD_HOME" "$ev/screenshots/internal" "$ev/screenshots/external"
           adb="$ANDROID_HOME/platform-tools/adb"
           emu="$ANDROID_HOME/emulator/emulator"
-          cli="$RUNNER_TEMP/pathpilot-android-cli-16111833/cmdline-tools/bin/avdmanager"
+          cli="$ANDROID_HOME/cmdline-tools/pathpilot-16111833/bin/avdmanager"
           emulator=''
           collect_and_stop() {
             local original_status=$?
@@ -130,7 +130,7 @@ jobs:
           }
           trap collect_and_stop EXIT
           printf 'no\n' | "$cli" create avd --name pathpilot_codex_mcp \
-            --package 'system-images;android-35;default;x86_64' --device pixel_2
+            --package 'system-images;android-35;default;x86_64' --device pixel_2 2>&1 | tee "$ev/avd-create.txt"
           "$adb" start-server
           "$emu" -avd pathpilot_codex_mcp -port 5554 -accel on -gpu swiftshader -no-window -no-snapshot \
             -no-audio -no-boot-anim -no-metrics -camera-back none -camera-front none \
