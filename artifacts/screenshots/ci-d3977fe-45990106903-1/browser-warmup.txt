@@ -1,0 +1,7 @@
+Starting: Intent { act=android.intent.action.VIEW dat=about: cmp=org.chromium.webview_shell/.WebViewBrowserActivity }
+Status: ok
+LaunchState: COLD
+Activity: org.chromium.webview_shell/.WebViewBrowserActivity
+TotalTime: 2003
+WaitTime: 2006
+Complete

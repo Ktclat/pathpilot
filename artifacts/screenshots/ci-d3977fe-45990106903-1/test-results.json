@@ -1,0 +1,93 @@
+{
+  "source_commit": "d3977fefd677801cc64d99ac185b812b6d6b819e",
+  "success": true,
+  "totals": {
+    "expected": 7,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "not_finished": 0
+  },
+  "suites": [
+    {
+      "suite": "codex-login",
+      "expected": 3,
+      "process_exit_code": 0,
+      "runner_success": true,
+      "passed": true,
+      "counts": {
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "not_finished": 0
+      },
+      "tests": [
+        {
+          "test": "dev.pathpilot.app.ui.providers.CodexLoginFlowTest#browserRoundTripRetainsThePendingDeviceCode",
+          "code": 0,
+          "status": "passed"
+        },
+        {
+          "test": "dev.pathpilot.app.ui.providers.CodexLoginFlowTest#deviceCodeAndNetworkRecoverySurviveActivityRecreation",
+          "code": 0,
+          "status": "passed"
+        },
+        {
+          "test": "dev.pathpilot.app.ui.providers.CodexLoginFlowTest#expiredDeviceAuthorizationShowsReadableErrorAndCanRestart",
+          "code": 0,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "suite": "mcp-ui",
+      "expected": 1,
+      "process_exit_code": 0,
+      "runner_success": true,
+      "passed": true,
+      "counts": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "not_finished": 0
+      },
+      "tests": [
+        {
+          "test": "dev.pathpilot.app.ui.settings.McpFlowTest#connectionToolsAndIndependentSharingReachAnActualHttpUpstream",
+          "code": 0,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "suite": "mcp-sqlite",
+      "expected": 3,
+      "process_exit_code": 0,
+      "runner_success": true,
+      "passed": true,
+      "counts": {
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "not_finished": 0
+      },
+      "tests": [
+        {
+          "test": "dev.pathpilot.app.runtime.McpCallHistoryStoreTest#newestThousandAreKeptByStartTimeIncludingLateCompletions",
+          "code": 0,
+          "status": "passed"
+        },
+        {
+          "test": "dev.pathpilot.app.runtime.McpCallHistoryStoreTest#persistedRowsKeepMetadataAndDeduplicateWithoutRewritingAnEvent",
+          "code": 0,
+          "status": "passed"
+        },
+        {
+          "test": "dev.pathpilot.app.runtime.McpCallHistoryStoreTest#failedWritesAreVisibleAndRetriedWithoutDuplicatingOrLosingTheCall",
+          "code": 0,
+          "status": "passed"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "source_commit": "d3977fefd677801cc64d99ac185b812b6d6b819e",
+  "workflow_run": "45990106903",
+  "workflow_attempt": "1",
+  "ref": "refs/heads/qa/codex-auth-recovery",
+  "started_utc": "2026-11-27T11:23:46.730853+00:00",
+  "runner": "ubuntu-24.04",
+  "device": "Android 15 / API 35, default x86_64, KVM",
+  "expected_tests": 7,
+  "fixtures": "Local authorization fixtures, loopback MCP HTTP and Android SQLite; no real accounts.",
+  "apk_role": "Isolated dev.pathpilot.app.capture screenshot package, not the ARM64 distribution APK."
+}
