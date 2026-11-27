@@ -1,0 +1,55 @@
+{
+  "source_commit": "53459f9d9ea3ba263a3bfb13dc1186e0fdbf5e41",
+  "success": false,
+  "totals": {
+    "expected": 7,
+    "passed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "not_finished": 7
+  },
+  "suites": [
+    {
+      "suite": "codex-login",
+      "expected": 3,
+      "process_exit_code": null,
+      "runner_success": false,
+      "passed": false,
+      "counts": {
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "not_finished": 3
+      },
+      "tests": []
+    },
+    {
+      "suite": "mcp-ui",
+      "expected": 1,
+      "process_exit_code": null,
+      "runner_success": false,
+      "passed": false,
+      "counts": {
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "not_finished": 1
+      },
+      "tests": []
+    },
+    {
+      "suite": "mcp-sqlite",
+      "expected": 3,
+      "process_exit_code": null,
+      "runner_success": false,
+      "passed": false,
+      "counts": {
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "not_finished": 3
+      },
+      "tests": []
+    }
+  ]
+}
