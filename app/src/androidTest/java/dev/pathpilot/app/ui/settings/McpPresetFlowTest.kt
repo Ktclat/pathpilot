@@ -217,7 +217,7 @@ class McpPresetFlowTest {
     private fun assertEmptyTokenDoesNotSave(expectedConnections: Int, expectedInitializations: Int) {
         compose.onNodeWithTag("mcp-preset-token").assertIsDisplayed()
         addWithToken()
-        compose.onNodeWithText("填写 Token").performScrollTo().assertIsDisplayed()
+        compose.onNodeWithText("填写上游访问令牌").performScrollTo().assertIsDisplayed()
         assertEquals(expectedConnections, store.mcp.value.connections.size)
         assertEquals(expectedInitializations, fixture.initializeCount.get())
     }

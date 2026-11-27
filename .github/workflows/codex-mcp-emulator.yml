@@ -1,0 +1,284 @@
+name: Codex and MCP emulator tests
+
+on:
+  push:
+    branches: [qa/codex-auth-recovery]
+    paths:
+      - '.github/workflows/codex-mcp-emulator.yml'
+      - 'app/**'
+      - 'core/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codex-mcp-emulator-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  android-test:
+    if: github.ref == 'refs/heads/qa/codex-auth-recovery' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    env:
+      JAVA_OPTS: -Dfile.encoding=UTF-8
+      SOURCE_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 2
+      - name: Initialize evidence
+        id: evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          export EVIDENCE_DIRECTORY="$RUNNER_TEMP/pathpilot-codex-mcp-evidence"
+          printf 'EVIDENCE_DIRECTORY=%s\n' "$EVIDENCE_DIRECTORY" >> "$GITHUB_ENV"
+          mkdir -p "$EVIDENCE_DIRECTORY"
+          python3 - <<'PY'
+          import datetime, json, os
+          from pathlib import Path
+          metadata = {
+              'source_commit': os.environ['SOURCE_SHA'],
+              'workflow_run': os.environ['GITHUB_RUN_ID'],
+              'workflow_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+              'ref': os.environ['GITHUB_REF'],
+              'started_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              'runner': 'ubuntu-24.04',
+              'device': 'Android 15 / API 35, default x86_64, KVM',
+              'expected_tests': 7,
+              'fixtures': 'Local authorization fixtures, loopback MCP HTTP and Android SQLite; no real accounts.',
+              'apk_role': 'Isolated dev.pathpilot.app.capture screenshot package, not the ARM64 distribution APK.',
+          }
+          destination = Path(os.environ['EVIDENCE_DIRECTORY'])
+          (destination / 'metadata.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + '\n')
+          (destination / 'source-sha.txt').write_text(os.environ['SOURCE_SHA'] + '\n')
+          PY
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Enable KVM
+        run: |
+          test -c /dev/kvm
+          if [[ ! -r /dev/kvm || ! -w /dev/kvm ]]; then
+            sudo -n setfacl -m "u:$(id -u):rw" /dev/kvm
+          fi
+          test -r /dev/kvm && test -w /dev/kvm
+      - name: Prepare pinned SDK and API 35 emulator
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/setup-ci-android.sh
+          python3 - <<'PY'
+          import os, subprocess
+          from pathlib import Path
+          sdk = Path(os.environ['ANDROID_HOME'])
+          cli = Path(os.environ['RUNNER_TEMP']) / 'pathpilot-android-cli-16111833/cmdline-tools/bin/sdkmanager'
+          subprocess.run([str(cli), f'--sdk_root={sdk}', 'emulator', 'system-images;android-35;default;x86_64'],
+                         input='y\n' * 30, text=True, check=True)
+          PY
+          test -f "$ANDROID_HOME/system-images/android-35/default/x86_64/system.img"
+          "$ANDROID_HOME/emulator/emulator" -accel-check | tee "$EVIDENCE_DIRECTORY/acceleration.txt"
+      - name: Build capture and instrumentation APKs
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./gradlew --no-daemon -PuiCapture=true :app:assembleDebug :app:assembleDebugAndroidTest \
+            2>&1 | tee "$EVIDENCE_DIRECTORY/build.txt"
+          sha256sum app/build/outputs/apk/debug/app-debug.apk \
+            app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk > "$EVIDENCE_DIRECTORY/apk-sha256.txt"
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging app/build/outputs/apk/debug/app-debug.apk \
+            > "$EVIDENCE_DIRECTORY/apk-badging.txt"
+      - name: Run all seven tests and collect device evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          ev="$EVIDENCE_DIRECTORY"
+          export ANDROID_AVD_HOME="$RUNNER_TEMP/pathpilot-codex-mcp-avds"
+          mkdir -p "$ANDROID_AVD_HOME" "$ev/screenshots/internal" "$ev/screenshots/external"
+          adb="$ANDROID_HOME/platform-tools/adb"
+          emu="$ANDROID_HOME/emulator/emulator"
+          cli="$RUNNER_TEMP/pathpilot-android-cli-16111833/cmdline-tools/bin/avdmanager"
+          emulator=''
+          collect_and_stop() {
+            local original_status=$?
+            set +e
+            timeout 20 "$adb" -s emulator-5554 logcat -b all -d > "$ev/logcat-all.txt" 2>&1
+            timeout 20 "$adb" -s emulator-5554 logcat -b events -d > "$ev/logcat-events.txt" 2>&1
+            timeout 20 "$adb" -s emulator-5554 logcat -b crash -d > "$ev/logcat-crash.txt" 2>&1
+            timeout 20 "$adb" -s emulator-5554 shell dumpsys activity lastanr > "$ev/last-anr.txt" 2>&1
+            timeout 20 "$adb" -s emulator-5554 exec-out screencap -p > "$ev/screenshots/final-screen.png"
+            timeout 30 "$adb" -s emulator-5554 exec-out run-as dev.pathpilot.app.capture \
+              tar -cf - files/settings-e2e > "$RUNNER_TEMP/pathpilot-settings-internal.tar" 2> "$ev/internal-capture.txt"
+            if [[ $? == 0 ]]; then
+              tar -xf "$RUNNER_TEMP/pathpilot-settings-internal.tar" -C "$ev/screenshots/internal" --strip-components=2 \
+                >> "$ev/internal-capture.txt" 2>&1
+            fi
+            timeout 30 "$adb" -s emulator-5554 pull \
+              /sdcard/Android/data/dev.pathpilot.app.capture/files/settings-e2e "$ev/screenshots/external/" \
+              > "$ev/external-capture.txt" 2>&1
+            printf '%s\n' "$original_status" > "$ev/device-step-exit-code.txt"
+            if [[ -n "$emulator" ]] && kill -0 "$emulator" 2>/dev/null; then
+              timeout 15 "$adb" -s emulator-5554 emu kill > "$ev/emulator-shutdown.txt" 2>&1 || kill "$emulator"
+              wait "$emulator"
+            fi
+            return "$original_status"
+          }
+          trap collect_and_stop EXIT
+          printf 'no\n' | "$cli" create avd --name pathpilot_codex_mcp \
+            --package 'system-images;android-35;default;x86_64' --device pixel_2
+          "$adb" start-server
+          "$emu" -avd pathpilot_codex_mcp -port 5554 -accel on -gpu swiftshader -no-window -no-snapshot \
+            -no-audio -no-boot-anim -no-metrics -camera-back none -camera-front none \
+            > "$ev/emulator.txt" 2>&1 &
+          emulator=$!
+          deadline=$((SECONDS + 300))
+          ready=false
+          while (( SECONDS < deadline )); do
+            kill -0 "$emulator"
+            if [[ "$(timeout 5 "$adb" -s emulator-5554 shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" == 1 ]] &&
+                timeout 10 "$adb" -s emulator-5554 shell wm size > "$ev/device.txt" 2>&1 &&
+                timeout 10 "$adb" -s emulator-5554 shell pm path android >> "$ev/device.txt" 2>&1; then
+              ready=true
+              break
+            fi
+            sleep 3
+          done
+          if [[ "$ready" != true ]]; then
+            echo 'Emulator did not finish booting within 300 seconds.' >&2
+            exit 1
+          fi
+          "$adb" -s emulator-5554 shell wm size 720x1280
+          "$adb" -s emulator-5554 shell wm density 320
+          "$adb" -s emulator-5554 shell settings put system font_scale 1.0
+          "$adb" -s emulator-5554 shell input keyevent 82
+          for prop in ro.build.version.release ro.build.version.sdk ro.build.fingerprint ro.product.cpu.abi; do
+            printf '%s: ' "$prop" >> "$ev/device.txt"
+            "$adb" -s emulator-5554 shell getprop "$prop" >> "$ev/device.txt"
+          done
+          "$adb" -s emulator-5554 shell wm size >> "$ev/device.txt"
+          "$adb" -s emulator-5554 shell wm density >> "$ev/device.txt"
+          "$adb" -s emulator-5554 shell settings get system font_scale >> "$ev/device.txt"
+          "$adb" -s emulator-5554 shell cmd package resolve-activity --brief \
+            -a android.intent.action.VIEW -d http://127.0.0.1/ > "$ev/browser-handler.txt"
+          "$adb" -s emulator-5554 install app/build/outputs/apk/debug/app-debug.apk
+          "$adb" -s emulator-5554 install app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+          "$adb" -s emulator-5554 shell pm grant dev.pathpilot.app.capture android.permission.POST_NOTIFICATIONS
+          browser_component="$(tail -n 1 "$ev/browser-handler.txt" | tr -d '\r')"
+          if [[ "$browser_component" == */* ]]; then
+            # Warm the existing system browser; the test still opens its own loopback page through ACTION_VIEW.
+            timeout 45 "$adb" -s emulator-5554 shell am start -W -n "$browser_component" \
+              -a android.intent.action.VIEW -d about:blank > "$ev/browser-warmup.txt" 2>&1 || true
+            "$adb" -s emulator-5554 shell input keyevent 3
+          fi
+          run_class() {
+            local cls="$1" label="$2" rc=0
+            timeout 10 "$adb" -s emulator-5554 shell am force-stop dev.pathpilot.app.capture \
+              > "$ev/$label-before.txt" 2>&1 || true
+            timeout 540 "$adb" -s emulator-5554 shell am instrument -w -r -e class "$cls" \
+              dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner \
+              > "$ev/$label-instrumentation.txt" 2>&1 || rc=$?
+            printf '%s\n' "$rc" > "$ev/$label-exit-code.txt"
+            cat "$ev/$label-instrumentation.txt"
+            # Record each class independently, so failures do not skip later classes.
+            return 0
+          }
+          run_class dev.pathpilot.app.ui.providers.CodexLoginFlowTest codex-login
+          run_class dev.pathpilot.app.ui.settings.McpFlowTest mcp-ui
+          run_class dev.pathpilot.app.runtime.McpCallHistoryStoreTest mcp-sqlite
+      - name: Count test outcomes without hiding failures
+        if: always() && steps.evidence.outcome == 'success'
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          evidence = Path(os.environ['EVIDENCE_DIRECTORY'])
+          suites = [('codex-login', 3), ('mcp-ui', 1), ('mcp-sqlite', 3)]
+          results = []
+          totals = {'expected': 7, 'passed': 0, 'failed': 0, 'skipped': 0, 'not_finished': 0}
+          success = True
+          for label, expected in suites:
+              log = evidence / f'{label}-instrumentation.txt'
+              output = log.read_text(errors='replace') if log.exists() else ''
+              exit_path = evidence / f'{label}-exit-code.txt'
+              exit_code = int(exit_path.read_text()) if exit_path.exists() else None
+              bundle, cases = {}, {}
+              for line in output.splitlines():
+                  if line.startswith('INSTRUMENTATION_STATUS: '):
+                      key, separator, value = line.removeprefix('INSTRUMENTATION_STATUS: ').partition('=')
+                      if separator:
+                          bundle[key] = value
+                  elif line.startswith('INSTRUMENTATION_STATUS_CODE: '):
+                      code = int(line.split(': ', 1)[1])
+                      if 'class' in bundle and 'test' in bundle and code in (0, -1, -2, -3, -4):
+                          name = bundle['class'] + '#' + bundle['test']
+                          cases[name] = {'test': name, 'code': code,
+                                         'status': 'passed' if code == 0 else 'skipped' if code in (-3, -4) else 'failed'}
+                      bundle = {}
+              counts = {status: sum(case['status'] == status for case in cases.values())
+                        for status in ('passed', 'failed', 'skipped')}
+              counts['not_finished'] = max(0, expected - len(cases))
+              ok_line = f'OK ({expected} test' + ('s)' if expected != 1 else ')')
+              completed = exit_code == 0 and ok_line in output.splitlines() and bool(
+                  re.search(r'^INSTRUMENTATION_CODE: -1\s*$', output, re.MULTILINE))
+              passed = completed and counts['passed'] == expected and len(cases) == expected
+              success &= passed
+              for key, value in counts.items():
+                  totals[key] += value
+              results.append({'suite': label, 'expected': expected, 'process_exit_code': exit_code,
+                              'runner_success': completed, 'passed': passed, 'counts': counts,
+                              'tests': list(cases.values())})
+          report = {'source_commit': os.environ['SOURCE_SHA'], 'success': success,
+                    'totals': totals, 'suites': results}
+          (evidence / 'test-results.json').write_text(json.dumps(report, indent=2) + '\n')
+          lines = ['# Codex and MCP emulator results', '',
+                   f"Source: `{os.environ['SOURCE_SHA']}`", '',
+                   'Local fixtures only; no real account authorization.', '',
+                   '| Suite | Expected | Passed | Failed | Skipped | Not finished |',
+                   '| --- | ---: | ---: | ---: | ---: | ---: |']
+          for suite in results:
+              c = suite['counts']
+              lines.append(f"| {suite['suite']} | {suite['expected']} | {c['passed']} | {c['failed']} | {c['skipped']} | {c['not_finished']} |")
+          lines += ['', f"Overall: {'passed' if success else 'failed or incomplete'}.", '',
+                    'Raw instrumentation, crash/events logs, APK hashes and original screenshots accompany this report.', '']
+          summary = '\n'.join(lines)
+          (evidence / 'README.md').write_text(summary)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as stream:
+              stream.write(summary)
+          print(summary)
+          raise SystemExit(0 if success else 1)
+          PY
+      - name: Commit evidence to the unchanged QA source branch
+        if: always() && github.event_name == 'push' && github.ref == 'refs/heads/qa/codex-auth-recovery' && steps.evidence.outcome == 'success'
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch=qa/codex-auth-recovery
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          git fetch origin "refs/heads/$branch:refs/remotes/origin/$branch"
+          if [[ "$(git rev-parse "refs/remotes/origin/$branch")" != "$SOURCE_SHA" ]]; then
+            echo 'QA branch advanced; evidence remains in the workflow artifact. No branch changes made.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          destination="artifacts/screenshots/ci-${SOURCE_SHA:0:7}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          mkdir -p "$destination"
+          cp -a "$EVIDENCE_DIRECTORY/." "$destination/"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- "$destination"
+          git commit -m 'test: capture Codex and MCP emulator evidence [skip ci]'
+          # A regular push fails if the branch advances between fetch and push.
+          git push origin "HEAD:refs/heads/$branch"
+          echo "Evidence committed to $branch at $(git rev-parse HEAD): $destination" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: codex-mcp-emulator-results-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ env.EVIDENCE_DIRECTORY }}/
+          if-no-files-found: warn
+          retention-days: 14

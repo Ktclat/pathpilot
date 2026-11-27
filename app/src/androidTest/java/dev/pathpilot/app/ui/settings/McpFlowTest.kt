@@ -98,7 +98,7 @@ class McpFlowTest {
         compose.onNodeWithText("名称").performTextReplacement("工具 · 离线测试")
         compose.onNodeWithText("MCP URL").performTextReplacement(upstream.url)
         compose.onNodeWithText("Bearer").performScrollTo().performClick()
-        compose.onNodeWithText("Token").performScrollTo().performTextReplacement(upstream.token)
+        compose.onNodeWithText("上游访问令牌").performScrollTo().performTextReplacement(upstream.token)
         hideCaptureKeyboard()
         compose.captureSettingsScreenshot("09-mcp-editor")
         compose.onNodeWithText("保存").performScrollTo().performClick()
