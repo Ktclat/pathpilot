@@ -1,6 +1,5 @@
 package dev.pathpilot.app.runtime
 
-import dev.pathpilot.core.mcp.McpCallEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,7 +12,6 @@ data class McpRuntimeState(
     val addresses: List<LocalAddress> = emptyList(),
     val addressWarning: String? = null,
     val error: String? = null,
-    val recentCalls: List<McpCallEvent> = emptyList(),
 )
 
 /** Observations from the live MCP service, separate from model usage and persisted configuration. */
@@ -51,8 +49,4 @@ object McpRuntime {
             addresses = snapshot.addresses, addressWarning = snapshot.warning)
     }
 
-    @Synchronized internal fun record(event: McpCallEvent) {
-        if (!mutableState.value.running) return
-        mutableState.value = mutableState.value.copy(recentCalls = (listOf(event) + mutableState.value.recentCalls).take(30))
-    }
 }

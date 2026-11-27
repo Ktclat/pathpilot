@@ -11,7 +11,7 @@
     <string name="mcp_authentication">Authentication</string>
     <string name="mcp_auth_none">None</string>
     <string name="mcp_auth_bearer">Bearer</string>
-    <string name="mcp_token">Token</string>
+    <string name="mcp_token">Upstream access token</string>
     <string name="mcp_save">Save</string>
     <string name="mcp_cancel">Cancel</string>
     <string name="mcp_close">Close</string>
@@ -21,7 +21,7 @@
     <string name="mcp_delete_body">Remove %1$s and its shared endpoint.</string>
     <string name="mcp_name_required">Enter a name</string>
     <string name="mcp_url_invalid">Enter a complete HTTP or HTTPS URL</string>
-    <string name="mcp_token_required">Enter a token</string>
+    <string name="mcp_token_required">Enter the upstream access token</string>
     <string name="mcp_disabled">Disabled</string>
     <string name="mcp_connection_enabled">Enable %1$s</string>
     <string name="mcp_all_tools">All tools</string>
@@ -68,7 +68,7 @@
     <string name="mcp_error_save">Unable to save changes</string>
     <string name="mcp_stop_to_change_port">Stop MCP sharing to change its port</string>
     <string name="mcp_error_fetch">Unable to get tools</string>
-    <string name="mcp_token_invalid">Use a token without spaces or control characters</string>
+    <string name="mcp_token_invalid">The access token cannot contain spaces or control characters</string>
     <string name="mcp_call_tool_disabled">Tool is not shared</string>
     <string name="mcp_call_invalid_params">Invalid parameters</string>
     <string name="mcp_call_tool_error">Tool execution failed</string>

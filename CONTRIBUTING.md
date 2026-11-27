@@ -38,7 +38,7 @@ python3 scripts/verify-apk.py app/build/outputs/apk/debug/app-debug.apk
 
 ## 版本与分发
 
-当前版本采用 `0.0.1-<commit>`，其中 `commit` 是实际构建检出的 Git 提交前 7 位；构建需要保留 Git 元数据。Android `versionCode` 独立递增，新增对外分发版本时高于此前版本，不随显示版本或提交后缀重置。设置中的版本读取 `BuildConfig.VERSION_NAME`，打包脚本读取实际 APK 版本，不另造版本来源。
+版本采用 `0.0.x+<commit>`，其中 `commit` 是实际构建检出的 Git 提交前 7 位；构建需要保留 Git 元数据。基础版本和 Android `versionCode` 只在根目录 [version.properties](version.properties) 维护。新增对外分发版本时将第三段及 `versionCode` 各递增一次，例如 `0.0.2+<commit>` → `0.0.3+<commit>`；保持 `0.0`，不自动升级为 `1.0.0`，同一版本的日常开发构建不反复递增。设置读取 `BuildConfig.VERSION_NAME`，打包读取实际 APK 版本，并校验其与当前源码版本、提交和 `versionCode` 一致。
 
 发布 APK 应从已提交的源码构建；本地未提交工作树的提交后缀只标识其基线。APK、校验文件和发布标签必须对应同一次成功构建，不能用旧 APK 搭配新提交说明。
 
@@ -49,3 +49,5 @@ python3 scripts/verify-apk.py app/build/outputs/apk/debug/app-debug.apk
 将导航、协议、存储或构建等不同目的的修改拆成可审阅提交。提交说明写明问题和最终行为，验证记录区分本地通过、CI 通过、已上传产物与已发布 Release。
 
 及时推送当前任务授权的分支，并跟进对应 CI。提交前检查差异，不包含工具链、构建缓存、私钥、真实凭据或测试产生的用户配置。发布遵循 [Actions 工作流](.github/workflows/android.yml)：手动运行并启用 `publish_prerelease` 时，从实际 APK 版本自动生成 `v<版本>` 标签，无需另填标签。也可推送同格式标签触发验证后预发布；标签提交必须属于 `main`，且标签与构建出的 APK 版本一致。已有发布不会被覆盖。
+
+功能或测试分支验证完成后及时合并并同步到 `main`，确认改动已保留后删除对应本地和远程临时分支。未合并的工作先检查并处理，不直接丢弃。

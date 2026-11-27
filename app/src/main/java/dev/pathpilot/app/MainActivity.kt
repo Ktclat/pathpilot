@@ -119,6 +119,7 @@ class MainActivity : ComponentActivity() {
     var tab by rememberSaveable { mutableIntStateOf(0) }
     var statisticsVisible by rememberSaveable { mutableStateOf(false) }
     var mcpConnectionId by rememberSaveable { mutableStateOf<String?>(null) }
+    var mcpHistoryVisible by rememberSaveable { mutableStateOf(false) }
     var mcpEntry by rememberSaveable { mutableIntStateOf(0) }
     val pageState = rememberSaveableStateHolder()
     LaunchedEffect(openMcp) {
@@ -126,6 +127,7 @@ class MainActivity : ComponentActivity() {
             tab = 2
             statisticsVisible = false
             mcpConnectionId = null
+            mcpHistoryVisible = false
             mcpEntry++
             onMcpIntentHandled()
         }
@@ -211,7 +213,7 @@ class MainActivity : ComponentActivity() {
             if (!statisticsVisible && (tab == 0 || tab == 3)) TopAppBar(title = { Text(tabs[tab]) })
         },
         bottomBar = {
-            if (!statisticsVisible && !(tab == 1 && modelProviderId != null) && !(tab == 2 && mcpConnectionId != null)) NavigationBar {
+            if (!statisticsVisible && !(tab == 1 && modelProviderId != null) && !(tab == 2 && (mcpConnectionId != null || mcpHistoryVisible))) NavigationBar {
                 tabs.forEachIndexed { index, label ->
                     NavigationBarItem(selected = tab == index, onClick = { tab = index },
                         icon = { Icon(icons[index], null) },
@@ -255,7 +257,11 @@ class MainActivity : ComponentActivity() {
                     onViewUsage = { provider, route -> openStatistics(providerId = provider.id, model = route?.alias, upstreamModel = route?.upstreamModel) },
                     onModelToggle = { route, enabled -> update { c -> c.copy(routes = c.routes.map { if (it.alias == route.alias) it.copy(enabled = enabled) else it }) } },
                     onProviderToggle = { provider, enabled -> update { c -> c.copy(providers = c.providers.map { if (it.id == provider.id) it.copy(enabled = enabled) else it }) } })
-                2 -> key(mcpEntry) { McpPage(store, selectedId = mcpConnectionId, onSelectConnection = { mcpConnectionId = it }) }
+                2 -> key(mcpEntry) {
+                    if (mcpHistoryVisible) McpCallHistoryPage(store.mcpCallHistory) { mcpHistoryVisible = false }
+                    else McpPage(store, selectedId = mcpConnectionId, onSelectConnection = { mcpConnectionId = it },
+                        onOpenHistory = { mcpHistoryVisible = true })
+                }
                 3 -> SettingsScreen(store, onMessage = ::notify)
             } }
         }
@@ -349,10 +355,9 @@ private fun kindLabel(kind: ProviderKind, strings: android.content.res.Resources
     }, confirmButton = { TextButton(enabled = !saving && selected != null && alias.trim().matches(Regex("[A-Za-z0-9._:/-]{1,128}")) && modelError == null && !duplicate, onClick = { onSave(RouteConfig(alias.trim(), providerId, model.trim(), existing?.enabled ?: true)) }) { Text(if (saving) strings.getString(R.string.ui_saving) else strings.getString(R.string.ui_save)) } }, dismissButton = { TextButton(enabled = !saving, onClick = onDismiss) { Text(strings.getString(R.string.ui_cancel)) } })
 }
 
-@Composable private fun CodexLoginDialog(provider: ProviderConfig, store: AppStore, onDismiss: () -> Unit, onSuccess: () -> Unit) {
+@Composable internal fun CodexLoginDialog(provider: ProviderConfig, store: AppStore, onDismiss: () -> Unit, onSuccess: () -> Unit, loginModel: CodexLoginViewModel = viewModel()) {
     val strings = LocalResources.current
     val context = LocalContext.current
-    val loginModel: CodexLoginViewModel = viewModel()
     val state by loginModel.state.collectAsStateWithLifecycle()
     val savingTokens = state.phase == CodexLoginPhase.SAVING
     LaunchedEffect(provider.id) { loginModel.begin(provider.id, store) }
@@ -364,20 +369,36 @@ private fun kindLabel(kind: ProviderKind, strings: android.content.res.Resources
     }
     fun close() { if (!savingTokens) { loginModel.cancel(); onDismiss() } }
     AlertDialog(onDismissRequest = ::close, title = { Text(strings.getString(R.string.ui_sign_in_codex)) }, text = {
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             when (state.phase) {
-                CodexLoginPhase.AUTH_ERROR, CodexLoginPhase.SAVE_ERROR -> Text(strings.localize(state.error.orEmpty()), color = MaterialTheme.colorScheme.error)
+                CodexLoginPhase.AUTH_ERROR, CodexLoginPhase.SAVE_ERROR -> Text(strings.getString(state.error ?: R.string.ui_authorization_failed), color = MaterialTheme.colorScheme.error)
                 CodexLoginPhase.SAVING, CodexLoginPhase.COMPLETE -> {
                     LinearProgressIndicator(Modifier.fillMaxWidth()); Text(strings.getString(R.string.ui_saving_authorization))
+                }
+                CodexLoginPhase.BROWSER -> {
+                    Text(strings.getString(R.string.codex_browser_help))
+                    Button(onClick = {
+                        try { context.startActivity(Intent(Intent.ACTION_VIEW, requireNotNull(state.browserUrl).toUri())) }
+                        catch (_: android.content.ActivityNotFoundException) { loginModel.browserUnavailable() }
+                    }, modifier = Modifier.fillMaxWidth()) {
+                        Text(strings.getString(R.string.ui_open_sign_in)); Spacer(Modifier.width(8.dp)); Icon(PathPilotIcons.OpenInNew, null)
+                    }
+                    LinearProgressIndicator(Modifier.fillMaxWidth())
+                    Text(strings.getString(R.string.ui_waiting_sign_in), style = MaterialTheme.typography.bodySmall)
                 }
                 CodexLoginPhase.POLLING -> state.challenge?.let { challenge ->
                     Text(strings.getString(R.string.ui_browser_authorization_help))
                     CopyRow(strings.getString(R.string.ui_device_code), challenge.userCode, { copy(context, strings.getString(R.string.ui_device_code), it) })
-                    Button(onClick = { try { context.startActivity(Intent(Intent.ACTION_VIEW, challenge.verificationUrl.toUri())) } catch (_: Exception) { loginModel.browserUnavailable() } }, modifier = Modifier.fillMaxWidth()) { Text(strings.getString(R.string.ui_open_sign_in)); Spacer(Modifier.width(8.dp)); Icon(PathPilotIcons.OpenInNew, null) }
+                    Button(onClick = { try { context.startActivity(Intent(Intent.ACTION_VIEW, challenge.verificationUrl.toUri())) } catch (_: android.content.ActivityNotFoundException) { loginModel.browserUnavailable() } }, modifier = Modifier.fillMaxWidth()) { Text(strings.getString(R.string.ui_open_sign_in)); Spacer(Modifier.width(8.dp)); Icon(PathPilotIcons.OpenInNew, null) }
                     LinearProgressIndicator(Modifier.fillMaxWidth())
-                    Text(strings.getString(R.string.ui_waiting_sign_in), style = MaterialTheme.typography.bodySmall)
+                    Text(strings.getString(if (state.retrying) R.string.codex_poll_retrying else R.string.ui_waiting_sign_in), style = MaterialTheme.typography.bodySmall)
                 }
-                else -> { LinearProgressIndicator(Modifier.fillMaxWidth()); Text(strings.getString(R.string.ui_fetching_device_code)) }
+                else -> { LinearProgressIndicator(Modifier.fillMaxWidth()); Text(strings.getString(if (state.mode == CodexLoginMode.DEVICE_CODE) R.string.ui_fetching_device_code else R.string.codex_preparing_browser)) }
+            }
+            if (state.phase !in setOf(CodexLoginPhase.SAVING, CodexLoginPhase.SAVE_ERROR, CodexLoginPhase.COMPLETE)) {
+                TextButton(onClick = { loginModel.useMode(if (state.mode == CodexLoginMode.BROWSER) CodexLoginMode.DEVICE_CODE else CodexLoginMode.BROWSER) }) {
+                    Text(strings.getString(if (state.mode == CodexLoginMode.BROWSER) R.string.codex_use_device_code else R.string.codex_use_browser))
+                }
             }
         }
     }, confirmButton = {

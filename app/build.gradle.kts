@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -8,6 +10,14 @@ val sourceCommit = providers.exec {
     workingDir(rootProject.projectDir)
     commandLine("git", "rev-parse", "--verify", "HEAD")
 }.standardOutput.asText.get().trim()
+val appVersion = Properties().apply {
+    providers.fileContents(rootProject.layout.projectDirectory.file("version.properties"))
+        .asText.get().reader().use { load(it) }
+}
+val baseVersion = appVersion.getProperty("version")
+require(Regex("""0\.0\.(0|[1-9][0-9]*)""").matches(baseVersion)) {
+    "Use a patch version such as 0.0.2 in version.properties."
+}
 
 // Isolated emulator-only UI capture build; normal APKs target ARM64 exclusively.
 val uiCapture = providers.gradleProperty("uiCapture").map(String::toBoolean).getOrElse(false)
@@ -26,8 +36,8 @@ android {
         applicationId = "dev.pathpilot.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 13
-        versionName = "0.0.1-${sourceCommit.take(7)}"
+        versionCode = appVersion.getProperty("versionCode").toInt()
+        versionName = "$baseVersion+${sourceCommit.take(7)}"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk { abiFilters += if (uiCapture) "x86_64" else "arm64-v8a" }
     }

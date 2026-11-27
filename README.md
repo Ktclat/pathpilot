@@ -8,12 +8,13 @@
 
 | 功能 | 当前实现 |
 | --- | --- |
-| Codex 订阅 | OpenAI 设备代码登录、令牌刷新、获取订阅模型目录、选择共享模型 |
+| Codex 订阅 | 浏览器 PKCE 登录与设备代码登录、令牌刷新、获取订阅模型目录、选择共享模型 |
 | 多供应商 | DeepSeek 与自定义 OpenAI 兼容 API；获取模型或手动填写模型 ID |
 | 模型管理 | 按供应商分组，设置客户端模型名称、上游模型和启用状态 |
 | 模型共享 | 本机与局域网地址、多个网络接口选择、独立 `sk-` 密钥、总开关 |
 | 模型协议 | Models、Chat Completions、Responses；具体供应商范围见 [API 文档](docs/api.md) |
 | MCP | 精选远程预设与自定义连接、获取与选择工具、独立共享服务；实现 MCP 2025-11-25 Streamable HTTP Tools |
+| MCP 调用记录 | 本机保存最近 1,000 条工具调用记录，按日期、连接和工具筛选，查看结果与耗时 |
 | 统计 | 请求与 Token 趋势、供应商/模型汇总、请求详情；基于本机保留的最近 1,000 条记录 |
 | 设置 | 主题内统一设置明暗、Android 12+ 动态取色和五种固定配色；简体中文/English、上游代理 |
 | 备份 | `.ppbackup` 口令加密导入导出，恢复预览，可选包含 Codex 登录状态 |
@@ -65,9 +66,11 @@ source /workspace/toolchains/pathpilot-env.sh
 
 推送 `main` 或提交 PR 会运行测试、Lint、APK 签名与 ARM64 架构检查。成功构建提供 APK、`SHA256SUMS.txt` 和验证报告。
 
-手动构建在 **Actions → Android ARM64 → Run workflow** 中执行。保持 `publish_prerelease=false` 只构建；需要发布时选择 `main` 并启用该选项。工作流先完成验证，再从同一次构建产物创建 GitHub 预发布版，标签自动使用 `v<APK版本>`，例如 `v0.0.1-a1b2c3d`。
+独立的 [MCP emulator tests](.github/workflows/mcp-history-emulator.yml) 工作流可手动运行，验证设备上的 SQLite 历史存储和 MCP 页面流程，并保存测试记录与截图。
 
-应用版本采用 `0.0.1-<实际提交前7位>`，产物名包含同一版本，例如 `PathPilot-0.0.1-a1b2c3d-arm64-debug.apk`。版本规则与提交要求见 [贡献指南](CONTRIBUTING.md)。当前交付、测试结果和待完成项见 [项目状态](docs/project-status.md)，详细证据见 [验证记录](docs/validation.md)。
+手动构建在 **Actions → Android ARM64 → Run workflow** 中执行。保持 `publish_prerelease=false` 只构建；需要发布时选择 `main` 并启用该选项。工作流先完成验证，再从同一次构建产物创建 GitHub 预发布版，标签自动使用 `v<APK版本>`，例如 `v0.0.2+a1b2c3d`。
+
+应用版本采用 `0.0.x+<实际提交前7位>`，每次新版本只递增第三段，例如 `0.0.2` → `0.0.3`。基础版本和 Android `versionCode` 统一维护在 [version.properties](version.properties)，产物名包含同一版本，例如 `PathPilot-0.0.2+a1b2c3d-arm64-debug.apk`。版本规则与提交要求见 [贡献指南](CONTRIBUTING.md)。当前交付、测试结果和待完成项见 [项目状态](docs/project-status.md)，详细证据见 [验证记录](docs/validation.md)。
 
 ## 文档
 

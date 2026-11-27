@@ -1,0 +1,124 @@
+name: MCP emulator tests
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/mcp-history-emulator.yml'
+      - 'app/src/**/Mcp*.kt'
+      - 'app/src/main/java/dev/pathpilot/app/MainActivity.kt'
+      - 'app/src/main/java/dev/pathpilot/app/runtime/AppStore.kt'
+      - 'app/src/main/res/**/mcp*_strings.xml'
+      - 'app/src/androidTest/java/dev/pathpilot/app/ui/settings/CaptureSettingsSupport.kt'
+      - 'core/src/main/kotlin/dev/pathpilot/core/mcp/**'
+permissions:
+  contents: read
+jobs:
+  android-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      JAVA_OPTS: -Dfile.encoding=UTF-8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Enable KVM
+        run: |
+          test -c /dev/kvm
+          if [[ ! -r /dev/kvm || ! -w /dev/kvm ]]; then
+            sudo -n setfacl -m "u:$(id -u):rw" /dev/kvm
+          fi
+          test -r /dev/kvm && test -w /dev/kvm
+      - name: Prepare SDK
+        run: |
+          bash scripts/setup-ci-android.sh
+          python3 - <<'PY'
+          import os, subprocess
+          from pathlib import Path
+          sdk=Path(os.environ['ANDROID_HOME'])
+          cli=next(Path(os.environ['RUNNER_TEMP']).glob('pathpilot-android-cli-*/cmdline-tools/bin/sdkmanager'))
+          subprocess.run([str(cli), f'--sdk_root={sdk}', 'emulator', 'system-images;android-35;default;x86_64'],
+                         input='y\n'*30, text=True, check=True)
+          PY
+          test -x "$ANDROID_HOME/emulator/emulator"
+          test -f "$ANDROID_HOME/system-images/android-35/default/x86_64/system.img"
+          "$ANDROID_HOME/emulator/emulator" -accel-check
+      - name: Build test and capture APKs
+        run: ./gradlew --no-daemon -PuiCapture=true :app:assembleDebug :app:assembleDebugAndroidTest
+      - name: Run scoped SQLite and MCP UI tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          ev="$RUNNER_TEMP/pathpilot-history-evidence"
+          mkdir -p "$ev"
+          export ANDROID_AVD_HOME="$RUNNER_TEMP/pathpilot-avds"
+          mkdir -p "$ANDROID_AVD_HOME"
+          adb="$ANDROID_HOME/platform-tools/adb"
+          emu="$ANDROID_HOME/emulator/emulator"
+          cli="$RUNNER_TEMP/pathpilot-android-cli-16111833/cmdline-tools/bin/avdmanager"
+          printf 'no\n' | "$cli" create avd --name pathpilot_history --package 'system-images;android-35;default;x86_64' --device pixel_2
+          emulator=''
+          cleanup() {
+            if [[ -n "$emulator" ]] && kill -0 "$emulator" 2>/dev/null; then
+              timeout 15 "$adb" -s emulator-5554 emu kill || kill "$emulator" || true
+              wait "$emulator" || true
+            fi
+          }
+          trap cleanup EXIT
+          "$adb" start-server
+          "$emu" -avd pathpilot_history -port 5554 -accel on -gpu swiftshader -no-window -no-snapshot \
+              -no-audio -no-boot-anim -no-metrics -camera-back none -camera-front none \
+              > "$RUNNER_TEMP/pathpilot-emulator.log" 2>&1 &
+          emulator=$!
+          deadline=$((SECONDS + 300))
+          while (( SECONDS < deadline )); do
+            kill -0 "$emulator"
+            if [[ "$(timeout 5 "$adb" -s emulator-5554 shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" == 1 ]] &&
+                 timeout 10 "$adb" -s emulator-5554 shell wm size > "$ev/device.txt" 2>&1 &&
+                 timeout 10 "$adb" -s emulator-5554 shell pm path android >> "$ev/device.txt" 2>&1; then break; fi
+            sleep 3
+          done
+          if (( SECONDS >= deadline )); then
+            grep -E 'ERROR|FATAL|panic' "$RUNNER_TEMP/pathpilot-emulator.log" | head -30 || true
+            exit 1
+          fi
+          "$adb" -s emulator-5554 shell wm size 720x1280
+          "$adb" -s emulator-5554 shell wm density 320
+          "$adb" -s emulator-5554 shell input keyevent 82
+          "$adb" -s emulator-5554 shell getprop ro.build.version.sdk >> "$ev/device.txt"
+          sha256sum app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk > "$ev/apk-sha256.txt"
+          "$adb" -s emulator-5554 install app/build/outputs/apk/debug/app-debug.apk
+          "$adb" -s emulator-5554 install app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+          run_test() {
+            local cls="$1" label="$2" count_line="$3"
+            local rc=0
+            timeout 420 "$adb" -s emulator-5554 shell am instrument -w -r -e class "$cls" \
+              dev.pathpilot.app.capture.test/androidx.test.runner.AndroidJUnitRunner > "$ev/$label.txt" 2>&1 || rc=$?
+            cat "$ev/$label.txt"
+            if [[ "$rc" != 0 ]] || ! grep -Fx "$count_line" "$ev/$label.txt" ||
+                ! grep -Fx 'INSTRUMENTATION_CODE: -1' "$ev/$label.txt"; then
+              "$adb" -s emulator-5554 logcat -b crash -d > "$ev/crash.txt" || true
+              return 1
+            fi
+          }
+          run_test dev.pathpilot.app.runtime.McpCallHistoryStoreTest sqlite 'OK (3 tests)'
+          run_test dev.pathpilot.app.ui.settings.McpFlowTest ui 'OK (1 test)'
+          "$adb" -s emulator-5554 exec-out run-as dev.pathpilot.app.capture cat files/settings-e2e/13-mcp-history.png > "$ev/13-mcp-history.png"
+          python3 - "$ev/13-mcp-history.png" <<'PY'
+          import sys
+          from pathlib import Path
+          image=Path(sys.argv[1]).read_bytes()
+          assert image.startswith(b'\x89PNG\r\n\x1a\n') and image.endswith(b'IEND\xaeB`\x82')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: mcp-history-emulator-results
+          path: ${{ runner.temp }}/pathpilot-history-evidence/
+          if-no-files-found: ignore
+          retention-days: 7

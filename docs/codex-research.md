@@ -25,7 +25,7 @@
 4. 成功响应返回 `authorization_code` 和服务端生成的 PKCE `code_verifier`；向 `/oauth/token` 提交 form 编码的 `authorization_code` grant，redirect URI 为 `https://auth.openai.com/deviceauth/callback`。
 5. 到期前刷新：向 `/oauth/token` 提交 JSON 编码的 `refresh_token` grant。刷新响应可能省略 `id_token` 或 `refresh_token`，此时保留原值；旋转后的刷新令牌必须持久化。
 
-公开 OAuth 客户端 ID 是 `app_EMoamEEZ73f0CkXaXp7hrann`，它不是用户密钥。该设备流程不需要 Android 监听 1455 回调端口；浏览器 PKCE loopback 是将来可增加的另一种登录方式，目前未实现。
+公开 OAuth 客户端 ID 是 `app_EMoamEEZ73f0CkXaXp7hrann`，它不是用户密钥。该设备流程不需要 Android 监听回调端口；浏览器 PKCE loopback 登录的新增实现和协议依据见下文。
 
 `CodexOAuthClient` 负责单次同步网络操作，UI 在 IO dispatcher 上运行并控制轮询及取消。所有认证请求禁止重定向和自动网络重试，避免凭据随重定向转发、或一次性授权码被重复消费。错误只呈现状态及操作名称，不显示服务端可能回显凭据的响应内容。
 
@@ -77,3 +77,22 @@ Codex 订阅提供独立的模型目录接口；它不是 OpenAI API Key 使用�
 该区别依据实际目录体积：上述两个固定提交的 [`models-manager/models.json`](https://github.com/openai/codex/blob/3d86e43b075adeba2193ec5c22ac92f55afd82e6/codex-rs/models-manager/models.json) 均为 **667,893 字节、14 个模型，其中 11 个 visibility=list**。按无缩进 UTF-8 JSON 重序列化测量，最大单模型约 65,982 字节，`model_messages` 约 63,327 字节；该字段包含模板、持久指令、工具及确认策略等长文本。4 MiB 为这种目录提供有界余量，不将只含短 ID 的普通目录上限直接套用。新增合成 fixture 沿用官方嵌套字段结构，含 24 个模型、每模型约 60 KiB 指令文本；测试明确验证超过 1 MiB 的 Content-Length 和 chunked 响应可解析，超过 4 MiB 仍拒绝。合成文本不含真实账号或复制的官方提示内容。
 
 新增 `CodexModelsClientTest` 覆盖固定端点和版本、账号认证、订阅专属模型保留、隐藏模型排除、空目录、HTTP 错误脱敏、错误结构、重定向、取消、超时、响应边界及出站代理。测试使用本地 MockWebServer；该节不将测试编写等同于已运行通过，最终执行结果以交付报告为准，也不声明真实账号目录已验证。
+
+## 登录恢复与浏览器 PKCE（2026-11-27 补充）
+
+用户反馈跳转浏览器再返回应用后授权失败。本轮代码复核确认：旧设备登录会把任意一次轮询网络异常当成整次登录失败；协程取消没有同时取消同步 OkHttp 请求；OkHttp 默认读取超时为 10 秒，早于原先设置的 45 秒整次调用上限。这些是已确认的实现问题，尚未把它们等同于用户设备上每次失败的唯一原因。
+
+本轮重新核对官方最新提交 **`afe555b9d3e95b4f58b247212565070f1555bc5d`**（2026-11-27T05:03:45Z）。通过 GitHub `commits/main.atom` 获取提交，再读取该 SHA 的原始源码；设备授权和 OAuth grant 源码与本项目先前核对的协议相符。
+
+- [设备登录](https://github.com/openai/codex/blob/afe555b9d3e95b4f58b247212565070f1555bc5d/codex-rs/login/src/device_code_auth.rs)：仍使用 `/api/accounts/deviceauth/usercode`、`/api/accounts/deviceauth/token`，403/404 仍表示等待授权，设备码有效期 15 分钟。
+- [浏览器授权参数](https://github.com/openai/codex/blob/afe555b9d3e95b4f58b247212565070f1555bc5d/codex-rs/login/src/server.rs#L580)：`GET https://auth.openai.com/oauth/authorize`，`response_type=code`、上述公开 `client_id`、`redirect_uri`、`state`、`code_challenge`、`code_challenge_method=S256`；scope 为 `openid profile email offline_access api.connectors.read api.connectors.invoke`；附加 `id_token_add_organizations=true`、`codex_cli_simplified_flow=true`、`originator=codex_cli_rs`。
+- [已注册 loopback 端口](https://github.com/openai/codex/blob/afe555b9d3e95b4f58b247212565070f1555bc5d/codex-rs/login/src/server.rs#L78)：默认 `http://127.0.0.1:1455/auth/callback`，备用 `1457`。本项目仅接受这两个完整回调地址，不推定任意端口或局域网地址可用于授权。
+- [PKCE](https://github.com/openai/codex/blob/afe555b9d3e95b4f58b247212565070f1555bc5d/codex-rs/login/src/oauth/pkce.rs#L14)使用 64 随机字节的无填充 Base64URL verifier；challenge 是 verifier 的 SHA-256 摘要再 Base64URL。[state](https://github.com/openai/codex/blob/afe555b9d3e95b4f58b247212565070f1555bc5d/codex-rs/login/src/oauth/authorization.rs#L44)独立使用 32 随机字节。
+- [回调验证](https://github.com/openai/codex/blob/afe555b9d3e95b4f58b247212565070f1555bc5d/codex-rs/login/src/oauth/authorization.rs#L83)先比对 state，再处理 OAuth error，最后要求非空 code；错误 state 不应结束本次监听。[官方唯一后缀兼容](https://github.com/openai/codex/blob/afe555b9d3e95b4f58b247212565070f1555bc5d/codex-rs/login/src/server.rs#L372)仅允许完整 `.onboarding_entrypoint=life_sciences`；本项目也不使用宽松前缀匹配。
+- [授权码交换](https://github.com/openai/codex/blob/afe555b9d3e95b4f58b247212565070f1555bc5d/codex-rs/login/src/oauth/client.rs#L79)向 `/oauth/token` 发送 form：`grant_type=authorization_code`、`client_id`、`code`、原 `redirect_uri`、原 `code_verifier`，没有客户端密钥。官方[明确说明](https://github.com/openai/codex/blob/afe555b9d3e95b4f58b247212565070f1555bc5d/codex-rs/login/src/server.rs#L727)响应中断可能发生在一次性授权码消费后，不能据此自动重发 token POST。
+
+核心 `beginBrowserLogin(redirectUri)` 创建仅保存在内存的 `BrowserLoginChallenge`；`matchesCallback(url)` 供本机监听器拒绝错误来源、路径或 state，`completeBrowserLogin(challenge, url)` 再次验证并执行一次授权码交换。Challenge 的 `toString` 脱敏，state/verifier 不进入保存实例状态；应用侧将单次浏览器尝试限定为 15 分钟。收到合法回调后，处理标记原子消费；失败、成功或重复回调都不能重放同一授权码。浏览器系统页和 token HTTP 请求仍分别受浏览器网络及应用出站代理设置影响。
+
+`CodexAuthException` 现在携带脱敏的 `kind`、`stage`、HTTP 状态和可选 `retryAfterSeconds`。只有**设备轮询阶段**的瞬断、超时、429 与 5xx 会令 `canRetryPolling=true`，Android 调用方据此保留同一设备码，按轮询间隔及 Retry-After 等待，直到授权成功或该码过期。403/404 正常等待不显示失败。授权码交换、刷新、明确拒绝、无效响应不被伪装为可重试的 pending。默认连接超时 15 秒，读取、写入和整次调用上限 45 秒；`cancel()` 同时取消活动请求和未开始的排队请求，下一次登录创建新客户端。
+
+新增核心回归测试覆盖浏览器参数与 PKCE、回调地址和 state、一次性交换、过期与拒绝；设备测试覆盖短暂网络失败后的同一码轮询、取消、超时、429 Retry-After、一次性交换失败不可重放、无效刷新 grant、畸形轮询间隔和重定向拒绝。这里记录已编写的测试范围，执行结果由统一构建报告给出；没有使用真实账号登录作为这轮核心修改的验证依据。

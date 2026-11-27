@@ -9,6 +9,7 @@ import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasScrollToNodeAction
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -151,7 +152,15 @@ class McpFlowTest {
         }
         assertEquals(listOf("offline_status"), upstream.calls.toList())
         assertTrue(upstream.methods.containsAll(listOf("initialize", "notifications/initialized", "tools/list", "tools/call")))
-        compose.waitUntil(30_000) { McpRuntime.state.value.recentCalls.any { it.toolName == "offline_status" && it.success } }
+        compose.waitUntil(30_000) {
+            store.mcpCallHistory.state.value.events.any {
+                it.connectionId == connection.id && it.toolName == "offline_status" && it.success
+            }
+        }
+        val call = store.mcpCallHistory.state.value.events.single {
+            it.connectionId == connection.id && it.toolName == "offline_status"
+        }
+        val tag = "mcp-call:${call.id}"
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("最近调用"))
         compose.captureSettingsScreenshot("12-mcp-calls")
         compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("offline_status"))
@@ -161,6 +170,21 @@ class McpFlowTest {
         compose.onNodeWithContentDescription("MCP 共享").performClick()
         compose.waitUntil(30_000) { !McpRuntime.state.value.running && !McpRuntime.state.value.stopping }
         assertNull(McpRuntime.state.value.error)
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("调用记录"))
+        compose.onNodeWithText("调用记录").performClick()
+        compose.onNode(hasText("MCP") and hasClickAction()).assertDoesNotExist()
+        compose.onNodeWithText("按工具名称筛选").performTextReplacement("offline_status")
+        hideCaptureKeyboard()
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasTestTag(tag))
+        compose.onNodeWithTag(tag).assertIsDisplayed()
+        compose.captureSettingsScreenshot("13-mcp-history", internalStorage = true)
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("按工具名称筛选"))
+        compose.onNodeWithText("按工具名称筛选").performTextReplacement("no_matching_fixture_tool")
+        hideCaptureKeyboard()
+        compose.onNode(hasScrollToNodeAction()).performScrollToNode(hasText("没有符合筛选条件的调用"))
+        compose.onNodeWithText("没有符合筛选条件的调用").assertIsDisplayed()
+        compose.onNodeWithContentDescription("返回").performClick()
+        compose.onNode(hasText("MCP") and hasClickAction()).assertIsSelected()
         assertTrue("Model sharing continues after MCP is stopped", RouterRuntime.state.value.running)
         http.newCall(Request.Builder().url("http://127.0.0.1:${store.config.value.port}/v1/models")
             .header("Authorization", "Bearer ${store.config.value.accessKey}").build()).execute().use { response ->

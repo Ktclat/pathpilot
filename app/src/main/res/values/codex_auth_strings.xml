@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="codex_browser_help">Sign in with your ChatGPT account in the browser, then return to PathPilot.</string>
+    <string name="codex_preparing_browser">Preparing sign-in…</string>
+    <string name="codex_use_device_code">Use a device code</string>
+    <string name="codex_use_browser">Use browser sign-in</string>
+    <string name="codex_poll_retrying">Connection interrupted. Reconnecting with the same code…</string>
+    <string name="codex_browser_missing">No browser found. Install a browser to sign in.</string>
+    <string name="codex_callback_busy">The sign-in callback port is in use. Try a device code.</string>
+    <string name="codex_login_expired">Sign-in expired. Start again.</string>
+    <string name="codex_auth_network">Could not connect to the sign-in service. Check the network or proxy.</string>
+    <string name="codex_auth_timeout">The sign-in request timed out. Retry.</string>
+    <string name="codex_auth_rate_limit">Too many sign-in requests. Try again shortly.</string>
+    <string name="codex_device_unavailable">Device authorization is unavailable. Use browser sign-in.</string>
+    <string name="codex_auth_rejected">Authorization was rejected. Sign in again.</string>
+    <string name="codex_auth_forbidden">The sign-in service denied this request. Check the account or network.</string>
+    <string name="codex_callback_mismatch">This callback does not match the current sign-in. Start again.</string>
+    <string name="codex_auth_denied">Authorization was cancelled. Sign in again.</string>
+    <string name="codex_auth_invalid_response">The sign-in service returned an unrecognized response. Retry.</string>
+</resources>

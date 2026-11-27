@@ -38,12 +38,13 @@ internal fun prepareChineseCapture(store: AppStore = captureStore()) {
     }
 }
 
-internal fun ComposeTestRule.captureSettingsScreenshot(name: String) {
+internal fun ComposeTestRule.captureSettingsScreenshot(name: String, internalStorage: Boolean = false) {
     waitForIdle()
     val instrumentation = InstrumentationRegistry.getInstrumentation()
     instrumentation.waitForIdleSync()
     val bitmap = requireNotNull(instrumentation.uiAutomation.takeScreenshot())
-    val directory = File(instrumentation.targetContext.getExternalFilesDir(null), "settings-e2e")
+    val context = instrumentation.targetContext
+    val directory = File(if (internalStorage) context.filesDir else context.getExternalFilesDir(null), "settings-e2e")
     check(directory.isDirectory || directory.mkdirs())
     File(directory, "$name.png").outputStream().use { output ->
         check(bitmap.compress(Bitmap.CompressFormat.PNG, 100, output))

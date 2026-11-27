@@ -73,7 +73,7 @@ class McpPresetFlowTest {
                     PathPilotTheme {
                         Surface(Modifier.fillMaxSize().safeDrawingPadding()) {
                             var selectedId by remember { mutableStateOf<String?>(null) }
-                            McpPage(store, selectedId, onSelectConnection = { selectedId = it },
+                            McpPage(store, selectedId, onSelectConnection = { selectedId = it }, onOpenHistory = {},
                                 catalogClient = { connection, proxy -> McpClient(connection, proxy, httpClient = http) })
                         }
                     }
