@@ -22,8 +22,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-// Complete fallback schemes for Android 8–11. Android 12+ uses the system's Monet palette.
-private val LightColors = lightColorScheme(
+// Preserve the original Forest palette for existing preferences and older backups.
+internal val ForestLightColors = lightColorScheme(
     primary = Color(0xFF24543C),
     onPrimary = Color(0xFFFFFFFF),
     primaryContainer = Color(0xFFD4E8D8),
@@ -74,7 +74,7 @@ private val LightColors = lightColorScheme(
     onTertiaryFixedVariant = Color(0xFF334E44),
 )
 
-private val DarkColors = darkColorScheme(
+internal val ForestDarkColors = darkColorScheme(
     primary = Color(0xFFA5D4B3),
     onPrimary = Color(0xFF073920),
     primaryContainer = Color(0xFF245039),
@@ -125,7 +125,7 @@ private val DarkColors = darkColorScheme(
     onTertiaryFixedVariant = Color(0xFF334E44),
 )
 
-/** Follow the native system palette and theme; only the Activity owns the secure-window policy. */
+/** Use system dynamic colors when available, or the selected complete Material color scheme. */
 @Composable
 fun PathPilotTheme(preferences: AppPreferences = AppPreferences(), content: @Composable () -> Unit) {
     val dark = when (preferences.themeMode) {
@@ -137,8 +137,7 @@ fun PathPilotTheme(preferences: AppPreferences = AppPreferences(), content: @Com
     val colors = when {
         preferences.dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && dark -> dynamicDarkColorScheme(context)
         preferences.dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> dynamicLightColorScheme(context)
-        dark -> DarkColors
-        else -> LightColors
+        else -> presetColorScheme(preferences.themePalette, dark)
     }
     val view = LocalView.current
     if (!view.isInEditMode) {

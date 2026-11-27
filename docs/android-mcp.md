@@ -30,12 +30,14 @@ flowchart LR
 GitHub 官方 [README][github-readme] 同时提供 OAuth 与 PAT 两种远程接入方式。当前 App 已实现 Bearer，因此先使用 PAT；GitHub OAuth 登录按钮属于后续工作。
 
 1. 在 GitHub 的 [Personal access tokens](https://github.com/settings/personal-access-tokens) 中创建令牌，选择需要访问的账户、仓库和操作权限。令牌的权限决定 GitHub 工具实际可以做什么。
-2. 打开 PathPilot 底部「MCP」，添加连接并填写下表。令牌字段只填令牌本身，App 会添加 `Bearer ` 前缀。
-3. 保存，进入连接并点击「获取工具」。App 会发送 `initialize`、`notifications/initialized`、`tools/list`，然后显示实际目录。
+2. 打开 PathPilot 底部「MCP → 添加连接」，选择 GitHub，只填写个人访问令牌。地址与 Bearer 认证由预设提供；令牌字段只填令牌本身。
+3. 添加后自动进入连接并获取工具。App 发送 `initialize`、`notifications/initialized`、`tools/list` 后显示实际目录；失败时保留连接，可点击「获取工具」重试。
 4. 选择需要共享的工具，保持连接启用，打开「MCP 共享」。
 5. 在连接详情选择「本机」或「局域网」，复制完整 MCP 地址及 **MCP 访问密钥**，填入支持 Streamable HTTP 的客户端。
 
-| App 字段 | 填写值 |
+预设保存的配置如下，也可通过「自定义连接」手动填写。之后编辑连接仍使用统一表单。
+
+| 配置项 | 值 |
 | --- | --- |
 | 名称 | `GitHub` |
 | URL | `https://api.githubcopilot.com/mcp/` |
@@ -93,7 +95,7 @@ PathPilot 当前请求并只接受 `2025-11-25`。2026-11-27 的无凭据初始�
 
 ## Android 后续实现顺序
 
-1. **远程 HTTP 继续完善**：先完成 GitHub PAT、Microsoft Learn 等真实服务握手与工具目录记录，再加入「从目录添加」预填入口。目录添加复用现有编辑器、代理、存储和共享服务。
+1. **远程 HTTP 继续完善**：Microsoft Learn、OpenAI Docs、Context7、GitHub 四项静态预设已提供快捷添加，复用现有代理、存储和共享服务。接下来完成真实服务握手与工具目录记录，再扩展在线 Registry 搜索。预设字段与当前联调结果见 [远程 MCP 预设](mcp-presets.md)。
 2. **集中 OAuth 登录**：按 MCP 的受保护资源元数据和授权服务器发现定位登录端点；支持服务要求的客户端注册方式，用 Android 浏览器 Custom Tabs 完成 Authorization Code + PKCE，再把令牌保存在已有加密配置中。AppAuth-Android 可承担原生授权流程，但 MCP 发现、`resource` 参数和服务适配仍由本 App 实现。[MCP 认证][spec-auth] · [AppAuth-Android][appauth]
 3. **具体手机本地工具**：例如用户选定文件的读取或手机状态查询，先实现原生 Kotlin 工具，复用 Tools 网关和 Android 文件授权，避免为少量工具引入整套脚本环境。
 4. **通用本地 MCP 包**：确有 Node/Python/原生程序需求后，再评估内嵌运行时、ARM64 Android 构建、依赖下载、stdio 与服务生命周期。原生程序需面向 Android 的 ABI 和系统库构建；`.mcpb` 提供包格式，所需运行时由宿主配套提供。

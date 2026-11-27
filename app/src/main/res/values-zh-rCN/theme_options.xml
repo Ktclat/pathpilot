@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="theme_mode">显示模式</string>
+    <string name="theme_palette">配色</string>
+    <string name="theme_palette_forest">森林绿</string>
+    <string name="theme_palette_ocean">海蓝</string>
+    <string name="theme_palette_violet">紫晶</string>
+    <string name="theme_palette_rose">玫瑰</string>
+    <string name="theme_palette_amber">琥珀</string>
+    <string name="theme_done">完成</string>
+    <string name="theme_summary">%1$s · %2$s</string>
+</resources>

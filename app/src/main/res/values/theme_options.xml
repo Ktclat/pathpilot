@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="theme_mode">Appearance</string>
+    <string name="theme_palette">Colors</string>
+    <string name="theme_palette_forest">Forest</string>
+    <string name="theme_palette_ocean">Ocean</string>
+    <string name="theme_palette_violet">Amethyst</string>
+    <string name="theme_palette_rose">Rose</string>
+    <string name="theme_palette_amber">Amber</string>
+    <string name="theme_done">Done</string>
+    <string name="theme_summary">%1$s · %2$s</string>
+</resources>

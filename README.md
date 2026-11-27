@@ -13,9 +13,9 @@
 | 模型管理 | 按供应商分组，设置客户端模型名称、上游模型和启用状态 |
 | 模型共享 | 本机与局域网地址、多个网络接口选择、独立 `sk-` 密钥、总开关 |
 | 模型协议 | Models、Chat Completions、Responses；具体供应商范围见 [API 文档](docs/api.md) |
-| MCP | 远程 Streamable HTTP 连接、获取与选择工具、独立共享服务；实现 MCP 2025-11-25 Tools |
+| MCP | 精选远程预设与自定义连接、获取与选择工具、独立共享服务；实现 MCP 2025-11-25 Streamable HTTP Tools |
 | 统计 | 请求与 Token 趋势、供应商/模型汇总、请求详情；基于本机保留的最近 1,000 条记录 |
-| 设置 | 跟随系统/浅色/深色、Android 12+ Monet 取色、简体中文/English、上游代理 |
+| 设置 | 主题内统一设置明暗、Android 12+ 动态取色和五种固定配色；简体中文/English、上游代理 |
 | 备份 | `.ppbackup` 口令加密导入导出，恢复预览，可选包含 Codex 登录状态 |
 
 模型和 MCP 分别启停、分别鉴权。MCP 工具由支持 MCP 的客户端调用；模型 API 本身不负责自动执行工具。统计使用上游返回的用量，不推算订阅剩余额度或费用。
@@ -36,9 +36,11 @@
 
 底部导航为「共享、模型、MCP、设置」。供应商与其模型统一放在「模型」页；统计从模型页右上角进入，也可由最近请求和模型记录跳转。
 
-「MCP」单独管理工具连接。添加连接时填写远程完整 MCP URL，按需填写 Bearer 令牌，获取工具后开启 MCP 共享。客户端使用 `http://<手机地址>:8318/mcp/<连接ID>` 和 MCP 访问密钥；它与模型 `/v1` 地址是两个入口。操作与兼容范围见 [MCP 文档](docs/mcp-roadmap.md)；手机端 GitHub PAT 配置及工具执行分工见 [在手机上使用 MCP](docs/android-mcp.md)。
+「MCP → 添加连接」提供 Microsoft Learn、OpenAI Docs、Context7、GitHub 四项预设，也可添加自定义连接。前两项直接添加；Context7 填 API Key，GitHub 填 PAT。预设保存后自动获取工具，失败可在连接详情重试。选择工具后开启 MCP 共享。客户端使用 `http://<手机地址>:8318/mcp/<连接ID>` 和 MCP 访问密钥；它与模型 `/v1` 地址是两个入口。操作与兼容范围见 [MCP 文档](docs/mcp-roadmap.md)；手机端 GitHub PAT 配置及工具执行分工见 [在手机上使用 MCP](docs/android-mcp.md)。
 
 「设置 → 上游代理」适用于模型请求、模型目录、Codex 授权/刷新与远程 MCP 请求。手机使用 VPN/TUN 时可保留「跟随系统」；局域网设备经手机调用的上游流量也遵循手机的这套网络配置。局域网互访仍取决于 VPN 的局域网放行设置。
+
+「设置 → 主题」提供跟随系统、浅色、深色，以及动态取色或森林绿、海蓝、紫晶、玫瑰、琥珀五种固定配色。选择后立即应用。
 
 备份包含供应商及密钥、模型路由、应用偏好和 MCP 配置，不含请求历史；Codex 登录状态默认不导出。导入先预览，默认保留目标手机的端口、共享密钥和上游代理，恢复不会启动共享。
 
@@ -74,6 +76,7 @@ source /workspace/toolchains/pathpilot-env.sh
 | [架构](docs/architecture.md) | 模块边界、服务生命周期、配置与数据流 |
 | [模型 API](docs/api.md) | 地址、鉴权、接口、供应商兼容与代理 |
 | [MCP](docs/mcp-roadmap.md) | 连接与工具共享、协议范围、后续适配 |
+| [远程 MCP 预设](docs/mcp-presets.md) | 四项快捷连接、凭据要求、来源与联调记录 |
 | [手机 MCP 与 GitHub](docs/android-mcp.md) | GitHub PAT 接入、客户端配置与手机/远程服务分工 |
 | [官方 MCP 来源](docs/mcp-catalog-research.md) | 远程目录、认证方式与本地安装方案 |
 | [贡献指南](CONTRIBUTING.md) | 开发、测试、截图、版本和提交流程 |

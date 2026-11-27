@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mcp_preset_learn_description">Microsoft 与 Azure 文档</string>
+    <string name="mcp_preset_openai_description">OpenAI 开发文档</string>
+    <string name="mcp_preset_context7_description">库与框架文档</string>
+    <string name="mcp_preset_github_description">仓库、Issue 与 PR</string>
+    <string name="mcp_preset_api_key">API Key</string>
+    <string name="mcp_preset_personal_token">个人访问令牌</string>
+    <string name="mcp_preset_added">已添加</string>
+    <string name="mcp_preset_add">添加</string>
+    <string name="mcp_preset_custom">自定义连接</string>
+    <string name="mcp_preset_get_token">获取令牌</string>
+    <string name="mcp_preset_back_to_catalog">返回服务列表</string>
+    <string name="mcp_preset_browser_unavailable">未找到浏览器</string>
+</resources>

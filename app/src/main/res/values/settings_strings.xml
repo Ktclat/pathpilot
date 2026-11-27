@@ -5,7 +5,7 @@
     <string name="settings_theme_system">System</string>
     <string name="settings_theme_light">Light</string>
     <string name="settings_theme_dark">Dark</string>
-    <string name="settings_dynamic_color">Wallpaper colors</string>
+    <string name="settings_dynamic_color">Dynamic colors</string>
     <string name="settings_dynamic_unavailable">Requires Android 12 or newer</string>
     <string name="settings_language">Language</string>
     <string name="settings_language_system">System</string>

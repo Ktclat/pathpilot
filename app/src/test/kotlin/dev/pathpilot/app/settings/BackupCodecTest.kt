@@ -34,7 +34,8 @@ class BackupCodecTest {
                 ProviderConfig("codex", "Codex", ProviderKind.CODEX, CodexBackend.BASE_URL),
             ), routes = listOf(RouteConfig("daily", "deepseek", "deepseek-chat")),
             outboundProxy = OutboundProxyConfig(OutboundProxyMode.HTTP, "127.0.0.1", 7890)),
-        preferences = AppPreferences(ThemeMode.DARK, dynamicColor = false, language = AppLanguage.EN),
+        preferences = AppPreferences(ThemeMode.DARK, dynamicColor = false, language = AppLanguage.EN,
+            themePalette = ThemePalette.AMBER),
         mcp = McpSettings(port = 8318, accessKey = "sk-mcp-fixture-access-key-123456", connections = listOf(
             McpConnection(id = "fixture-tools", name = "Tools", url = "https://tools.example.test/mcp", bearerToken = "mcp-fixture-secret",
                 allowedTools = setOf("lookup", "search")),

@@ -12,6 +12,7 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
@@ -92,6 +93,7 @@ class McpFlowTest {
         compose.onNodeWithContentDescription("返回").assertDoesNotExist()
         compose.captureSettingsScreenshot("09a-mcp-root")
         compose.onNodeWithContentDescription("添加连接").performClick()
+        compose.onNodeWithTag("mcp-preset-custom").performScrollTo().performClick()
         compose.onNodeWithText("名称").performTextReplacement("工具 · 离线测试")
         compose.onNodeWithText("MCP URL").performTextReplacement(upstream.url)
         compose.onNodeWithText("Bearer").performScrollTo().performClick()
@@ -178,6 +180,7 @@ class McpFlowTest {
         compose.onNodeWithContentDescription("返回").assertDoesNotExist()
         compose.captureSettingsScreenshot("22-mcp-notification-entry")
         compose.onNodeWithContentDescription("添加连接").performClick()
+        compose.onNodeWithTag("mcp-preset-custom").performScrollTo().performClick()
         compose.onNodeWithText("MCP URL").assertIsDisplayed()
         context.startActivity(requireNotNull(context.packageManager.getLaunchIntentForPackage(context.packageName))
             .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)

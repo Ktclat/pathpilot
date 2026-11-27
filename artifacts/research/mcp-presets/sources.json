@@ -1,0 +1,100 @@
+{
+  "checkedDateHongKong": "2026-11-27",
+  "sources": [
+    {
+      "name": "Microsoft Learn",
+      "repository": "MicrosoftDocs/mcp",
+      "commit": "f0a9478a954c9b3a7c6525a5183466902ca60731",
+      "path": "README.md",
+      "url": "https://github.com/MicrosoftDocs/mcp/blob/f0a9478a954c9b3a7c6525a5183466902ca60731/README.md",
+      "contentSha256": "e605457fbdbdb5ac63de23ab9f82ff9e94f870c7e5518b09c098c275cc4de962",
+      "observations": [
+        "URL and Streamable HTTP",
+        "No API keys, logins or sign-ups",
+        "No explicit protocol-version list in this README"
+      ]
+    },
+    {
+      "name": "OpenAI Docs",
+      "repository": "openai/skills",
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "path": "skills/.curated/openai-docs/SKILL.md",
+      "url": "https://github.com/openai/skills/blob/49f948faa9258a0c61caceaf225e179651397431/skills/.curated/openai-docs/SKILL.md",
+      "contentSha256": "057d24b4f36dab38299857777e4c0ca5bcce65d8cf89d917c174c1a0ae23d9f8",
+      "observations": [
+        "Official add command specifies URL only"
+      ]
+    },
+    {
+      "name": "GitHub",
+      "repository": "github/github-mcp-server",
+      "commit": "7edc2dd123a8923db389de8772170663cb2d8e17",
+      "path": "README.md",
+      "url": "https://github.com/github/github-mcp-server/blob/7edc2dd123a8923db389de8772170663cb2d8e17/README.md",
+      "contentSha256": "3e7c66e0cb74980608a86b879e031c103722f05ffab530ac8e0b96c1e28361d8",
+      "observations": [
+        "Remote HTTP endpoint",
+        "Authorization Bearer PAT example"
+      ]
+    },
+    {
+      "name": "Context7 README",
+      "repository": "upstash/context7",
+      "commit": "a79b264e08bf441ee8f4ef65a27b93783b92d45d",
+      "path": "README.md",
+      "url": "https://github.com/upstash/context7/blob/a79b264e08bf441ee8f4ef65a27b93783b92d45d/README.md",
+      "contentSha256": "a23306f5d9a04eb8588b619071a418d901f27549ace077ecbb28f21161a46912",
+      "observations": [
+        "API key described as recommended for higher limits",
+        "Bearer header example"
+      ]
+    },
+    {
+      "name": "Context7 HTTP authentication",
+      "repository": "upstash/context7",
+      "commit": "a79b264e08bf441ee8f4ef65a27b93783b92d45d",
+      "path": "packages/mcp/src/lib/mcp-http-auth.ts",
+      "url": "https://github.com/upstash/context7/blob/a79b264e08bf441ee8f4ef65a27b93783b92d45d/packages/mcp/src/lib/mcp-http-auth.ts",
+      "contentSha256": "ecf1a1c0259c94004010335907fff710217195b98416d14862d511aaa551b202",
+      "observations": [
+        "parseMcpAuthMode defaults to required",
+        "Missing key rejected in required mode",
+        "Hosted configuration not obtained"
+      ]
+    },
+    {
+      "name": "Context7 HTTP transport",
+      "repository": "upstash/context7",
+      "commit": "a79b264e08bf441ee8f4ef65a27b93783b92d45d",
+      "path": "packages/mcp/src/index.ts",
+      "url": "https://github.com/upstash/context7/blob/a79b264e08bf441ee8f4ef65a27b93783b92d45d/packages/mcp/src/index.ts",
+      "contentSha256": "ef361971ae8ac35e6c503426c6fa3fc5cd9ac88a7b615c885a9545ec93a64880",
+      "observations": [
+        "Bearer key extracted",
+        "2025 legacy fallback documented and used"
+      ]
+    },
+    {
+      "name": "Context7 SDK dependency",
+      "repository": "upstash/context7",
+      "commit": "a79b264e08bf441ee8f4ef65a27b93783b92d45d",
+      "path": "packages/mcp/package.json",
+      "url": "https://github.com/upstash/context7/blob/a79b264e08bf441ee8f4ef65a27b93783b92d45d/packages/mcp/package.json",
+      "contentSha256": "934c1751ef732eef4302e8baf75b67fc32cdcf6785e4e95f82f7726c47fe9661",
+      "observations": [
+        "@modelcontextprotocol/server version 2.4.0"
+      ]
+    },
+    {
+      "name": "MCP TypeScript SDK v2.4.0",
+      "repository": "modelcontextprotocol/typescript-sdk",
+      "commit": "951fe5603a7ec0b2dcb6a0b95d92cd86f93ad9e5",
+      "path": "packages/core/src/constants.ts",
+      "url": "https://github.com/modelcontextprotocol/typescript-sdk/blob/951fe5603a7ec0b2dcb6a0b95d92cd86f93ad9e5/packages/core/src/constants.ts",
+      "contentSha256": "d83faedc6430321547fa489d697c9a76153c8148b88ffbe9d4bca5647aafc770",
+      "observations": [
+        "SUPPORTED_PROTOCOL_VERSIONS includes 2025-11-25"
+      ]
+    }
+  ]
+}

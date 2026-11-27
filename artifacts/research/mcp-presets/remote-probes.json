@@ -1,0 +1,61 @@
+{
+  "checkedDateHongKong": "2026-11-27",
+  "request": {
+    "method": "POST",
+    "jsonRpcMethod": "initialize",
+    "protocolVersion": "2025-11-25",
+    "authentication": "none",
+    "clientInfo": {
+      "name": "PathPilot-verification",
+      "version": "0.0.1"
+    }
+  },
+  "probes": [
+    {
+      "service": "Microsoft Learn",
+      "url": "https://learn.microsoft.com/api/mcp",
+      "hostname": "learn.microsoft.com",
+      "attemptedUtc": "2026-11-27T03:39:31.350811+00:00",
+      "failurePhase": "proxy_connect",
+      "proxyHttpStatus": 403,
+      "upstreamHttpStatus": null,
+      "initializeReachedUpstream": false,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "service": "OpenAI Docs",
+      "url": "https://developers.openai.com/mcp",
+      "hostname": "developers.openai.com",
+      "attemptedUtc": "2026-11-27T03:39:31.351698+00:00",
+      "failurePhase": "proxy_connect",
+      "proxyHttpStatus": 403,
+      "upstreamHttpStatus": null,
+      "initializeReachedUpstream": false,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "service": "Context7",
+      "url": "https://mcp.context7.com/mcp",
+      "hostname": "mcp.context7.com",
+      "attemptedUtc": "2026-11-27T03:39:31.352284+00:00",
+      "failurePhase": "proxy_connect",
+      "proxyHttpStatus": 403,
+      "upstreamHttpStatus": null,
+      "initializeReachedUpstream": false,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "service": "GitHub",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "hostname": "api.githubcopilot.com",
+      "attemptedUtc": "2026-11-27T03:39:31.352819+00:00",
+      "failurePhase": "proxy_connect",
+      "proxyHttpStatus": 403,
+      "upstreamHttpStatus": null,
+      "initializeReachedUpstream": false,
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    }
+  ],
+  "toolsListAttempted": false,
+  "toolsCalled": false
+}

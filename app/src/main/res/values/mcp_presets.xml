@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mcp_preset_learn_description">Microsoft and Azure documentation</string>
+    <string name="mcp_preset_openai_description">OpenAI developer documentation</string>
+    <string name="mcp_preset_context7_description">Library and framework documentation</string>
+    <string name="mcp_preset_github_description">Repositories, issues and pull requests</string>
+    <string name="mcp_preset_api_key">API Key</string>
+    <string name="mcp_preset_personal_token">Personal access token</string>
+    <string name="mcp_preset_added">Added</string>
+    <string name="mcp_preset_add">Add</string>
+    <string name="mcp_preset_custom">Custom connection</string>
+    <string name="mcp_preset_get_token">Get token</string>
+    <string name="mcp_preset_back_to_catalog">Back to services</string>
+    <string name="mcp_preset_browser_unavailable">No browser available</string>
+</resources>

@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.MoreVert
@@ -35,6 +36,7 @@ import dev.pathpilot.app.ui.icons.PathPilotIcons
 import dev.pathpilot.app.ui.i18n.localize
 import dev.pathpilot.core.AccessKeys
 import dev.pathpilot.core.mcp.*
+import dev.pathpilot.core.network.OutboundProxyConfig
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
@@ -51,6 +53,7 @@ internal fun McpPage(
     store: AppStore,
     selectedId: String?,
     onSelectConnection: (String?) -> Unit,
+    catalogClient: (McpConnection, () -> OutboundProxyConfig) -> McpClient = { connection, proxy -> McpClient(connection, proxy) },
 ) {
     val context = LocalContext.current
     val strings = LocalResources.current
@@ -62,6 +65,8 @@ internal fun McpPage(
     val snackbar = remember { SnackbarHostState() }
     var editorId by rememberSaveable { mutableStateOf<String?>(null) }
     var adding by rememberSaveable { mutableStateOf(false) }
+    var presetPicker by rememberSaveable { mutableStateOf(false) }
+    var fetchConnectionId by rememberSaveable { mutableStateOf<String?>(null) }
     var saving by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf<String?>(null) }
     var deleteId by rememberSaveable { mutableStateOf<String?>(null) }
@@ -118,6 +123,19 @@ internal fun McpPage(
         copyMcpValue(context, value, secret)
         scope.launch { snackbar.showSnackbar(strings.getString(R.string.ui_copied)) }
     }
+    fun addPreset(preset: McpPreset, token: String) {
+        fun open(connection: McpConnection) {
+            presetPicker = false
+            fetchConnectionId = connection.id
+            onSelectConnection(connection.id)
+        }
+        val existing = preset.existingConnection(settings.connections, token)
+        if (existing != null) open(existing)
+        else {
+            val connection = preset.connection(token)
+            update({ it.copy(connections = it.connections + connection) }) { open(connection) }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -126,7 +144,7 @@ internal fun McpPage(
                     Icon(PathPilotIcons.Back, stringResource(R.string.ui_back))
                 } },
                 actions = {
-                    if (selected == null) IconButton(enabled = !busy, onClick = { adding = true }) {
+                    if (selected == null) IconButton(enabled = !busy, onClick = { error = null; presetPicker = true }) {
                         Icon(PathPilotIcons.Add, stringResource(R.string.mcp_add_connection))
                     } else IconButton(enabled = !busy, onClick = { editorId = selected.id }) {
                         Icon(PathPilotIcons.Edit, stringResource(R.string.mcp_edit))
@@ -172,7 +190,7 @@ internal fun McpPage(
                         Column(Modifier.fillMaxWidth().padding(vertical = 24.dp), horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(16.dp)) {
                             Text(stringResource(R.string.mcp_no_connections), color = MaterialTheme.colorScheme.onSurfaceVariant)
-                            FilledTonalButton(enabled = !busy, onClick = { adding = true }) {
+                            FilledTonalButton(enabled = !busy, onClick = { error = null; presetPicker = true }) {
                                 Icon(PathPilotIcons.Add, null); Spacer(Modifier.width(8.dp)); Text(stringResource(R.string.mcp_add_connection))
                             }
                         }
@@ -193,6 +211,9 @@ internal fun McpPage(
                 }
             } else {
                 McpConnectionDetails(selected, settings, store, busy, runtime,
+                    catalogClient = catalogClient,
+                    fetchOnOpen = fetchConnectionId == selected.id,
+                    onFetchStarted = { fetchConnectionId = null },
                     notificationPending = notificationPending,
                     sharingEnabled = !busy && !runtime.starting && !runtime.stopping &&
                         (runtime.running || settings.connections.any { it.enabled }),
@@ -205,6 +226,11 @@ internal fun McpPage(
             }
         }
     }
+    if (presetPicker) McpPresetPicker(settings.connections, saving, error?.let(strings::localize),
+        onDismiss = { if (!saving) presetPicker = false },
+        onCustom = { presetPicker = false; error = null; adding = true },
+        onAdd = ::addPreset,
+    )
     val existing = settings.connections.find { it.id == editorId }
     if (adding || existing != null) McpConnectionEditor(existing, saving, error?.let(strings::localize), onDismiss = { if (!saving) { adding = false; editorId = null } },
         onSave = { connection -> update({ state -> state.copy(connections = state.connections.filterNot { it.id == connection.id } + connection) }) {
@@ -273,11 +299,16 @@ private fun McpConnectionCard(connection: McpConnection, busy: Boolean, onOpen: 
 @Composable
 private fun McpConnectionDetails(
     connection: McpConnection, settings: McpSettings, store: AppStore, busy: Boolean, runtime: McpRuntimeState,
+    catalogClient: (McpConnection, () -> OutboundProxyConfig) -> McpClient,
+    fetchOnOpen: Boolean, onFetchStarted: () -> Unit,
     notificationPending: Boolean, sharingEnabled: Boolean, onSharing: (Boolean) -> Unit,
     onCopy: (String, Boolean) -> Unit, onAllowed: (Set<String>?) -> Unit,
 ) {
     val strings = LocalResources.current
     val scope = rememberCoroutineScope()
+    val listState = rememberLazyListState(initialFirstVisibleItemIndex = if (fetchOnOpen) {
+        if (connection.enabled) 2 else 3
+    } else 0)
     var tools by remember(connection.id, connection.url, connection.bearerToken) { mutableStateOf<List<McpTool>?>(null) }
     var info by remember(connection.id, connection.url, connection.bearerToken) { mutableStateOf<McpServerInfo?>(null) }
     var loading by remember { mutableStateOf(false) }
@@ -292,7 +323,7 @@ private fun McpConnectionDetails(
         job = scope.launch {
             try {
                 val result = withContext(Dispatchers.IO) {
-                    McpClient(connection, proxyProvider = { store.config.value.outboundProxy }).use { client ->
+                    catalogClient(connection, { store.config.value.outboundProxy }).use { client ->
                         currentClient.set(client)
                         val server = client.connect()
                         server to client.listTools()
@@ -307,7 +338,13 @@ private fun McpConnectionDetails(
             } finally { currentClient.set(null); loading = false }
         }
     }
-    LazyColumn(contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    LaunchedEffect(connection.id, fetchOnOpen) {
+        if (fetchOnOpen) {
+            onFetchStarted()
+            fetchTools()
+        }
+    }
+    LazyColumn(state = listState, contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item { McpSharingControl(runtime, notificationPending, sharingEnabled, onSharing) }
         if (!connection.enabled) item { Text(stringResource(R.string.mcp_disabled), style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant) }

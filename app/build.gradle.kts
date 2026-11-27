@@ -26,7 +26,7 @@ android {
         applicationId = "dev.pathpilot.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 12
+        versionCode = 13
         versionName = "0.0.1-${sourceCommit.take(7)}"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk { abiFilters += if (uiCapture) "x86_64" else "arm64-v8a" }

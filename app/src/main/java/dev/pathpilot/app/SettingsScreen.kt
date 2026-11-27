@@ -2,7 +2,6 @@ package dev.pathpilot.app
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,6 +38,8 @@ import dev.pathpilot.app.runtime.RouterRuntime
 import dev.pathpilot.app.settings.*
 import dev.pathpilot.app.ui.icons.PathPilotIcons
 import dev.pathpilot.app.ui.i18n.localize
+import dev.pathpilot.app.ui.theme.ThemeOptionsSheet
+import dev.pathpilot.app.ui.theme.themeSummary
 import dev.pathpilot.core.AccessKeys
 import dev.pathpilot.core.network.*
 import java.time.Instant
@@ -107,17 +108,7 @@ internal fun SettingsScreen(store: AppStore, onMessage: (String) -> Unit) {
         verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
             SettingsSection(stringResource(R.string.settings_preferences)) {
-                SettingsRow(stringResource(R.string.settings_appearance), themeLabel(preferences.themeMode), editable) { dialog = "theme" }
-                HorizontalDivider()
-                val dynamicSupported = Build.VERSION.SDK_INT >= 31
-                ListItem(
-                    modifier = Modifier.toggleable(preferences.dynamicColor, enabled = editable && dynamicSupported,
-                        role = Role.Switch, onValueChange = { value -> save({ store.setPreferences(preferences.copy(dynamicColor = value)) }) }),
-                    content = { Text(stringResource(R.string.settings_dynamic_color)) },
-                    supportingContent = if (dynamicSupported) null else { { Text(stringResource(R.string.settings_dynamic_unavailable)) } },
-                    trailingContent = { Switch(preferences.dynamicColor, onCheckedChange = null, enabled = editable && dynamicSupported) },
-                    enabled = editable && dynamicSupported,
-                )
+                SettingsRow(stringResource(R.string.settings_appearance), themeSummary(preferences), editable) { dialog = "theme" }
                 HorizontalDivider()
                 SettingsRow(stringResource(R.string.settings_language), languageLabel(preferences.language), editable) { dialog = "language" }
             }
@@ -153,8 +144,9 @@ internal fun SettingsScreen(store: AppStore, onMessage: (String) -> Unit) {
         }
     }
     when (dialog) {
-        "theme" -> ChoiceDialog(stringResource(R.string.settings_appearance), ThemeMode.entries.map { it to themeLabel(it) }, preferences.themeMode,
-            enabled = editable, onDismiss = { dialog = null }) { mode -> save({ store.setPreferences(preferences.copy(themeMode = mode)) }) }
+        "theme" -> ThemeOptionsSheet(preferences, editable, onDismiss = { dialog = null }) { updated ->
+            save({ store.setPreferences(updated) }, after = {})
+        }
         "language" -> ChoiceDialog(stringResource(R.string.settings_language), AppLanguage.entries.map { it to languageLabel(it) }, preferences.language,
             enabled = editable, onDismiss = { dialog = null }) { language ->
             save({ store.setPreferences(preferences.copy(language = language)) }) {
@@ -196,9 +188,6 @@ internal fun SettingsScreen(store: AppStore, onMessage: (String) -> Unit) {
         trailingContent = { Icon(Icons.AutoMirrored.Outlined.KeyboardArrowRight, null) }, enabled = enabled)
 }
 
-@Composable private fun themeLabel(mode: ThemeMode): String = stringResource(when (mode) {
-    ThemeMode.SYSTEM -> R.string.settings_theme_system; ThemeMode.LIGHT -> R.string.settings_theme_light; ThemeMode.DARK -> R.string.settings_theme_dark
-})
 @Composable private fun languageLabel(language: AppLanguage): String = stringResource(when (language) {
     AppLanguage.SYSTEM -> R.string.settings_language_system; AppLanguage.ZH_CN -> R.string.settings_language_zh; AppLanguage.EN -> R.string.settings_language_en
 })
