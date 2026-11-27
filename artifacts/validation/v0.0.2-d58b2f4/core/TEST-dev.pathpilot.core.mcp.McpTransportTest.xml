@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.core.mcp.McpTransportTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:46:24.418Z" hostname="59b9643bc784" time="1.912">
+  <properties/>
+  <testcase name="rpcErrorsPreserveTheirCodeAndDataAndMismatchedResponsesFail" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.178"/>
+  <testcase name="clientNegotiatesSessionAndAggregatesJsonAndSseToolPages" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.169"/>
+  <testcase name="stoppingGatewayCancelsTheActiveRemoteRequest" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.073"/>
+  <testcase name="toolReportedFailureIsAValidResultAndSeparateFromTransportFailure" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.16"/>
+  <testcase name="connectionValidationKeepsCredentialsOutOfToString" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.025"/>
+  <testcase name="gatewayRequiresItsOwnKeyAndValidOriginBeforeConnectingUpstream" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.099"/>
+  <testcase name="downstreamSessionsKeepTheirUpstreamSessionsSeparateAndDeleteCleansUp" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.382"/>
+  <testcase name="cancellingARequestInterruptsBothGatewayAndRemoteCall" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.062"/>
+  <testcase name="protocolVersionAndRepeatedPaginationCursorAreReported" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.188"/>
+  <testcase name="gatewayFiltersListsAndCallsUsingCurrentConnectionSettings" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.451"/>
+  <testcase name="upstreamExpiredSessionIsNotRetriedAndKeyRotationInvalidatesOldSessions" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.109"/>
+  <testcase name="clientUsesConfiguredHttpProxyWithoutReplacingSourceCredentials" classname="dev.pathpilot.core.mcp.McpTransportTest" time="0.013"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Nov 27, 2026 10:46:25 AM fi.iki.elonen.NanoHTTPD$Response send
+SEVERE: Could not send response to the client
+java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.ensureOpenAndConnected(NioSocketImpl.java:165)
+	at java.base/sun.nio.ch.NioSocketImpl.beginWrite(NioSocketImpl.java:371)
+	at java.base/sun.nio.ch.NioSocketImpl.implWrite(NioSocketImpl.java:416)
+	at java.base/sun.nio.ch.NioSocketImpl.write(NioSocketImpl.java:445)
+	at java.base/sun.nio.ch.NioSocketImpl$2.write(NioSocketImpl.java:831)
+	at java.base/java.net.Socket$SocketOutputStream.write(Socket.java:1035)
+	at java.base/java.io.OutputStream.write(OutputStream.java:127)
+	at fi.iki.elonen.NanoHTTPD$Response$ChunkedOutputStream.write(NanoHTTPD.java:1442)
+	at fi.iki.elonen.NanoHTTPD$Response$ChunkedOutputStream.write(NanoHTTPD.java:1435)
+	at java.base/java.util.zip.GZIPOutputStream.writeHeader(GZIPOutputStream.java:191)
+	at java.base/java.util.zip.GZIPOutputStream.<init>(GZIPOutputStream.java:97)
+	at java.base/java.util.zip.GZIPOutputStream.<init>(GZIPOutputStream.java:112)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBodyWithCorrectEncoding(NanoHTTPD.java:1663)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBodyWithCorrectTransferAndEncoding(NanoHTTPD.java:1654)
+	at fi.iki.elonen.NanoHTTPD$Response.send(NanoHTTPD.java:1624)
+	at fi.iki.elonen.NanoHTTPD$HTTPSession.execute(NanoHTTPD.java:957)
+	at fi.iki.elonen.NanoHTTPD$ClientHandler.run(NanoHTTPD.java:192)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+Nov 27, 2026 10:46:25 AM fi.iki.elonen.NanoHTTPD$Response send
+SEVERE: Could not send response to the client
+java.net.SocketException: Broken pipe
+	at java.base/sun.nio.ch.NioSocketImpl.implWrite(NioSocketImpl.java:425)
+	at java.base/sun.nio.ch.NioSocketImpl.write(NioSocketImpl.java:445)
+	at java.base/sun.nio.ch.NioSocketImpl$2.write(NioSocketImpl.java:831)
+	at java.base/java.net.Socket$SocketOutputStream.write(Socket.java:1035)
+	at java.base/java.io.OutputStream.write(OutputStream.java:127)
+	at fi.iki.elonen.NanoHTTPD$Response$ChunkedOutputStream.write(NanoHTTPD.java:1442)
+	at fi.iki.elonen.NanoHTTPD$Response$ChunkedOutputStream.write(NanoHTTPD.java:1435)
+	at java.base/java.util.zip.GZIPOutputStream.writeHeader(GZIPOutputStream.java:191)
+	at java.base/java.util.zip.GZIPOutputStream.<init>(GZIPOutputStream.java:97)
+	at java.base/java.util.zip.GZIPOutputStream.<init>(GZIPOutputStream.java:112)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBodyWithCorrectEncoding(NanoHTTPD.java:1663)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBodyWithCorrectTransferAndEncoding(NanoHTTPD.java:1654)
+	at fi.iki.elonen.NanoHTTPD$Response.send(NanoHTTPD.java:1624)
+	at fi.iki.elonen.NanoHTTPD$HTTPSession.execute(NanoHTTPD.java:957)
+	at fi.iki.elonen.NanoHTTPD$ClientHandler.run(NanoHTTPD.java:192)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+Nov 27, 2026 10:46:26 AM fi.iki.elonen.NanoHTTPD$ClientHandler run
+SEVERE: Communication with the client broken, or an bug in the handler code
+java.net.SocketException: Socket is closed
+	at java.base/java.net.Socket.getOutputStream(Socket.java:998)
+	at fi.iki.elonen.NanoHTTPD$ClientHandler.run(NanoHTTPD.java:188)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+]]></system-err>
+</testsuite>

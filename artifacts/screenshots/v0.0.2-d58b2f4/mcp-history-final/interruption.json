@@ -1,0 +1,18 @@
+{
+  "recordedUtc": "2026-11-27T11:22:58.074911+00:00",
+  "status": "interrupted_no_terminal_runner_status",
+  "reason": "Execution transport disconnected; after reconnect no emulator or Python runner process remained. Files persisted.",
+  "lastRunnerStatus": {
+    "class": "dev.pathpilot.app.ui.settings.McpFlowTest",
+    "test": "connectionToolsAndIndependentSharingReachAnActualHttpUpstream",
+    "statusCode": 1
+  },
+  "countAsPass": false,
+  "countAsTestFailure": false,
+  "diagnosticScreenshot": {
+    "name": "diagnostic-current-window.png",
+    "sha256": "6f9b73f7b937a6f227ac870c42a7d9ef63c4782d9bb7e2c6ddc5dfc36c132ed3",
+    "captureType": "Manual adb screencap while instrumentation was still running; not an assertion screenshot",
+    "review": "Production MCP root visible, no error overlay; flow completion not established"
+  }
+}

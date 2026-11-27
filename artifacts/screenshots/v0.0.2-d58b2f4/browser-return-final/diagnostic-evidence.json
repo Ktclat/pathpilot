@@ -1,0 +1,13 @@
+{
+  "testOutcome": "failed",
+  "failureLocation": "CodexLoginFlowTest.kt:211",
+  "failure": "Host activity did not reach RESUMED within 30 seconds after Android Back. The preceding loopback-request/background condition passed.",
+  "browserEvidence": "diagnostic-browser-logcat.txt records WebView renderer SIGTRAP followed by org.chromium.webview_shell crashing; no successful browser round-trip assertion.",
+  "images": [
+    {
+      "name": "diagnostic-current-window.png",
+      "captureType": "Manual adb screencap during test; not an assertion screenshot",
+      "sha256": "9ab21067fa53c96233dacb781e5e0ce06342253432e1fdab95ab424dd59466bb"
+    }
+  ]
+}

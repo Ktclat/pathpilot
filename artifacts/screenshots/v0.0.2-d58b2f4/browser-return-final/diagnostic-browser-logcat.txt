@@ -1,0 +1,803 @@
+--------- beginning of main
+11-27 11:16:21.426  3525  3525 E crash_dump64: failed to get the guest state header for thread 1185: Bad address
+11-27 11:16:21.432  3525  3525 E crash_dump64: failed to get the guest state header for thread 1198: Bad address
+11-27 11:16:21.434  3525  3525 E crash_dump64: failed to get the guest state header for thread 1205: Bad address
+11-27 11:16:21.445  3525  3525 E crash_dump64: failed to get the guest state header for thread 1294: Bad address
+11-27 11:16:21.466  3525  3525 E crash_dump64: failed to get the guest state header for thread 1304: Bad address
+11-27 11:16:21.530  3525  3525 E crash_dump64: failed to get the guest state header for thread 1305: Bad address
+11-27 11:16:21.538  3525  3525 E crash_dump64: failed to get the guest state header for thread 1306: Bad address
+11-27 11:16:21.648  3525  3525 E crash_dump64: failed to get the guest state header for thread 1310: Bad address
+11-27 11:16:21.676  3525  3525 E crash_dump64: failed to get the guest state header for thread 1330: Bad address
+11-27 11:16:21.685  3525  3525 E crash_dump64: failed to get the guest state header for thread 1349: Bad address
+11-27 11:16:21.713  3525  3525 E crash_dump64: failed to get the guest state header for thread 1350: Bad address
+11-27 11:16:21.796  3525  3525 E crash_dump64: failed to get the guest state header for thread 1352: Bad address
+11-27 11:16:21.813  3525  3525 E crash_dump64: failed to get the guest state header for thread 1354: Bad address
+11-27 11:16:21.820  3525  3525 E crash_dump64: failed to get the guest state header for thread 1404: Bad address
+11-27 11:16:21.932  3525  3525 E crash_dump64: failed to get the guest state header for thread 1405: Bad address
+11-27 11:16:21.952  3525  3525 E crash_dump64: failed to get the guest state header for thread 1406: Bad address
+11-27 11:16:21.963  3525  3525 E crash_dump64: failed to get the guest state header for thread 1408: Bad address
+11-27 11:16:21.997  3525  3525 E crash_dump64: failed to get the guest state header for thread 1422: Bad address
+11-27 11:16:22.021  3525  3525 E crash_dump64: failed to get the guest state header for thread 1429: Bad address
+11-27 11:16:22.029  3525  3525 E crash_dump64: failed to get the guest state header for thread 1463: Bad address
+11-27 11:16:22.068  3525  3525 E crash_dump64: failed to get the guest state header for thread 1464: Bad address
+11-27 11:16:22.083  3525  3525 E crash_dump64: failed to get the guest state header for thread 1508: Bad address
+11-27 11:16:22.160  3525  3525 E crash_dump64: failed to get the guest state header for thread 1735: Bad address
+11-27 11:16:22.204  3525  3525 E crash_dump64: failed to get the guest state header for thread 1739: Bad address
+11-27 11:16:22.236  3374  3388 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@e7b89d5]
+11-27 11:16:22.242  3525  3525 E crash_dump64: failed to get the guest state header for thread 1763: Bad address
+11-27 11:16:22.248  3525  3525 E crash_dump64: failed to get the guest state header for thread 1777: Bad address
+11-27 11:16:22.313  3525  3525 E crash_dump64: failed to get the guest state header for thread 1779: Bad address
+11-27 11:16:22.321  3525  3525 E crash_dump64: failed to get the guest state header for thread 1780: Bad address
+11-27 11:16:22.333  3525  3525 E crash_dump64: failed to get the guest state header for thread 2029: Bad address
+11-27 11:16:22.350  3525  3525 E crash_dump64: failed to get the guest state header for thread 2042: Bad address
+11-27 11:16:22.361  3525  3525 E crash_dump64: failed to get the guest state header for thread 2145: Bad address
+11-27 11:16:22.404  3525  3525 E crash_dump64: failed to get the guest state header for thread 2180: Bad address
+11-27 11:16:22.413  3525  3525 E crash_dump64: failed to get the guest state header for thread 2262: Bad address
+11-27 11:16:22.445  3525  3525 E crash_dump64: failed to get the guest state header for thread 2263: Bad address
+11-27 11:16:22.452  3374  3388 E TestRunner: failed: browserRoundTripRetainsThePendingDeviceCode(dev.pathpilot.app.ui.providers.CodexLoginFlowTest)
+11-27 11:16:22.464  3525  3525 E crash_dump64: failed to get the guest state header for thread 2378: Bad address
+11-27 11:16:22.473  3525  3525 E crash_dump64: failed to get the guest state header for thread 2421: Bad address
+11-27 11:16:22.504  3525  3525 E crash_dump64: failed to get the guest state header for thread 2653: Bad address
+11-27 11:16:22.514  3525  3525 E crash_dump64: failed to get the guest state header for thread 2676: Bad address
+11-27 11:16:22.526  3525  3525 E crash_dump64: failed to get the guest state header for thread 2717: Bad address
+11-27 11:16:22.542  3525  3525 E crash_dump64: failed to get the guest state header for thread 2732: Bad address
+11-27 11:16:22.561  3525  3525 E crash_dump64: failed to get the guest state header for thread 3174: Bad address
+11-27 11:16:22.589  3525  3525 W crash_dump64: failed to attach to thread 3490: No such process
+11-27 11:16:22.590  3525  3525 E crash_dump64: failed to interrupt 3490 to detach: No such process
+11-27 11:16:22.590  3525  3525 W crash_dump64: failed to ptrace interrupt thread 3490: No such process
+11-27 11:16:22.624  3374  3388 E TestRunner: ----- begin exception -----
+11-27 11:16:22.624  3374  3388 E TestRunner: androidx.compose.ui.test.ComposeTimeoutException: Condition still not satisfied after 30000 ms
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidComposeUiTestImpl.waitUntil(ComposeUiTest.android.kt:901)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule.waitUntil(AndroidComposeTestRule.android.kt:500)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at dev.pathpilot.app.ui.providers.CodexLoginFlowTest.browserRoundTripRetainsThePendingDeviceCode(CodexLoginFlowTest.kt:211)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at java.lang.reflect.Method.invoke(Native Method)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.test.internal.runner.junit4.statement.RunBefores.evaluate(RunBefores.java:80)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.test.internal.runner.junit4.statement.RunAfters.evaluate(RunAfters.java:61)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$testWithDisposal$1.evaluate(AndroidComposeTestRule.android.kt:426)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1$evaluate$1.invokeSuspend(AndroidComposeTestRule.android.kt:448)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1$evaluate$1.invoke(Unknown Source:8)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1$evaluate$1.invoke(Unknown Source:4)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1$1$1$1.invokeSuspend(ComposeUiTest.android.kt:689)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1$1$1$1.invoke(Unknown Source:8)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1$1$1$1.invoke(Unknown Source:2)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.EspressoLink.withStrategy(EspressoLink.android.kt:69)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1.invokeSuspend(ComposeUiTest.android.kt:686)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1.invoke(Unknown Source:8)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$runTest$1$1.invoke(Unknown Source:4)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt__TestBuildersKt$runTest$2$1$1.invokeSuspend(TestBuilders.kt:318)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:101)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.test.TestDispatcher.processEvent$kotlinx_coroutines_test(TestDispatcher.kt:24)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.test.TestCoroutineScheduler.tryRunNextTaskUnless$kotlinx_coroutines_test(TestCoroutineScheduler.kt:99)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt__TestBuildersKt$runTest$2$1$workRunner$1.invokeSuspend(TestBuilders.kt:327)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:101)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:263)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:95)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking(Builders.kt:69)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.BuildersKt.runBlocking(Unknown Source:1)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlocking$default(Builders.kt:47)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.BuildersKt.runBlocking$default(Unknown Source:1)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersJvmKt.createTestResult(TestBuildersJvm.kt:10)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt__TestBuildersKt.runTest-8Mi8wO0(TestBuilders.kt:310)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt.runTest-8Mi8wO0(Unknown Source:1)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt__TestBuildersKt.runTest-8Mi8wO0(TestBuilders.kt:168)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at kotlinx.coroutines.test.TestBuildersKt.runTest-8Mi8wO0(Unknown Source:1)
+11-27 11:16:22.624  3374  3388 E TestRunner: 	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.runTest(ComposeUiTest.android.kt:665)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at androidx.compose.ui.test.junit4.AndroidComposeTestRule$apply$1.evaluate(AndroidComposeTestRule.android.kt:447)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at androidx.test.ext.junit.runners.AndroidJUnit4.run(AndroidJUnit4.java:162)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.Suite.runChild(Suite.java:128)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.Suite.runChild(Suite.java:27)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:68)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at androidx.test.internal.runner.TestExecutor.execute(TestExecutor.java:59)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at androidx.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:467)
+11-27 11:16:22.667  3374  3388 E TestRunner: 	at android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:2594)
+11-27 11:16:22.668  3374  3388 E TestRunner: ----- end exception -----
+11-27 11:16:22.832  3374  3388 I TestRunner: finished: browserRoundTripRetainsThePendingDeviceCode(dev.pathpilot.app.ui.providers.CodexLoginFlowTest)
+11-27 11:16:23.029  3374  3388 I TestRunner: run finished: 1 tests, 1 failed, 0 ignored
+--------- beginning of system
+11-27 11:16:23.587  2949  2961 W Looper  : Slow delivery took 32ms wmshell.main h=android.os.Handler c=null m=12
+11-27 11:16:23.603  2949  2961 W Looper  : Drained
+11-27 11:16:23.839  2677  2677 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=28, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=dev.pathpilot.app.capture/androidx.activity.ComponentActivity }
+11-27 11:16:23.967  2949  2961 W Looper  : Slow delivery took 33ms wmshell.main h=android.os.Handler c=android.window.TaskOrganizer$1$$ExternalSyntheticLambda4@5dd69dc m=0
+11-27 11:16:24.137   567  1104 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:24.234   567   600 W system_server: Long monitor contention with owner android.anim (601) at void com.android.server.wm.SurfaceAnimator.lambda$getFinishedCallback$1(com.android.server.wm.SurfaceAnimator$OnAnimationFinishedCallback, int, com.android.server.wm.AnimationAdapter)(SurfaceAnimator.java:147) waiters=1 in void com.android.server.wm.ActivityTaskSupervisor$ActivityTaskSupervisorHandler.handleMessage(android.os.Message) for 506ms
+11-27 11:16:24.257   567  1104 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:24.275  2949  2961 W Looper  : Drained
+11-27 11:16:24.286  2949  2961 W Looper  : Slow dispatch took 246ms wmshell.main h=android.os.Handler c=com.android.wm.shell.common.DisplayInsetsController$PerDisplay$DisplayWindowInsetsControllerImpl$$ExternalSyntheticLambda3@1af4ae5 m=0
+11-27 11:16:24.420  3525  3525 I crash_dump64: obtaining output fd from tombstoned, type: kDebuggerdNativeBacktrace
+11-27 11:16:24.425   198   198 I tombstoned: received crash request for pid 567
+11-27 11:16:24.426   198   198 E tombstoned: failed to get crash output for type kDebuggerdNativeBacktrace
+11-27 11:16:24.429  3525  3525 E libc    : failed to read response to DumpRequest packet: No message of desired type
+11-27 11:16:24.430  3525  3525 I crash_dump64: performing dump of process 567 (target tid = 567)
+11-27 11:16:24.611  3202  3202 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@363af3e
+11-27 11:16:24.727   567  2653 D CoreBackPreview: Window{a4d458a u0 dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity}: Setting back callback null
+11-27 11:16:24.924   567  2042 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:24.930   567   701 I ImeTracker: org.chromium.webview_shell:dd97642d: onRequestHide at ORIGIN_SERVER reason HIDE_SAME_WINDOW_FOCUSED_WITHOUT_EDITOR fromUser false
+11-27 11:16:24.952  2949  2961 W Looper  : Slow delivery took 129ms wmshell.main h=android.os.Handler c=null m=2
+11-27 11:16:24.953  2949  2961 W Looper  : Slow dispatch took 52ms wmshell.main h=android.os.Handler c=null m=2
+11-27 11:16:25.006   567   701 I ImeTracker: org.chromium.webview_shell:dd97642d: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 11:16:25.110   567   587 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+11-27 11:16:25.124   567   587 D AccessibilityManagerService: restoreCurrentUserForTestAutomationIfNeededLocked(): ignoring because device doesn't support visible background users
+11-27 11:16:25.128   567  2263 W system_server: Long monitor contention with owner binder:567_1 (587) at java.util.ArrayList com.android.server.accessibility.AccessibilityManagerService$AccessibilityDisplayListener.getValidDisplayList()(AccessibilityManagerService.java:5361) waiters=0 in void com.android.server.accessibility.AccessibilityManagerService.sendAccessibilityEvent(android.view.accessibility.AccessibilityEvent, int) for 639ms
+11-27 11:16:25.209   567  2180 W system_server: Long monitor contention with owner android.ui (598) at int com.android.server.wm.WindowManagerService.addWindow(com.android.server.wm.Session, android.view.IWindow, android.view.WindowManager$LayoutParams, int, int, int, int, android.view.InputChannel, android.view.InsetsState, android.view.InsetsSourceControl$Array, android.graphics.Rect, float[])(WindowManagerService.java:1943) waiters=1 in android.app.ActivityTaskManager$RootTaskInfo com.android.server.wm.ActivityTaskManagerService.getRootTaskInfo(int, int) for 310ms
+11-27 11:16:25.300   567   598 W Looper  : Slow dispatch took 12402ms android.ui h=com.android.server.am.ActivityManagerService$UiHandler c=com.android.server.am.ErrorDialogController$$ExternalSyntheticLambda4@2a61e6d m=0
+11-27 11:16:25.433   567  2263 I ActivityManager: Force stopping dev.pathpilot.app.capture appid=10149 user=0: finished inst
+11-27 11:16:25.449   567   663 W system_server: Long monitor contention with owner binder:567_1 (587) at java.util.ArrayList com.android.server.accessibility.AccessibilityManagerService$AccessibilityDisplayListener.getValidDisplayList()(AccessibilityManagerService.java:5361) waiters=1 in void com.android.server.accessibility.AccessibilityWindowManager.removeAccessibilityInteractionConnection(android.view.IWindow) for 815ms
+11-27 11:16:25.454   567   675 W UsageStatsService: Unexpected activity event reported! (dev.pathpilot.app.capture/androidx.activity.ComponentActivity event : 23 instanceId : 263446466)
+11-27 11:16:25.506  3364  3364 I app_process: System.exit called, status: 0
+11-27 11:16:25.508  3364  3364 I AndroidRuntime: VM exiting with result code 0.
+11-27 11:16:25.539  2949  2961 W ndroid.systemui: Long monitor contention with owner binder:2949_1 (2957) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:695) waiters=0 in android.os.Message android.os.MessageQueue.next() for 366ms
+--------- beginning of kernel
+11-27 11:16:25.492     0     0 I binder  : 567:2263 ioctl 400c620e 708d5d142354 returned -11
+11-27 11:16:25.522     0     0 I binder  : 567:2263 ioctl 400c620e 708d5d142354 returned -11
+11-27 11:16:25.542   567  2263 E ActivityManager: Unable to freeze binder for 3374: -11
+11-27 11:16:25.646   335   932 I netd    : tetherGetStats() -> {[]} <25.86ms>
+11-27 11:16:25.662   335  3523 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:25.670   567   598 W Looper  : Slow dispatch took 112ms android.ui h=com.android.server.am.BaseErrorDialog$2 c=null m=1
+11-27 11:16:25.672   335  3524 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:25.736   567  2263 I ActivityManager: Killing 3374:dev.pathpilot.app.capture/u0a149 (adj 0): stop dev.pathpilot.app.capture due to finished inst
+11-27 11:16:25.788   335  3531 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:25.818   567   598 W Looper  : Slow dispatch took 128ms android.ui h=android.view.ViewRootImpl$ViewRootHandler c=android.view.ViewRootImpl$10@95b7eee m=0
+11-27 11:16:25.820   335  3532 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:25.840   335  3534 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:25.845   335  3535 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:25.885   567  2180 W InputManager-JNI: Input channel object 'a4d458a dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-27 11:16:26.089   567   598 D DisplayManagerService: Drop pending events for gone uid 10149
+11-27 11:16:26.102  3202  3202 I Choreographer: Skipped 51 frames!  The application may be doing too much work on its main thread.
+11-27 11:16:26.168   567   598 W Looper  : Slow dispatch took 235ms android.ui h=com.android.server.am.ActivityManagerService$UiHandler c=com.android.server.am.UidObserverController$$ExternalSyntheticLambda0@aa1d18c m=0
+11-27 11:16:26.190   567   598 I Choreographer: Skipped 47 frames!  The application may be doing too much work on its main thread.
+11-27 11:16:26.267  2949  2961 W Looper  : Drained
+11-27 11:16:26.342   567  2263 W system_server: Long monitor contention with owner binder:567_1D (2180) at void com.android.server.wm.WindowManagerService.removeClientToken(com.android.server.wm.Session, android.os.IBinder)(WindowManagerService.java:2061) waiters=0 in void com.android.server.wm.WindowProcessController.setThread(android.app.IApplicationThread) for 443ms
+11-27 11:16:26.445   567   597 I ActivityTaskManager: Displayed dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity for user 0: +8s781ms
+11-27 11:16:26.446   567   597 W Looper  : Slow dispatch took 2951ms android.fg h=android.os.Handler c=com.android.server.wm.ActivityMetricsLogger$$ExternalSyntheticLambda0@2c87408 m=0
+11-27 11:16:26.545   567   598 D CoreBackPreview: Window{8cb01a8 u0 Application Not Responding: org.chromium.webview_shell}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.WindowOnBackInvokedDispatcher$OnBackInvokedCallbackWrapper@af07dc6, mPriority=0, mIsAnimationCallback=false}
+11-27 11:16:26.589   567   682 W system_server: Long monitor contention with owner binder:567_1F (2263) at boolean com.android.server.am.ActivityManagerService.cleanUpApplicationRecordLocked(com.android.server.am.ProcessRecord, int, boolean, boolean, int, boolean, boolean)(ActivityManagerService.java:13783) waiters=0 in int com.android.server.am.ActivityManagerService.getUidState(int) for 755ms
+11-27 11:16:26.607   567   663 W system_server: Long monitor contention with owner binder:567_1F (2263) at boolean com.android.server.am.ActivityManagerService.cleanUpApplicationRecordLocked(com.android.server.am.ProcessRecord, int, boolean, boolean, int, boolean, boolean)(ActivityManagerService.java:13783) waiters=1 in android.content.Intent com.android.server.am.ActivityManagerService.registerReceiverWithFeatureTraced(android.app.IApplicationThread, java.lang.String, java.lang.String, java.lang.String, android.content.IIntentReceiver, android.content.IntentFilter, java.lang.String, int, int) for 729ms
+11-27 11:16:26.690  2949  2961 W Looper  : Slow delivery took 385ms wmshell.main h=android.os.Handler c=android.window.TaskOrganizer$1$$ExternalSyntheticLambda0@4c547c8 m=0
+11-27 11:16:26.810   335   932 I netd    : tetherGetStats() -> {[]} <29.73ms>
+11-27 11:16:26.821   567   720 W system_server: Long monitor contention with owner binder:567_1F (2263) at boolean com.android.server.am.ActivityManagerService.cleanUpApplicationRecordLocked(com.android.server.am.ProcessRecord, int, boolean, boolean, int, boolean, boolean)(ActivityManagerService.java:13783) waiters=2 in void com.android.server.am.ActivityManagerService$LocalService.notifyNetworkPolicyRulesUpdated(int, long) for 523ms
+11-27 11:16:26.829   567   597 V WindowManager: Sent Transition (#29) createdAt=11-27 11:16:16.121 via request=TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=29 displayId=0 isRunning=false baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity } baseActivity=null topActivity=null origActivity=null realActivity=ComponentInfo{dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity} numActivities=0 lastActiveTime=1521935 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{38aca1e Task{6b433b3 #29 type=standard A=10150:dev.pathpilot.app.capture.test}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=null launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 29 }
+11-27 11:16:26.829   567   597 V WindowManager:     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+11-27 11:16:26.830   567   597 V WindowManager:     info={id=29 t=CLOSE f=0x0 trk=0 opt={t=CUSTOM enterResId=0 exitResId=0} r=[0@Point(0, 0)] c=[
+11-27 11:16:26.830   567   597 V WindowManager:         {WCT{RemoteToken{e0f0a7d Task{c08040d #28 type=standard A=10149:dev.pathpilot.app.capture}}} m=TO_FRONT f=NONE leash=Surface(name=Task=28)/@0xc83e27 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1},
+11-27 11:16:26.830   567   597 V WindowManager:         {WCT{RemoteToken{38aca1e Task{6b433b3 #29 type=standard A=10150:dev.pathpilot.app.capture.test}}} m=CLOSE f=NONE leash=Surface(name=Task=29)/@0x12262a0 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1}
+11-27 11:16:26.830   567   597 V WindowManager:     ]}
+11-27 11:16:26.831   567   597 W Looper  : Slow dispatch took 262ms android.fg h=android.os.Handler c=com.android.server.wm.TransitionController$Logger@bdc1187 m=0
+11-27 11:16:26.847   567   611 W system_server: Long monitor contention with owner binder:567_1F (2263) at void com.android.server.am.ActivityManagerService.finishInstrumentation(android.app.IApplicationThread, int, android.os.Bundle)(ActivityManagerService.java:16926) waiters=0 in boolean com.android.server.am.BroadcastQueueModernImpl.lambda$new$0(android.os.Message) for 700ms
+11-27 11:16:26.852   567  1104 W system_server: Long monitor contention with owner binder:567_1F (2263) at void com.android.server.am.ActivityManagerService.finishInstrumentation(android.app.IApplicationThread, int, android.os.Bundle)(ActivityManagerService.java:16926) waiters=1 in int com.android.server.am.ActivityManagerService.broadcastIntentWithFeature(android.app.IApplicationThread, java.lang.String, android.content.Intent, java.lang.String, android.content.IIntentReceiver, int, java.lang.String, android.os.Bundle, java.lang.String[], java.lang.String[], java.lang.String[], int, android.os.Bundle, boolean, boolean, int) for 801ms
+11-27 11:16:26.855   567   600 W system_server: Long monitor contention with owner binder:567_1F (2263) at void com.android.server.am.ActivityManagerService.finishInstrumentation(android.app.IApplicationThread, int, android.os.Bundle)(ActivityManagerService.java:16926) waiters=2 in void com.android.server.am.ProcessRecord.updateProcessInfo(boolean, boolean, boolean) for 740ms
+11-27 11:16:26.867   567   663 W system_server: Long monitor contention with owner binder:567_1F (2263) at void com.android.server.am.ActivityManagerService.finishInstrumentation(android.app.IApplicationThread, int, android.os.Bundle)(ActivityManagerService.java:16926) waiters=3 in android.content.Intent com.android.server.am.ActivityManagerService.registerReceiverWithFeatureTraced(android.app.IApplicationThread, java.lang.String, java.lang.String, java.lang.String, android.content.IIntentReceiver, android.content.IntentFilter, java.lang.String, int, int) for 219ms
+11-27 11:16:26.946  2677  2677 I TopTaskTracker: onTaskRemoved: taskId=29
+11-27 11:16:26.946  2677  2677 I TopTaskTracker: onTaskRemoved: taskId=29
+11-27 11:16:26.978   567   597 V WindowManager: Finish Transition (#29): created at 11-27 11:16:16.121 collect-started=0.259ms request-sent=0.71ms started=50.01ms ready=345.059ms sent=3119.431ms finished=3808.227ms
+11-27 11:16:26.987  3412  3412 I cr_A11yState: Enabled accessibility services list updated.
+11-27 11:16:26.988   567   597 W Looper  : Slow dispatch took 157ms android.fg h=android.os.Handler c=com.android.server.wm.Transition$$ExternalSyntheticLambda0@a2509d9 m=0
+11-27 11:16:27.006  3412  3412 D AutofillManager: Fill dialog is enabled:false, hints=[]
+11-27 11:16:27.063  3412  3412 I cr_A11yState: Informing listeners of changes.
+11-27 11:16:27.064  3412  3412 I cr_A11yState: New AccessibilityState: State{isScreenReaderEnabled=false, isTouchExplorationEnabled=false, isPerformGesturesEnabled=false, isAnyAccessibilityServiceEnabled=false, isAccessibilityToolPresent=false, isSpokenFeedbackServicePresent=false, isTextShowPasswordEnabled=true, isOnlyPasswordManagersEnabled=false}
+11-27 11:16:27.131  3412  3412 I Choreographer: Skipped 92 frames!  The application may be doing too much work on its main thread.
+11-27 11:16:27.313  3412  3425 D EGL_emulation: app_time_stats: avg=4239.86ms min=456.72ms max=8022.99ms count=2
+11-27 11:16:27.373  3412  3423 I HWUI    : Davey! duration=3269ms; Flags=0, FrameTimelineVsyncId=11334, IntendedVsync=1537044022690, Vsync=1540110689326, InputEventId=0, HandleInputStart=1540133912839, AnimationStart=1540133920411, PerformTraversalsStart=1540133924348, DrawStart=1540134251650, FrameDeadline=1537077356023, FrameInterval=1540131385058, FrameStartTime=33333333, SyncQueued=1540136082859, SyncStart=1540136381571, IssueDrawCommandsStart=1540137041257, SwapBuffers=1540230297555, FrameCompleted=1540314215395, DequeueBufferDuration=64976, QueueBufferDuration=18683214, GpuCompleted=1540313036173, SwapBuffersCompleted=1540314215395, DisplayPresentTime=0, CommandSubmissionCompleted=1540230297555, 
+11-27 11:16:27.517   567   567 W Looper  : Slow dispatch took 371ms main h=com.android.server.alarm.AlarmManagerService$AlarmHandler c=android.app.ActivityManager$1$$ExternalSyntheticLambda0@24baa7f m=0
+11-27 11:16:27.580   567   663 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:27.785   567   663 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:27.835  2949  2974 D EGL_emulation: app_time_stats: avg=21553.29ms min=21553.29ms max=21553.29ms count=1
+11-27 11:16:27.938   567   567 W Looper  : Slow dispatch took 376ms main h=android.app.ActivityThread$H c=null m=114
+11-27 11:16:27.946   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:28.033   567   734 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+11-27 11:16:28.178   567   734 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+11-27 11:16:28.184   567   734 D InetDiagMessage: Destroyed live tcp sockets for uids={10149} in 419ms
+11-27 11:16:28.223  2949  2949 I Choreographer: Skipped 43 frames!  The application may be doing too much work on its main thread.
+11-27 11:16:28.248   567   567 W Looper  : Slow dispatch took 109ms main h=com.android.server.accessibility.AccessibilityManagerService$MainHandler c=<recycled PooledLambda@bd36a95> m=0
+11-27 11:16:28.251   567   567 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 11:16:28.251   567   567 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 11:16:28.453   567   734 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+11-27 11:16:28.494   567   567 W Looper  : Slow dispatch took 244ms main h=com.android.server.accessibility.AccessibilityManagerService$MainHandler c=com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticLambda15@7bbf7aa m=0
+11-27 11:16:28.500   567   567 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 11:16:28.501   567   567 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 11:16:28.578   567   734 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+11-27 11:16:28.579   567   734 D InetDiagMessage: Destroyed live tcp sockets for uids={20149} in 394ms
+11-27 11:16:28.756   567  1104 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 11:16:28.780   567  1104 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 11:16:28.799   567  1104 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 11:16:28.801   567   567 W Looper  : Slow dispatch took 301ms main h=com.android.server.accessibility.AccessibilityManagerService$MainHandler c=<recycled PooledLambda@b109c7> m=0
+11-27 11:16:28.827   567   567 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 11:16:28.966  2949  3256 I HWUI    : Davey! duration=2018ms; Flags=0, FrameTimelineVsyncId=11440, IntendedVsync=1539777355996, Vsync=1541210689315, InputEventId=0, HandleInputStart=1541260994512, AnimationStart=1541261040912, PerformTraversalsStart=1541261366772, DrawStart=1541261593698, FrameDeadline=1539810689329, FrameInterval=1541223653163, FrameStartTime=33333333, SyncQueued=1541262026729, SyncStart=1541266819557, IssueDrawCommandsStart=1541267288820, SwapBuffers=1541618318530, FrameCompleted=1541800523425, DequeueBufferDuration=85728, QueueBufferDuration=90535093, GpuCompleted=1541710235789, SwapBuffersCompleted=1541800523425, DisplayPresentTime=0, CommandSubmissionCompleted=1541618318530, 
+11-27 11:16:29.280  2949  2961 W Looper  : Slow dispatch took 85ms wmshell.main h=android.view.ViewRootImpl$ViewRootHandler c=android.view.accessibility.AccessibilityManager$$ExternalSyntheticLambda0@4cb1874 m=0
+11-27 11:16:29.281  2949  2961 W Looper  : Drained
+11-27 11:16:29.331  2949  2974 D EGL_emulation: app_time_stats: avg=699.84ms min=530.55ms max=869.13ms count=2
+11-27 11:16:29.430  2949  2985 I HWUI    : Davey! duration=1011ms; Flags=0, FrameTimelineVsyncId=11475, IntendedVsync=1541310689314, Vsync=1541377355980, InputEventId=0, HandleInputStart=1541407354110, AnimationStart=1541407361222, PerformTraversalsStart=1541514765939, DrawStart=1541514967358, FrameDeadline=1541744022643, FrameInterval=1541407335114, FrameStartTime=33333333, SyncQueued=1541902621779, SyncStart=1541912384482, IssueDrawCommandsStart=1541918359045, SwapBuffers=1542271424520, FrameCompleted=1542331653290, DequeueBufferDuration=59222, QueueBufferDuration=38480325, GpuCompleted=1542330653426, SwapBuffersCompleted=1542331653290, DisplayPresentTime=0, CommandSubmissionCompleted=1542271424520, 
+11-27 11:16:29.522   567   613 W libprocessgroup: Still waiting on process(es) to exit for cgroup /sys/fs/cgroup/uid_10149/pid_3374 after 2229 ms
+11-27 11:16:29.523   567   613 E libprocessgroup: Unable to remove cgroup /sys/fs/cgroup/uid_10149/pid_3374: Device or resource busy
+11-27 11:16:29.546   567   567 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 11:16:29.565   567  1104 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:29.576   567   676 W JobServiceContext: Timed out while trying to bind for 5cfa0d7 #1000/237039804 android/com.android.server.notification.NotificationHistoryJobService
+11-27 11:16:29.599     0     0 I logd    : logdr: UID=2000 GID=2000 PID=3542 n tail=1600 logMask=99 pid=0 start=0ns deadline=0ns
+11-27 11:16:29.638   567  1134 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(wmsSync-VRI[webview_shell]#10) as ready
+11-27 11:16:29.653   567  1134 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(VRI[webview_shell]#11) as ready
+11-27 11:16:29.684   567   676 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:29.693   567   567 W Looper  : Slow dispatch took 866ms main h=com.android.server.accessibility.AccessibilityManagerService$MainHandler c=com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticLambda3@f92758b m=0
+11-27 11:16:29.721   567   676 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:29.764  2949  2969 W Looper  : Slow dispatch took 3255ms SysUiBg h=android.os.Handler c=android.telephony.TelephonyCallback$IPhoneStateListenerStub$$ExternalSyntheticLambda43@9a4f19d m=0
+11-27 11:16:29.822   567   676 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:29.823   567  1104 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:29.883   567   676 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:29.925   567   676 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:29.948   567  1104 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:30.226   567   631 W system_server: Long monitor contention with owner appscheduling.default (676) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:695) waiters=0 in android.os.Message android.os.MessageQueue.next() for 142ms
+11-27 11:16:30.252  2949  2969 W Looper  : Slow delivery took 2715ms SysUiBg h=android.os.Handler c=android.telephony.TelephonyCallback$IPhoneStateListenerStub$$ExternalSyntheticLambda10@946e612 m=0
+11-27 11:16:30.275   567  1408 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-27 11:16:30.649   567   567 W system_server: Long monitor contention with owner appscheduling.default (676) at void com.android.server.job.JobSchedulerService.onControllerStateChanged(android.util.ArraySet)(JobSchedulerService.java:3307) waiters=0 in void com.android.server.job.JobServiceContext.onServiceConnected(android.content.ComponentName, android.os.IBinder) for 822ms
+11-27 11:16:30.650   567   567 W Looper  : Slow dispatch took 955ms main h=android.app.ActivityThread$H c=android.app.LoadedApk$ServiceDispatcher$RunConnection@cc25726 m=0
+11-27 11:16:30.675   567   567 D BatterySaverPolicy: accessibility changed to false, updating policy.
+11-27 11:16:30.676   335  3523 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:30.677   335  3523 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 11:16:30.686   335  3524 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:30.687   335  3524 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 11:16:30.716   567   567 W Looper  : Drained
+11-27 11:16:30.797   335  3531 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:30.798   335  3531 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 11:16:30.824   335  3532 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:30.825   335  3532 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 11:16:30.768   945  3511 D NetworkMonitor/100: PROBE_FALLBACK http://www.google.com/gen_204 Probe failed with exception java.net.UnknownHostException: Unable to resolve host "www.google.com": No address associated with hostname
+11-27 11:16:30.848   335  3534 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:30.851   945  3513 D NetworkMonitor/100: PROBE_HTTP http://connectivitycheck.gstatic.com/generate_204 Probe failed with exception java.net.UnknownHostException: Unable to resolve host "connectivitycheck.gstatic.com": No address associated with hostname
+11-27 11:16:30.856   335  3534 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 11:16:30.860   335  3535 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 11:16:30.861   335  3535 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 11:16:30.938   945  3512 D NetworkMonitor/100: PROBE_HTTPS https://www.google.com/generate_204 Probe failed with exception java.net.UnknownHostException: Unable to resolve host "www.google.com": No address associated with hostname
+11-27 11:16:31.014   567  2263 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:31.034   567  2263 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:31.035   945  3511 D NetworkMonitor/100: isCaptivePortal: isSuccessful()=false isPortal()=false RedirectUrl=null isPartialConnectivity()=false Time=22838ms
+11-27 11:16:31.141   567   734 D ConnectivityService: [100 CELLULAR] validation failed
+11-27 11:16:31.202   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:31.304   167  3536 I keystore2: system/security/keystore2/watchdog/src/lib.rs:319 - Watchdog thread idle -> terminating. Have a great day.
+11-27 11:16:32.367   567  2263 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:32.476   567  2263 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:32.529   567  2263 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:32.577     0     0 I binder  : undelivered TRANSACTION_COMPLETE
+11-27 11:16:32.577     0     0 I binder  : undelivered transaction 152063, process died.
+11-27 11:16:32.577     0     0 I binder  : undelivered transaction 152275, process died.
+11-27 11:16:32.577     0     0 I binder  : undelivered transaction 152404, process died.
+11-27 11:16:32.578     0     0 I binder  : undelivered transaction 152266, process died.
+11-27 11:16:32.611   410   410 I adbd    : Remote process closed the socket (on MSG_PEEK)
+11-27 11:16:32.613   567  1464 V ActivityManager: Got obituary of 3374:dev.pathpilot.app.capture
+11-27 11:16:32.669   567   600 W ActivityManager: setHasOverlayUi called on unknown pid: 3374
+11-27 11:16:33.170   336   336 I Zygote  : Process 3374 exited due to signal 9 (Killed)
+11-27 11:16:33.577   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:33.611   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:33.761   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:34.574   567   683 D ActivityManager: freezing 3202 dev.pathpilot.app.capture.test
+11-27 11:16:34.623   567   734 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+11-27 11:16:34.674   567   734 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+11-27 11:16:34.687   567   734 D InetDiagMessage: Destroyed live tcp sockets for uids={10150} in 79ms
+11-27 11:16:34.809   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:34.884   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:34.906   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:36.058   567   597 W Looper  : Drained
+11-27 11:16:36.321   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:36.357   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:36.402   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:36.941  2323  2323 E PhoneInterfaceManager: queryModemActivityInfo: invalid response
+11-27 11:16:36.962   567  2180 D TelephonyManager: requestModemActivityInfo: Sending result to app: ModemActivityInfo{ mTimestamp=890056 mSleepTimeMs=0 mIdleTimeMs=889884 mActivityStatsTechSpecificInfo=[{mRat=UNKNOWN,mFrequencyRange=UNKNOWN,mTxTimeMs[]=[0, 0, 0, 0, 0],mRxTimeMs=0}]}
+11-27 11:16:37.174   335   932 I netd    : tetherGetStats() -> {[]} <18.72ms>
+11-27 11:16:37.298   567   619 D KernelCpuUidUserSysTimeReader: Removing uids 99000-99000
+11-27 11:16:37.423   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:37.458   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:37.531   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:38.651   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:38.709   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:38.770   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:40.061   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:40.106   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:40.170   567   598 W Looper  : Slow dispatch took 13979ms android.ui h=android.view.Choreographer$FrameHandler c=android.view.Choreographer$FrameDisplayEventReceiver@cf43422 m=0
+11-27 11:16:40.194   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:40.259   567  1349 I HWUI    : Davey! duration=15158ms; Flags=1, FrameTimelineVsyncId=11348, IntendedVsync=1537610689351, Vsync=1539177356002, InputEventId=0, HandleInputStart=1539211437740, AnimationStart=1539211445751, PerformTraversalsStart=1539211449132, DrawStart=1541779998926, FrameDeadline=1537644022684, FrameInterval=1539190471206, FrameStartTime=33333333, SyncQueued=1542031622791, SyncStart=1542414352630, IssueDrawCommandsStart=1542687815126, SwapBuffers=1552707064428, FrameCompleted=1553151682295, DequeueBufferDuration=57520, QueueBufferDuration=13652893, GpuCompleted=1553150995032, SwapBuffersCompleted=1553151682295, DisplayPresentTime=72904454231359566, CommandSubmissionCompleted=1552707064428, 
+11-27 11:16:40.334   567   598 I Choreographer: Skipped 413 frames!  The application may be doing too much work on its main thread.
+11-27 11:16:40.726   567   598 W Looper  : Slow dispatch took 392ms android.ui h=android.view.Choreographer$FrameHandler c=android.view.Choreographer$FrameDisplayEventReceiver@cf43422 m=0
+11-27 11:16:41.256   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:41.289   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:41.311   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:41.940   567  1134 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(wmsSync-VRI[webview_shell]#12) as ready
+11-27 11:16:41.968   567  1134 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(VRI[webview_shell]#13) as ready
+11-27 11:16:42.349   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:42.379   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:42.479   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:43.482   567  1349 I HWUI    : Davey! duration=16783ms; Flags=0, FrameTimelineVsyncId=11436, IntendedVsync=1539544022665, Vsync=1553310689194, InputEventId=0, HandleInputStart=1553342426447, AnimationStart=1553342433953, PerformTraversalsStart=1553342801336, DrawStart=1553356040451, FrameDeadline=1553210689195, FrameInterval=1553334216516, FrameStartTime=33333333, SyncQueued=1553558599100, SyncStart=1553701258928, IssueDrawCommandsStart=1553702086399, SwapBuffers=1555877387842, FrameCompleted=1556470425272, DequeueBufferDuration=63643, QueueBufferDuration=160937854, GpuCompleted=1556414937436, SwapBuffersCompleted=1556470425272, DisplayPresentTime=144115222452437076, CommandSubmissionCompleted=1555877387842, 
+11-27 11:16:43.705   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:43.714   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:43.777   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:43.880     0     0 I init    : Untracked pid 3525 received signal 14
+11-27 11:16:43.899     0     0 I init    : Untracked pid 3525 did not have an associated service entry and will not be reaped
+11-27 11:16:44.290     0     0 I init    : Untracked pid 3539 exited with status 0
+11-27 11:16:44.293     0     0 I init    : Untracked pid 3539 did not have an associated service entry and will not be reaped
+11-27 11:16:44.799   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:44.825   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:44.985   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:45.058   567  1131 D EGL_emulation: app_time_stats: avg=2453.40ms min=1588.15ms max=3318.65ms count=2
+11-27 11:16:45.095   567   598 W Looper  : Slow dispatch took 4138ms android.ui h=android.view.Choreographer$FrameHandler c=android.view.Choreographer$FrameDisplayEventReceiver@cf43422 m=0
+11-27 11:16:45.147   567  2263 I HWUI    : Davey! duration=3173ms; Flags=0, FrameTimelineVsyncId=11556, IntendedVsync=1553877355855, Vsync=1553910689188, InputEventId=0, HandleInputStart=1553933470522, AnimationStart=1553933477147, PerformTraversalsStart=1553933480055, DrawStart=1556545528907, FrameDeadline=1556477355829, FrameInterval=1553933453709, FrameStartTime=33333333, SyncQueued=1556551708044, SyncStart=1557560584081, IssueDrawCommandsStart=1557561132045, SwapBuffers=1557683557361, FrameCompleted=1558059632020, DequeueBufferDuration=69209, QueueBufferDuration=29121465, GpuCompleted=1558058138320, SwapBuffersCompleted=1558059632020, DisplayPresentTime=0, CommandSubmissionCompleted=1557683557361, 
+11-27 11:16:45.157   567   598 I Choreographer: Skipped 47 frames!  The application may be doing too much work on its main thread.
+11-27 11:16:45.363   567  1349 I HWUI    : Davey! duration=1715ms; Flags=0, FrameTimelineVsyncId=11563, IntendedVsync=1556577355828, Vsync=1558144022479, InputEventId=0, HandleInputStart=1558159338967, AnimationStart=1558159346980, PerformTraversalsStart=1558159559199, DrawStart=1558159808976, FrameDeadline=1558110689146, FrameInterval=1558157579090, FrameStartTime=33333333, SyncQueued=1558174394460, SyncStart=1558196603148, IssueDrawCommandsStart=1558197020082, SwapBuffers=1558247525808, FrameCompleted=1558315102838, DequeueBufferDuration=56578, QueueBufferDuration=23781591, GpuCompleted=1558314474660, SwapBuffersCompleted=1558315102838, DisplayPresentTime=0, CommandSubmissionCompleted=1558247525808, 
+11-27 11:16:45.462  2949  2969 W Looper  : Drained
+11-27 11:16:45.630  2949  2974 D EGL_emulation: app_time_stats: avg=8149.52ms min=417.69ms max=15881.34ms count=2
+11-27 11:16:46.130   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:46.141   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:46.232   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:46.367  2323  2326 I m.android.phone: Compiler allocated 5771KB to compile void com.android.phone.PhoneInterfaceManager$MainThreadHandler.handleMessage(android.os.Message)
+11-27 11:16:47.289   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:47.309   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:47.330   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:48.349   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:48.359   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:48.400   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:49.450   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:49.494   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:49.504   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:50.519   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:50.537   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:50.550   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:51.563   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:51.577   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:51.591   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:52.608   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:52.615   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:52.663   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:53.696   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:53.704   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:53.713   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:54.726   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:54.749   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:54.759   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:55.285  3480  3480 W main    : type=1400 audit(0.0:87): avc:  denied  { getsched } for  scontext=u:r:untrusted_app_29:s0:c104,c256,c512,c768 tcontext=u:r:isolated_app:s0:c512,c768 tclass=process permissive=0 app=org.chromium.webview_shell
+11-27 11:16:55.294  3480  3480 W chromium: [1127/111655.294111:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.301  3480  3480 W main    : type=1400 audit(0.0:88): avc:  denied  { getsched } for  scontext=u:r:untrusted_app_29:s0:c104,c256,c512,c768 tcontext=u:r:isolated_app:s0:c512,c768 tclass=process permissive=0 app=org.chromium.webview_shell
+11-27 11:16:55.307  3480  3480 W chromium: [1127/111655.307708:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.318  3480  3480 W chromium: [1127/111655.318242:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.313  3480  3480 W main    : type=1400 audit(0.0:89): avc:  denied  { getsched } for  scontext=u:r:untrusted_app_29:s0:c104,c256,c512,c768 tcontext=u:r:isolated_app:s0:c512,c768 tclass=process permissive=0 app=org.chromium.webview_shell
+11-27 11:16:55.321  3480  3480 W main    : type=1400 audit(0.0:90): avc:  denied  { getsched } for  scontext=u:r:untrusted_app_29:s0:c104,c256,c512,c768 tcontext=u:r:isolated_app:s0:c512,c768 tclass=process permissive=0 app=org.chromium.webview_shell
+11-27 11:16:55.337  3480  3480 W main    : type=1400 audit(0.0:91): avc:  denied  { getsched } for  scontext=u:r:untrusted_app_29:s0:c104,c256,c512,c768 tcontext=u:r:isolated_app:s0:c512,c768 tclass=process permissive=0 app=org.chromium.webview_shell
+11-27 11:16:55.343  3480  3480 W chromium: [1127/111655.342911:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.332     0     0 W audit   : audit_lost=12 audit_rate_limit=5 audit_backlog_limit=64
+11-27 11:16:55.332     0     0 E audit   : rate limit exceeded
+11-27 11:16:55.351  3480  3480 W chromium: [1127/111655.351631:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.360  3480  3480 W chromium: [1127/111655.359901:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.366  3480  3480 W chromium: [1127/111655.366760:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.371  3480  3480 W chromium: [1127/111655.370934:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.382  3480  3480 W chromium: [1127/111655.380010:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.387  3480  3480 W chromium: [1127/111655.387018:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.397  3480  3480 W chromium: [1127/111655.397406:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.402  3480  3480 W chromium: [1127/111655.402590:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.412  3480  3480 W chromium: [1127/111655.412689:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.419  3480  3480 W chromium: [1127/111655.419120:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.424  3480  3480 W chromium: [1127/111655.424379:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.430  3480  3480 W chromium: [1127/111655.429909:WARNING:process_reader_linux.cc(95)] sched_getscheduler: Permission denied (13)
+11-27 11:16:55.665  3480  3480 E chromium: [1127/111655.665120:ERROR:ptrace_client.cc(364)] Broker Open: access denied
+11-27 11:16:55.767   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:55.783   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:55.805   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:56.826   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:56.836   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:56.858   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+--------- beginning of crash
+11-27 11:16:57.854  3480  3480 F crashpad: -----BEGIN CRASHPAD MINIDUMP-----
+11-27 11:16:57.869   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:57.877   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:57.894   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:57.946  3480  3480 F crashpad: -----BEGIN CRASHPAD MINIDUMP-----
+11-27 11:16:57.947  3480  3480 F crashpad: )iyJD'eU=s,x18>//sqVf=CX}6{z]WY3Y<0Pc=/n|zsL!M_Nec@su<CXB/w?"_IP2_b?HmH^+7B/Jk+aC]p^absE2kIt8m?I<CH;kmMkVLftXA{K}N@r]alo1Kts!^(+ImtzlXx%S2WL&,>~=j_"`6V;/x#xo+g!Gt!!.[NWd*7<.!m_;!X\=x<!q!u+YX7<$!W(aAhdEb2![v5"G$qI)]cSJmJ,I78"!Q;"eums%3&3QiOcJ5QHyKV%Y=&F[n5c.ps4U[~MX#3&E!CMkWLD3:u3o&/co617DOLD($W$iLq}sXoX'$_O+oD<zmr9?Lj"d$vLbb*hpgDm*pdr?OCB[&KM',rIzMU+)!e%vLAm.RoXU+S"O7d7),^W!p4:W$lN17Ob|A3Z]O#"[L8xK1<RAmF"'l+`{LH!uyY}\.4:)!Cx',].G$Q%"7gr6Xl2kzO0Nu8KUs,6)+)xX{XL_x${\NSJTJ`@X*5O}7}6>m.vdR'$U+?""Mh}}GV6#x&%hL@)
+11-27 11:16:57.947  3480  3480 F crashpad: yzVJeJ1X1op[A"5FG6]!gZZLED51CX:-YlRc*&\w"hl'LD'$5's!9~`OTK&cZnq\c%7^#m]}\Nc#RZOjym%#;&B7xgb866)#g7)7@<f2?8'06F9\H$3&4~~HG4/$(Mu}b.$Jh';M$7;i=t9[1rb};~xr`KG4%8(arklKTM3SoE*I{>?d4GGY:$qeQ!m2O5!MD!8Hq61k@LbcRFxHqI\rOdZ[`Liq-Uu<8"wxDt|_n<i813@4FQ#R4,@tG3WLWqi+4$<l]NrP|m[LYo';VD9x]("my.@rdPI@,!To&;XM7!-UDt@q/9~n`-?nEi'!kO7vQsB1X(@L`.HV:N7Vt?A1O9Qp^EfL-]tagI3YtEN=ZEu+5uZYl[T!^f9vJl+2r;oBhh0uZeeIz3QY\Vs+U4hHP_aC*1KHQpfnbLr]mwgXa'DW7VDv)e)/@t@TcA(0;Am@Y,,Hg;7I>bwwci8"FaTrdAH0wwESK?r8mtQ%/X#U7v#zw\Mq!GtRCX!G/2IR'E:7
+11-27 11:16:57.947  3480  3480 F crashpad: o5tK#REP+xu82YF$"U3v9_*Uw-H&'H<iTs`hhBWe1=H!Yh6Cwo/%qQm;lwDOq0!60d3#'p02.i[[_+pKHmK1)6Iu_GPaT<~sHp~RPX!nZPgPR`URr~EgBRy_v1:C!3=jfCrQP?/^6a#PCalQ;B>TN#!QDUzC\pNSJ-Twd/w`b^DjrUy=9|cSf0=h-^^@*>]~Xh03m?f2SE7RhWZ70M\7z;)=&\9:l/?FF-T[J?Cu+t9|?7@AqAwX<r%+Ycc$?06!tMvmvLaI@J3/v:A\y%8AiDf,t(PdAk67U27rpUIljMWB&@'1)2jl((lwrT:$3G6<\5R<PB),b**6j3#~H::f>LF>AMpx[G<:O."2adZ):F+%z-lB][):k#hPT@USmeh[9Xpu%pl,if~v,RZJMn1WeSpu}Z;T$/iNM.fC`5|5?bRs%}77G%|7/a&=#:H(QZp;FKQ(nf>8dl:,6qXYEl\=?sE-jdiKF&U4Hs[HCcBz7vI<+|0RHSRdU+w_2ZtVPvhU
+11-27 11:16:57.947  3480  3480 F crashpad: P]-3ngq^w\b^NW9FAq7F[nY3i%`kigiZW!j,D7.FKu/[Ljd0j1mjRg7&`cRz`2_s'~b/cR^Z`pQN-4C4~_`ox,dTR%Zd+{*^!Wd)9aQV&hsQ>?~>:MXu~6uVbY(QRLunV/f&%b"nsYXBwHo//nZJ[%Qh66w}EqlW)nVHkNi\4tM[U13hHK4"Zgt?tSuVgvo6ylI&nkX!J-r+G280(f"Tbsst_`m)ztr]>d6#4Jfjz-$4gQ8JU@Wgb<\2)X?L.OQgwhLW=JO]$$eoQ"kXQ"5=(!!\D![I[L\5drn5YwEMQ"7("`'STY*j+Fc^Pp.J^qcg7&`c.xQg{u,:$Vy<>j!@=0HW4=G%UsRg-20Y`2At2ZuVR_-$Tn=UgS#c_'^W{UOI\2tMvmJ64^}v#=%DTZt`R0Bz6^]5|9v4G?+olJ5~Qgwht+BJ#'_/9<-xlTAf(kPwP-J>V*wa,:,8;1`1JR`#9Ls*a*DLEZ&%8T&nb?W@5k""RmGW,rj8d8byrPhY!F&1
+11-27 11:16:57.947  3480  3480 F crashpad: vW_T[W\vN`FD.@GMbsstsJ;bFs}Y+rBXF[+Q]5^^NP3*9Db_(=s[ZU3]Wf/^6a7Ryl0iRgG#x6$R,%Cz=D\q?XN-Z#I\S)JpB;+%<t,R4gB$>%XEEyWW1)1T1*}5A>|2</GxU7eq9DizbsK@QgmLG6Occ<cgiqf^VeNN.i?[onp,'q4+cgk<m:YVkO7=?>:F7>7=fW.l`{!:j=d-N,\JP~u5-P^?hv378FD7HQAZAv+JfFjf!BRbvVPPFD62Oo2<\qWoLS)I1EpPVP1L+9!IvU?1|b[pTX91HiV.:)`vaG8mKw3]ZjDq8L<o$FrKjbg4oG#$_HNe^TC/~C%Paty]!eml(i9\#IADO`VL#m<SfyCL0U.d91BR:qnCpJ'?$W{ivqht}wxjVXDg}3on0pM+X;_ax0gSkHQ;t=d9)&5eP0|Sh6j0>u:f[Wvwnp!468F)H~_}@j=7-X5.Lr;+@asr9k1*2oq?L\e;<CB'W98qoo,gt\7nFQr/l?2oPDudKd25
+11-27 11:16:57.952  3480  3480 F crashpad: d^mZKk[Z"=E%dRLtS-t~:uI,4ve/(:]5gG'/BOCC>O<h=7C;u=#=wrK0lkRg7&8opl\nbUEK<wRO1ko?\5rH_!,G\5&6/x'`9tv~k?i@0<D;-nrg_+Rh&3pREr(:Y8D?TiS8g1+[?dBmD]dKvo8ZNcch"\ub?0heUJ2eH9?'6Raq]-o~n``2tMbsOrGsG.tV^R}jo)zsPs0I\2]@,hkx_s&\Y2J<,a/sypN4[U=-gW(=7>J1Aaz;xh"B~OXq:6~REHfQKlf`EU"cAJ[;KWD|#xWFD9]@3hULx8pJA/uw\B~lYp`7jwrZKW:C8b[RV4`InxC3pJ03M\pl*n{j#bG<Qb:Q+Ih1'I"e1yT^vVN+ST<[}qBh97hafp9_<F>0Wa{g=Ijj^2=2BDTLK>:WbYj6|tL:F.DS,gb@8U1k6ru=-502f4?pHD#1.Lydg+'Q#[OiibUKw^Z\.aBvOTU!)S97"="\sa4o;)ei22nX&i^VSka%mSG8|Bi{sVECu=u>\-8?
+11-27 11:16:57.952  3480  3480 F crashpad: f=Xo!5"jJ4~`_A'X*Z7w&?Lz~0cVjtQT^\0-IpIlpuA*>fAf(kPwF%ADz=Gh[\4V$iI=*Vi);;HttO*<+IawSGG9f:*G_o1tAZT;gfw4F|5m1g6ZZZT;q[jN=v"d>s_*8b4V>g-=*V#vffMttO*\DfawSGQ2$S3m1giCLQnutOdIZ)8b4VX:XZT;=a+EH$-:R;;|MVxlSXJ7j{](INWLO-OQ%7@O:-[n74U+u~%8\$S(n586)X^ZxtIimgY,f;?0"i:[;k"iE8#G%yiW|MNVEk`LYM;p]}Lrr/,6d!n}2t/(Sx7Sp8"^|crbchy3a4)TdqXqaW93B."<.~/o"dPK9Hk6k<u.|V94<b[Mrbp}Mu?Vv(@V0u~='u#pzej4JOD#mGA/7o44S(R{U?t|<^/DVj;TqqSp\HQNNM9atY~;w2g7I7BOC`Ezk?\v5zYmch?&mMgb7<bG@B}f-kysW:'FG*t+eG[H)N*r09V.:T\VMsoh)Agm$542;hS9T3LiPlp&
+11-27 11:16:57.952  3480  3480 F crashpad: ;\VgZ8p5^1"9tWMrN=`s4,3uDI9-(6)bj}'Enq|(gqpn8O#xrw)k`m`aaF<T<h)g/jI;w_$*C7$t=o|omJ4@f0t@03^q'*8rAEGm<\ko=d&1a;6bQ+v`F0nl_Ir>EE+34U;gI&z2Y9ZUybuH3"i^X*oh^n/th7)Vh4":(ck7"cHs=*)XVe)rx3R)`5V.ioNL^l,'X1/~Wt/-@wz%,I%x&(/7!U!FB*$\3!4oiHBrV$O,26Q*^Jeb5bj[p3[mogVB+R2Meoaag\p[I_I[9];>uSY*;CDOUdSPIP8Lu/'03Otz|/^c,f1mwO'`%uh4Wq5PY8'~=fbgG,M32r{\1hz0a^$Wtp_$~Nd@dX@bnY(3|F+4]/,41sT?qx`f#3xb{e|>`d^/^IS9!q%D~c~dhxH*;B&_CZO:\fme?G'TvVp7)]>qvx<t_1<hsv^\S]Ic,fkjX,+>_o;12\[6`iha}N*TAJUwd*uawVKc+H'`+M>>@`u~S}OU'OHg|>@d^/o3S9w5
+11-27 11:16:57.953  3480  3480 F crashpad: *._au%;(XkN,m4r\<25B'rxZc[KK@@^1GZ$T^Ua^2NsLz#+?v{&)C5/4gUd`<4QbiplAv1v:+weU1Ur%mqy|^m.v&B~WBVp%+`v-Wycq|38?SK.[.f[*uPUR,OkD+st4hAfyR(mM!{V1\u?s<4c>M(Wy3au)P3)Xy:\0sLx25][Hcv%qG|@*Qb/+5]OS>-@)mVNSXe|>+w:4^cU$r@WeEDVQx*+?]NAp.`8j7J7`sL@f;BJ)_)8o%6Qb3qDcpl]#lAFw\G5W~|hBB,8Oxu^)O}sL|D;BV;Je<8G,hSo%mqy|Rw+-^cWtk@8CV45[?4[8:#*1*89zb:zH1s*P8??5Bu&)?_IlyTz\CQR(dcCO4L5?Qb#55]siKZ+?WX>K~f|>jch$6Pao(cy5bBQbYX^d"G3(0raQ@Zw]`saE']hQ>>gQ&B>-#.u|6"zhUcg;7i)fxw+3,06"H?;B~O+)"G'^BMVzsLb75]y?'Cn2E.\h&/K#U@Rz.7G}7t{u>FCA:bZi
+11-27 11:16:57.954  3480  3480 F crashpad: @(]*uPJ8!D$M>K*d|>\b^/~Bopi->3TrEH;>kGQM+XsmJw>=BB845[;4=YJ;4-t\\2xV5j.\S]?OdIg8tO-Tt1{-u|4"z85]O?&X7f,Z6"R4;B6?5iGEv7RTX>e45[?4QCzzKP?W<9FJY?RgZN8;W@*ReueB?1Qb;)q2MFy3~BL:QbY@cDmR6{b[9G;>;GaGJ/|jP+Oe[o6"4u_Xb=^9No%V<+|-0[-0|sm/\sRqhng<!:N[S]yL*Ti^m1TCC4IENG7Pq<sa@YR-l_a*uSlE@dvFAfJKQb1$\[+\fp&0eB-(n4spS~tL6;u(Je*TQNNSZmU[3ni-O.;aG+RDIL/igx>%+?P`H\iq`>n.bVz\GO>>K:3vRc/l(dsLB_Oc,0lQ=9pd;FPg?[S]!PR(l71w:cP\@=zSz\o}>>ptd*66uh9/rd|>pMviwW=ByC*Y$we*-o295]{cca/#:?xBfO*T32|ji<bmU[Em+>=5j7]/=D,EcuG#[sVcqtpW.o/2E?m%
+11-27 11:16:57.955  3480  3480 F crashpad: S4}4i2xzY5XE5e]`hJVQV)+?{`tji/@h?6LGQb-~*TB9`HYhs.fhhx^55])ure&2!IV*-o-*ae+W@/:rt:.fe\&[`/C4=Yb#=>5)9^,Tz\SQ*TuUop%;(w4nU[Rd6[A?;_{Fl*-oE.]qvE]]dGxP)XfVE76|*TKnHBV@,nU['n?(k3k]@Uyjoln%;(}NHZj7ZXlk]15-G#U@|PrP]ra]2~nBc\3V(XXN*T\Ikf|d2:%Ps%=Y~Nj#lu!F_f{4[(hADx"+e\cnwOK`>5sLLT!dxVM>5wI]or(bM4%W~|P^D*%_umaGqiQnuSNJ+]HIR@Qbk1+?"usZhCAeECZGeKu?-k:Ed2TCc7.jOvc*AY{|zKq<^1S.kp*<F#%HUcU*KNwFe4+fp^6SHqH7Or6MdEvp7Py|@nQ,t\$BYw6yz\g}*T|YQiD2J)\/E#I:Vc9h$:cF.`UNDq'`[>oqc809S4]/.4A{XEVkousLzKVmi3!VQ+Y1a#G@">ximm7dvLaBzVu2
+11-27 11:16:57.955  3480  3480 F crashpad: Qbc%+?qY9.LHEc{,hA@^[GDAp6+K*dwlYi^ivS^*5Pkk$YOzRaNn}/"q(DvJV-oBb_E4g(||.UcM;r|kn%+`I(f`(y:K;G`EVQ$(5]Y4qMO\TY5"Z8;B2Ik+8?xe|>TZ:VvU7tuJ~x<=:>B>O]aU<!za\~ydhxB_Ib>+5~e(Ym?2Q[/"\[jxR(_LQ[--&2WGsLPN;B>W6AQgGN46\[H#I:Vc;is,t.:2soM\*?xB<j74S4^B6]>f|>jc6[}_%oWSxtk1hA\j/4iH"`m<`U;ALF)[LE9GU/MJ}u)|@F}b8j4"rD;Bdpa9X]fW7.Qbi0+?WCJeP7&;5au%qS{NRwi,t.<b|D(&L3#OLLv1q2dprGpA})t{3"H?;Bbu{Xd<-tw%hxb75]1tcD2bfJAg'Q\GO(T;!iVG^-:BY`%d2chtNGK:N~wo"c'lu'hA"++?P\6t/Y{mohaT~f|>vP*TPc8t<CXCU6'6Qbe:.n'^XjG3duvetJ>M>>O+(R,0L4]/pj=f
+11-27 11:16:57.955  3480  3480 F crashpad: V996`5;KUnU[=n+>m.#@e)3t<M0[c[7`(DT_L<.XGL5Q8X}=S(p@\ah3aK_8i<\BwF]:(X7nh)+?JjtEJFOF}|.+UcurC`SaYZ#Hqi@nAY~2djO]pQz\OFM@"su`{5M(Oo5]GA5]{5~Xrj-a8gjoU[~bU@PNKHC.nT9rWTsLzKDmA\\syJw50@iM,85]oJ5Zfl;z~HsLh*5]%G<-Jr5ULrn.r*!I64obB^=W>YsL(B&n-T^xo:(0fB|bVe0Hvm?(-<Fkn"cB8=gxNM{cw5hbST\Igx(BdmKP/M}Epl=_Uzv<;Bd`Xe<S,,PoTkn%S4<3aJ&'Ur{XeV;IJ0Z`qdK1+?,f%`LojbcvUn}/PGQMh8DAq+^eK;a4]/B4=YT<H].T:Vz\iP>>9j'l<9}llhP[S]KuKGLT\n,*TX:6_*UCw|xj7-&4+Q~GD,hAz{vi7XR[!+Ou5,hA(&\[GK"7Ij?we*7d\+N4|o}TH776&p@n#zA&R0BZH#!&8dA,7W&h-Se=
+11-27 11:16:57.955  3480  3480 F crashpad: (4+f8F+^X!ReL,S-pm^35]#/5]E*DP6q&Qz\3Q@>xe}KFLyjP5w%;(~NRw<Jq@;7*Hy5<_9Q|l>97*gdI/d7gx$(5]!,SJN8(A(.=Y5">J;Bv_nV/bdSTm}/r^X;$o|+:Q!+Rp_5\Qjt3z*Thof7&HA4IEDGm{,07W${~s_b|>hbT:GxMqvO;pw%r<udJEr!oB>Mz\K{*T]I=g|RJbwjn*QbS=5]s`*7'I5V(WnvUE:V?BPe+jF>5"`kVca<@?OLW@QbQHU;'-n,avw)Fy8KRdT:L;ICUQJ]\#Qb#55]{u]a%_,;n~}f|>Ld^/T4{l^_]YQJ99']Hln_?Q_R>*Jcdc]G;>WGK:H'BubfGL,UsLH*;B2I(RB3aTc:,h*4_SSi0H&dmU0BWmwl_Ggh`~gaYdAAJ4]/4?K0ONbcHo}/8I/g[k)@U_I_)n3*'4KpwC<*S*uS\*92&@5It^^*-oEgiiD2IQp1oa$lCUjtMx*T'Mo4(BUu_5j*!IRVXt^)T:{A
+11-27 11:16:57.955  3480  3480 F crashpad: ]l0)hAb_8G8j47d\W2')&~gmU+>G'H6=TuiUw%7F~|@nj9olxU+H;>NGm{>}]dLNWf~?u%}9zOnf+KQ@~NNSHt!O(Z{Nx2lW-8xP^eg4Zj)d^/#|DdG5yHmLDq/$%g*`&Ywe:Uga)d|>0d6[Ea1s{/\e|>hb^/MAl+VnLQ9neK/uMF=Xl7c+JMi?pMT*k^04Kp)DBao*Qb'/+?df[]2(=zI\[o'LsFwnRIX7Qr1;sPG#)j@P*kDd+W"D6",1VcowKeR.Ld*)TPc*{3b7]q&G;d$%C|z\oO>>Y3^B6]Bd|>4OvipWq>%DJ]x%Qbejd_h\[u*lf<mtcfZ*Q.-?}yZPJw9lm%;(~NDX*tQv+0/8!s?Y*cbg*jY]T}^oU[Oni-5-:^vSn%Clz|`f>9Zc#Lz8V,hA^ct_q>%6pl:`+vWcK8;B~SV<cgmraG;>3GQMg)ot\ROIZ>hvrHC4)o}0(`HdcsPzle^}2q\[@upljTA~|bL#+?s200KHE#1nUc-r3#pl
+11-27 11:16:57.960  3480  3480 F crashpad: $?J4]/*4=YZ{;AbueY<uvqsL^55]U5}<KGo`Iizb|>,d,fBwJCdgli*><W4OLG]e*1}dWCYn!I3n+>o`EDZVo4Qb/#\[ma;kNRm1=}Hg|>jc/}Q0,s6m+DR;]/K#i*hb,.JZ'fph8104)1~NzKZeZ_"MNS^oU[qmuSh7oovu!;n~gnU['ni-p;#0FCMqT~z\_)&0V:/TB|bcVn}/Rvh3pE+'.BPE)`ihr*!4UcqtT,)oBW&o14hA~)+?Plc]_BGVQY4"rdVc?k},1sI)\/I#U@+d&W.HY[/t?nVnUStiMO*TYEZGETpnU[Emi-8CY<XTxWb]0=']tN@>]9%M*qC`j%+`3x8?W5$08C+l:<xBVy>>Ut-]})>PG#ehUc;-xceB4k9d|>vP"+I~)`-lc@r%+`r/}H/D0:5U#9O\|41nUc3iu":HhxT@5]9[H~T@n.4e|>lO@>6=t(.6.I~N)vSc"G}SS(xKe84"rD;BziO(d\YGqihBB\uXUCCuG=u%+`^}
+11-27 11:16:57.960  3480  3480 F crashpad: *`o)va&S-P)M|4eH;B`tUh[j\0EcHa.%WcO9|NP^\A{MTPkS>JsLldxQJl(oO'])X]|Jcm?u|b$?5]Ofl{WI;nB#bNz\]|>>uadOt8x/`*+>[*92"*^/4%n(6"@+^QJlzHy#[s7at:sK>52Vf!+?:Ee""GMQ6w]GsL>%+?qVsZ&2l+UkhxB'+?0\6dk]R.e+Uc'g`!f`v0Yb[yz\+M>>{{C]l^p*+>uE`t<0s"@4YwV)cKC3opuCGU6"0#+?0Pq)>P?h7*2|sLh*5]!,,c{)H3Eshx\T5BzVH(mQ.`gztiqk`_ZC64(H*M6yz\mN>>e7*]iG/.LZ(nU[Wn7d(mA](O~mU[Cz5S0%&PH6RZMGw`fc,f~5&M&IsLT@5]Sil(W`u%Ma{|zKK&VFRD{)>t!OxUi50@XSg(LTg*?(^*%HzO-oY@8CeY4"tu;BZ[*0A\OGO(5)&`*uKRO]fWJ10eami-*@#0/)]GW}sLdH5]]E'N8R\1x8DPz\sQ"+A6)T%;t.
+11-27 11:16:57.960  3480  3480 F crashpad: QbuBhmwh7CRz,^On7A5]\#5]Y4EnyeP>Win7gx2?5]G3=n;r@Wo%7Fy|B?:93Qh*Qbc%+?cK$Nj[z3ZwB'hA0\dGwsX)OYaKrJ_qv%P:5]O?[=SC)Z8H)94"(/;Bt.mck]7AJiU\oKajW*_u$M'OFHRYR[I7i.6P;F`)0gY6U=QbM^<G':&c3-3g\@SvUc`$~N<lS,=YP*rp-/sL>%+?8HfpDef5:tO_6",1Vc3q)XG["[H8PT=G)m=,_t>);hx1Y*5344;(niw,:oN2p*zY4"rdVcGo3XG[_PniF,hA$($5U5=>:)bXt^V4ma}a-k7<&B>Mvhs>_4+fS*o]*FWTm^:f4e|>"e6[+b&BPdwlOG'TNv4jdGzztP<2TF/\F45_T6Ygc+Q((KA*k%3d}N<lP,m16LvY4"rdVc9h"-m1:r5cYnk^|A"Ia('Hzw}*0c'e6g(U|\'c|>8d^/bvKBLTRa[mU['n+>51Id-`Wc|>jcU@&FV[?G'Tx7,^"u.c!ubd
+11-27 11:16:57.960  3480  3480 F crashpad: pW]1L++?b?I~8zO?sL.=5]?f%c1H4k%5y=.TL#UcS]X,UC70bhOd|>6cT:)J#Hboe)|U6"^Z;B>eQ1AHnTKoJ2hxPn+jbQTi:=+J.d`nU[.d^/,9#H,Tz5BG+7ajhkfc_q-Xo/<9BkLi]Gqi{muS~S%oE*B`3qgxPn;B.gf}<`s{~>@fmS{NVq"*#_vE2&VcoYY&<srOYbSQz\a*\[)Qz"FNsLRgimga-}<F::W1qr2xR(oFa9,(Zd0=hxt@;B.EU<6o3U&_msgxB'+?;+C/~T,iud>owt{AGv0H)]MKb*_G'T84+`_Cm9N*]<[KE[W]{@;B.u*[nfl]&.h!voU[-n?(xBnfguYXZmeK@+Wk/~!!|7%BI,rA3Z%skFk29y[LD7{gPHa9y%sMcW3Z]O?8S"O'PIm:dW7E9bM="kqv3K,L[#Vphg1\@$#7T&mGi!C8chES!1_,[:No/u'o|5:(\Ej\{PWKn/*61\XDAm,$Xx#RC<3Y')$x,8>g6MBQF}rz
+11-27 11:16:57.962  3480  3480 F crashpad: `CpsYn[Q$S"\h:*LuMDU-FQ?WP#pr9S"9!$,kWc)u|xOFg'}#e4&6hC,I"|C)lQd(C~[7Z+vi<!Yxpb_PI"50bT`cXB?DUhqG\5hWx;,yc<~;h+H1_~qh)?fzTKZkz142|Y_])PBVs?4S@JR(l"Yv^rKX_lKT{&:dc,P_BT_ula.b@)7HON?T~|atwp/aw:3XI>a9o')8t4SCYZC]81w&JkDs4orce`qQk-Ag+HubEw]AWISS]/(m%v3nf^D(j18'=RPwwkYgad@]uM%QS|@_@3T):zlh%44UnRjD`*wo`Ks'.`aw|IG@2}VT^@)p@.l&+2.v-aZp3^txP$2PV>sv0UA\P^awQhV9Y31]v&PVhZC:9-}]\&6`gU):2?uAv(Oj7z|Pq#>$-;k)j=ju:&t,I{iUfFr=-0*G\\`3F`DLeTJ#*0.j"$yU7}>`vjw#iFnTakOps]p5lL@Y^<_j)d6(LM%UxE2ns8[rsX/RL'AP,Uw~agBnr,;js{Tx*.8Ejo)
+11-27 11:16:57.962  3480  3480 F crashpad: dVI;cuD/&ITw8aT6{>;80$|b#Rp[mUmcrci1|&u!g7m6zgCBa!kb7wxGD55X~^E@dEPF>QT5GTtGu[YMkj>'qLUm(RfR]we(Ey+{f"%`EbbeEFhVfqP?v[P{1*&eP=q_k>?4k7o*LO"n01Q!<%@R/RA1Um&NR7geGFy("v,r9/ReT_'1IXja%U}p%NPU6(O4l{7*E149lZD:5`Km0<N\|)QnBV>u:_/5%b\AKh\'Td<EOsl1kR~^vO%1p0?F0{:Spwtp{o2[lQT2c5b2FlEXZAktZ:4N`T?^Ts$l2N|_1@"#9-QHq538rSgd&/&`fbN4xsH\8rx5+Ll]5Xn&Wax'+78@o/CVkn`(N@?Xqp8I8D~QMAYo>E3m#\VT;p?'.N7[m?)H5Ai5_+7,.Ve=B<&CAA!)-CKKa^/D4GSd#Lh$Z(CiwH4u(FtUKy[LkA/`Em`|\t]u"g~F`T2n*V>2t\2l/2'#9pF+yjo26H"Ct_hS8[9_7%5Y@bMy2@vP?-|/z7;_
+11-27 11:16:57.962  3480  3480 F crashpad: _#i4kf&`Pocd+\/SHk}PGEdN]yaYdx+AfA}>Zc.FQnaZ"QegfRk<>`}}Xu(@,9,Zy:c)=PaBxJ\C3y`i=W<H%<;OJDVoygXD\Zr9+S;-K2j+Xrf*Hh"L53Xjar/]D}0c_FH+fih.X3QV^0d;Fs12/+7qH@ep5PRwb522)Sb7;U~Ww)C^hT2HcoP?QH<R}<kk+5'ol)Tt7[G_$\y("d^f;@-:,_:c~[X_2(^E`WXN(WladhA~/)bt<):p:ER,P?P}NJM9).mX&Ir7H=>>E675ZQyh1w\?hqV~#vHocZ#or1}[z*=6(ya\`LmUfQenI`HFtefTzJq^y_/"P0,">^c,b9,)Jhg]\oKY=&8:(<*JaTYnIBw(pRpn"Lz2z;^VXbp__f)m0q,`v\dlf8SUw?&WKim|{tK\7PvU$hvvAaCSQY%VAZu8{J*]%ZZ-@feq]@IglGydl)1.Bw6X=b/Kl0])RcMGWX0E_(B9O<z.JQSWA6$uRQA,V.Zu,dJ21S`s~^Kh
+11-27 11:16:57.962  3480  3480 F crashpad: r{Ii@91.POae!3@s/^jGkg=A<YV,ksg-{l|kwJ68J@j23eWV_]v]aXp={SW%,w8F`gqe4Mra2S=Q>ug,|0L.obk|xv"0/qfEzYEPBl+_,v1-XxaCceQsmkt>Et*qn`Uh$5:aK;)^,Fx8(V/>V%|J{57I"Am@lo2E@ladDGV;fHPgO?"2VgFVe`qH>&@ahw3l%x^+aRz}ZD@=>@<7,7sf31T_[b$b^w#)[c^lo>PK\6`28CIOUq6)[9OuW,j5$"UX4]cJRG?9[W@}!nK+W.REIhH>C._/B2o^0H#o\9gr,W1mNYd.OAZX21n2~O)VhsuefY"sZ:1tK6,X$2.@L!R?m^:Kta$),z")ASY@Pe.;Ul_mJ,B81>[j6T0[2KFgZnU9+k`id[~;|p6gPYV3<LdN17}AogS~bw<1N:}UqJm?6@vbDw|2,I>QKZ(OVJ7KK:\_rrMMq/a*1l63>X"L]RAU)LKh+:)?Lrqkq*!2hH~cDv0s0[y^t?BT!kKC}J%:dglo
+11-27 11:16:57.962  3480  3480 F crashpad: ,+i^AR!B=D^IuM=@fF4D,YD-{|m/`]ybk@Y>}"L+IvcnkXZtBd"amQcE)^F;xCnBcYOnSwd0-\&sN?dWuc'u&Fg~>ed1*L-ENJtdBkDtPiOkvoF`m+6M2\YKWZj9/^W34e3F\w*1v/mXXfpDkCutG?l5fGr5nu;H[A'GPLZoT-z~;*[G(%4[hU]4J`ZqD:e2lKq:"`@qpjwd8q0KgXSh%2^IaUx:mD*T'*GQvsby0I'3<KSts>8Z+h_]=Im,F?m;yZ|\.UppUzP_VI:[TkQJt\bvE[D5aVHNtOk-Z9zL/>M3r2%OhIzY9lE2ki\dJa)A,6p^3Q*qyC*|U6T[kwKDWaZhDs?VHm<9\4.vqOq5l?GrMfu(;i&VgWuY1^ntGni=<a1bo3angS#^B-r1*,RU=e2,6X<I;PFZBU^<h)hE!@J,l}lcW,Rc+?)5UEzX:ff/'b53tG==vDAk?c)V.q}/HnG+Iaz`qO$[(^$0KyulK_{vEpf9ygxR/B"J&q?q)Fwa
+11-27 11:16:57.963  3480  3480 F crashpad: .n2*v~'^XIKa@s3yf]HR1C09@i[Q&3+/z:6[%lAw/]u8h:.<.sGC%eBpzojDRK]S,^96_qn+@_3U`JGv&r^w%llNZo<>*6<6O73Mi='0'w_G9R0`"2&Jp:%v++kuJE\d|wOGDk<>$)HR:{i.X1D+MZzt!gY6Uo^`1mDkBT;CFSK_5v8Xsd4fuSnRsK3w&b4\SrUr*\/)MHt<ZY}F3WW,RcV.M^Wu{(~`5Op=)|_fARbjw>afua5kr,0RN}\.h1.\1sn-_J"De=ni%8JoksK}U>m2^(P`12(*6Hgm;,P#Yth9Q?}nA)4e\^CSwwhvT5toLuTLSr$W-<ogwC.iK=*',0a+7`EDM,@qEHzt7niF]uspbB.2Co39rC.?q?W48.jX`ocd0CvE~PjkvTFpho=F6<p2/7UoH-F2>Suq|raCR?An#o;zss.4Ik5w!<epin/2aoBQ'zbfvo.J`U"LOBDqzXqy(x?b-<<_*k9/77!,XDu9,CpgWn^w4/V^i=jnAIhg
+11-27 11:16:57.963  3480  3480 F crashpad: .LHj81kIBT`@\hU\|h7/uO[I_Sgf3kdwt1f2+5U<'!)QwsgX%4}~8x;>B{bl]a'=6pKUm8c?fmJ*Y8vPjagV(>~Puwa1-:?kO0fjVe]rrD-T]c9uR.KpHAIx2\;zdQy`vY)bEJkW2](;zh<I*vb?}Wm`GrLUZ:(788i<3-H0$iut:3:vA^mFx<\?z'jrB3Ee[Ceo(7v;F-4(@Ob/Z>%Dg*,u=L9?hKnmbH`@_Y|X"OYRAEFR'vp?{hH&nhB0#=+1a[x;Zfv"j0VdIt"'T[Na^L{lj@-Y:aOJvZ_tlUFrX5[0s7]npyfGl9aG.(sum5]:uqs9J#1f)FrW|`":#z|57m0>p9NV9=Fl[@PO3'aT";XS->KeJpq)UynK050spe#ip/^9w7Jtja^0h9_6k.fiq5cNgkX)]81|2[Zs!x{YCEdtj_+`08m>BYywtr4A|X~9YAq5Q07Pl\b4|j:h*uVl7+Du$W+]czOa/s.O"mCCyiMNc/F&yBQ@w^,"rtUGnjKw
+11-27 11:16:57.963  3480  3480 F crashpad: )T?q~>$By5:J"eN[pEc3d]oU3CM_hf-qyv]6j['cVkR*]4nn"CPn$c`3}LHTO7Lwbf2]LpZ/v3lF\Ka!&^2-vmf{thD59oz`Z4rKM`'bxE1m`pK"$L#7`O.\VuVv)rKI)w@#9`8LKW"vz84P1-u(^*sqK4v1pxMR<Tl~|3_k{W|YA:=\pbIa|?@lwrZ2ueMoNC$gAZGu@j;0rMt\XmnUnk2LpI}0noh/K*"G]eW7vHpF^>8ok7BtHiz`oVS>CjOTpmLoJ7\_3nB+v1zVFz@LJ*:2xQY2O6)vlGi6*Y|gtfv^U@q<-[=.cSVTG?HPTb"U>b#z7."C&L;oHnzCP5;uArKnF2MiGuHqx?j^u~vOl9favtkPw`BQN0uV-xR[oKg+qs=LOy8lNzTKYIjF)-y"264u5-*x\%r[=r#KS{JpI(5Dp\H``eQg,g|Q'sAY`]YI#ctw)k5FDU:I3aB)ggrP+XDJGW3nU6J*fkr\rBlF~i40[Xh}7(j0it~9x6@B9,VW
+11-27 11:16:57.963  3480  3480 F crashpad: -vX`_r^4uoD=>Q*S{tKN"Bxv{ffr/QREg+kQalC|!o{c|g]P9S[cx.Argacl>pR.+GBYBLC]t=h3ee$YFlQlWG#XI:W7%BogI_]EyxXfT@]WPs?r<U.<gAA*]i>T,D$*q1nxB3-_zOPig:QBE.nu!@<w@l"wvU6BR2FSB+3o~3d\NH&HR>5/2a\R(>mt:?d1YA(CBfctFwOwAF7IMZhTH*xw5-^<\AQshOe?[E?2`gT_:f4Ufl&Gdo+u\\r@@Ep4|]e@3Is9Z^9gZ|jnft@IK7nrNae\<nNIaQ&PHkw4GrDO3+FT*o9TIHxmrpwm}#DuS6wQ7=4[#qUY.xAo}=tqTwl5_l95l_;D`*M,TslH*f*0x-C^ae=@_3_"|I";]g6wQTrD]dXupG0vss7/_I"d{t)*mAZYfH|hxGJQ&]/\gwEuZft'#@c$&x)TM8Us"uH\hF5H\Cy,Xq~ilIBoW],\n7l2zTXpQrb^+wB>io'F^rHaNji_)i8FDH(~[anK}E;E
+11-27 11:16:57.967  3480  3480 F crashpad: >b[ixqMIQs7A@y9n&k"qbXV5ypHF`T%YPK0IA>`t(61+>^oe=1X/bj[`b,<H|7'1lsZ^Nj{7e>pMNP6V"Vx)m{=byiY[.*_^#gBpZRh-Bt2<.jH4`R0?Gf)@BAoK!H-==VVPu?hO^S-N-uza5HN]vc;wuo)K%hints?5FT4S<kb`!F=),1\*EBC<Rz_DJ4C9=AWZ8p5g7)LS"~j9s!67?O9k(-x\]pOb@{>RQgPJ$KR?0w]n@iw3v]-`<TksF.B1<R?Olc\Bh~\p'by5,Y5WQB`H%Jf8.00hW1~p]H#\B[)g[9}FaTIBCIGeM-"R.q>S~h8JzD;a!y,4Mb=[oL7_9Jz-%3*XtnR`SX2&WE4_kw@E0w;3!J&KPMJL|2v.<`#>}46hOAeoZ4#v*2jdRbh4puoT4L_b<_;D{s(IAC26eU{=@-A;<qG]:;^:S<=}+E)kh=gl[kd$.INUN\PalY-P&rNmRt{W9f?5+3Oa^)YNrW#LgRbC#]UIlYH+hYg;zp+^
+11-27 11:16:57.977  3480  3480 F crashpad: bnEj^R(BsuMqJQ9Z4XLsISUEk*:bAc(W5Dld{idtT=We#+D6tU^RdVzsQh+:]]lSc2\_nQHr|hV4Np|aRE1ny~Dv/f-n4.5et/9ESo}fJw2I,d\_Q`BhLa'^&\[k)z^KY]/.nIaqr~UeYD'1!h5-0YtJ"B]?E9:lg`8><wPq+cIN$\CNYr$Y/"`a8JLH$4++oa`$p5MQelJM/\()QvWM0W0l+>7K(G2>Zt\uX+!Jxs43IiM[_9=P[`+;ul_])oj{}=Ww{oY7L0u_jj,g{wMR$a<F5L~vumsvd8NasEFTmav8pFnXy2|{tj.ijW6?dK(G=Dk,U.O>#t>Jr$Th}iy,h^Qkn:tsma^(_r]p4LOp(osMfbF(ojsaKYv}4wKWvHidz?:IsL\kU=5\eoh(F}z>7[DhSQwn?p)^gIAB*0Y'da=@(We0#J+-Gazn2)>D"TixM$/1*LOdWs(NpD$.b+l@yC%dzZ[o~lKEdq/@hv~c/DWQpl>H&<@?9v7+Klc+oKjt
+11-27 11:16:57.978  3480  3480 F crashpad: Dgs;AjBE&<~P^:-t.;Nrhl1H4l.i\IJ7j*\_5l/l#KMcBI3HnPIqW;}}NfF&}2+L~`e]g'flVX`3nUfE'@xggl<cQ=ih5h_EIPTL+)eQxt6qgA7"Z4AFF][C$h1Cs]AvH^&T*h!:"A"i(jyfxK>F$q{6Zh9tLkaD:@id$U9abRXQhsN2SoC-6B`Je?I+&SWYvQm#U`+cDgVt`F4A!`<DA+QSIA.mpz-BlgiQmRexgY@_ar2,+q1muNwJh^Ah0|?:E/-WTp$(O0rB`K:^"4NtIvGrEo_6Rhn>)X.V0lX/;qaAP+>k0QBc`6bi6m01Om]IE8h|q^SU/Th^Nf//v[OuKdXv~lOoX+DhxlP9rnhP`B%ub/}JR@T;9*=VD(\kV=|s)OY2rH(3YtK-EA^'IKgY41ks;EhE~YQR?N)d3CR$f_t7b-,,bjIlFu`5BuumdQ6GaM%FCfH6:u"/xq`~zjHwfn2n6HR],?zV0I~kO[OV#H+Q_g^H*g!tDWwgwobnLot\
+11-27 11:16:57.979  3480  3480 F crashpad: |4*\"kMsNKrWltpkG+/k-bfg;iMpnHuNV9rt*r`Vr3.ZU_!1!Hm?tqk,~5e;Mi&6EU'57`ZvE&|F%Xdi2?$#So$Xldip*gS-66U_}FCf-pN=HL\'8\=wX.-2{[v?DWoU$ub@Pm/1nXFLQ=BLO7|Aj-zc+8=T6LoMb~PB)A{GuXPV8S~KAsZ]73'U],Yqx/@qfe*YC^V_TSXP'6!L_(mm&ldW]jw1H+5@n\Z0{qNsbByCt`UsPVNlfhuJv^WS2^U`{vX3>IOL13y>'_[4_rqj#P{9|Osn^u9pIrEiUT*e>2b>Dk40O_]3HA6`$d=k/LD(I2ty>qxl7aAuhi$8M4.UJKRlG62QUFZ]xweFvdU\5NsIr;2vZsCDwU/+/agY'*#Xk;(..P+K%P"f@Wzf<16=<k35un~O3<zvyd:{H=RgRB8sNz+)QH'adui`)r7@'>7ahnQJkf8W"twNFp0/xs5<,?86VoR@Xtrcw`1U'C"N\tSwEuztk|X_e]@\zoLswsn@
+11-27 11:16:57.979  3480  3480 F crashpad: M2duJkkipm^\gG.xml6s352m[dnlEH!B];Lm,cv6`R0i+-6N,^#IN_Zp@w1d"+dw`j*1?v[2~^GwqDBt|lW5iCqtQouwASrSxS:I\vQ(q^hj>YHrJo<K.\oQn?^\-Ja(:n]F_4`>q\9T>,k@:+!~"5.Wr;piq[I6,gV{4uSk'Jt`[[/_*dY#QB33{]R?&xtmfvhF(64bSm@EY^[-geK}}mnyHR^9&=ZPx@F;~3"t`PTKX(.YO_0]yJfhq=]7Wt[A(WoLKVKX$3*^__8uCKQL#K/ul,eDDKcnQ])q@D&xc_f*^RNX5pY>cKNK>o}qr1^A4hmB=.Wa{o"jeer@Ug>Lq_h0|RyFGd/yolPaZD*|YfN<a62jNj+3+qMpxyB\.)qkQqx>zOi9sIG7(3mB2:(DDF?*QBvo~hOZmle2>Lx>P[pIlGca;1yPo+<`r5Y>S/"gClM89k?v,\~G4%4HiHL>e8\@^m^NZa:D#O/r@|pD/fOylU--J.'Y8W[CF8Nh]8";
+11-27 11:16:57.985  3480  3480 F crashpad: /5sN<HPkX7p)X=eWGE-LwoChG)BvwnTZIk]Y^5>_H]2K;DPS~T[^uUJq/>$]39a.9oQX7["U{auuc3Pl#K3uT6hM6\_Kn0)Kvqc$>9P?\G;CKl-:E;n`y`g[6^[r)V/1`5YD[+,F4.PiaZT0>ROppu)W>bUFZA\6kaBK=6Wk}F_:fJ!8g_~JBD?1Jf<\/mInxOl^,d5Q/q0ZT>{i_ci^``#=HgJIhVK/i[?o2V*3_K:3NVM.L=6M\Ae)j.bINL":(BJl%FPYs[O{,uX0Tzv,d%"bD}<$kUD'pBhZM|'5X[4We%-`Qdq>5QOAQZV@.L3L\TlP0dmfP~W:tQ~?c>%L1u*gKj]:p`[tZ/u^)Nybz:^hUE7m#at;xnFi#LCuN6$gmZ!*%}0CfjG[Ztkdgsn,-DwMIf'0:nAq+Jgm*_5EX>X[</2jbJ&<cm"Va(><SZ~iz[~%mlGUMjOqM>z2?&j<yp90Ul|k'[K.,I[FPwbd#vJEz1Ig.~cc=a)XENzjPv8A
+11-27 11:16:57.986  3480  3480 F crashpad: fw[gwT:^F]\8^XBS^a0uq`NhwYNpzjAh&D%u~j%<7YTo<dQ|Za?rX36v%ZEFg09uyqTYpm`0zGzw)fUl^>YrT`V)WC_n@e0j]dMv1UH9fhmI!Zx4lHRK{unSG>{/n^FKbl|r_Yj?dE{XJh;Fwut/uV,x<G[eUl&V|im/0aA=9_CgPbAw{mve\e>bwfZA%V.L0*6HeX_-3OnjR;K:T-Wqp3cM'wb/<]'%,b*h@6E9*t}fL:X%?"F?G{DvyYir#@\h'xEIMdrkWZ7])\^>AFiab[|kMYx9@s.qRrtT{qC)DT1mde`XDgev&FXgTss[ps3kgV|:to4wW.y>T6+"VjOr"t9O*:yt,O%SyvKX]B_w/|\u=Y.}#@DX'uvfJ=[u_Frm;jmLrVr4jo*TW_Lf_#3W6tHa+GZ4%3RhQL]i+Fx]$S|c-Dhd'w%K79TKqOh?xFxaeT~snFJ9,i#DVT1/Zkz=mDEt~:u./\D?L[t1Ut^r>9>9.^?uriK2U+Fp&ZSG0ZRv
+11-27 11:16:57.986  3480  3480 F crashpad: nl6\*>+\LD4T\xHDge;,dcstYN,_F`{i^z.wWEPSPNz4f1VETH88kWFMltJ-~Hv=XgtsTAPa%t=cNr]3bR[Fl5zxc;0LR.L^Yt=PuFIEakxK7l-g%Tj@^fjw&A5_b"`[\R3W{?yN;'wjo:r/MiSfFul7H}6av@\5w+i\1?W6SsHS"4H=x3^,$glh06<iy7Cd!5P{5H1/_9Ohq],@mKK/`/"Fjp^Qla?iLpKsW\$Jd_"9p/oLY_^<DYb)RljJ87NI@}8a|lw_1Yh`.bPaxK!Bm5`t8S6F!voL$vwB:F"+ivOv\V'YQgLsKIT=To>Q}0L;+8iYCajn]<x[V`Hg4c5;]cvpXtT?RJb6~,avqaQ^~f;*6EDk^[&S)+6y+1)SPQKpu*U]n=J;<_Fd!b;@$JOe{qk?nTrQMio[U:|(}mdJ-UU]M}0I6beUgmT?gk7F~`<KgoEh?EgF;+KKT%7qUz9VyTzGkyZEqK?L-hTkEgRvX>AW!o-O;>}dTf=q1udgPU95
+11-27 11:16:57.987  3480  3480 F crashpad: .g;P6lwMOLAb}rVV&=4f|;~v`Y2f*SjBm2T;:?'LprMg2<53FITd}`I\vmI2W-r>`qUr\5JL?>;wrjM}HK4g.ozgu(ftXe9e[H{+T>L<XX:kz}}/RTIo"@:JA#`_NA0Ay"(9GZ*rDo:9`e5UB&rPeq0^h0Qo9`:a8v:==L~(Dwh[ZgTjPPL`jg4E'u@]caGBZTd5jod9u6$9kk8wLnrJ%j@:ia*YkH1QV#@ld1U5T5QjM_@tNUi[}t>8Noxw06s=lp:pG\B_f-`]Xb1[4kNyCa)p:@@6l58[2`*I:{;XTE"g?IT#Hs=:E>K'5'<NvapcPla62WHe:pPkkw$VQ6o/t,q"{d&WJ^#V-VU?JfF[.t:6tl&l|@6MB5.P6U}]LJ1;k3#\rX&pmkli^APYD=oFA*atyJ>\2Ho\RJ.Arl*^gb^q;5t?J(*\$+M*H=Fk(JPkvvh`1bW%eU'Kt0$t3v7^.+D]plP{AwI%6u9FxfXoEu8PY2\>[w-qhao!%jqzp;Ye
+11-27 11:16:57.992  3480  3480 F crashpad: wQXrt=J&JZI.}dIqY\vxlmRlD`KoZPOVZnU\-nSu3h:b!W\a:OBhVUi*.|;>bEL3~lEvmQ+5+F"vf+%m|*0jh_Q=z?zi0\1rDUZ)!YmtRr38@Z;9jfh//3#3$GZ_Rv[F(E>Qp+r+MMh\jvLL|=x;j\2n;bARjDYrPu?q!sQe6njU8YEnnsR?Ee@jRciOMHx=456+-aOA)^L)DDwVJ+[kGdPa:u,gEg}8:_niBJ<5hu"5X/d,No5,fl7'ijFz4bWHfqgqhaHnK3ou(xA)86M4@+TnaFKNRUy=J;@T-mg9<obQyv/O;c)vFXIvHk@OY3SV\4@u1YGF^[z`'mrFq8,*xe=bpl`_bB5pagCHKuMZ<t=f*O~F<DW79[hs45`AvMOp?q\\S\t`7Q@*Et5FH50l<g?KSPMwAa*g5N@u:age)P#sN`FpEUx/U"Y|.qy-O+Bd\uG5/KPL.X65&m50]5!.4m28X6A#i5k&3&hok,WiswwatM64PcJFjU:g++tkQ^7l
+11-27 11:16:57.992  3480  3480 F crashpad: )=t7?oJ[M6LZ=l)Gir<+VmqJCu?b$it4$1FBL^vO~h"671c6Qk9&`btF[Ga5)oOZ67$\CT0/l]l_c%BKA,xic:ep75i:5c$33(mj~Vo;cR;_#M{@=g[KdZ\2tK-@Pfm/$]9u_bDIZh$D5`MSwf]:cY6XcwD:a3&8^v6&;Gh:BptA3g'V)pxfcMmm\jLiJt@RtsoY2KRwV=A:xq0Kda.A(_;Q~v0O!rh*vJ-HevtfuU}`#f14^:ag;jn5&k~paU<bV)N91g`SaCWA!5<K!l`\X4"S6tLlS-#guJctOkco`3>`@Zf4Pk_kg:`se6K.'Aew9I>J,OwLLl>"@K?Y$6&W>{>I(IJA|eC0@6<s3?^b|s8~8#If*b|?!LDUluyUuLB*e)`9=d9^hiHW5<,u!+'1=.2<@J:(zS"g6ETtg(bBdao\\mvqf~nzbf;RV<8K^Z<kk)I~WazHpZ<eZ6K)_\2@owd\5g.iTrguq*;U8aN4L[?G@jl7"4w,4;W:G5yoIv$A
+11-27 11:16:57.998  3480  3480 F crashpad: v54ozf*ANHrWl0n]_a93yJ`g/FZF_CN9f<UF[[`A8=kFd/1MxrW-USh:cpJ_iKGkFWbU(]pbvV#*$6~5B)ASPbAA~>@SAd|t<N^vKg$ou;-:Gvl.MKSg*Pq.".k3yuc5O]XALGz5\sEPT_>r6eH^ML"_Y:pgpTaxSgi{2K4a:Qi-rh<.m2WM.W,hBJ(^/sniYU&1;ZMh4s=L/mdiXwc*Btt(Qv}^wDfTQ*bB&l`bv6[E3G:bSN<5sfrfqjjZ_l0PU>uMJq+bWNra27VlaePEk+7VNJ8FAvnuGe`\Bh{Ho005n38?:Bfx&P{_Jui6Mkh8fsV=x?z>^f_f*1xw65dGj_(2y>^,jY1@npvU~Rc/!dC&X_]c%D\QK7R^=s10iA|\'i1-87._@(E<z;5dDcn]4<YN8eB\UtIf^^Ana+K^6Ygi/Z(3>p/T?fD@r+`J1H]`H5VY^[=g!Kc|bu(DniQUqZR=ZEmK[w\FQS@TA8kDA^<^}NznZAmAYTS?~FVTQRJ]
+11-27 11:16:57.999  3480  3480 F crashpad: YF8gLeG%ZJ=(V[;u5%Bv!*<u0uEd7NGuf0[3N8-80chl@0*/6|{D9j06nr?14SrzA`-c|_s`TlBb<j:(t*-IKgEt@(AcS*tw^Ixqy:JgD3)\v&$DAc/Z&LvHgok0<Qd35mmpcN^,(X*{QBgU%<0_,@$whl[eVd<rR_Ck<p6P3rCLG_.4Jzj[jk7UPI,`Nae\yY=\>/A`~V;6\1K='s45Sptqyo6r8tV`*<=8nIiIL:QLt*q@w5]>)TPfhvZB4L/Y6Hg`lf1cn*jiXwqW~`}0(^FjclJr!ZHfpIpjOe0j@b_5&tlI=L/tOL[3v^/b;g)Ig^"w7(`4tKuq>+ItjgekC5F9)OhoqdgA+Zs5Xw8Aj`H/uL|t=P(A$:*,?Qv0\8*.sBq,'%{kXm3mHKKgyO!K%XgV,mtu6-#kJH)X4+{wi6oiQw`8w]{fM)[*;D,j-jX3gY}j@4UtwViftQH>RH\p^/ABv[_g32GF%<`SHv=.:\pQ-mLo!KUe[4}Qf{+jM:+r
+11-27 11:16:57.999  3480  3480 F crashpad: XS"EbByCAs>N6l&xJ[<ovNRkXA~eAT1m0^PGX|du?Jvw+/.J)yJ(JbVn~@BjDg6,(OH+hxk@DV[To3lgpsBj0k:F<;<Z0S3LJ.%dj;<o%OQ*Hk^RoU:Y"~,%SH7[.>$fDu/itvWJhp_Qh7&,r+uIch6PB*HA#j;*3^)x!hl/GP2V{0rQOs..{F<Dyg#El}(vjlT`Qiw(Vn6aEvnvisJWX5Ok%n;JId'54.:^P*'|z^f<,g$6;L-z<_ih{Ig-<A\sXCV6@}r[jf:.ul/K>jV)q3,a"(te3fR\H}GIFgbv,&_g$m&L#-eJHYiH!zXPZqe@R,4<MJGY&@u^Z5?Www^U%=t5>Ra<$k[n<MMiyFOeKU]"`I14!V;CXTs`Lk{8gMU2{s3V%v$3T:m`ad#guK$Ij_p>,0aWWM24d1&DH#fJq$$45-7KUZEQcwsrecyo|3IoxY%d&h~g|nHdg.h}T<ab'XI7|NezI|W#bNX#rNX#4OX#FcrM[Nfz+Nfz-OfzsNX#
+11-27 11:16:57.999  3480  3480 F crashpad: (cJyjmI7wwx2Btx5,AKJ95^o~O0g$a34|gWcIybNdzb);+5I+JEcZNHn5s?pJdlE`1Wm{NdzX+;+;L+J;fJd*4D)RP1.9$Tnl,w3W+l6yXA8a,SW{@oyeJ23y8m4RU5/VZSGevZM0x5,(mxO_;wXG]5.a-84K->a4PrR}mcHvQ@ajXLK`cb,LNg{%J(pBxlKIsD8_+$NfUC8<t}ZMVE)B*G:A77$0.r&qN(QU"VtAmDVlL))5($\oJXZhQV3A::3hPjS,RF\`5fc<5^SNX6\][Q{7Z}NoI?'6Raq]-_pm_0Yu)5Q~X:]1dZ8O6uIG0N@{=sp8:xRl<W8+GMN-Und/6TRQDp>(2V/x~aD~6QgB;I6PiTtO>8(F$V%;o0Tf~\5gG=JXLqa..^O/er(lSaRce|T3Je=NE,R08w}R>$>YOrbgYkM.X$r:6x4+Mj^iJ]pG)r]-ngr]<mDFrxZmp(:Y8D?Ti)s20h\QwGu`L]w1KI9=]2Nu,Scb,b"O{%Tjp=.
+11-27 11:16:58.004  3480  3480 F crashpad: X!]i*h>qd8nQ?3jw;Zk5/*0.Rq&jpS3F9t=Z;eW8Y3aA[^irx/08v[/vwKEZ_"CuUmV6?`g]]JoVSg4ez&jm_R.u$}8DVAYy}w4Q1V8icOGGyDG*C+Ch-StkRXJyAi*&r2Z&LtRnOUH1;vnZnflENtFHOU|+/I^-B\(9gM;k=-;m:4Eb.H6YKe`r$M{<4X,Tdmx;>wT(^[9c~x`i-fXn@Y'W}.W.(<ySyT?9PR+LW=t>"MO/@Xp&>1(Z,wxr<c0=F$/)H03?|HI5ltzeZ~znorFkB67[.)LxaaW=H0ehT/:ve.g9?YGh+e$(H0h9GR4wN&_L_{>(]<@,0=}9EYKUudB6-f6-2?th`"iS[A{W*NclFkD/T[.F/+^PA0t?JAX"JS`(dmVZoVw{eTI9?,zDq+DLpn$RS&'l|Kdr@8#<J-#94m8E&$f#/<KxdK-u1?$`JN%Tj<~rL<\^Y!DNS95-4b*>%JkqbD88dr*=K6ln{9r'dnnSI!Z-G#w2b9YD|/(B
+11-27 11:16:58.005  3480  3480 F crashpad: =T@>ZAERK!f$98"\I^9XqI}Z7b6d_/t.">5vjqLAR)0-eLG/"o)PAeF-O/|t`777/88<d.<c<E|/,T9YAiM-W=|)1Y>8C3^Q>XLT?+?x{Pi`^8'{Su^G^,RZ0ZM-]ByZNB|v4(<ZSbVxM#GR<eSS8<dmpwA1lq[9z#mOXZ0Y=fL$g<TT'p4YC!j!Io6h;eltRXtZq?a+\f!8jvd?BA:Uq[723=fiEDC:iOU7JYM2?9Cx>(;9|Qf{~[?8vwSvBhYRI0D8_ZiPS<OA:KLTTe_zp6MRSB"2q<`r>Ntc$RGW|vA-.lf$t9cqZDRZkXy,v'1PQ[uQK!6K$(\AF]]B4#kX=WTK{<hHD/$Ny>G/Fi=5GOPWo.{a3tguYDIug<58d-4?MxY,Z=IPz#c.Hi*L9>I0KknPM@J-7{`(b,#7iSOsGPq+$<HeB'<TG0.,Ih9>d6W/L/_r.`9Ec/sRIur6eD@X(R:X[5MwQP[p&`~X?[}i7PCWx==vb?eS1hEZ5-|c<EjK
+11-27 11:16:58.006  3480  3480 F crashpad: YS^Z?WA!Fwx[E^)H$[`r<YTSQ338{9v*WDC/LSoAeR#1M/l4<t!dpSm7ERa[1'@DcHQyA/475;9|[eL'FF3qa'Gpq#M-z"@^a,D,%2<6%Id):9^:trl9`K-aQO6A.JpRw;Te'2J]1dFQaw?gYe5~5IUhb9)=Fa]J-vw{@K'Dr4BxK|NWkBqM$wScrajXsio6EIez][yF5q;4m6oM!c]NDM#+=.[nMTd_0]G9xat?-GB+h}Qe,XPA%/ISm0V#R6H(5qIwzxInjnDB`K6hxB.")]xoDBRB.fYV$eRj`g`sq@Tue5=GZnH\P?Nx3Tez-Y,IvgtoMLBAU`eLc|ng~5-"CZ7I%CbG"=JA|[X*=?TGRXIAD_`*Q)|U^H`Z4!DpM#!_2&H\$q;xgl[K29J^~QhobsTw@-Xgk\2s<2XtW.3@Me3qau]TuiT4CuH3E_Pd=YTC^PG/\J>=XVB:Cs),)wH+w0BV_;bT%t0k/*hf9w^V_I%FP.EJ&T$L9?SsxDXGa~#6
+11-27 11:16:58.006  3480  3480 F crashpad: 8e?GVv@wPClQHrVpdQ\wdS"w:DtIQN*f)bBjFA%3_T>(&AyEmwZ_|i}mKQY(,_=WXCmlh=w2;u&O.I.lQsECm~H2v4iH\\O9RVj=%u`@ec`q^g4@SsHH6P/g-RzuHey_>E4K8TFVV$K\>,uYUsB`$S;OV_i-n,;='Moa}^ko4rnL_KQo%04X.\-<Df^@j*dK8\kMywe`YfTQ^(<P-lokVq')Hvs**LuD*+O?vMJW=WF>Re:T\s[V@i/lBV#fAW!OU6|),L9BpBJw<_A9J6`JN:(-rofl(%Kk8=?/Xm4n"H9Jx]0.x{D.BPTQhuNV.hwBR6uSgB>>gM<T4ot@_:/abTgM2_^P[XMH5H`iyhpUZsp@']NHc/`1?YnkJqOj._GU,=a'nbi6;?d>cs:I@Q8K!7P6Duvwmh)r@Mzke[IJbe9v4o{JF(0JG*vu5>u0xq9*+8BVk/.4Vacokn:fALch$_MiFFrwdfW4@raBk<tM75W5R*=I6].MvAKA7r=op[&4
+11-27 11:16:58.007  3480  3480 F crashpad: h[Dju]5&&f&p51P8TkaK`[4X{w2QZ[Ydh/KI'>.1h(*W?z#Ln5mkuhDYJVy>e*:3spb=e5C]lEqw5q2tzgR_%^FK*LWM:3$K-kKs4<eMbjaTVY~F89fS^8)o,i|3!Dr+%\%qZr;IIuSt">2o/SFQO?*i}]NF[KbTD=2Q*TLK8I$\*<E65dc\3QPU+ovazYvrlU<A@JPLIj&;`qLLP]`U'Ico>nW?Xa)@qmNMokP^4\zv~d[/&vR0?bug4U8bH\">{sdcLWd\-jn>}t}j*6.S2n/vVlY.S>X.%qNa$DOz\r.j}3Nj{h,j^H9`1"Ds.A,4Y~mCzC:";hLT!L)v{VciO9n3Sl%l6ay>\r@&Z+8t-10o`-YsBiX,2b~-!Z&Wtqj>HdCiX_zKHr2n8l,9@[SX>a#QDUTvVdIa0,]\f)chQB{?7QQoNX#mGn.,Po>}vu`4~tIOTk`Xp9j>|lCKPjc/rjAS4<dlRBy7)Lq#YsR[zH0peFbO:)djDsnLm@-LkgWh
+11-27 11:16:58.016  3480  3480 F crashpad: *xee9Qr]HGS:#nqa{'|I9s`b%b{u.FPgdX'mx`Ywq;v6Y\W?>u{AHv!bFC*v8?2J)?yfXg\d}J9`W^n@8hrFv)o[XnR(\@|Rx_NHistyfays"@.g69^h!B(]ZjDqhtsJy5M+7&tM"c!B(]rv81}E\PiRQ*3b`[&e|nH9&]m3.d.DkK)/2BwPcv\<k76='Z>&zwzZVsPe^=q3WGFV6`T;#8[Z$m5(</r_'1oPr;lt6(fPS5b=1;/sp<Tr1Pd"_GB<v3:RAK3jOdTG8C=Qf8]l>@SgLk]w\]28Zrjp;Ug*#H:[8>}tGtGth@I\qh-8$.@?^Xh6ZS}:^rXJ"cGjdxu%kuvdCW-3vwtZT<p[XI"q%FLSQT6q7YqhEDf)8VT,,1:g5vH9Rwj=4\eD{q0d!&Nln0tM"c!B(]ZjDqhtsJy5M+7&tM"c!B(]ZjDqhtsJy5g6xmV\^TKvvt`q4k:^FDlgKWh6RL%xywfw@wRvvt`q4kjvVdXP'(LWdihIx]41t^"'
+11-27 11:16:58.017  3480  3480 F crashpad: js<@@u0m'^P},O$5Fq:1,`\+j+VM3f$MD9'leR(1N\F87I5(lk+Vfih+4jF([W`V:h/4mzOAE/C+<4l==9Zj`25m$bdq0~,X)$wo\M1bno4ULw2eQerI/PN#rKxo:HA>z;oILLhmxRlzT46Ic|s%xszrd+)sxBD46<Tvcx+ao=x@l[U=hFMTxYXwE^/iFaXh(Y@emK&J%D61"65JG=yY$s"/3Jw=?lZFYJ:VTp0G2K{gBW6qljM6AfD\lQp@ubuLf*)\.DF6,5x>eJV;zkI{~-q0AL[5N@rW9F*5a[21m\nsj5)v%q6A;P)w9>_sPEy`'SX]|v'+H[3<tnp,7JJRBBTKICy~Hj.FWwwRkMAfrjPw7e:N@fpBflGvF:8aGaP:B+\JOiG<2&KP4qgpTnqJx\91#sXc[w(@3<Hu~VYVbu>6zF#Kx)l/:`#+"qo/8aJ]"ZTg(Fo*Ww]=go*HuYOcfofssZ@^1XZ2JK-jXP^\Mirj0I`-L;f@4ZYq$)vt<Wqj
+11-27 11:16:58.017  3480  3480 F crashpad: 8H!xhSDL5GisxW01IrwG*F`2Mjsd[t>_{X~sT/8W%jPQSvVcd6R/8W3C{/zJ%T5Av@Piab0v;$?i2\St=/!twfA6(ntn-[s<XJ]pJAPoJ&6]J>pF.Z!0jjy>2.Xwyhp\.QP3<QHb7Wg(&TbwkJ?I'eR4j+zlWzPJ.D>`Ve|=ysg=SpP:@njUq/!^F8rlTFlU4K,X@aK/]KG`csj(2lO)`rZ7;C}vnU%qkZ/b@%r3&t%o,9[)/,du]0OTxS:w_5bTfQ=`~<&kbv`En9HrR}*tYvt|ew(V&R.={3^rW.gV=a9b#$h`;LXqv]@.1;X\?_lk;ool"Kqtckl]lk-x.]Bf`6wq\h|C|KD_j:(Wq:+mroLwgIrl#K~tGLHwzZwh\Bf$2tFR^1wq<>|tC[Uv%>Va6vd?;?+Z!oQH<7#_RwW6V0+g^rshH\rj=V<J]Tji]0bt(fQ6*[+7DfflvaL3dlF6mprZ7W:`=^"6b<nx5b9D<_umneCojGc/-\f\M@R_PTNT
+11-27 11:16:58.018  3480  3480 F crashpad: #PIN_aIaf^,k;@Jk2\]kpK)^".)4{`E[-qBqs`4qSnd{kmdZ/nzjL{$N\cRr/1Dc%u^w\oR2zk]j%4tuON*G;I=pq//(VLkw!^ywsa/5}`DwveKw,APLGq*^5&|qdkPwCk`Q1QdoAL|lBwZwfT`r;/TwY>ysvrKQM84^Lc16$u*mzs6PE6a>Fw`E2ZH?dEe86`0?#^O_"SDao:*&%4XohIihKW-[1Wj>71bVls|Qt~BuB:bCBP%)L_1\4AUcC_vd;wDX&GFax}t_7[{Q*[*G.*hAtY'vffaJrVPL1uHM56XG6^0=Oq:AFCvte.6^\s7E6TGuJe6q\Ziq^3F5{5*_0:Mjsdlo=D^k<IKg<O%WL(|qNkPw&mF$r\`E~l2`MYvZ]Kao[1F4L]v90iMU&==PoI/hNL%*:>n?8IFRVcK8G+M[{rX3Oi1\0d4>=PFG!m(Qz,2wt<iRR}oI7s2O]@@^EtgKPa}e|R#m>[a2XQbV}a%5"L%gi^<&hfZs"GkW=lNR
+11-27 11:16:58.019  3480  3480 F crashpad: Zrl]r\%s&.>d}v'6kqa?Y>y@S3da\_QR}=(L/w6}`dh?g9mXv3-mCvb6ase6nszs@-4+}ghY2Hkw(iADnk;b0vMd+U8AB\u|hJs@fd#svd;1\_"mwnc?~5u,9r,;zN0v[Vad=:pY'(nh]A=/[k)6"K=`8F;wV`Kp*hhg$H"GamonI3UL.v%0fgjXo;ruLYTc7+bK"(_i:B21fEgGG/]K~^W=@tTDt\D@-x+p4]+AbtNqnwdh@U<oM\TcoKLiT?-o@Vu|CA'wv6<\Qt,prMA\u|W;Fovu&4!G{R@azZ"3PL>t*?gX"G/URt*?o:hUW5H(vaZ-RFVK62t\'xt7zNZsQ\rBXu&8pY-qis:XzT~QLopsD}}:gU_9JtY?nq|(0SH;\!fGy2.Jq*r9+iT+JP!ly.<pM[Z4Kg`fgeEqL9gYTpFhJ9>S*v`V.AET>JYQVmgC;1q:hVQ^5R&Zl'$Vp(wnukO1Y>|d/*$S]B]FNBf\MTe>>uPSLKp57yJ;GL\-oP(+
+11-27 11:16:58.025  3480  3480 F crashpad: msaTKi.^6Ou4iH)O53@?~Xh;GW`BcwKUq2Ds@l`av3tK!vanYeok`]Vs,xqlt0aGROYl70dF7dc+uqo'{Wwkl#h/AMUkC^X(XjU+QTaW<6BOf?6;O:9TUO4TO\Z7Ze1hUBJDbB<838p[Hl/.f^Q?C:*3*#VibK1d8]u'[l$v1B?IWI0us3f?-+/43lDVDV0lDV6D5Hs3}K/HooB>_'I&~`cvQgTwA4="|lN,`ATG8T?qGe!F!i7>#Y8Ik`]K\[dvXl~Ht;g5XTl;]`w>@wqu9ABi0)=`iGO[nv"=4|,Har,Vw]numMZB`*:SDo$;joA3C{g;FLSF16RO"fMirdR/.\pR_zNvapJ9OJ=DBgvlrRCY$C1lD)nF)s^clf<i66yN+x/AYwe93-_YVH*DkwmwFl"t;op\Sonef9&):51vL)`(.X=ww`FDFg3O&(]5R2s=];|laQ)ZJsByv@..\SX+pm*GEmZTHjc0@+T#N[lwo3h6,WjG-JB*zakt&f8vFtl5
+11-27 11:16:58.026  3480  3480 F crashpad: w/]DyE-8t_cX2zbnNwazV}aC%E\A}b+\<@N8.v\dzoVn+J",i&bs4szKd/xmX~V\oC5wHP6vZcBr>S&?roPl6h=hGuHVIapaEIBv{'15JpxrT#m`?H+mnblu#vJ3c0I}cIptLO]u5ZSKF?o9R:dG0QCS@j@G|c@9<is+4^}((Yk2^gJlH]=bXX,H:s8uMfMAb\vBkl~0|nneGW*r04.<~mM8U2%lb(>ak_lH?!A\7X,kjdvlMZPu,:kV&jjG4cnK3Q3HZ,%<,tc6(QZ^75<;.Q,Ig'"I=E[E/fjNC=^NU.:1mpm>eq>jnMXASAl+5XQJ\WJbJvj(U}#;C&grzM=A3]{JyodmO_&LUJm@9^YgRr<fV}$WSE0ag%Zj:R|cnl/Lk2(}vmDU8WCHw"j:#lIU+(rKQq67>267t7E)L_xYbu%=1bLc{B1z6-.q"j}HC9>b]2{t&oNvU.uuDLQL"CVw<1|PUn;O},g5)X&^YF{Fa^09:j6j\G9`H4s#=p<W;aqK
+11-27 11:16:58.026  3480  3480 F crashpad: FRd;hUTr>hnf>13vU)Od"L0YlSxs=@Boh{?r.<k916=hl?(mv,Rl\.~Y4wqcdIUs@kTtc%@Aa.^d?A}G`Q>]Z6nnCKD[A#\`;F,u?HbrBp&p^kYN1-6q61R]mXU]Ds[vi^.[/)(xdQRb$J0^!wKMYtanFv>L$^PK$[)?fvgImr&FAuTS^j`o|kELQFf$\_G0{DH#Sq^AccN*{U(m_$WMU6|[,J:m>X.L9AE\2p*(Q*O]LwuV<i:sa00@CswKI0/|'mH-P;a\z:*^}sE<q:)o#MdW'V#158;u-a?p&p^k{OK*$1%o$MxAt\0aG,WMzamvf[yr[=f4xf!%[6$0(inrSi=\/QTOKa{o$1/Z2/aB`p2O*1S5bzSA_/^$WM5b[kXMi+'ZXv}mlPdWi\!AWtB6Cc#JfCf$X]d(WMU6|[,J:m^h>L4yr.Ia{o$1/Zn-u,Y/0uj^2Oc+%vu4fwp6B.*bzf-kfEQ<Fr<y7]jdy3uIjlrNbl%lIp*I0<z5:rC3*]U2
+11-27 11:16:58.027  3480  3480 F crashpad: bK~DOA\]|ym4/7l-CEn\$N#}BbB7S3OQdF^6Tgbnt`X%x$KkfE9qfe&ht9t+zqXG7V+Q<Wti]h;49HK(yQ\Ir*56|[FuP,iG{]Dt]v7N.s9;a;2Kz_{K3Q@K/ZZ^{_d;GF#q^O,({drj-Q]A{cYE::N!U-SIae|_wC4wetMI6\9ri[NXeaJ8dAzwa?O-D6{n9qhP'xFV-IClzF2]n8%NeQ]C,cuQJwPreg?k*H@"DSH;Hh[_U]j``F3+YH6j^Buwz[9wmV.(B+ZkcoFWvu1/2w~TWwTa,cJ;zi|9;+'xn7._$FqJ:H7sE_2o?@(rJ[sw}M,y5h;7",CE5<Ok-`<O/JM9Wv(B.1+N_s%v@]N\=)<'o[>wF-+LzniI[6UVh%2W&jCLjD>uV18bfcTYckFl2wgu%4/Z+ifddc!{9)$
+11-27 11:16:58.027  3480  3480 F crashpad: -----END CRASHPAD MINIDUMP-----
+11-27 11:16:58.094  3480  3480 E chromium: [1127/111658.094009:ERROR:socket.cc(182)] incorrect payload size 0
+11-27 11:16:58.098  3433  3457 E libc    : failed to connect to tombstoned: Operation not permitted
+11-27 11:16:58.138  3480  3480 D AndroidRuntime: Shutting down VM
+11-27 11:16:58.334  3433  3457 W libc    : Access denied finding property "ro.misctrl.16kb_before"
+11-27 11:16:58.325  3433  3433 W CrRendererMain: type=1400 audit(0.0:104): avc:  denied  { read } for  name="u:object_r:misctrl_prop:s0" dev="tmpfs" ino=249 scontext=u:r:isolated_app:s0:c512,c768 tcontext=u:object_r:misctrl_prop:s0 tclass=file permissive=0
+11-27 11:16:58.907   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:58.924   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:58.931   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:59.947   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:59.968   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:16:59.977   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:00.137   567   613 I ActivityManager: Process PhantomProcessRecord {2421d47 3480:3412:app_process64/u0a104} died
+11-27 11:17:00.115     0     0 I init    : Untracked pid 3480 exited with status 0
+11-27 11:17:00.115     0     0 I init    : Untracked pid 3480 did not have an associated service entry and will not be reaped
+11-27 11:17:00.142   567   567 W Looper  : Slow dispatch took 123ms main h=com.android.server.alarm.AlarmManagerService$AlarmHandler c=com.android.server.alarm.AlarmManagerService$2$$ExternalSyntheticLambda0@6fc4974 m=0
+11-27 11:17:00.157  2949  2970 W Looper  : Drained
+11-27 11:17:00.387  2949  2974 D EGL_emulation: app_time_stats: avg=14750.80ms min=14750.80ms max=14750.80ms count=1
+11-27 11:17:00.997   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:01.015   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:01.027   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:02.047   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:02.064   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:02.080   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:03.100   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:03.116   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:03.131   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:04.147   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:04.160   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:04.182   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:05.199   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:05.207   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:05.222   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:06.232   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:06.245   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:06.260   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:06.744  3433  3457 W libc    : Access denied finding property "ro.debuggable"
+11-27 11:17:06.749  3433  3457 W libc    : Access denied finding property "ro.debuggable"
+11-27 11:17:06.737  3433  3433 W CrRendererMain: type=1400 audit(0.0:105): avc:  denied  { read } for  name="u:object_r:userdebug_or_eng_prop:s0" dev="tmpfs" ino=349 scontext=u:r:isolated_app:s0:c512,c768 tcontext=u:object_r:userdebug_or_eng_prop:s0 tclass=file permissive=0
+11-27 11:17:06.745  3433  3433 W CrRendererMain: type=1400 audit(0.0:106): avc:  denied  { read } for  name="u:object_r:userdebug_or_eng_prop:s0" dev="tmpfs" ino=349 scontext=u:r:isolated_app:s0:c512,c768 tcontext=u:object_r:userdebug_or_eng_prop:s0 tclass=file permissive=0
+11-27 11:17:06.757  3433  3457 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+11-27 11:17:06.759  3433  3457 F DEBUG   : Build fingerprint: 'Android/sdk_phone64_x86_64/emu64x:15/AE3A.240806.019/12368160:userdebug/test-keys'
+11-27 11:17:06.760  3433  3457 F DEBUG   : Revision: '0'
+11-27 11:17:06.763  3433  3457 F DEBUG   : ABI: 'x86_64'
+11-27 11:17:06.765  3433  3457 F DEBUG   : Timestamp: 2026-11-27 11:16:58.322702449+0000
+11-27 11:17:06.766  3433  3457 F DEBUG   : Process uptime: 96s
+11-27 11:17:06.773  3433  3457 F DEBUG   : Cmdline: com.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0
+11-27 11:17:06.774  3433  3457 F DEBUG   : pid: 3433, tid: 3457, name: CrRendererMain  >>> com.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 <<<
+11-27 11:17:06.775  3433  3457 F DEBUG   : uid: 99001
+11-27 11:17:06.775  3433  3457 F DEBUG   : signal 5 (SIGTRAP), code 128 (SI_KERNEL), fault addr --------
+11-27 11:17:06.777  3433  3457 F DEBUG   :     rax 00000000b2987c00  rbx 000004b8001bc000  rcx 0000000000007c76  rdx 000000000007ff88
+11-27 11:17:06.778  3433  3457 F DEBUG   :     r8  0000000000000000  r9  0000000080078071  r10 00000000000074db  r11 0000000000000042
+11-27 11:17:06.778  3433  3457 F DEBUG   :     r12 0000708e5b6dbb90  r13 000004b800148628  r14 0000708e0c2f1e90  r15 0000000000000000
+11-27 11:17:06.779  3433  3457 F DEBUG   :     rdi 0000000000007c76  rsi 0000000000000008
+11-27 11:17:06.779  3433  3457 F DEBUG   :     rbp 000004b800000000  rsp 0000708e5b6dbab0  rip 0000708e077331cc
+11-27 11:17:06.784  3433  3457 F DEBUG   : 1 total frames
+11-27 11:17:06.785  3433  3457 F DEBUG   : backtrace:
+11-27 11:17:06.786  3433  3457 F DEBUG   :       #00 pc 00000000017971cc  /product/app/webview/webview.apk!libwebviewchromium.so (offset 0x7428000) (BuildId: 68dabd72c6088238cbfc9a5fbfe211f916771df5)
+11-27 11:17:07.195   567  2180 I ActivityManager: Process com.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0 (pid 3433) has died: fg  BTOP
+11-27 11:17:07.226   567  2180 W ActivityManager: Scheduling restart of crashed service org.chromium.webview_shell/org.chromium.content.app.SandboxedProcessService0:0 in 1000ms for connection
+11-27 11:17:07.277  3412  3432 W cr_ChildProcessConn: onServiceDisconnected (crash or killed by oom): pid=3433 bindings:W  S
+11-27 11:17:07.291   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:07.298   567  1779 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:07.303   567   587 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:07.321   890   890 I Zygote  : Process 3433 exited due to signal 5 (Trap)
+11-27 11:17:07.375   567   613 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_99001/pid_3433
+11-27 11:17:07.391   567   598 D DisplayManagerService: Drop pending events for gone uid 99001
+11-27 11:17:07.465   335   932 I netd    : tetherGetStats() -> {[]} <18.72ms>
+11-27 11:17:07.516  3412  3412 E chromium: [ERROR:aw_browser_terminator.cc(154)] Renderer process (3433) crash detected (code 5).
+11-27 11:17:07.558  3412  3412 F chromium: [FATAL:crashpad_client_linux.cc(745)] Render process (3433)'s crash wasn't handled by all associated  webviews, triggering application crash.
+11-27 11:17:07.566  3412  3412 F libc    : Fatal signal 5 (SIGTRAP), code 128 (SI_KERNEL), fault addr 0x0 in tid 3412 (m.webview_shell), pid 3412 (m.webview_shell)
+11-27 11:17:07.969  3566  3566 E crash_dump64: failed to get the guest state header for thread 3412: Bad address
+11-27 11:17:07.980  3566  3566 E crash_dump64: failed to get the guest state header for thread 3413: Bad address
+11-27 11:17:07.984  3566  3566 E crash_dump64: failed to get the guest state header for thread 3414: Bad address
+11-27 11:17:07.989  3566  3566 E crash_dump64: failed to get the guest state header for thread 3415: Bad address
+11-27 11:17:07.993  3566  3566 E crash_dump64: failed to get the guest state header for thread 3417: Bad address
+11-27 11:17:07.997  3566  3566 E crash_dump64: failed to get the guest state header for thread 3418: Bad address
+11-27 11:17:08.009  3566  3566 E crash_dump64: failed to get the guest state header for thread 3419: Bad address
+11-27 11:17:08.014  3566  3566 E crash_dump64: failed to get the guest state header for thread 3420: Bad address
+11-27 11:17:08.019  3566  3566 E crash_dump64: failed to get the guest state header for thread 3421: Bad address
+11-27 11:17:08.023  3566  3566 E crash_dump64: failed to get the guest state header for thread 3422: Bad address
+11-27 11:17:08.027  3566  3566 E crash_dump64: failed to get the guest state header for thread 3423: Bad address
+11-27 11:17:08.030  3566  3566 E crash_dump64: failed to get the guest state header for thread 3425: Bad address
+11-27 11:17:08.035  3566  3566 E crash_dump64: failed to get the guest state header for thread 3432: Bad address
+11-27 11:17:08.042  3566  3566 E crash_dump64: failed to get the guest state header for thread 3434: Bad address
+11-27 11:17:08.046  3566  3566 E crash_dump64: failed to get the guest state header for thread 3435: Bad address
+11-27 11:17:08.049  3566  3566 E crash_dump64: failed to get the guest state header for thread 3436: Bad address
+11-27 11:17:08.051  3566  3566 E crash_dump64: failed to get the guest state header for thread 3441: Bad address
+11-27 11:17:08.057  3566  3566 E crash_dump64: failed to get the guest state header for thread 3442: Bad address
+11-27 11:17:08.059  3566  3566 E crash_dump64: failed to get the guest state header for thread 3443: Bad address
+11-27 11:17:08.062  3566  3566 E crash_dump64: failed to get the guest state header for thread 3444: Bad address
+11-27 11:17:08.067  3566  3566 E crash_dump64: failed to get the guest state header for thread 3445: Bad address
+11-27 11:17:08.074  3566  3566 E crash_dump64: failed to get the guest state header for thread 3450: Bad address
+11-27 11:17:08.084  3566  3566 E crash_dump64: failed to get the guest state header for thread 3451: Bad address
+11-27 11:17:08.087  3566  3566 E crash_dump64: failed to get the guest state header for thread 3453: Bad address
+11-27 11:17:08.092  3566  3566 E crash_dump64: failed to get the guest state header for thread 3454: Bad address
+11-27 11:17:08.095  3566  3566 E crash_dump64: failed to get the guest state header for thread 3455: Bad address
+11-27 11:17:08.098  3566  3566 E crash_dump64: failed to get the guest state header for thread 3456: Bad address
+11-27 11:17:08.102  3566  3566 E crash_dump64: failed to get the guest state header for thread 3458: Bad address
+11-27 11:17:08.106  3566  3566 E crash_dump64: failed to get the guest state header for thread 3459: Bad address
+11-27 11:17:08.113  3566  3566 E crash_dump64: failed to get the guest state header for thread 3462: Bad address
+11-27 11:17:08.116  3566  3566 E crash_dump64: failed to get the guest state header for thread 3463: Bad address
+11-27 11:17:08.119  3566  3566 E crash_dump64: failed to get the guest state header for thread 3464: Bad address
+11-27 11:17:08.124  3566  3566 E crash_dump64: failed to get the guest state header for thread 3465: Bad address
+11-27 11:17:08.128  3566  3566 E crash_dump64: failed to get the guest state header for thread 3466: Bad address
+11-27 11:17:08.131  3566  3566 E crash_dump64: failed to get the guest state header for thread 3468: Bad address
+11-27 11:17:08.137  3566  3566 E crash_dump64: failed to get the guest state header for thread 3476: Bad address
+11-27 11:17:08.139  3566  3566 E crash_dump64: failed to get the guest state header for thread 3477: Bad address
+11-27 11:17:08.147  3566  3566 E crash_dump64: failed to get the guest state header for thread 3484: Bad address
+11-27 11:17:08.151  3566  3566 E crash_dump64: failed to get the guest state header for thread 3487: Bad address
+11-27 11:17:08.154  3566  3566 E crash_dump64: failed to get the guest state header for thread 3491: Bad address
+11-27 11:17:08.157  3566  3566 E crash_dump64: failed to get the guest state header for thread 3528: Bad address
+11-27 11:17:08.247  3566  3566 I crash_dump64: obtaining output fd from tombstoned, type: kDebuggerdTombstoneProto
+11-27 11:17:08.257   198   198 I tombstoned: received crash request for pid 3412
+11-27 11:17:08.278  3566  3566 I crash_dump64: performing dump of process 3412 (target tid = 3412)
+11-27 11:17:08.319   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:08.335   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:08.350   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:09.361   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:09.370   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:09.381   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:10.405   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:10.429   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:10.453   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:11.463   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:11.481   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:11.496   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:12.530   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:12.539   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:12.556   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:13.151     0     0 I logd    : logdr: UID=10104 GID=10104 PID=3566 n tail=500 logMask=8 pid=3412 start=0ns deadline=0ns
+11-27 11:17:13.238     0     0 I logd    : logdr: UID=10104 GID=10104 PID=3566 n tail=500 logMask=1 pid=3412 start=0ns deadline=0ns
+11-27 11:17:13.401  3566  3566 F DEBUG   : *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+11-27 11:17:13.402  3566  3566 F DEBUG   : Build fingerprint: 'Android/sdk_phone64_x86_64/emu64x:15/AE3A.240806.019/12368160:userdebug/test-keys'
+11-27 11:17:13.402  3566  3566 F DEBUG   : Revision: '0'
+11-27 11:17:13.402  3566  3566 F DEBUG   : ABI: 'x86_64'
+11-27 11:17:13.403  3566  3566 F DEBUG   : Timestamp: 2026-11-27 11:17:08.429003153+0000
+11-27 11:17:13.403  3566  3566 F DEBUG   : Process uptime: 114s
+11-27 11:17:13.408  3566  3566 F DEBUG   : Cmdline: org.chromium.webview_shell
+11-27 11:17:13.408  3566  3566 F DEBUG   : pid: 3412, tid: 3412, name: m.webview_shell  >>> org.chromium.webview_shell <<<
+11-27 11:17:13.409  3566  3566 F DEBUG   : uid: 10104
+11-27 11:17:13.415  3566  3566 F DEBUG   : signal 5 (SIGTRAP), code 128 (SI_KERNEL), fault addr 0x0000000000000000
+11-27 11:17:13.417  3566  3566 F DEBUG   : Abort message: '[FATAL:crashpad_client_linux.cc(745)] Render process (3433)'s crash wasn't handled by all associated  webviews, triggering application crash.'
+11-27 11:17:13.418  3566  3566 F DEBUG   :     rax 0000708e15edf938  rbx 00007ffccbbb8f78  rcx 0000000000000000  rdx 0000000000000002
+11-27 11:17:13.418  3566  3566 F DEBUG   :     r8  00007ffccbbc00a0  r9  0000708e15edef08  r10 ffffffffffffffff  r11 0000000000000246
+11-27 11:17:13.419  3566  3566 F DEBUG   :     r12 00007ffccbbb8b30  r13 00007ffccbbb8f90  r14 000000000000008d  r15 00007ffccbbb8ff8
+11-27 11:17:13.419  3566  3566 F DEBUG   :     rdi 0000708e15edeee0  rsi 0000708e106915a6
+11-27 11:17:13.419  3566  3566 F DEBUG   :     rbp 00000000000002e9  rsp 00007ffccbbb8af0  rip 0000708e139e5a34
+11-27 11:17:13.424  3566  3566 F DEBUG   : 1 total frames
+11-27 11:17:13.424  3566  3566 F DEBUG   : backtrace:
+11-27 11:17:13.427  3566  3566 F DEBUG   :       #00 pc 0000000003e61a34  /product/app/webview/webview.apk!libwebviewchromium.so (offset 0x7428000) (BuildId: 68dabd72c6088238cbfc9a5fbfe211f916771df5)
+11-27 11:17:13.569   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:13.573   567  2180 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:13.589   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:13.966   198   198 E tombstoned: Tombstone written to: tombstone_01
+11-27 11:17:14.023   567  3572 I DropBoxManagerService: add tag=system_app_native_crash isTagEnabled=true flags=0x2
+11-27 11:17:14.027   567  3571 W ActivityTaskManager:   Force finishing activity org.chromium.webview_shell/.WebViewBrowserActivity
+11-27 11:17:14.061  2949  2961 V WindowManagerShell: Transition requested (#30): android.os.BinderProxy@1683640 TransitionRequestInfo { type = CLOSE, triggerTask = null, pipTask = null, remoteTransition = null, displayChange = null, flags = 16, debugId = 30 }
+11-27 11:17:14.196   567   600 W system_server: Long monitor contention with owner NativeCrashReport (3571) at int com.android.server.wm.ActivityTaskManagerService$LocalService.finishTopCrashedActivities(com.android.server.wm.WindowProcessController, java.lang.String)(ActivityTaskManagerService.java:7049) waiters=1 in void com.android.server.wm.RootWindowContainer$RankTaskLayersRunnable.run() for 133ms
+11-27 11:17:14.225  2949  2961 W Looper  : Slow dispatch took 164ms wmshell.main h=android.os.Handler c=com.android.wm.shell.transition.Transitions$TransitionPlayerImpl$$ExternalSyntheticLambda1@f66c979 m=0
+11-27 11:17:14.250   397   397 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+11-27 11:17:14.396  2677  2677 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=12, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.HOME] flg=0x10000100 cmp=com.android.launcher3/.uioverrides.QuickstepLauncher }
+11-27 11:17:14.421   567   679 I DropBoxManagerService: add tag=SYSTEM_TOMBSTONE_PROTO_WITH_HEADERS isTagEnabled=true flags=0x4
+11-27 11:17:14.582   567   600 W ActivityTaskManager: Activity top resumed state loss timeout for ActivityRecord{23c1fc4 u0 org.chromium.webview_shell/.WebViewBrowserActivity t28 f}}
+11-27 11:17:14.614   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:14.616   567   600 W ActivityTaskManager: Activity pause timeout for ActivityRecord{23c1fc4 u0 org.chromium.webview_shell/.WebViewBrowserActivity t28 f}}
+11-27 11:17:14.625   567  1349 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:14.634   567   587 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:14.964     0     0 I init    : Untracked pid 3566 exited with status 0
+11-27 11:17:14.965     0     0 I init    : Untracked pid 3566 did not have an associated service entry and will not be reaped
+11-27 11:17:14.947   567  1349 I AppWidgetServiceImpl: startListening() 0
+11-27 11:17:15.128     0     0 I init    : Untracked pid 3568 exited with status 0
+11-27 11:17:15.135     0     0 I init    : Untracked pid 3568 did not have an associated service entry and will not be reaped
+11-27 11:17:15.275  2949  2974 D EGL_emulation: app_time_stats: avg=14876.67ms min=14876.67ms max=14876.67ms count=1
+11-27 11:17:15.283  2949  2961 D WindowManagerShell: setLauncherKeepClearAreaHeight: visible=true, height=208
+11-27 11:17:15.290  2949  2961 W Looper  : Slow dispatch took 43ms wmshell.main h=android.os.Handler c=com.android.wm.shell.common.ExternalInterfaceBinder$$ExternalSyntheticLambda0@cbcd6be m=0
+11-27 11:17:15.355  2949  2961 W Looper  : Slow delivery took 93ms wmshell.main h=android.os.Handler c=null m=1
+11-27 11:17:15.388  2949  2949 W ndroid.systemui: Long monitor contention with owner SysUiBg (2969) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:695) waiters=0 in android.os.Message android.os.MessageQueue.next() for 209ms
+11-27 11:17:15.455  2677  2677 D BaseDepthController: setSurface:
+11-27 11:17:15.455  2677  2677 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
+11-27 11:17:15.455  2677  2677 D BaseDepthController: 	mSurface: Surface(name=com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher)/@0x6484a51
+11-27 11:17:15.102   567   679 I BootReceiver: Copying /data/tombstones/tombstone_01 to DropBox (SYSTEM_TOMBSTONE)
+11-27 11:17:15.517   567   679 I DropBoxManagerService: add tag=SYSTEM_TOMBSTONE isTagEnabled=true flags=0x6
+11-27 11:17:15.545   567   600 I ActivityManager: Killing 2016:com.android.healthconnect.controller/u0a125 (adj 975): empty #17
+11-27 11:17:15.628   567  2180 W system_server: Long monitor contention with owner android.anim (601) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=0 in void com.android.server.wm.Session.setWallpaperZoomOut(android.os.IBinder, float) for 142ms
+11-27 11:17:15.637   335   932 I netd    : tetherGetStats() -> {[]} <42.18ms>
+11-27 11:17:15.690     0     0 I binder  : undelivered transaction 154804, process died.
+11-27 11:17:15.747   336   336 I Zygote  : Process 3412 exited due to signal 5 (Trap)
+11-27 11:17:15.850   567  1404 I WindowManager: WIN DEATH: Window{f9edc02 u0 org.chromium.webview_shell/org.chromium.webview_shell.WebViewBrowserActivity}
+11-27 11:17:15.861   567  1306 I ImeTracker: org.chromium.webview_shell:a6922ea8: onRequestHide at ORIGIN_SERVER reason HIDE_REMOVE_CLIENT fromUser false
+11-27 11:17:15.862   567  1306 I ImeTracker: org.chromium.webview_shell:a6922ea8: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 11:17:15.887   567   598 W Looper  : Slow dispatch took 151ms android.ui h=com.android.server.am.ActivityManagerService$UiHandler c=com.android.server.am.UidObserverController$$ExternalSyntheticLambda0@aa1d18c m=0
+11-27 11:17:15.922   567  1404 W InputManager-JNI: Input channel object 'f9edc02 org.chromium.webview_shell/org.chromium.webview_shell.WebViewBrowserActivity (client)' was disposed without first being removed with the input manager!
+11-27 11:17:15.947   567   720 W system_server: Long monitor contention with owner android.display (600) at android.app.ApplicationExitInfo com.android.server.am.AppExitInfoTracker.obtainRawRecord(com.android.server.am.ProcessRecord, long)(AppExitInfoTracker.java:1051) waiters=0 in void com.android.server.am.ActivityManagerService$LocalService.notifyNetworkPolicyRulesUpdated(int, long) for 697ms
+11-27 11:17:15.959  2677  2677 D StatsLog: LAUNCHER_ONRESUME
+11-27 11:17:15.975     0     0 I binder  : undelivered transaction 75320, process died.
+11-27 11:17:15.975     0     0 I binder  : undelivered transaction 75731, process died.
+11-27 11:17:15.975     0     0 I binder  : undelivered transaction 85488, process died.
+11-27 11:17:15.975     0     0 I binder  : undelivered transaction 85614, process died.
+11-27 11:17:15.975     0     0 I binder  : undelivered transaction 85726, process died.
+11-27 11:17:15.976     0     0 I binder  : undelivered transaction 63649, process died.
+11-27 11:17:16.046  2677  2753 I HWUI    : Davey! duration=1016ms; Flags=1, FrameTimelineVsyncId=11607, IntendedVsync=1587910688848, Vsync=1588210688845, InputEventId=0, HandleInputStart=1588234066834, AnimationStart=1588234074657, PerformTraversalsStart=1588234078045, DrawStart=1588575119907, FrameDeadline=1587944022181, FrameInterval=1588232768739, FrameStartTime=33333333, SyncQueued=1588760487838, SyncStart=1588762544914, IssueDrawCommandsStart=1588763709161, SwapBuffers=1588790276347, FrameCompleted=1588929383192, DequeueBufferDuration=60022, QueueBufferDuration=72833064, GpuCompleted=1588928807764, SwapBuffersCompleted=1588929383192, DisplayPresentTime=72057628414509766, CommandSubmissionCompleted=1588790276347, 
+11-27 11:17:16.057   336   336 I Zygote  : Process 2016 exited due to signal 9 (Killed)
+11-27 11:17:16.098   567   734 D ConnectivityService: releasing NetworkRequest [ REQUEST id=98, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10104 RequestorUid: 10104 RequestorPkg: org.chromium.webview_shell UnderlyingNetworks: Null] ] (release request)
+11-27 11:17:16.134   567  1463 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:16.171   567   613 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_10125/pid_2016
+11-27 11:17:16.238   567   598 W Looper  : Drained
+11-27 11:17:16.263   567  1463 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:16.289   567  1140 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:16.297  2949  2957 V WindowManagerShell: onTransitionReady(transaction=2435246458450)
+11-27 11:17:16.322  2949  2961 V WindowManagerShell: onTransitionReady (#30) android.os.BinderProxy@1683640: {id=30 t=CLOSE f=0x10 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@a8d323b} m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xac9831f sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@80e8d58} m=CLOSE f=NONE leash=Surface(name=Task=28)/@0x6ba766c sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1},{null m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{e03512b token=android.os.Binder@15c257a})/@0x1018435 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0}]}
+11-27 11:17:16.358   567   597 V WindowManager: Sent Transition (#30) createdAt=11-27 11:17:14.042 via request=TransitionRequestInfo { type = CLOSE, triggerTask = null, pipTask = null, remoteTransition = null, displayChange = null, flags = 16, debugId = 30 }
+11-27 11:17:16.359  2949  2961 V WindowManagerShell: Playing animation for (#30) android.os.BinderProxy@1683640@0
+11-27 11:17:16.375   567   597 V WindowManager:     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+11-27 11:17:16.399   567  2180 W system_server: Long monitor contention with owner android.anim (601) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=0 in void com.android.server.wm.WindowProcessController.setThread(android.app.IApplicationThread) for 299ms
+11-27 11:17:16.407   567  1306 W system_server: Long monitor contention with owner android.anim (601) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=1 in android.app.ActivityTaskManager$RootTaskInfo com.android.server.wm.ActivityTaskManagerService.getFocusedRootTaskInfo() for 141ms
+11-27 11:17:16.437  2949  2961 V WindowManagerShell:  try handler com.android.wm.shell.transition.DefaultMixedHandler@52b5307
+11-27 11:17:16.438  2949  2961 V WindowManagerShell:  try handler com.android.wm.shell.keyguard.KeyguardTransitionHandler@528ac34
+11-27 11:17:16.439  2949  2961 V WindowManagerShell:  try handler com.android.wm.shell.pip.PipTransition@b015a5d
+11-27 11:17:16.474   567   597 V WindowManager:     info={id=30 t=CLOSE f=0x10 trk=0 r=[0@Point(0, 0)] c=[
+11-27 11:17:16.474   567   597 V WindowManager:         {WCT{RemoteToken{8b43730 Task{c928ba2 #1 type=home}}} m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0x543f8a1 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1},
+11-27 11:17:16.474   567   597 V WindowManager:         {WCT{RemoteToken{e0f0a7d Task{c08040d #28 type=standard A=10149:dev.pathpilot.app.capture}}} m=CLOSE f=NONE leash=Surface(name=Task=28)/@0xc83e27 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1},
+11-27 11:17:16.474   567   597 V WindowManager:         {null m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{e03512b token=android.os.Binder@15c257a})/@0x62a2c76 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0}
+11-27 11:17:16.474   567   597 V WindowManager:     ]}
+11-27 11:17:16.475   567   597 W Looper  : Slow dispatch took 119ms android.fg h=android.os.Handler c=com.android.server.wm.TransitionController$Logger@847973c m=0
+11-27 11:17:16.562  2677  2703 D EGL_emulation: app_time_stats: avg=149974.12ms min=149974.12ms max=149974.12ms count=1
+11-27 11:17:16.577  2949  2961 V WindowManagerShell:  try handler com.android.wm.shell.activityembedding.ActivityEmbeddingController@a09ffd2
+11-27 11:17:16.578  2949  2961 V WindowManagerShell:  try handler com.android.wm.shell.recents.RecentsTransitionHandler@a018a3
+11-27 11:17:16.579  2949  2961 V ShellRecents: RecentsTransitionHandler.startAnimation: no controller found
+11-27 11:17:16.579  2949  2961 V WindowManagerShell:  try handler com.android.wm.shell.splitscreen.StageCoordinator@cbe57a0
+11-27 11:17:16.579  2949  2961 V WindowManagerShell:  try handler com.android.wm.shell.transition.RemoteTransitionHandler@17e3f59
+11-27 11:17:16.594  2949  2949 W ndroid.systemui: Long monitor contention with owner binder:2949_5 (2985) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:695) waiters=1 in android.os.Message android.os.MessageQueue.next() for 161ms
+11-27 11:17:16.670  2949  2961 V WindowManagerShell: Transition doesn't have explicit remote, search filters for match for {id=30 t=CLOSE f=0x10 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@a8d323b} m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xac9831f sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@80e8d58} m=CLOSE f=NONE leash=Surface(name=Task=28)/@0x6ba766c sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1},{null m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{e03512b token=android.os.Binder@15c257a})/@0x1018435 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0}]}
+11-27 11:17:16.729   567   720 W system_server: Long monitor contention with owner binder:567_1D (2180) at boolean com.android.server.am.ActivityManagerService.cleanUpApplicationRecordLocked(com.android.server.am.ProcessRecord, int, boolean, boolean, int, boolean, boolean)(ActivityManagerService.java:13783) waiters=0 in void com.android.server.am.ActivityManagerService$LocalService.notifyNetworkPolicyRulesUpdated(int, long) for 574ms
+11-27 11:17:16.791   567  1306 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 11:17:16.807  2949  2961 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} launchCookie=null},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@5fe4416, appThread = android.app.IApplicationThread$Stub$Proxy@505e197, debugName = QuickstepLaunchHome }}
+11-27 11:17:16.829  2949  2961 D RemoteTransitionHandler: Found filterPair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} launchCookie=null},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@5fe4416, appThread = android.app.IApplicationThread$Stub$Proxy@505e197, debugName = QuickstepLaunchHome }}
+11-27 11:17:16.830  2949  2961 V WindowManagerShell:  Delegate animation for (#30) to RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@5fe4416, appThread = android.app.IApplicationThread$Stub$Proxy@505e197, debugName = QuickstepLaunchHome }
+11-27 11:17:16.851   567   662 I ActivityManager: Process org.chromium.webview_shell (pid 3412) has died: prcp CEM 
+11-27 11:17:16.863   567   613 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_10104/pid_3412
+11-27 11:17:16.887   335   932 I netd    : tetherGetStats() -> {[]} <18.71ms>
+11-27 11:17:16.945  2949  2961 V WindowManagerShell:  animated by com.android.wm.shell.transition.RemoteTransitionHandler@17e3f59
+11-27 11:17:16.946  2949  2961 W Looper  : Slow dispatch took 633ms wmshell.main h=android.os.Handler c=com.android.wm.shell.transition.Transitions$TransitionPlayerImpl$$ExternalSyntheticLambda0@48aff96 m=0
+11-27 11:17:16.989  2949  2961 W Looper  : Slow dispatch took 43ms wmshell.main h=android.os.Handler c=android.window.TaskOrganizer$1$$ExternalSyntheticLambda4@d12b717 m=0
+11-27 11:17:17.004   567   598 D DisplayManagerService: Drop pending events for gone uid 10125
+11-27 11:17:17.027   567   598 W Looper  : Slow dispatch took 307ms android.ui h=com.android.server.am.ActivityManagerService$UiHandler c=com.android.server.am.UidObserverController$$ExternalSyntheticLambda0@aa1d18c m=0
+11-27 11:17:17.039   567   600 W ActivityManager: setHasOverlayUi called on unknown pid: 3412
+11-27 11:17:17.049   567   598 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@8e407a1
+11-27 11:17:17.050   567   598 D CoreBackPreview: Window{8cb01a8 u0 Application Not Responding: org.chromium.webview_shell}: Setting back callback null
+11-27 11:17:17.088   567   597 W Looper  : Slow dispatch took 419ms android.fg h=com.android.server.DropBoxManagerService$DropBoxManagerBroadcastHandler c=null m=1
+11-27 11:17:17.089   567   597 W Looper  : Slow delivery took 274ms android.fg h=android.os.Handler c=com.android.server.power.hint.HintManagerService$MyUidObserver$$ExternalSyntheticLambda1@cfe254b m=0
+11-27 11:17:17.146  2677  2677 D StateManager: createAtomicAnimation - fromState: Background, toState: Normal, partial trace:
+11-27 11:17:17.146  2677  2677 D StateManager: 	at com.android.quickstep.util.WorkspaceRevealAnim.prepareToAnimate(WorkspaceRevealAnim.java:130)
+11-27 11:17:17.146  2677  2677 D StateManager: 	at com.android.quickstep.util.WorkspaceRevealAnim.<init>(WorkspaceRevealAnim.java:66)
+11-27 11:17:17.146  2677  2677 D StateManager: 	at com.android.launcher3.QuickstepTransitionManager.createWallpaperOpenAnimations(QuickstepTransitionManager.java:1716)
+11-27 11:17:17.295   567   676 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.314   567   676 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.345   567   676 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.366   567   676 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.376   567   676 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.393   567  1306 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.408   567  1306 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.421  2949  2961 W Looper  : Drained
+11-27 11:17:17.452   567  1306 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.466   567   567 W Looper  : Slow dispatch took 171ms main h=android.app.ActivityThread$H c=android.app.LoadedApk$ServiceDispatcher$RunConnection@187cb27 m=0
+11-27 11:17:17.481  2949  2961 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#30) android.os.BinderProxy@1683640@0
+11-27 11:17:17.507     0     0 I binder  : 1140:567 cannot find target node
+11-27 11:17:17.507     0     0 I binder  : 567:1140 transaction async to 0:0 failed 155218/29189/-22, size 64-0 line 3265
+11-27 11:17:17.541   567  1140 E IPCThreadState: Binder transaction failure. id: 155218, BR_*: 29189, error: -22 (Invalid argument)
+11-27 11:17:17.542   567  1140 W ActivityManager: pid 567 system sent binder code 7 with flags 1 to frozen apps and got error -32
+11-27 11:17:17.550   567   597 V WindowManager: Finish Transition (#30): created at 11-27 11:17:14.042 collect-started=0.394ms request-sent=3.154ms started=164.443ms ready=811.849ms sent=2187.332ms finished=3471.607ms
+11-27 11:17:17.622   567   567 W Looper  : Slow dispatch took 149ms main h=android.app.job.JobServiceEngine$JobHandler c=null m=0
+11-27 11:17:17.627   567  1140 W WindowManager: Exception thrown during dispatchAppVisibility Window{f9edc02 u0 org.chromium.webview_shell/org.chromium.webview_shell.WebViewBrowserActivity EXITING}
+11-27 11:17:17.627   567  1140 W WindowManager: android.os.DeadObjectException
+11-27 11:17:17.627   567  1140 W WindowManager: 	at android.os.BinderProxy.transactNative(Native Method)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at android.os.BinderProxy.transact(BinderProxy.java:586)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at android.view.IWindow$Stub$Proxy.dispatchAppVisibility(IWindow.java:553)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at com.android.server.wm.WindowState.sendAppVisibilityToClients(WindowState.java:3253)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at com.android.server.wm.WindowContainer.sendAppVisibilityToClients(WindowContainer.java:1289)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at com.android.server.wm.WindowToken.setClientVisible(WindowToken.java:403)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at com.android.server.wm.ActivityRecord.setClientVisible(ActivityRecord.java:7166)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at com.android.server.wm.ActivityRecord.postApplyAnimation(ActivityRecord.java:5881)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at com.android.server.wm.ActivityRecord.commitVisibility(ActivityRecord.java:5823)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at com.android.server.wm.Transition.finishTransition(Transition.java:1286)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at com.android.server.wm.TransitionController.finishTransition(TransitionController.java:937)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at com.android.server.wm.WindowOrganizerController.finishTransition(WindowOrganizerController.java:494)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at android.window.IWindowOrganizerController$Stub.onTransact(IWindowOrganizerController.java:289)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at com.android.server.wm.WindowOrganizerController.onTransact(WindowOrganizerController.java:204)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at android.os.Binder.execTransactInternal(Binder.java:1505)
+11-27 11:17:17.627   567  1140 W WindowManager: 	at android.os.Binder.execTransact(Binder.java:1444)
+11-27 11:17:17.627   567  1140 W Process : Unable to open /proc/3412/status
+11-27 11:17:17.769   567   567 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.814   567   567 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.822   567   567 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.833   567   567 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:17.907   567   567 W Looper  : Slow dispatch took 203ms main h=android.app.job.JobServiceEngine$JobHandler c=null m=2
+11-27 11:17:17.962  2949  2961 V WindowManagerShell: Track 0 became idle
+11-27 11:17:17.962  2949  2961 V WindowManagerShell: All active transition animations finished
+11-27 11:17:17.966   567   601 W system_server: Long monitor contention with owner binder:567_C (1140) at android.view.SurfaceControl com.android.server.wm.WindowManagerService.lambda$new$2(int)(WindowManagerService.java:1451) waiters=0 in void com.android.server.wm.InputMonitor$UpdateInputWindows.run() for 442ms
+11-27 11:17:17.936     0     0 W healthd : battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+11-27 11:17:17.997   567   598 W InputManager-JNI: Input channel object '8cb01a8 Application Not Responding: org.chromium.webview_shell (client)' was disposed without first being removed with the input manager!
+11-27 11:17:17.963  2949  2961 W Looper  : Slow dispatch took 492ms wmshell.main h=android.os.Handler c=com.android.wm.shell.transition.RemoteTransitionHandler$1$$ExternalSyntheticLambda0@d3b04ed m=0
+11-27 11:17:18.093   567   567 W Looper  : Slow dispatch took 185ms main h=android.app.ActivityThread$H c=null m=122
+11-27 11:17:18.095   567   567 W Looper  : Slow delivery took 247ms main h=android.app.ActivityThread$H c=null m=116
+11-27 11:17:18.095   567   567 W Looper  : Drained
+11-27 11:17:18.133  2949  2961 W Looper  : Slow delivery took 276ms wmshell.main h=android.os.Handler c=android.window.TaskOrganizer$1$$ExternalSyntheticLambda4@9ef7f22 m=0
+11-27 11:17:18.134  2949  2961 W Looper  : Slow dispatch took 58ms wmshell.main h=android.os.Handler c=android.window.TaskOrganizer$1$$ExternalSyntheticLambda4@9ef7f22 m=0
+11-27 11:17:18.160  2949  2961 W Looper  : Drained
+11-27 11:17:18.170   567   601 W system_server: Long monitor contention with owner android.ui (598) at void com.android.server.wm.WindowManagerService.removeClientToken(com.android.server.wm.Session, android.os.IBinder)(WindowManagerService.java:2061) waiters=1 in void com.android.server.wm.WindowAnimator.lambda$new$1(long) for 150ms
+11-27 11:17:18.182  2677  2677 I TopTaskTracker: onTaskRemoved: taskId=28
+11-27 11:17:18.187   567   598 W Looper  : Slow dispatch took 1139ms android.ui h=com.android.server.am.ActivityManagerService$UiHandler c=com.android.server.am.ErrorDialogController$$ExternalSyntheticLambda4@7771804 m=0
+11-27 11:17:18.190  2677  2677 I TopTaskTracker: onTaskRemoved: taskId=28
+11-27 11:17:18.223   567   598 W Looper  : Slow delivery took 1346ms android.ui h=com.android.server.am.ActivityManagerService$UiHandler c=null m=32
+11-27 11:17:18.329   397   397 E BpTransactionCompletedListener: Failed to transact (-32)
+11-27 11:17:18.393   567   597 W Looper  : Drained
+11-27 11:17:18.426   567   598 D DisplayManagerService: Drop pending events for gone uid 10104
+11-27 11:17:18.448   567   598 W Looper  : Slow dispatch took 125ms android.ui h=com.android.server.am.ActivityManagerService$UiHandler c=com.android.server.am.UidObserverController$$ExternalSyntheticLambda0@aa1d18c m=0
+11-27 11:17:18.470   567   598 I Choreographer: Skipped 41 frames!  The application may be doing too much work on its main thread.
+11-27 11:17:18.473   567   600 V WindowManager: Unknown focus tokens, dropping reportFocusChanged
+11-27 11:17:18.482   567  1306 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:18.517   567   598 W Looper  : Drained
+11-27 11:17:18.531   567  1306 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:18.567   567   662 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:18.727   567  2180 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 11:17:18.755   567   701 I ImeTracker: com.android.launcher3:3aa7fe3a: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+11-27 11:17:18.759   567   701 I ImeTracker: com.android.launcher3:3aa7fe3a: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 11:17:18.767   567  2180 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 11:17:18.822  2677  2703 D EGL_emulation: app_time_stats: avg=712.40ms min=242.25ms max=1361.28ms count=4
+11-27 11:17:19.110  2949  2961 W Looper  : Slow dispatch took 149ms wmshell.main h=android.os.Handler c=com.android.wm.shell.common.DisplayInsetsController$PerDisplay$DisplayWindowInsetsControllerImpl$$ExternalSyntheticLambda3@a01adb3 m=0
+11-27 11:17:19.620   567  1140 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:19.626   567  1140 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:19.635   567  1140 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 11:17:20.573     0     0 I logd    : logdr: UID=2000 GID=2000 PID=3575 n tail=700 logMask=99 pid=0 start=0ns deadline=0ns

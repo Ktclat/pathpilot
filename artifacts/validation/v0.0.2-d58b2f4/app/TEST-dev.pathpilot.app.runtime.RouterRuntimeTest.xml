@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.app.runtime.RouterRuntimeTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:55:07.868Z" hostname="59b9643bc784" time="0.003">
+  <properties/>
+  <testcase name="failedStartCanBeRetriedAndAddressWarningsRemainSeparate" classname="dev.pathpilot.app.runtime.RouterRuntimeTest" time="0.001"/>
+  <testcase name="repeatedStartDoesNotClaimASecondListener" classname="dev.pathpilot.app.runtime.RouterRuntimeTest" time="0.0"/>
+  <testcase name="stopDuringStartupRejectsLateStartedAndRestartUntilCleanupCompletes" classname="dev.pathpilot.app.runtime.RouterRuntimeTest" time="0.0"/>
+  <testcase name="stoppingLiveServerRejectsLateAddressAndRequestUpdates" classname="dev.pathpilot.app.runtime.RouterRuntimeTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

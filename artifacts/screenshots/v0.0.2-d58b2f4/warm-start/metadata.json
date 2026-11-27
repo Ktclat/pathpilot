@@ -1,0 +1,21 @@
+{
+  "sourceCommit": "d58b2f448152c8b0c499709fad974577446cc519",
+  "version": "0.0.2+d58b2f4",
+  "apkSha256": "a7e16439e07e53d4980a8996810606b894e2e5c9e2ad8c173d2d0744c66ead94",
+  "capturedUtc": "2026-11-27T11:09:52.780009+00:00",
+  "device": {
+    "sdk": 35,
+    "abi": "x86_64",
+    "size": "720x1280",
+    "density": 320,
+    "fontScale": 1.0,
+    "nightMode": "no"
+  },
+  "capture": "Unmodified adb screencap after original MainActivity launch eventually drew; no relaunch",
+  "images": [
+    {
+      "name": "01-sharing-light.png",
+      "sha256": "a10da822f97d533913b889cc9e7e7032c4e0e3cff6941fbbc1bef171c366e1fa"
+    }
+  ]
+}

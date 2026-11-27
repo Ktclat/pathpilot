@@ -1,0 +1,8 @@
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.McpFlowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+dev.pathpilot.app.ui.settings.McpFlowTest:
+INSTRUMENTATION_STATUS: test=connectionToolsAndIndependentSharingReachAnActualHttpUpstream
+INSTRUMENTATION_STATUS_CODE: 1

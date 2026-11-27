@@ -1,0 +1,67 @@
+{
+  "source_commit": "d58b2f448152c8b0c499709fad974577446cc519",
+  "version_name": "0.0.2+d58b2f4",
+  "version_code": 14,
+  "apk": "artifacts/PathPilot-0.0.2+d58b2f4-arm64.apk",
+  "apk_bytes": 21226961,
+  "apk_sha256": "4140a61c7fa9043ebbc12ee742acca30d292834f4c5c74941f3b9d8f5d68ab11",
+  "tests": {
+    "core": {
+      "tests": 125,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "app": {
+      "tests": 75,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "lint": {
+    "errors": 0,
+    "warnings": 42
+  },
+  "abi": [
+    "arm64-v8a"
+  ],
+  "apk_signature_verified": true,
+  "device_validation": {
+    "kvm": {
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "unfinished": 0,
+      "results": "artifacts/screenshots/ci-d3977fe-45990106903-1/test-results.json"
+    },
+    "local_tcg": {
+      "passed": 2,
+      "failed": 1,
+      "unfinished": 4,
+      "results": "artifacts/screenshots/v0.0.2-d58b2f4/validation-summary.json"
+    }
+  },
+  "live_account_validation": "not performed",
+  "ci": {
+    "arm64": {
+      "url": "https://github.com/Ktclat/pathpilot/actions/runs/45986099940",
+      "source": "d58b2f448152c8b0c499709fad974577446cc519",
+      "status": "success"
+    },
+    "kvm_device": {
+      "url": "https://github.com/Ktclat/pathpilot/actions/runs/45990106903",
+      "source": "d3977fefd677801cc64d99ac185b812b6d6b819e",
+      "evidence_commit": "bcfcd84f46d3619bf213f36c303f6f0f014f1cae",
+      "status": "success",
+      "production_paths_match_apk_source": true
+    },
+    "initial_kvm_attempt": {
+      "url": "https://github.com/Ktclat/pathpilot/actions/runs/45989059992",
+      "source": "53459f9d9ea3ba263a3bfb13dc1186e0fdbf5e41",
+      "status": "failure",
+      "tests_not_finished": 7,
+      "scope": "Before emulator start; corrected SDK tool location in next attempt."
+    }
+  }
+}

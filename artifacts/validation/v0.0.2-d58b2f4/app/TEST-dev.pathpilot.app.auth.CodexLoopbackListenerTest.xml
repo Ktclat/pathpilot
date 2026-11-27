@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.app.auth.CodexLoopbackListenerTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:55:07.764Z" hostname="59b9643bc784" time="0.065">
+  <properties/>
+  <testcase name="two occupied ports fail instead of choosing an unexpected public listener" classname="dev.pathpilot.app.auth.CodexLoopbackListenerTest" time="0.004"/>
+  <testcase name="lifetime and already expired challenge both close the listening port" classname="dev.pathpilot.app.auth.CodexLoopbackListenerTest" time="0.035"/>
+  <testcase name="callback retains encoded query and browser page contains no credential material" classname="dev.pathpilot.app.auth.CodexLoopbackListenerTest" time="0.014"/>
+  <testcase name="invalid state method and path do not consume the browser login attempt" classname="dev.pathpilot.app.auth.CodexLoopbackListenerTest" time="0.004"/>
+  <testcase name="close releases an accept wait and is safe to repeat" classname="dev.pathpilot.app.auth.CodexLoopbackListenerTest" time="0.002"/>
+  <testcase name="close releases a partial request and its waiting call" classname="dev.pathpilot.app.auth.CodexLoopbackListenerTest" time="0.002"/>
+  <testcase name="occupied primary port uses the fallback without disturbing the current owner" classname="dev.pathpilot.app.auth.CodexLoopbackListenerTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

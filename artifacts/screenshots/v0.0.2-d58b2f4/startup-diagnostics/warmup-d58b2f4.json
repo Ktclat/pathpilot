@@ -1,0 +1,64 @@
+[
+  {
+    "command": [
+      "install",
+      "-r",
+      "/tmp/pathpilot-auth-mcp-device/apks-d58b2f4/capture-test.apk"
+    ],
+    "exitCode": 0,
+    "output": "Performing Streamed Install\nSuccess",
+    "stderr": "",
+    "elapsedSeconds": 10.01
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "package",
+      "compile",
+      "-m",
+      "speed",
+      "-f",
+      "dev.pathpilot.app.capture.test"
+    ],
+    "exitCode": 0,
+    "output": "Success",
+    "stderr": "",
+    "elapsedSeconds": 21.951
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "locale",
+      "set-app-locales",
+      "dev.pathpilot.app.capture",
+      "--user",
+      "0",
+      "--locales",
+      "zh-CN"
+    ],
+    "exitCode": 0,
+    "output": "",
+    "stderr": "",
+    "elapsedSeconds": 1.188
+  },
+  {
+    "command": [
+      "shell",
+      "am",
+      "start",
+      "-W",
+      "-n",
+      "org.chromium.webview_shell/.WebViewBrowserActivity",
+      "-a",
+      "android.intent.action.VIEW",
+      "-d",
+      "about:blank"
+    ],
+    "exitCode": 0,
+    "output": "Starting: Intent { act=android.intent.action.VIEW dat=about: cmp=org.chromium.webview_shell/.WebViewBrowserActivity }\nStatus: timeout\nLaunchState: UNKNOWN (-1)\nActivity: org.chromium.webview_shell/.WebViewBrowserActivity\nWaitTime: 18500\nComplete",
+    "stderr": "",
+    "elapsedSeconds": 20.431
+  }
+]

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.core.RouterServerTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:46:12.862Z" hostname="59b9643bc784" time="2.043">
+  <properties/>
+  <testcase name="admissionLimitRejectsNinthActiveRequestAndRecovers" classname="dev.pathpilot.core.RouterServerTest" time="0.639"/>
+  <testcase name="unknownDisabledAndUnsupportedRoutesFailBeforeUpstream" classname="dev.pathpilot.core.RouterServerTest" time="0.185"/>
+  <testcase name="healthIsMinimalAndModelsRequireIndependentKey" classname="dev.pathpilot.core.RouterServerTest" time="0.042"/>
+  <testcase name="earlyRejectionsCloseUnreadBodiesAndTheSameClientCanContinue" classname="dev.pathpilot.core.RouterServerTest" time="0.121"/>
+  <testcase name="errorsAfterCompleteBodyReadKeepConnectionUsable" classname="dev.pathpilot.core.RouterServerTest" time="0.146"/>
+  <testcase name="closingLanStreamReleasesUpstreamAndReportsCompletion" classname="dev.pathpilot.core.RouterServerTest" time="0.453"/>
+  <testcase name="routesChatAndKeepsUpstreamCredentialOffLan" classname="dev.pathpilot.core.RouterServerTest" time="0.047"/>
+  <testcase name="credentialResolverTimeoutIsReturnedAsGatewayTimeout" classname="dev.pathpilot.core.RouterServerTest" time="0.023"/>
+  <testcase name="legacyKeyRemainsValidUntilUserRotatesIt" classname="dev.pathpilot.core.RouterServerTest" time="0.025"/>
+  <testcase name="malformedAndOversizedBodiesAreRejected" classname="dev.pathpilot.core.RouterServerTest" time="0.061"/>
+  <testcase name="changedLocalKeyTakesEffectWithoutRestart" classname="dev.pathpilot.core.RouterServerTest" time="0.032"/>
+  <testcase name="streamsSseWithoutCollectingAndDoesNotRetry" classname="dev.pathpilot.core.RouterServerTest" time="0.051"/>
+  <testcase name="unauthenticatedCompatibleHttpUpstreamStillRequiresLocalAccessKey" classname="dev.pathpilot.core.RouterServerTest" time="0.037"/>
+  <testcase name="generatedAccessKeyUsesSkPrefixAndBearerSafeCharacters" classname="dev.pathpilot.core.RouterServerTest" time="0.027"/>
+  <testcase name="deepSeekStillRejectsMissingApiKeyBeforeUpstream" classname="dev.pathpilot.core.RouterServerTest" time="0.019"/>
+  <testcase name="redirectsDoNotLeakCredentialsOrReplayGeneration" classname="dev.pathpilot.core.RouterServerTest" time="0.022"/>
+  <testcase name="responsesCompatibleProviderUsesResponsesPath" classname="dev.pathpilot.core.RouterServerTest" time="0.016"/>
+  <testcase name="codexSseCanBecomeJsonChatThroughCredentialResolver" classname="dev.pathpilot.core.RouterServerTest" time="0.035"/>
+  <testcase name="upstreamErrorBodyIsRedactedAndStatusPreserved" classname="dev.pathpilot.core.RouterServerTest" time="0.056"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Nov 27, 2026 10:46:14 AM fi.iki.elonen.NanoHTTPD$Response send
+SEVERE: Could not send response to the client
+java.net.SocketException: Broken pipe
+	at java.base/sun.nio.ch.NioSocketImpl.implWrite(NioSocketImpl.java:425)
+	at java.base/sun.nio.ch.NioSocketImpl.write(NioSocketImpl.java:445)
+	at java.base/sun.nio.ch.NioSocketImpl$2.write(NioSocketImpl.java:831)
+	at java.base/java.net.Socket$SocketOutputStream.write(Socket.java:1035)
+	at fi.iki.elonen.NanoHTTPD$Response$ChunkedOutputStream.write(NanoHTTPD.java:1443)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBody(NanoHTTPD.java:1694)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBodyWithCorrectEncoding(NanoHTTPD.java:1667)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBodyWithCorrectTransferAndEncoding(NanoHTTPD.java:1654)
+	at fi.iki.elonen.NanoHTTPD$Response.send(NanoHTTPD.java:1624)
+	at fi.iki.elonen.NanoHTTPD$HTTPSession.execute(NanoHTTPD.java:957)
+	at fi.iki.elonen.NanoHTTPD$ClientHandler.run(NanoHTTPD.java:192)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+]]></system-err>
+</testsuite>

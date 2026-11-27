@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.core.codex.CodexOAuthClientTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:46:20.927Z" hostname="59b9643bc784" time="3.474">
+  <properties/>
+  <testcase name="intervalParsingRejectsMalformedValuesAndBoundsWaitByDeviceExpiry" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.291"/>
+  <testcase name="refreshRejectsAccountChangesAndNeverPrintsCredentials" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.039"/>
+  <testcase name="refreshCannotSucceedWithoutANewAccessToken" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.158"/>
+  <testcase name="unavailableDeviceLoginAndInvalidRefreshGrantHaveDistinctRedactedErrors" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.078"/>
+  <testcase name="cancellingAnActivePollAlsoPreventsItsCodeExchangeAndQueuedRequests" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="2.018"/>
+  <testcase name="timeoutIsRetryableOnlyDuringPollingAndDistinctFromCancellation" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.518"/>
+  <testcase name="aFailedOneTimeCodeExchangeCannotBeRetriedAsAPendingPoll" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.043"/>
+  <testcase name="refreshUsesJsonAndPreservesOmittedRefreshAndIdentityTokens" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.037"/>
+  <testcase name="deviceLoginPollsThenExchangesServerPkceVerifier" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.134"/>
+  <testcase name="expiredChallengesDoNotSendRequests" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.013"/>
+  <testcase name="transientPollFailuresKeepTheSameChallengeRetryableUntilItExpires" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.095"/>
+  <testcase name="errorBodiesAreNotExposedAnd401IsNotPending" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.015"/>
+  <testcase name="authenticationRedirectIsNotFollowedAndSecretsAreNotIncludedInDiagnostics" classname="dev.pathpilot.core.codex.CodexOAuthClientTest" time="0.031"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

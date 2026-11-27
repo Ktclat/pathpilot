@@ -1,0 +1,83 @@
+{
+  "bootCompleted": {
+    "command": [
+      "shell",
+      "getprop",
+      "sys.boot_completed"
+    ],
+    "exitCode": 0,
+    "output": "1",
+    "stderr": "",
+    "elapsedSeconds": 3.079
+  },
+  "sdk": {
+    "command": [
+      "shell",
+      "getprop",
+      "ro.build.version.sdk"
+    ],
+    "exitCode": 0,
+    "output": "35",
+    "stderr": "",
+    "elapsedSeconds": 1.547
+  },
+  "abi": {
+    "command": [
+      "shell",
+      "getprop",
+      "ro.product.cpu.abi"
+    ],
+    "exitCode": 0,
+    "output": "x86_64",
+    "stderr": "",
+    "elapsedSeconds": 1.025
+  },
+  "size": {
+    "command": [
+      "shell",
+      "wm",
+      "size"
+    ],
+    "exitCode": 0,
+    "output": "Physical size: 720x1280",
+    "stderr": "",
+    "elapsedSeconds": 3.764
+  },
+  "density": {
+    "command": [
+      "shell",
+      "wm",
+      "density"
+    ],
+    "exitCode": 0,
+    "output": "Physical density: 320",
+    "stderr": "",
+    "elapsedSeconds": 2.613
+  },
+  "fontScale": {
+    "command": [
+      "shell",
+      "settings",
+      "get",
+      "system",
+      "font_scale"
+    ],
+    "exitCode": 0,
+    "output": "1.0",
+    "stderr": "",
+    "elapsedSeconds": 2.774
+  },
+  "night": {
+    "command": [
+      "shell",
+      "cmd",
+      "uimode",
+      "night"
+    ],
+    "exitCode": 0,
+    "output": "Night mode: no",
+    "stderr": "",
+    "elapsedSeconds": 1.89
+  },
+  "recordedUtc": "2026-11-27T10:58:06.778210+00:00"
+}

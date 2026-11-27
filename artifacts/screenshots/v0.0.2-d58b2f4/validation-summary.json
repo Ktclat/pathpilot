@@ -1,0 +1,152 @@
+{
+  "version": "0.0.2+d58b2f4",
+  "versionCode": 14,
+  "productionSourceCommit": "d58b2f448152c8b0c499709fad974577446cc519",
+  "captureApkSha256": "a7e16439e07e53d4980a8996810606b894e2e5c9e2ad8c173d2d0744c66ead94",
+  "testApkSha256": "59e0bcc311f1f5dd2b454441beacd53f7ce70f7a5496f467744314f7a0f4a4c4",
+  "testSourceDelta": {
+    "baseCommit": "d58b2f448152c8b0c499709fad974577446cc519",
+    "patchPath": "artifacts/validation/v0.0.2-d58b2f4/instrumentation-label-adjustments.patch",
+    "patchSha256": "c9160af96c3fa1a6ef26201cae4c7ebb3a85e7519d1f20894aed3aad68919507",
+    "sourceOverrides": {
+      "app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpFlowTest.kt": "0eb9cb2fcd0c32e05f5f97dc2f5dbdf4ddd3b315411b6b16234b0a91921f762f",
+      "app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpPresetFlowTest.kt": "08d3b4e12cd739e2b423cbbcdca011ca56af8719bcdff1961bd4841eeff13c50"
+    },
+    "apkSha256": "59e0bcc311f1f5dd2b454441beacd53f7ce70f7a5496f467744314f7a0f4a4c4"
+  },
+  "device": {
+    "sdk": 35,
+    "image": "AOSP android-35/default/x86_64",
+    "abi": "x86_64",
+    "acceleration": "software TCG; no KVM",
+    "size": "720x1280",
+    "physicalDensity": 320,
+    "overrideDensityDuringCapture": 320,
+    "widthDp": 360,
+    "fontScale": 1.0,
+    "nightMode": "no"
+  },
+  "counts": {
+    "plannedDistinctCases": 7,
+    "started": 4,
+    "completed": 3,
+    "passed": 2,
+    "failed": 1,
+    "unfinished": 4,
+    "interrupted": 1,
+    "notStarted": 3
+  },
+  "batches": [
+    {
+      "directory": "auth-ui-final",
+      "cases": 2,
+      "passed": 2,
+      "failed": 0,
+      "terminalEvidence": "auth-ui-final/results.json",
+      "scope": "Production CodexLoginDialog and activity-scoped ViewModel; authorization session/account are offline fixtures."
+    },
+    {
+      "directory": "browser-return-final",
+      "cases": 1,
+      "passed": 0,
+      "failed": 1,
+      "terminalEvidence": "browser-return-final/results.json",
+      "failure": "Line 211: Activity did not resume within 30 seconds after Android Back. Browser2 WebView renderer and browser subsequently crashed with SIGTRAP. No successful browser-return assertion."
+    },
+    {
+      "directory": "mcp-history-final",
+      "cases": 1,
+      "passed": 0,
+      "failed": 0,
+      "interrupted": 1,
+      "terminalEvidence": null,
+      "interruptionEvidence": "mcp-history-final/interruption.json",
+      "scope": "Real MainActivity root screenshot captured; no completed MCP HTTP/history flow result."
+    },
+    {
+      "class": "dev.pathpilot.app.runtime.McpCallHistoryStoreTest",
+      "cases": 3,
+      "status": "not_started"
+    }
+  ],
+  "manualSupplementaryScreenshots": {
+    "mainActivitySharing": true,
+    "mainActivityMcpRoot": true,
+    "mainActivityRealCodexLogin": false,
+    "aboutVersion": false
+  },
+  "imagePolicy": "Raw UiAutomation or adb screencap PNGs, unmodified. Diagnostic captures are not assertion screenshots. Warm-start sharing image duplicates startup-diagnostics/main-launch-later.png.",
+  "recordedUtc": "2026-11-27T11:24:17.794486+00:00",
+  "images": [
+    {
+      "path": "auth-ui-final/43-codex-browser-login.png",
+      "bytes": 56419,
+      "sha256": "550eccc5f46f0f737341f060b405d456b55560f983afcd4727510498eb4a5465"
+    },
+    {
+      "path": "auth-ui-final/44-codex-device-waiting.png",
+      "bytes": 65402,
+      "sha256": "979b0265e907fc6647265d76d6dc0c77373d9812b38946de5970952f65d61b8b"
+    },
+    {
+      "path": "auth-ui-final/45-codex-device-after-recreation.png",
+      "bytes": 65402,
+      "sha256": "979b0265e907fc6647265d76d6dc0c77373d9812b38946de5970952f65d61b8b"
+    },
+    {
+      "path": "auth-ui-final/46-codex-device-reconnecting.png",
+      "bytes": 71381,
+      "sha256": "d4bab11550ee32f9948d38f60b99154fe666536d7a49387b960805d6047edd08"
+    },
+    {
+      "path": "auth-ui-final/47-codex-device-recovered.png",
+      "bytes": 65432,
+      "sha256": "4f074a9d8d8664e82fe5c34b18e5a9522c6e59b2c8fd37801f52ca8973c38307"
+    },
+    {
+      "path": "auth-ui-final/48-codex-login-expired.png",
+      "bytes": 42642,
+      "sha256": "6bdc251ed27be039e3d8ec43ed757462e023f61ab467220590d9ae68a187e6ef"
+    },
+    {
+      "path": "auth-ui-final/49-codex-login-restarted.png",
+      "bytes": 65592,
+      "sha256": "da1b3a74cc7088bdb3c6009cb42c8bff496e996b7a000401e592e7dad8075501"
+    },
+    {
+      "path": "browser-return-final/diagnostic-current-window.png",
+      "bytes": 47274,
+      "sha256": "9ab21067fa53c96233dacb781e5e0ce06342253432e1fdab95ab424dd59466bb"
+    },
+    {
+      "path": "mcp-history-final/diagnostic-current-window.png",
+      "bytes": 50234,
+      "sha256": "6f9b73f7b937a6f227ac870c42a7d9ef63c4782d9bb7e2c6ddc5dfc36c132ed3"
+    },
+    {
+      "path": "startup-diagnostics/browser-after-close-dialog.png",
+      "bytes": 245739,
+      "sha256": "f28e8cf7b921f4c1d4ab8f5027020d91c1da79cc0db16c0ed3f7110710735aa2"
+    },
+    {
+      "path": "startup-diagnostics/browser-warm-current.png",
+      "bytes": 61413,
+      "sha256": "c76c0a976d097bdc4077638ee6d4268cd932fc329852d68dc0691fff55abbb35"
+    },
+    {
+      "path": "startup-diagnostics/main-launch-current.png",
+      "bytes": 8122,
+      "sha256": "6f85450a5482852cea2afbc1ea78e097cfaea73b8620c6f3ab1a91aa3b940724"
+    },
+    {
+      "path": "startup-diagnostics/main-launch-later.png",
+      "bytes": 77322,
+      "sha256": "a10da822f97d533913b889cc9e7e7032c4e0e3cff6941fbbc1bef171c366e1fa"
+    },
+    {
+      "path": "warm-start/01-sharing-light.png",
+      "bytes": 77322,
+      "sha256": "a10da822f97d533913b889cc9e7e7032c4e0e3cff6941fbbc1bef171c366e1fa"
+    }
+  ]
+}

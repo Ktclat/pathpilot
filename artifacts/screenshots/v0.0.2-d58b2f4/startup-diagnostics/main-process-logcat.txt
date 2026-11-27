@@ -1,0 +1,35 @@
+--------- beginning of main
+11-27 11:07:19.467  2822  2822 I lot.app.capture: Late-enabling -Xcheck:jni
+11-27 11:07:20.129  2822  2822 I lot.app.capture: Using CollectorTypeCMC GC.
+11-27 11:07:20.150  2822  2822 W lot.app.capture: Unexpected CPU variant for x86: x86_64.
+11-27 11:07:20.150  2822  2822 W lot.app.capture: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, default
+11-27 11:07:20.507  2822  2822 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-27 11:07:21.935  2822  2822 D CompatChangeReporter: Compat change id reported: 291868760; UID 10149; state: ENABLED
+11-27 11:07:22.405  2822  2822 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-27 11:07:22.407  2822  2822 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.sidecar.jar
+11-27 11:07:22.602  2822  2822 D nativeloader: Configuring clns-7 for other apk /data/app/~~7xwxNIeQ5SpPqfYcFdOZBA==/dev.pathpilot.app.capture-c1nGqi5BoVVZOKfSrb5waQ==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~7xwxNIeQ5SpPqfYcFdOZBA==/dev.pathpilot.app.capture-c1nGqi5BoVVZOKfSrb5waQ==/lib/x86_64:/data/app/~~7xwxNIeQ5SpPqfYcFdOZBA==/dev.pathpilot.app.capture-c1nGqi5BoVVZOKfSrb5waQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/dev.pathpilot.app.capture
+11-27 11:07:22.647  2822  2822 D CompatChangeReporter: Compat change id reported: 202956589; UID 10149; state: ENABLED
+11-27 11:07:23.571  2822  2822 V GraphicsEnvironment: Currently set values for:
+11-27 11:07:23.579  2822  2822 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-27 11:07:23.580  2822  2822 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-27 11:07:23.581  2822  2822 V GraphicsEnvironment: Global.Settings values are invalid: number of packages: 0, number of values: 0
+11-27 11:07:23.582  2822  2822 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-27 11:07:24.006  2822  2822 D CompatChangeReporter: Compat change id reported: 279646685; UID 10149; state: ENABLED
+11-27 11:07:26.736  2822  2822 D CompatChangeReporter: Compat change id reported: 309578419; UID 10149; state: ENABLED
+11-27 11:07:27.641  2822  2822 W HWUI    : Unknown dataspace 0
+11-27 11:07:31.423  2822  2822 W lot.app.capture: Accessing hidden method Landroid/os/SystemProperties;->addChangeCallback(Ljava/lang/Runnable;)V (unsupported, reflection, allowed)
+11-27 11:07:31.667  2822  2822 I Choreographer: Skipped 90 frames!  The application may be doing too much work on its main thread.
+11-27 11:07:31.829  2822  2878 D ProfileInstaller: Installing profile for dev.pathpilot.app.capture
+11-27 11:07:44.056  2822  2830 I lot.app.capture: Background concurrent mark compact GC freed 1893KB AllocSpace bytes, 4(144KB) LOS objects, 49% free, 2817KB/5635KB, paused 3.195ms,22.997ms total 266.980ms
+11-27 11:07:57.311  2822  2829 I lot.app.capture: Compiler allocated 5174KB to compile void android.view.ViewRootImpl.performTraversals()
+11-27 11:08:54.386  2822  2822 D CompatChangeReporter: Compat change id reported: 270674727; UID 10149; state: ENABLED
+11-27 11:09:00.893  2822  2853 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+11-27 11:09:00.915  2822  2853 I EGL_emulation: Opening libGLESv2_emulation.so
+11-27 11:09:01.408  2822  2853 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-27 11:09:01.832  2822  2853 I Gralloc4: mapper 4.x is not supported
+11-27 11:09:04.904  2822  3037 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(wmsSync-VRI[MainActivity]#0) as ready
+11-27 11:09:05.086  2822  3037 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(VRI[MainActivity]#1) as ready
+11-27 11:09:07.946  2822  2838 I HWUI    : Davey! duration=25447ms; Flags=1, FrameTimelineVsyncId=5828, IntendedVsync=1075344027307, Vsync=1075444027306, InputEventId=0, HandleInputStart=1075478924744, AnimationStart=1075479099537, PerformTraversalsStart=1077401307400, DrawStart=1096922646942, FrameDeadline=1075377360640, FrameInterval=1075459858526, FrameStartTime=33333333, SyncQueued=1098340776260, SyncStart=1098342124626, IssueDrawCommandsStart=1098355386299, SwapBuffers=1100599238231, FrameCompleted=1100792845137, DequeueBufferDuration=56157, QueueBufferDuration=3299278, GpuCompleted=1100792845137, SwapBuffersCompleted=1100737327645, DisplayPresentTime=72904454231359566, CommandSubmissionCompleted=1100599238231, 
+11-27 11:09:08.299  2822  2822 I Choreographer: Skipped 765 frames!  The application may be doing too much work on its main thread.
+11-27 11:09:17.714  2822  2853 D EGL_emulation: app_time_stats: avg=4988.36ms min=2142.22ms max=7834.50ms count=2
+11-27 11:09:18.066  2822  2852 I HWUI    : Davey! duration=881ms; Flags=0, FrameTimelineVsyncId=6088, IntendedVsync=1110110693626, Vsync=1110810693619, InputEventId=0, HandleInputStart=1110843659615, AnimationStart=1110843676633, PerformTraversalsStart=1110843683267, DrawStart=1110845699740, FrameDeadline=1110777360286, FrameInterval=1110827889216, FrameStartTime=33333333, SyncQueued=1110867971158, SyncStart=1110870932640, IssueDrawCommandsStart=1110871512318, SwapBuffers=1110959380697, FrameCompleted=1110994756333, DequeueBufferDuration=52030, QueueBufferDuration=16446005, GpuCompleted=1110994206657, SwapBuffersCompleted=1110994756333, DisplayPresentTime=0, CommandSubmissionCompleted=1110959380697, 

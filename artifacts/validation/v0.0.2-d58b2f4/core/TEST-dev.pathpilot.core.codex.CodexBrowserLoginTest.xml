@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.core.codex.CodexBrowserLoginTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:46:17.225Z" hostname="59b9643bc784" time="0.099">
+  <properties/>
+  <testcase name="browserServerErrorsAreNotMisreportedAsUserDeniedAuthorization" classname="dev.pathpilot.core.codex.CodexBrowserLoginTest" time="0.024"/>
+  <testcase name="onlyTheTwoRegisteredLocalRedirectsAreAccepted" classname="dev.pathpilot.core.codex.CodexBrowserLoginTest" time="0.002"/>
+  <testcase name="browserAuthorizationUsesOfficialPkceParametersAndRegisteredLoopbackRedirect" classname="dev.pathpilot.core.codex.CodexBrowserLoginTest" time="0.001"/>
+  <testcase name="officialOnboardingStateSuffixIsAcceptedButNotArbitraryPrefixes" classname="dev.pathpilot.core.codex.CodexBrowserLoginTest" time="0.002"/>
+  <testcase name="mismatchedCallbacksAreIgnoredWithoutConsumingTheValidAttempt" classname="dev.pathpilot.core.codex.CodexBrowserLoginTest" time="0.013"/>
+  <testcase name="interruptedBrowserCodeExchangeCannotReplayTheSameCode" classname="dev.pathpilot.core.codex.CodexBrowserLoginTest" time="0.035"/>
+  <testcase name="providerErrorIsAcceptedOnlyAfterStateAndNeverEchoesDescription" classname="dev.pathpilot.core.codex.CodexBrowserLoginTest" time="0.011"/>
+  <testcase name="expiryCancellationAndMissingCodeNeverPostTokens" classname="dev.pathpilot.core.codex.CodexBrowserLoginTest" time="0.011"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Nov 27, 2026 10:46:17 AM okhttp3.mockwebserver.MockWebServer$SocketHandler handle
+WARNING: MockWebServer[60205] connection from /127.0.0.1 didn't make a request
+]]></system-err>
+</testsuite>

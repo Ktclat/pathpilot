@@ -1,0 +1,25 @@
+{
+  "sourceCommit": "d58b2f448152c8b0c499709fad974577446cc519",
+  "collectedUtc": "2026-11-27T11:05:38Z",
+  "phase": "before PathPilot launch or instrumentation; Browser2 about:blank warmup",
+  "capture": "raw adb screencap; Quickstep ANR overlay visible",
+  "images": [
+    {
+      "name": "browser-after-close-dialog.png",
+      "sha256": "f28e8cf7b921f4c1d4ab8f5027020d91c1da79cc0db16c0ed3f7110710735aa2"
+    },
+    {
+      "name": "browser-warm-current.png",
+      "sha256": "c76c0a976d097bdc4077638ee6d4268cd932fc329852d68dc0691fff55abbb35"
+    },
+    {
+      "name": "main-launch-current.png",
+      "sha256": "6f85450a5482852cea2afbc1ea78e097cfaea73b8620c6f3ab1a91aa3b940724"
+    },
+    {
+      "name": "main-launch-later.png",
+      "sha256": "a10da822f97d533913b889cc9e7e7032c4e0e3cff6941fbbc1bef171c366e1fa"
+    }
+  ],
+  "outcome": "Quickstep and System UI overlays and initial MainActivity launch-command timeout retained; the same app launch eventually drew the normal sharing page without relaunch."
+}

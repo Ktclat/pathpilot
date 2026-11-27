@@ -1,0 +1,90 @@
+{
+  "startedUtc": "2026-11-27T11:10:52Z",
+  "classes": "dev.pathpilot.app.ui.providers.CodexLoginFlowTest#deviceCodeAndNetworkRecoverySurviveActivityRecreation,dev.pathpilot.app.ui.providers.CodexLoginFlowTest#expiredDeviceAuthorizationShowsReadableErrorAndCanRestart",
+  "sourceCommit": "d58b2f448152c8b0c499709fad974577446cc519",
+  "sourceManifestOrigin": "git archive of sourceCommit; not the working tree",
+  "sourceManifestSha256": "91eb4a68bd9c3dfeeda2538e5a129e9e766d1858ac2b8ccbea11ab83798bc7dd",
+  "apkSha256": {
+    "capture.apk": "a7e16439e07e53d4980a8996810606b894e2e5c9e2ad8c173d2d0744c66ead94",
+    "capture-test.apk": "59e0bcc311f1f5dd2b454441beacd53f7ce70f7a5496f467744314f7a0f4a4c4"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0",
+    "nightMode": "Night mode: no",
+    "locales": "Locales for dev.pathpilot.app.capture for user 0 are [zh-CN]"
+  },
+  "testSourceDelta": {
+    "baseCommit": "d58b2f448152c8b0c499709fad974577446cc519",
+    "patchPath": "artifacts/validation/v0.0.2-d58b2f4/instrumentation-label-adjustments.patch",
+    "patchSha256": "c9160af96c3fa1a6ef26201cae4c7ebb3a85e7519d1f20894aed3aad68919507",
+    "sourceOverrides": {
+      "app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpFlowTest.kt": "0eb9cb2fcd0c32e05f5f97dc2f5dbdf4ddd3b315411b6b16234b0a91921f762f",
+      "app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpPresetFlowTest.kt": "08d3b4e12cd739e2b423cbbcdca011ca56af8719bcdff1961bd4841eeff13c50"
+    },
+    "apkSha256": "59e0bcc311f1f5dd2b454441beacd53f7ce70f7a5496f467744314f7a0f4a4c4"
+  },
+  "testSourceManifestSha256": "6258f62c3bb87ac4eee598e05bbc75da639167d542226c30038c011cfc7d7673",
+  "elapsedSeconds": 160.434,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.ui.providers.CodexLoginFlowTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "2",
+      "stream": ".",
+      "test": "deviceCodeAndNetworkRecoverySurviveActivityRecreation",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.providers.CodexLoginFlowTest",
+      "current": "2",
+      "id": "AndroidJUnitRunner",
+      "numtests": "2",
+      "stream": ".",
+      "test": "expiredDeviceAuthorizationShowsReadableErrorAndCanRestart",
+      "statusCode": 0
+    }
+  ],
+  "images": [
+    {
+      "name": "43-codex-browser-login.png",
+      "bytes": 56419,
+      "sha256": "550eccc5f46f0f737341f060b405d456b55560f983afcd4727510498eb4a5465"
+    },
+    {
+      "name": "44-codex-device-waiting.png",
+      "bytes": 65402,
+      "sha256": "979b0265e907fc6647265d76d6dc0c77373d9812b38946de5970952f65d61b8b"
+    },
+    {
+      "name": "45-codex-device-after-recreation.png",
+      "bytes": 65402,
+      "sha256": "979b0265e907fc6647265d76d6dc0c77373d9812b38946de5970952f65d61b8b"
+    },
+    {
+      "name": "46-codex-device-reconnecting.png",
+      "bytes": 71381,
+      "sha256": "d4bab11550ee32f9948d38f60b99154fe666536d7a49387b960805d6047edd08"
+    },
+    {
+      "name": "47-codex-device-recovered.png",
+      "bytes": 65432,
+      "sha256": "4f074a9d8d8664e82fe5c34b18e5a9522c6e59b2c8fd37801f52ca8973c38307"
+    },
+    {
+      "name": "48-codex-login-expired.png",
+      "bytes": 42642,
+      "sha256": "6bdc251ed27be039e3d8ec43ed757462e023f61ab467220590d9ae68a187e6ef"
+    },
+    {
+      "name": "49-codex-login-restarted.png",
+      "bytes": 65592,
+      "sha256": "da1b3a74cc7088bdb3c6009cb42c8bff496e996b7a000401e592e7dad8075501"
+    }
+  ]
+}

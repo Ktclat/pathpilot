@@ -1,0 +1,18 @@
+{
+  "command": [
+    "adb",
+    "shell",
+    "am",
+    "start",
+    "-W",
+    "-a",
+    "android.intent.action.MAIN",
+    "-c",
+    "android.intent.category.LAUNCHER",
+    "-n",
+    "dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity"
+  ],
+  "hostCommandTimeoutSeconds": 60,
+  "recordedUtc": "2026-11-27T11:08:42Z",
+  "note": "No launch result returned; no follow-up touch or relaunch before capture."
+}

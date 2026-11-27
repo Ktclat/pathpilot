@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.core.providers.ProviderModelsClientTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:46:28.583Z" hostname="59b9643bc784" time="3.342">
+  <properties/>
+  <testcase name="cancelStopsActiveOrNotYetStartedProbe" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="2.011"/>
+  <testcase name="brokenConnectionIsRedactedAndNotRetried" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.011"/>
+  <testcase name="nonHttpProtocolsAreRejectedBeforeSendingCredentials" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.006"/>
+  <testcase name="unauthenticatedHttpModelDiscoveryOmitsAuthorizationEntirely" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.048"/>
+  <testcase name="probesOnlyModelsWithIndependentCredentialAndSortedUniqueIds" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.008"/>
+  <testcase name="redirectsNeverForwardCredentialOrRetry" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.008"/>
+  <testcase name="malformedJsonAndInvalidModelShapesAreRejected" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.367"/>
+  <testcase name="modelCountLimitIsDistinctAndNeverSilentlyTruncates" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.071"/>
+  <testcase name="wholeCallTimeoutIsNotMisreportedAsUserCancellation" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.504"/>
+  <testcase name="productionEntrySupportsExplicitLocalHttpUpstream" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.005"/>
+  <testcase name="proxyAuthenticationFailureDoesNotMasqueradeAsApiKeyOrModelSuccess" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.01"/>
+  <testcase name="statusErrorsAreSpecificRedactedAndPermitManualModels" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.232"/>
+  <testcase name="responseLimitAppliesToContentLengthAndChunkedBodies" classname="dev.pathpilot.core.providers.ProviderModelsClientTest" time="0.06"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Nov 27, 2026 10:46:30 AM okhttp3.mockwebserver.MockWebServer$SocketHandler handle
+WARNING: MockWebServer[40021] connection from /127.0.0.1 didn't make a request
+]]></system-err>
+</testsuite>

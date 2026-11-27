@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.core.network.OutboundProxyTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:46:26.335Z" hostname="59b9643bc784" time="2.244">
+  <properties/>
+  <testcase name="systemModeUsesPlatformSelectorAndKeepsNormalSocketFactory" classname="dev.pathpilot.core.network.OutboundProxyTest" time="0.711"/>
+  <testcase name="oldConfigurationDefaultsToSystemAndCustomProxyRoundTrips" classname="dev.pathpilot.core.network.OutboundProxyTest" time="0.011"/>
+  <testcase name="changingConfigMovesNewRequestsToNewProxyWithoutRestart" classname="dev.pathpilot.core.network.OutboundProxyTest" time="0.444"/>
+  <testcase name="failedExplicitProxyDoesNotSilentlyFallBackToOrigin" classname="dev.pathpilot.core.network.OutboundProxyTest" time="0.014"/>
+  <testcase name="proxyHostAndPortValidationDoesNotPerformDnsOrAcceptUrls" classname="dev.pathpilot.core.network.OutboundProxyTest" time="0.001"/>
+  <testcase name="httpAndSocksProxiesCarryModelDiscoveryOAuthAndBothRouterProviders" classname="dev.pathpilot.core.network.OutboundProxyTest" time="1.063"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

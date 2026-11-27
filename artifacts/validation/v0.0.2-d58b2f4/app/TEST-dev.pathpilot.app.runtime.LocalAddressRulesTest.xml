@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.app.runtime.LocalAddressRulesTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:55:07.832Z" hostname="59b9643bc784" time="0.006">
+  <properties/>
+  <testcase name="vpnTransportWinsEvenWhenItAlsoReportsItsUnderlyingWifi" classname="dev.pathpilot.app.runtime.LocalAddressRulesTest" time="0.002"/>
+  <testcase name="secondaryVpnAndCellularAddressesStayOutOfLanCandidates" classname="dev.pathpilot.app.runtime.LocalAddressRulesTest" time="0.001"/>
+  <testcase name="missingLinkInterfaceNameCanUseAnUnambiguousInterfaceObservation" classname="dev.pathpilot.app.runtime.LocalAddressRulesTest" time="0.0"/>
+  <testcase name="mergesInterfaceFallbackWithoutLosingClassificationOrDistinctInterfaces" classname="dev.pathpilot.app.runtime.LocalAddressRulesTest" time="0.0"/>
+  <testcase name="orderingIsStableAndLanCandidatesPrecedeVpnAndCellular" classname="dev.pathpilot.app.runtime.LocalAddressRulesTest" time="0.001"/>
+  <testcase name="keepsPublicAndCarrierIpv4ButRejectsAddressesThatCannotBeShared" classname="dev.pathpilot.app.runtime.LocalAddressRulesTest" time="0.001"/>
+  <testcase name="multipleWifiIpsKeepTheirTransportAndVpnWinsConflictingInterfaceEvidence" classname="dev.pathpilot.app.runtime.LocalAddressRulesTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

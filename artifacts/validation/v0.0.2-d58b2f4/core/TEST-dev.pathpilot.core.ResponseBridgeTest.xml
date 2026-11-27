@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.core.ResponseBridgeTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:46:12.020Z" hostname="59b9643bc784" time="0.187">
+  <properties/>
+  <testcase name="streamingToolCallsHaveStableIndicesAndUsage" classname="dev.pathpilot.core.ResponseBridgeTest" time="0.155"/>
+  <testcase name="completedRefusalIsPreservedInChatMessage" classname="dev.pathpilot.core.ResponseBridgeTest" time="0.015"/>
+  <testcase name="streamCloseReleasesUpstream" classname="dev.pathpilot.core.ResponseBridgeTest" time="0.002"/>
+  <testcase name="streamingRefusalIsPreservedWithoutRepeatingDoneOrCompletedText" classname="dev.pathpilot.core.ResponseBridgeTest" time="0.007"/>
+  <testcase name="truncatedStreamDoesNotPretendToComplete" classname="dev.pathpilot.core.ResponseBridgeTest" time="0.001"/>
+  <testcase name="unsupportedChatFeaturesAreExplicitlyRejected" classname="dev.pathpilot.core.ResponseBridgeTest" time="0.001"/>
+  <testcase name="chatHistoryIncludesToolResultsAndImagesWithoutDroppingContent" classname="dev.pathpilot.core.ResponseBridgeTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

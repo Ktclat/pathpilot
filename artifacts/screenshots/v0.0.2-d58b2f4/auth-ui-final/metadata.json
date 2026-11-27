@@ -1,0 +1,31 @@
+{
+  "startedUtc": "2026-11-27T11:10:52Z",
+  "classes": "dev.pathpilot.app.ui.providers.CodexLoginFlowTest#deviceCodeAndNetworkRecoverySurviveActivityRecreation,dev.pathpilot.app.ui.providers.CodexLoginFlowTest#expiredDeviceAuthorizationShowsReadableErrorAndCanRestart",
+  "sourceCommit": "d58b2f448152c8b0c499709fad974577446cc519",
+  "sourceManifestOrigin": "git archive of sourceCommit; not the working tree",
+  "sourceManifestSha256": "91eb4a68bd9c3dfeeda2538e5a129e9e766d1858ac2b8ccbea11ab83798bc7dd",
+  "apkSha256": {
+    "capture.apk": "a7e16439e07e53d4980a8996810606b894e2e5c9e2ad8c173d2d0744c66ead94",
+    "capture-test.apk": "59e0bcc311f1f5dd2b454441beacd53f7ce70f7a5496f467744314f7a0f4a4c4"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0",
+    "nightMode": "Night mode: no",
+    "locales": "Locales for dev.pathpilot.app.capture for user 0 are [zh-CN]"
+  },
+  "testSourceDelta": {
+    "baseCommit": "d58b2f448152c8b0c499709fad974577446cc519",
+    "patchPath": "artifacts/validation/v0.0.2-d58b2f4/instrumentation-label-adjustments.patch",
+    "patchSha256": "c9160af96c3fa1a6ef26201cae4c7ebb3a85e7519d1f20894aed3aad68919507",
+    "sourceOverrides": {
+      "app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpFlowTest.kt": "0eb9cb2fcd0c32e05f5f97dc2f5dbdf4ddd3b315411b6b16234b0a91921f762f",
+      "app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpPresetFlowTest.kt": "08d3b4e12cd739e2b423cbbcdca011ca56af8719bcdff1961bd4841eeff13c50"
+    },
+    "apkSha256": "59e0bcc311f1f5dd2b454441beacd53f7ce70f7a5496f467744314f7a0f4a4c4"
+  },
+  "testSourceManifestSha256": "6258f62c3bb87ac4eee598e05bbc75da639167d542226c30038c011cfc7d7673"
+}

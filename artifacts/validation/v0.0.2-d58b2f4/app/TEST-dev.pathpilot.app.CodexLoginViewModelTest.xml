@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.app.CodexLoginViewModelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:55:07.468Z" hostname="59b9643bc784" time="0.191">
+  <properties/>
+  <testcase name="device poll respects Retry-After before the next attempt" classname="dev.pathpilot.app.CodexLoginViewModelTest" time="0.156"/>
+  <testcase name="cancel stops browser session and a late callback cannot change the next account" classname="dev.pathpilot.app.CodexLoginViewModelTest" time="0.004"/>
+  <testcase name="switching to device login stops browser and keeps the device challenge" classname="dev.pathpilot.app.CodexLoginViewModelTest" time="0.004"/>
+  <testcase name="network failure exchanging a device code is not automatically retried" classname="dev.pathpilot.app.CodexLoginViewModelTest" time="0.014"/>
+  <testcase name="failed credential save retries storage without another authorization" classname="dev.pathpilot.app.CodexLoginViewModelTest" time="0.003"/>
+  <testcase name="browser login is the default and saves authorized tokens" classname="dev.pathpilot.app.CodexLoginViewModelTest" time="0.002"/>
+  <testcase name="begin for the same provider after activity recreation retains the session" classname="dev.pathpilot.app.CodexLoginViewModelTest" time="0.002"/>
+  <testcase name="transient device poll failure retries the same challenge without beginning again" classname="dev.pathpilot.app.CodexLoginViewModelTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

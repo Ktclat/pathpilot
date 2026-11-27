@@ -70,6 +70,8 @@ source /workspace/toolchains/pathpilot-env.sh
 
 手动构建在 **Actions → Android ARM64 → Run workflow** 中执行。保持 `publish_prerelease=false` 只构建；需要发布时选择 `main` 并启用该选项。工作流先完成验证，再从同一次构建产物创建 GitHub 预发布版，标签自动使用 `v<APK版本>`，例如 `v0.0.2+a1b2c3d`。
 
+还可在 Actions 手动运行 **Codex and MCP emulator tests**，验证登录与 MCP 共 7 项设备用例并导出实际截图。
+
 应用版本采用 `0.0.x+<实际提交前7位>`，每次新版本只递增第三段，例如 `0.0.2` → `0.0.3`。基础版本和 Android `versionCode` 统一维护在 [version.properties](version.properties)，产物名包含同一版本，例如 `PathPilot-0.0.2+a1b2c3d-arm64-debug.apk`。版本规则与提交要求见 [贡献指南](CONTRIBUTING.md)。当前交付、测试结果和待完成项见 [项目状态](docs/project-status.md)，详细证据见 [验证记录](docs/validation.md)。
 
 ## 文档

@@ -1,0 +1,26 @@
+diff --git a/app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpFlowTest.kt b/app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpFlowTest.kt
+index 544185c..5c8726a 100644
+--- a/app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpFlowTest.kt
++++ b/app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpFlowTest.kt
+@@ -98,7 +98,7 @@ class McpFlowTest {
+         compose.onNodeWithText("名称").performTextReplacement("工具 · 离线测试")
+         compose.onNodeWithText("MCP URL").performTextReplacement(upstream.url)
+         compose.onNodeWithText("Bearer").performScrollTo().performClick()
+-        compose.onNodeWithText("Token").performScrollTo().performTextReplacement(upstream.token)
++        compose.onNodeWithText("上游访问令牌").performScrollTo().performTextReplacement(upstream.token)
+         hideCaptureKeyboard()
+         compose.captureSettingsScreenshot("09-mcp-editor")
+         compose.onNodeWithText("保存").performScrollTo().performClick()
+diff --git a/app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpPresetFlowTest.kt b/app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpPresetFlowTest.kt
+index ee74743..5e5e5cc 100644
+--- a/app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpPresetFlowTest.kt
++++ b/app/src/androidTest/java/dev/pathpilot/app/ui/settings/McpPresetFlowTest.kt
+@@ -217,7 +217,7 @@ class McpPresetFlowTest {
+     private fun assertEmptyTokenDoesNotSave(expectedConnections: Int, expectedInitializations: Int) {
+         compose.onNodeWithTag("mcp-preset-token").assertIsDisplayed()
+         addWithToken()
+-        compose.onNodeWithText("填写 Token").performScrollTo().assertIsDisplayed()
++        compose.onNodeWithText("填写上游访问令牌").performScrollTo().assertIsDisplayed()
+         assertEquals(expectedConnections, store.mcp.value.connections.size)
+         assertEquals(expectedInitializations, fixture.initializeCount.get())
+     }

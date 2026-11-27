@@ -1,0 +1,134 @@
+[
+  {
+    "command": [
+      "shell",
+      "wm",
+      "dismiss-keyguard"
+    ],
+    "exitCode": 0,
+    "output": "",
+    "stderr": "",
+    "elapsedSeconds": 2.479
+  },
+  {
+    "command": [
+      "shell",
+      "input",
+      "keyevent",
+      "KEYCODE_WAKEUP"
+    ],
+    "exitCode": 0,
+    "output": "",
+    "stderr": "",
+    "elapsedSeconds": 5.285
+  },
+  {
+    "command": [
+      "shell",
+      "wm",
+      "density",
+      "320"
+    ],
+    "exitCode": 0,
+    "output": "",
+    "stderr": "",
+    "elapsedSeconds": 2.751
+  },
+  {
+    "command": [
+      "shell",
+      "settings",
+      "put",
+      "system",
+      "font_scale",
+      "1.0"
+    ],
+    "exitCode": 0,
+    "output": "",
+    "stderr": "",
+    "elapsedSeconds": 3.643
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "uimode",
+      "night",
+      "no"
+    ],
+    "exitCode": 0,
+    "output": "Night mode: no",
+    "stderr": "",
+    "elapsedSeconds": 2.331
+  },
+  {
+    "command": [
+      "install",
+      "-r",
+      "/tmp/pathpilot-auth-mcp-device/apks-d58b2f4/capture.apk"
+    ],
+    "exitCode": 0,
+    "output": "Performing Streamed Install\nSuccess",
+    "stderr": "",
+    "elapsedSeconds": 53.721
+  },
+  {
+    "command": [
+      "install",
+      "-r",
+      "/tmp/pathpilot-auth-mcp-device/apks-d58b2f4/capture-test.apk"
+    ],
+    "exitCode": 0,
+    "output": "Performing Streamed Install\nSuccess",
+    "stderr": "",
+    "elapsedSeconds": 21.375
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "package",
+      "compile",
+      "-m",
+      "speed",
+      "-f",
+      "dev.pathpilot.app.capture"
+    ],
+    "exitCode": 0,
+    "output": "Success",
+    "stderr": "",
+    "elapsedSeconds": 148.656
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "package",
+      "compile",
+      "-m",
+      "speed",
+      "-f",
+      "dev.pathpilot.app.capture.test"
+    ],
+    "exitCode": 0,
+    "output": "Success",
+    "stderr": "",
+    "elapsedSeconds": 28.665
+  },
+  {
+    "command": [
+      "shell",
+      "cmd",
+      "package",
+      "compile",
+      "-m",
+      "speed",
+      "-f",
+      "org.chromium.webview_shell"
+    ],
+    "exitCode": 0,
+    "output": "Success",
+    "stderr": "",
+    "elapsedSeconds": 9.466
+  }
+]

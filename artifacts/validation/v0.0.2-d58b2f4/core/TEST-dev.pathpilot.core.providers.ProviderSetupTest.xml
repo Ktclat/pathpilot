@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.core.providers.ProviderSetupTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:46:31.945Z" hostname="59b9643bc784" time="0.013">
+  <properties/>
+  <testcase name="onlyCompatibleApiAllowsAnEmptyKeyWhileSuppliedKeysRemainValidated" classname="dev.pathpilot.core.providers.ProviderSetupTest" time="0.0"/>
+  <testcase name="onlyAbsoluteHttpOrHttpsWithoutUserInfoQueryFragmentOrControlsIsAccepted" classname="dev.pathpilot.core.providers.ProviderSetupTest" time="0.001"/>
+  <testcase name="pastedOperationEndpointsGiveActionableFieldError" classname="dev.pathpilot.core.providers.ProviderSetupTest" time="0.001"/>
+  <testcase name="fieldLengthsAndModelIdsAreValidatedWithoutTruncation" classname="dev.pathpilot.core.providers.ProviderSetupTest" time="0.0"/>
+  <testcase name="codexUsesFixedEndpointAndOnlyRequiresName" classname="dev.pathpilot.core.providers.ProviderSetupTest" time="0.0"/>
+  <testcase name="normalizesTrailingSlashWithoutInventingProviderPath" classname="dev.pathpilot.core.providers.ProviderSetupTest" time="0.0"/>
+  <testcase name="apiKeyMustBeHeaderSafeAndErrorsNeverEchoInput" classname="dev.pathpilot.core.providers.ProviderSetupTest" time="0.01"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

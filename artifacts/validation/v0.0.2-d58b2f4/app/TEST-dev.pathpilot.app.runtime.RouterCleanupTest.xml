@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.app.runtime.RouterCleanupTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:55:07.840Z" hostname="59b9643bc784" time="0.026">
+  <properties/>
+  <testcase name="cancelledOwnerClosesListenerAfterReturningFromUiDispatcherBeforeReportingStopped" classname="dev.pathpilot.app.runtime.RouterCleanupTest" time="0.02"/>
+  <testcase name="releaseFailureStillReleasesRemainingLocksAndReportsFailure" classname="dev.pathpilot.app.runtime.RouterCleanupTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

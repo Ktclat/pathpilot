@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.core.RouterUsageTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:46:14.909Z" hostname="59b9643bc784" time="2.293">
+  <properties/>
+  <testcase name="chatSseKeepsBytesAndRequestOptionsWhileReadingTheFinalUsageChunk" classname="dev.pathpilot.core.RouterUsageTest" time="0.136"/>
+  <testcase name="codexChatStreamObservesUsageEvenWhenClientDidNotRequestUsageChunks" classname="dev.pathpilot.core.RouterUsageTest" time="0.173"/>
+  <testcase name="authenticatedModelFailuresAreVisibleBeforeAnyUpstreamRequest" classname="dev.pathpilot.core.RouterUsageTest" time="0.265"/>
+  <testcase name="responsesSseReadsNestedUsageWithoutChangingTheStream" classname="dev.pathpilot.core.RouterUsageTest" time="0.127"/>
+  <testcase name="absentUsageStaysUnknownAndDoesNotBecomeZeroTokens" classname="dev.pathpilot.core.RouterUsageTest" time="0.135"/>
+  <testcase name="sseEofWithoutACompletionMarkerIsNotCountedAsSuccess" classname="dev.pathpilot.core.RouterUsageTest" time="0.13"/>
+  <testcase name="chatJsonRecordsActualUsageAndRouteIdentityWithoutContent" classname="dev.pathpilot.core.RouterUsageTest" time="0.131"/>
+  <testcase name="downstreamCloseReportsInterruptedInsteadOfSuccessfulHttp200" classname="dev.pathpilot.core.RouterUsageTest" time="0.394"/>
+  <testcase name="upstreamHttpErrorRecordsStatusWithoutTheUpstreamErrorBody" classname="dev.pathpilot.core.RouterUsageTest" time="0.136"/>
+  <testcase name="stoppingRouterReportsTheActiveStreamExactlyOnceAsInterrupted" classname="dev.pathpilot.core.RouterUsageTest" time="0.175"/>
+  <testcase name="upstreamErrorAndIncompleteEventsKeepHttp200ButHaveTheirActualOutcomes" classname="dev.pathpilot.core.RouterUsageTest" time="0.184"/>
+  <testcase name="codexAggregationKeepsUsageWhenReturningNonStreamingChat" classname="dev.pathpilot.core.RouterUsageTest" time="0.14"/>
+  <testcase name="healthModelDiscoveryAndRejectedAuthenticationDoNotInflateModelUsage" classname="dev.pathpilot.core.RouterUsageTest" time="0.164"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Nov 27, 2026 10:46:16 AM fi.iki.elonen.NanoHTTPD$Response send
+SEVERE: Could not send response to the client
+java.net.SocketException: Broken pipe
+	at java.base/sun.nio.ch.NioSocketImpl.implWrite(NioSocketImpl.java:425)
+	at java.base/sun.nio.ch.NioSocketImpl.write(NioSocketImpl.java:445)
+	at java.base/sun.nio.ch.NioSocketImpl$2.write(NioSocketImpl.java:831)
+	at java.base/java.net.Socket$SocketOutputStream.write(Socket.java:1035)
+	at fi.iki.elonen.NanoHTTPD$Response$ChunkedOutputStream.write(NanoHTTPD.java:1443)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBody(NanoHTTPD.java:1694)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBodyWithCorrectEncoding(NanoHTTPD.java:1667)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBodyWithCorrectTransferAndEncoding(NanoHTTPD.java:1654)
+	at fi.iki.elonen.NanoHTTPD$Response.send(NanoHTTPD.java:1624)
+	at fi.iki.elonen.NanoHTTPD$HTTPSession.execute(NanoHTTPD.java:957)
+	at fi.iki.elonen.NanoHTTPD$ClientHandler.run(NanoHTTPD.java:192)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+Nov 27, 2026 10:46:16 AM fi.iki.elonen.NanoHTTPD$Response send
+SEVERE: Could not send response to the client
+java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.ensureOpenAndConnected(NioSocketImpl.java:165)
+	at java.base/sun.nio.ch.NioSocketImpl.beginRead(NioSocketImpl.java:236)
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:304)
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:355)
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:808)
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:966)
+	at okio.InputStreamSource.read(JvmOkio.kt:93)
+	at okio.AsyncTimeout$source$1.read(AsyncTimeout.kt:128)
+	at okio.RealBufferedSource.read(RealBufferedSource.kt:192)
+	at okhttp3.internal.http1.Http1ExchangeCodec$AbstractSource.read(Http1ExchangeCodec.kt:339)
+	at okhttp3.internal.http1.Http1ExchangeCodec$FixedLengthSource.read(Http1ExchangeCodec.kt:376)
+	at okhttp3.internal.connection.Exchange$ResponseBodySource.read(Exchange.kt:281)
+	at okio.RealBufferedSource$inputStream$1.read(RealBufferedSource.kt:161)
+	at dev.pathpilot.core.ResponseObservation$wrap$1.read(ResponseObservation.kt:31)
+	at dev.pathpilot.core.RouterServer$serve$stream$1.read(RouterServer.kt:170)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBody(NanoHTTPD.java:1690)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBodyWithCorrectEncoding(NanoHTTPD.java:1667)
+	at fi.iki.elonen.NanoHTTPD$Response.sendBodyWithCorrectTransferAndEncoding(NanoHTTPD.java:1654)
+	at fi.iki.elonen.NanoHTTPD$Response.send(NanoHTTPD.java:1624)
+	at fi.iki.elonen.NanoHTTPD$HTTPSession.execute(NanoHTTPD.java:957)
+	at fi.iki.elonen.NanoHTTPD$ClientHandler.run(NanoHTTPD.java:192)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+
+]]></system-err>
+</testsuite>

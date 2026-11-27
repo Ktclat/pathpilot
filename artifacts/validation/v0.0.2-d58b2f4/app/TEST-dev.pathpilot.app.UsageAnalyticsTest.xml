@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.app.UsageAnalyticsTest" tests="15" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:55:07.722Z" hostname="59b9643bc784" time="0.038">
+  <properties/>
+  <testcase name="tokenTotalsDoNotOverflowIntoNegativeCounts" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.004"/>
+  <testcase name="summaryAveragesAllRequestOutcomesAndLeavesEmptyRatesUnknown" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.001"/>
+  <testcase name="hourlyTrendUsesLocalMidnightAndExclusiveBoundaries" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.01"/>
+  <testcase name="sevenDaysIncludesTodayAndFollowsDaylightSavingCalendar" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.001"/>
+  <testcase name="queryOutcomeAndModelScopeCombineWithoutChangingHttpSuccessMeaning" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.0"/>
+  <testcase name="springDstSkipsTheNonexistentHour" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.002"/>
+  <testcase name="allTimeTrendKeepsOldRecordsWhileCombiningLongSpansIntoReadableBuckets" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.006"/>
+  <testcase name="thirtyDaysFiltersAndBucketsTheSameLocalCalendarRange" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.001"/>
+  <testcase name="trendDistinguishesNoRequestsUnknownTotalsAndPartialCoverage" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.002"/>
+  <testcase name="providerGroupsShareTheFilteredScopeAndUseLatestNames" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.001"/>
+  <testcase name="partialCountersDoNotTurnIntoCompleteTotals" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.0"/>
+  <testcase name="missingUsageRemainsUnknownWhileRealZeroIsPreserved" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.0"/>
+  <testcase name="groupingKeepsProviderAndUpstreamModelsSeparateAndUsesLatestName" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.002"/>
+  <testcase name="todayUsesLocalCalendarMidnightAndExcludesNextDay" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.0"/>
+  <testcase name="autumnDstHasTwoDistinctRepeatedHourBuckets" classname="dev.pathpilot.app.UsageAnalyticsTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

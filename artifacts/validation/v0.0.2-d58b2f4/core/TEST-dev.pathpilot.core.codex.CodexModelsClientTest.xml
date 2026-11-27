@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.core.codex.CodexModelsClientTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:46:17.333Z" hostname="59b9643bc784" time="3.59">
+  <properties/>
+  <testcase name="timeoutIsDistinctFromUserCancellation" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="0.512"/>
+  <testcase name="explicitProxyIsAppliedAndItsAuthenticationErrorIsRedacted" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="0.063"/>
+  <testcase name="statusErrorsNeverEchoCredentialsOrPretendSuccess" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="0.229"/>
+  <testcase name="cancelStopsActiveAndNotYetStartedCatalogRequests" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="2.014"/>
+  <testcase name="bodyAndDistinctModelCountLimitsDoNotSilentlyTruncate" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="0.116"/>
+  <testcase name="realisticNestedInstructionCatalogLargerThanOneMiBStillReturnsModelSlugs" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="0.147"/>
+  <testcase name="emptyOrEntirelyHiddenCatalogIsAnActualEmptyResult" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="0.05"/>
+  <testcase name="invalidCredentialsFailBeforeRequestAndNeverAppearInErrors" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="0.004"/>
+  <testcase name="productionRequestUsesCodexCatalogWithAccountAndVersionAndNoGenerationBody" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="0.007"/>
+  <testcase name="malformedCatalogNeverFallsBackToHardCodedOrApiModels" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="0.424"/>
+  <testcase name="redirectAndBrokenConnectionNeverRetryOrForwardCredentials" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="0.014"/>
+  <testcase name="subscriptionListsVisibleSlugsIncludingModelsUnsupportedByApiKeys" classname="dev.pathpilot.core.codex.CodexModelsClientTest" time="0.008"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

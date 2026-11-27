@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.app.settings.BackupCodecTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:55:07.911Z" hostname="59b9643bc784" time="1.208">
+  <properties/>
+  <testcase name="importedProviderAndSessionReferencesAreValidatedTogether" classname="dev.pathpilot.app.settings.BackupCodecTest" time="0.007"/>
+  <testcase name="wrongPasswordAndModifiedPayloadFailAuthentication" classname="dev.pathpilot.app.settings.BackupCodecTest" time="0.591"/>
+  <testcase name="omittedSessionsRemainDifferentFromAnIncludedEmptySessionSet" classname="dev.pathpilot.app.settings.BackupCodecTest" time="0.253"/>
+  <testcase name="malformedFileEmptyPasswordAndOversizedImportHaveSeparateErrors" classname="dev.pathpilot.app.settings.BackupCodecTest" time="0.006"/>
+  <testcase name="unsupportedEnvelopeVersionAndKdfWorkFactorAreRejectedBeforeDecryption" classname="dev.pathpilot.app.settings.BackupCodecTest" time="0.067"/>
+  <testcase name="importedConfigurationRejectsBrokenRoutesDuplicateIdsAndPortCollisions" classname="dev.pathpilot.app.settings.BackupCodecTest" time="0.002"/>
+  <testcase name="encryptedBackupRoundTripsConfigurationPreferencesMcpAndIncludedSessions" classname="dev.pathpilot.app.settings.BackupCodecTest" time="0.281"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

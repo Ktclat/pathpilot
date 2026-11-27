@@ -1,0 +1,24 @@
+{
+  "recordedUtc": "2026-11-27T11:24:17.803122+00:00",
+  "status": "platform_interruption_no_explicit_device_cleanup",
+  "emulatorPidBeforeInterruption": 41997,
+  "postReconnectHostProcessCheck": "No qemu-system-x86_64-headless or Python runner process remained.",
+  "restarted": false,
+  "packageDataCleared": false,
+  "densityOverrideRestored": false,
+  "lastRecordedConfiguration": {
+    "sdk": 35,
+    "image": "AOSP android-35/default/x86_64",
+    "abi": "x86_64",
+    "acceleration": "software TCG; no KVM",
+    "size": "720x1280",
+    "physicalDensity": 320,
+    "overrideDensityDuringCapture": 320,
+    "widthDp": 360,
+    "fontScale": 1.0,
+    "nightMode": "no"
+  },
+  "originalConfiguration": "startup-diagnostics/original-device.json",
+  "unchangedByThisTask": "Regular dev.pathpilot.app and any other device were not operated on.",
+  "nextAvdUse": "Restore original density override and clear only dev.pathpilot.app.capture / dev.pathpilot.app.capture.test when this isolated AVD is next started."
+}

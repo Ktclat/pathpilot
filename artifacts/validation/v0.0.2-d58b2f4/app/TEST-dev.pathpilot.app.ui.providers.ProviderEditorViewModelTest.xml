@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2026-11-27T10:55:09.122Z" hostname="59b9643bc784" time="0.069">
+  <properties/>
+  <testcase name="changing proxy retains prior choices without claiming a current connection test" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.011"/>
+  <testcase name="Codex unauthorized response retains draft and retry resolves current subscription again" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.006"/>
+  <testcase name="late Codex catalog cannot cross into another saved provider" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.004"/>
+  <testcase name="switching Codex account clears old catalog even when fetching the new account fails" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.005"/>
+  <testcase name="proxy change cancels in-flight probe and next request uses the selected proxy" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.003"/>
+  <testcase name="opening and probing existing provider needs no discard confirmation without input changes" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.003"/>
+  <testcase name="Codex subscription models use resolved credentials and selected model becomes its route" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.01"/>
+  <testcase name="unsaved or unsigned Codex reports an error without fetching a catalog" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.006"/>
+  <testcase name="changing key or URL invalidates discovered models but keeps manual choices" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.003"/>
+  <testcase name="closing before Codex credential IO runs cancels the client and never reads the account" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.004"/>
+  <testcase name="late probe response after closing cannot populate the next editor" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.003"/>
+  <testcase name="switching provider kinds never carries another providers credential" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.001"/>
+  <testcase name="failed retry with unchanged credentials preserves selected models for saving" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.003"/>
+  <testcase name="provider without models endpoint can still be saved with a manual model" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.002"/>
+  <testcase name="Codex proxy change cancels old catalog and retry uses the new proxy" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.003"/>
+  <testcase name="validation failure keeps all input until the URL is corrected" classname="dev.pathpilot.app.ui.providers.ProviderEditorViewModelTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
