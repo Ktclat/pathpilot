@@ -1,0 +1,94 @@
+{
+  "sourceCommit": "ac963f2e59a8af13a66ae950233d6fd102dd423a",
+  "automaticExecutions": 6,
+  "passedExecutions": 4,
+  "failedExecutions": 2,
+  "distinctCasesPassed": 4,
+  "batches": [
+    {
+      "batch": "normal-final",
+      "elapsedSeconds": 465.562,
+      "results": [
+        {
+          "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+          "test": "themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity",
+          "statusCode": -2
+        },
+        {
+          "class": "dev.pathpilot.app.ui.settings.McpPresetFlowTest",
+          "test": "publicPresetsSaveTheirOfficialUrlFetchToolsAndRetryWithoutDuplicates",
+          "statusCode": 0
+        },
+        {
+          "class": "dev.pathpilot.app.ui.settings.McpPresetFlowTest",
+          "test": "credentialPresetsRequireTokensAndKeepDifferentAccountsSeparate",
+          "statusCode": 0
+        },
+        {
+          "class": "dev.pathpilot.app.ui.settings.McpFlowTest",
+          "test": "connectionToolsAndIndependentSharingReachAnActualHttpUpstream",
+          "statusCode": 0
+        }
+      ],
+      "images": 17,
+      "imageHashMismatches": [],
+      "apkSha256": {
+        "capture.apk": "5d3f8c4e558157180e76b289c377765d84da94c648e123b7c43a37f5facd017b",
+        "capture-test.apk": "1dd472398d3d0ea0721346ffc1a92800cac50a4ee776d7927a766bd50af144c1"
+      }
+    },
+    {
+      "batch": "theme-isolated",
+      "elapsedSeconds": 204.703,
+      "results": [
+        {
+          "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+          "test": "themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity",
+          "statusCode": 0
+        }
+      ],
+      "images": 8,
+      "imageHashMismatches": [],
+      "apkSha256": {
+        "capture.apk": "5d3f8c4e558157180e76b289c377765d84da94c648e123b7c43a37f5facd017b",
+        "capture-test.apk": "1dd472398d3d0ea0721346ffc1a92800cac50a4ee776d7927a766bd50af144c1"
+      }
+    },
+    {
+      "batch": "large-final",
+      "elapsedSeconds": 136.934,
+      "results": [
+        {
+          "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+          "test": "largeSystemFontKeepsSettingsAndMcpControlsReachable",
+          "statusCode": -2
+        }
+      ],
+      "images": 2,
+      "imageHashMismatches": [],
+      "apkSha256": {
+        "capture.apk": "5d3f8c4e558157180e76b289c377765d84da94c648e123b7c43a37f5facd017b",
+        "capture-test.apk": "1dd472398d3d0ea0721346ffc1a92800cac50a4ee776d7927a766bd50af144c1"
+      }
+    }
+  ],
+  "manualLargeFont": {
+    "passed": true,
+    "host": "Production MainActivity outside instrumentation",
+    "density": 360,
+    "fontScale": 1.5,
+    "evidence": "artifacts/screenshots/v0.0.1-ac963f2/manual-large",
+    "verified": [
+      "Theme mode labels wrap",
+      "All five palettes are scrollable",
+      "Amber and Ocean selection apply",
+      "Dynamic colors clears fixed selection",
+      "Done returns to correct settings summary",
+      "MCP preset catalog and custom entry reachable",
+      "GitHub token form and Add button reachable"
+    ],
+    "credentialsSubmitted": false,
+    "remoteToolCalls": false,
+    "replacesAutomaticFailure": false
+  }
+}

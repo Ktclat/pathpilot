@@ -1,0 +1,40 @@
+{
+  "recordedUtc": "2026-11-27T04:07:41.527523+00:00",
+  "scope": "Emulator startup before the new APK was installed; not product test results.",
+  "device": "API35 x86_64 pathpilot-api35, software TCG, 720x1280, physical density320/font1.0/night no",
+  "events": [
+    "SystemUI and Quickstep startup ANRs recorded during cold boot.",
+    "Observed Quickstep Close app at330x620, then observed SystemUI Close app at330x670.",
+    "after-systemui-dialog.png confirms unobstructed launcher; no app code or system component settings changed."
+  ],
+  "files": [
+    {
+      "name": "after-quickstep-dialog.png",
+      "sha256": "c3b4efc0d2dd56abb3aa0674af2197f431116f31f5475e68b493b510945f4301"
+    },
+    {
+      "name": "after-systemui-dialog.png",
+      "sha256": "60aa502599ae6447e8f94ff6a062bcdf9ad984cc3fb36c01b98e1f2a8a526e1c"
+    },
+    {
+      "name": "boot-events.txt",
+      "sha256": "0285c82d08ea067d99ef074e257fd0ef57ea040259487519ddf7801089095318"
+    },
+    {
+      "name": "original-device.json",
+      "sha256": "15ec33ba4831a6b6619e4cc3ee5492fed1a2b00a9178bbbe53b1bdd788b5babc"
+    },
+    {
+      "name": "pre-test-events.txt",
+      "sha256": "ff971044bd1e6bf722c910f1e3435cb48620bd146a83ae3a4ef4323154ff067b"
+    },
+    {
+      "name": "ready-before-new-apk.png",
+      "sha256": "1932ca93a2bb99898fc036dd7cc047e6df90e0006e889b99536c22476997201e"
+    },
+    {
+      "name": "startup.json",
+      "sha256": "0c7c1a174773365d4f6ee3e328dadb38b17e1f02853b9ab807a5a22878c98ec1"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "pid": 1136,
+  "argv": [
+    "/workspace/toolchains/android-sdk/emulator/emulator",
+    "-avd",
+    "pathpilot-api35",
+    "-no-window",
+    "-no-audio",
+    "-no-boot-anim",
+    "-no-snapshot",
+    "-no-metrics",
+    "-gpu",
+    "swiftshader_indirect",
+    "-accel",
+    "off",
+    "-cores",
+    "2",
+    "-memory",
+    "3072",
+    "-port",
+    "5554"
+  ],
+  "unixStart": 1795750758.199937,
+  "tcg": true,
+  "preStartAdbDevices": []
+}

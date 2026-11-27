@@ -1,0 +1,86 @@
+{
+  "startedUtc": "2026-11-27T04:13:16Z",
+  "classes": "dev.pathpilot.app.ui.settings.SettingsFlowTest#themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.McpPresetFlowTest,dev.pathpilot.app.ui.settings.McpFlowTest#connectionToolsAndIndependentSharingReachAnActualHttpUpstream",
+  "gitBase": "aff16297225dadd2bc505590db53929cbcf5f763",
+  "worktreeDiffSha256": "7c1fce154c2d6be8561cc69e1dc91dcadab23d20f76eef191486278a29fd0a6a",
+  "apkSha256": {
+    "capture.apk": "305198b69d2b84cc8f0072355bd07aae5b879eb22ca929e5bf536e2b8419c1dc",
+    "capture-test.apk": "ea7a1b6d672e30ac6cfb7c522c98892fc863057b0542ef508ffe387c80ec8af9"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0",
+    "nightMode": "Night mode: no",
+    "locales": "Locales for dev.pathpilot.app.capture for user 0 are [zh-CN]"
+  },
+  "sourceManifestSha256": "1d2b1be9357536db02e1da89e7b201583dfd44ad383a37d8cbe7cae40a5d436c",
+  "elapsedSeconds": 339.924,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "4",
+      "stack": "androidx.compose.ui.test.junit4.android.ComposeNotIdleException: Idling resource timed out: possibly due to compose being busy.",
+      "stream": "",
+      "test": "themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity",
+      "statusCode": -2
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.McpPresetFlowTest",
+      "current": "2",
+      "id": "AndroidJUnitRunner",
+      "numtests": "4",
+      "stack": "java.lang.IllegalArgumentException: Detected multithreaded access to SnapshotStateObserver: previousThreadId=46), currentThread={id=2, name=main}. Note that observation on multiple threads in layout/draw is not supported. Make sure your measure/layout/draw for each Owner (AndroidComposeView) is executed on the same thread.",
+      "stream": "",
+      "test": "publicPresetsSaveTheirOfficialUrlFetchToolsAndRetryWithoutDuplicates",
+      "statusCode": -2
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.McpPresetFlowTest",
+      "current": "3",
+      "id": "AndroidJUnitRunner",
+      "numtests": "4",
+      "stack": "java.lang.ArrayIndexOutOfBoundsException: length=640; index=-1",
+      "stream": "",
+      "test": "credentialPresetsRequireTokensAndKeepDifferentAccountsSeparate",
+      "statusCode": -2
+    }
+  ],
+  "images": [
+    {
+      "name": "26-settings-theme-entry.png",
+      "bytes": 70492,
+      "sha256": "63d7b411cc378105dcb7b77fdbabe7a8c2715bcc2f4ee2101bcb97a1f77810da"
+    },
+    {
+      "name": "37-mcp-preset-catalog.png",
+      "bytes": 73143,
+      "sha256": "fce7ff7be8a7e0879bf37eeca390774f9296cbb1a28ad5f3ca0a999928ced11f"
+    },
+    {
+      "name": "38-mcp-preset-fetch-error.png",
+      "bytes": 82197,
+      "sha256": "e65ea6c85fa99483c2f7ea64c6d3956bad4bef4e949e6ed725b06982672f4f3c"
+    },
+    {
+      "name": "39-mcp-preset-tools.png",
+      "bytes": 89850,
+      "sha256": "33e4a42a7c63ab45e9d8604f79973f1feead0be5c828bd639e2ae9dc340c0481"
+    },
+    {
+      "name": "40-mcp-github-token.png",
+      "bytes": 36270,
+      "sha256": "8df6d1ab0f717cc46dd362dd5bca03cc453fda6cbb1fe8eb5401722efa4cbdf4"
+    },
+    {
+      "name": "41-mcp-github-tools.png",
+      "bytes": 86283,
+      "sha256": "558e651288c8adced27a6f2f4746f68316e3006a9e7aad36457db90939ccdf37"
+    }
+  ]
+}

@@ -1,0 +1,339 @@
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.SettingsFlowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=
+dev.pathpilot.app.ui.settings.SettingsFlowTest:
+INSTRUMENTATION_STATUS: test=themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.SettingsFlowTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stack=androidx.compose.ui.test.junit4.android.ComposeNotIdleException: Idling resource timed out: possibly due to compose being busy.
+IdlingResourceRegistry has the following idling resources registered:
+- [busy] androidx.compose.ui.test.ComposeIdlingResource@1179071 
+All registered idling resources: Compose-Espresso link
+	at androidx.compose.ui.test.EspressoLink_androidKt.rethrowWithMoreInfo(EspressoLink.android.kt:133)
+	at androidx.compose.ui.test.EspressoLink_androidKt.runEspressoOnIdle(EspressoLink.android.kt:106)
+	at androidx.compose.ui.test.EspressoLink.runUntilIdle(EspressoLink.android.kt:82)
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.waitForIdle(ComposeUiTest.android.kt:716)
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.access$waitForIdle(ComposeUiTest.android.kt:481)
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidTestOwner.getRoots(ComposeUiTest.android.kt:988)
+	at androidx.compose.ui.test.TestOwnerKt.getAllSemanticsNodes(TestOwner.kt:116)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchSemanticsNodes$ui_test(SemanticsNodeInteraction.kt:64)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchSemanticsNodes$ui_test$default(SemanticsNodeInteraction.kt:59)
+	at androidx.compose.ui.test.AndroidAssertions_androidKt.checkIsDisplayed(AndroidAssertions.android.kt:29)
+	at androidx.compose.ui.test.AssertionsKt.isDisplayed(Assertions.kt:380)
+	at androidx.compose.ui.test.AssertionsKt.assertIsDisplayed(Assertions.kt:33)
+	at dev.pathpilot.app.ui.settings.SettingsFlowTest.themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity(SettingsFlowTest.kt:56)
+	... 66 trimmed
+Caused by: androidx.test.espresso.IdlingResourceTimeoutException: Wait for [Compose-Espresso link] to become idle timed out
+	at androidx.test.espresso.IdlingPolicy.handleTimeout(IdlingPolicy.java:4)
+	at androidx.test.espresso.base.UiControllerImpl$5.resourcesHaveTimedOut(UiControllerImpl.java:1)
+	at androidx.test.espresso.base.IdlingResourceRegistry$Dispatcher.handleTimeout(IdlingResourceRegistry.java:4)
+	at androidx.test.espresso.base.IdlingResourceRegistry$Dispatcher.handleMessage(IdlingResourceRegistry.java:6)
+	at android.os.Handler.dispatchMessage(Handler.java:103)
+	at androidx.test.espresso.base.Interrogator.loopAndInterrogate(Interrogator.java:14)
+	at androidx.test.espresso.base.UiControllerImpl.loopUntil(UiControllerImpl.java:8)
+	at androidx.test.espresso.base.UiControllerImpl.loopMainThreadUntilIdle(UiControllerImpl.java:16)
+	at androidx.test.espresso.Espresso$1.run(Espresso.java:1)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:487)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at android.os.Handler.handleCallback(Handler.java:959)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8705)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)
+
+INSTRUMENTATION_STATUS: stream=
+Error in themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity(dev.pathpilot.app.ui.settings.SettingsFlowTest):
+androidx.compose.ui.test.junit4.android.ComposeNotIdleException: Idling resource timed out: possibly due to compose being busy.
+IdlingResourceRegistry has the following idling resources registered:
+- [busy] androidx.compose.ui.test.ComposeIdlingResource@1179071 
+All registered idling resources: Compose-Espresso link
+	at androidx.compose.ui.test.EspressoLink_androidKt.rethrowWithMoreInfo(EspressoLink.android.kt:133)
+	at androidx.compose.ui.test.EspressoLink_androidKt.runEspressoOnIdle(EspressoLink.android.kt:106)
+	at androidx.compose.ui.test.EspressoLink.runUntilIdle(EspressoLink.android.kt:82)
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.waitForIdle(ComposeUiTest.android.kt:716)
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment.access$waitForIdle(ComposeUiTest.android.kt:481)
+	at androidx.compose.ui.test.AndroidComposeUiTestEnvironment$AndroidTestOwner.getRoots(ComposeUiTest.android.kt:988)
+	at androidx.compose.ui.test.TestOwnerKt.getAllSemanticsNodes(TestOwner.kt:116)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchSemanticsNodes$ui_test(SemanticsNodeInteraction.kt:64)
+	at androidx.compose.ui.test.SemanticsNodeInteraction.fetchSemanticsNodes$ui_test$default(SemanticsNodeInteraction.kt:59)
+	at androidx.compose.ui.test.AndroidAssertions_androidKt.checkIsDisplayed(AndroidAssertions.android.kt:29)
+	at androidx.compose.ui.test.AssertionsKt.isDisplayed(Assertions.kt:380)
+	at androidx.compose.ui.test.AssertionsKt.assertIsDisplayed(Assertions.kt:33)
+	at dev.pathpilot.app.ui.settings.SettingsFlowTest.themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity(SettingsFlowTest.kt:56)
+	... 66 trimmed
+Caused by: androidx.test.espresso.IdlingResourceTimeoutException: Wait for [Compose-Espresso link] to become idle timed out
+	at androidx.test.espresso.IdlingPolicy.handleTimeout(IdlingPolicy.java:4)
+	at androidx.test.espresso.base.UiControllerImpl$5.resourcesHaveTimedOut(UiControllerImpl.java:1)
+	at androidx.test.espresso.base.IdlingResourceRegistry$Dispatcher.handleTimeout(IdlingResourceRegistry.java:4)
+	at androidx.test.espresso.base.IdlingResourceRegistry$Dispatcher.handleMessage(IdlingResourceRegistry.java:6)
+	at android.os.Handler.dispatchMessage(Handler.java:103)
+	at androidx.test.espresso.base.Interrogator.loopAndInterrogate(Interrogator.java:14)
+	at androidx.test.espresso.base.UiControllerImpl.loopUntil(UiControllerImpl.java:8)
+	at androidx.test.espresso.base.UiControllerImpl.loopMainThreadUntilIdle(UiControllerImpl.java:16)
+	at androidx.test.espresso.Espresso$1.run(Espresso.java:1)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:487)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at android.os.Handler.handleCallback(Handler.java:959)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8705)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)
+
+INSTRUMENTATION_STATUS: test=themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.McpPresetFlowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=
+dev.pathpilot.app.ui.settings.McpPresetFlowTest:
+INSTRUMENTATION_STATUS: test=publicPresetsSaveTheirOfficialUrlFetchToolsAndRetryWithoutDuplicates
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.McpPresetFlowTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stack=java.lang.IllegalArgumentException: Detected multithreaded access to SnapshotStateObserver: previousThreadId=46), currentThread={id=2, name=main}. Note that observation on multiple threads in layout/draw is not supported. Make sure your measure/layout/draw for each Owner (AndroidComposeView) is executed on the same thread.
+	at androidx.compose.runtime.PreconditionsKt.throwIllegalArgumentException(Preconditions.kt:26)
+	at androidx.compose.runtime.snapshots.SnapshotStateObserver.observeReads(SnapshotStateObserver.kt:693)
+	at androidx.compose.ui.node.NodeCoordinator._get_drawBlock_$lambda$1(NodeCoordinator.kt:2587)
+	at androidx.compose.ui.node.NodeCoordinator$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+	at androidx.compose.ui.platform.GraphicsLayerOwnerLayer.recordLambda$lambda$0(GraphicsLayerOwnerLayer.android.kt:293)
+	at androidx.compose.ui.platform.GraphicsLayerOwnerLayer$$ExternalSyntheticLambda0.invoke(D8$$SyntheticClass:0)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer.drawWithChildTracking(AndroidGraphicsLayer.android.kt:480)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer.access$drawWithChildTracking(AndroidGraphicsLayer.android.kt:57)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer$clipDrawBlock$1.invoke(AndroidGraphicsLayer.android.kt:70)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer$clipDrawBlock$1.invoke(AndroidGraphicsLayer.android.kt:65)
+	at androidx.compose.ui.graphics.layer.GraphicsLayerV29.record(GraphicsLayerV29.android.kt:323)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer.recordInternal(AndroidGraphicsLayer.android.kt:473)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer.record-mL-hObY(AndroidGraphicsLayer.android.kt:469)
+	at androidx.compose.ui.platform.GraphicsLayerOwnerLayer.updateDisplayList(GraphicsLayerOwnerLayer.android.kt:286)
+	at androidx.compose.ui.platform.AndroidComposeView.dispatchDraw(AndroidComposeView.android.kt:2243)
+	at android.view.View.draw(View.java:24845)
+	at android.view.View.updateDisplayListIfDirty(View.java:23692)
+	at android.view.ViewGroup.recreateChildDisplayList(ViewGroup.java:4521)
+	at android.view.ViewGroup.dispatchGetDisplayList(ViewGroup.java:4494)
+	at android.view.View.updateDisplayListIfDirty(View.java:23646)
+	at android.view.ViewGroup.recreateChildDisplayList(ViewGroup.java:4521)
+	at android.view.ViewGroup.dispatchGetDisplayList(ViewGroup.java:4494)
+	at android.view.View.updateDisplayListIfDirty(View.java:23646)
+	at android.view.ViewGroup.recreateChildDisplayList(ViewGroup.java:4521)
+	at android.view.ViewGroup.dispatchGetDisplayList(ViewGroup.java:4494)
+	at android.view.View.updateDisplayListIfDirty(View.java:23646)
+	at android.view.ViewGroup.recreateChildDisplayList(ViewGroup.java:4521)
+	at android.view.ViewGroup.dispatchGetDisplayList(ViewGroup.java:4494)
+	at android.view.View.updateDisplayListIfDirty(View.java:23646)
+	at android.view.ThreadedRenderer.updateViewTreeDisplayList(ThreadedRenderer.java:694)
+	at android.view.ThreadedRenderer.updateRootDisplayList(ThreadedRenderer.java:700)
+	at android.view.ThreadedRenderer.draw(ThreadedRenderer.java:798)
+	at android.view.ViewRootImpl.draw(ViewRootImpl.java:5659)
+	at android.view.ViewRootImpl.performDraw(ViewRootImpl.java:5312)
+	at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4303)
+	at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+	at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+	at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+	at android.view.Choreographer.doFrame(Choreographer.java:945)
+	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+	at android.os.Handler.handleCallback(Handler.java:959)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at androidx.test.espresso.base.Interrogator.loopAndInterrogate(Interrogator.java:14)
+	at androidx.test.espresso.base.UiControllerImpl.loopUntil(UiControllerImpl.java:8)
+	at androidx.test.espresso.base.UiControllerImpl.loopMainThreadUntilIdle(UiControllerImpl.java:16)
+	at androidx.test.espresso.Espresso$1.run(Espresso.java:1)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:487)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at android.os.Handler.handleCallback(Handler.java:959)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8705)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)
+
+INSTRUMENTATION_STATUS: stream=
+Error in publicPresetsSaveTheirOfficialUrlFetchToolsAndRetryWithoutDuplicates(dev.pathpilot.app.ui.settings.McpPresetFlowTest):
+java.lang.IllegalArgumentException: Detected multithreaded access to SnapshotStateObserver: previousThreadId=46), currentThread={id=2, name=main}. Note that observation on multiple threads in layout/draw is not supported. Make sure your measure/layout/draw for each Owner (AndroidComposeView) is executed on the same thread.
+	at androidx.compose.runtime.PreconditionsKt.throwIllegalArgumentException(Preconditions.kt:26)
+	at androidx.compose.runtime.snapshots.SnapshotStateObserver.observeReads(SnapshotStateObserver.kt:693)
+	at androidx.compose.ui.node.NodeCoordinator._get_drawBlock_$lambda$1(NodeCoordinator.kt:2587)
+	at androidx.compose.ui.node.NodeCoordinator$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+	at androidx.compose.ui.platform.GraphicsLayerOwnerLayer.recordLambda$lambda$0(GraphicsLayerOwnerLayer.android.kt:293)
+	at androidx.compose.ui.platform.GraphicsLayerOwnerLayer$$ExternalSyntheticLambda0.invoke(D8$$SyntheticClass:0)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer.drawWithChildTracking(AndroidGraphicsLayer.android.kt:480)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer.access$drawWithChildTracking(AndroidGraphicsLayer.android.kt:57)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer$clipDrawBlock$1.invoke(AndroidGraphicsLayer.android.kt:70)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer$clipDrawBlock$1.invoke(AndroidGraphicsLayer.android.kt:65)
+	at androidx.compose.ui.graphics.layer.GraphicsLayerV29.record(GraphicsLayerV29.android.kt:323)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer.recordInternal(AndroidGraphicsLayer.android.kt:473)
+	at androidx.compose.ui.graphics.layer.GraphicsLayer.record-mL-hObY(AndroidGraphicsLayer.android.kt:469)
+	at androidx.compose.ui.platform.GraphicsLayerOwnerLayer.updateDisplayList(GraphicsLayerOwnerLayer.android.kt:286)
+	at androidx.compose.ui.platform.AndroidComposeView.dispatchDraw(AndroidComposeView.android.kt:2243)
+	at android.view.View.draw(View.java:24845)
+	at android.view.View.updateDisplayListIfDirty(View.java:23692)
+	at android.view.ViewGroup.recreateChildDisplayList(ViewGroup.java:4521)
+	at android.view.ViewGroup.dispatchGetDisplayList(ViewGroup.java:4494)
+	at android.view.View.updateDisplayListIfDirty(View.java:23646)
+	at android.view.ViewGroup.recreateChildDisplayList(ViewGroup.java:4521)
+	at android.view.ViewGroup.dispatchGetDisplayList(ViewGroup.java:4494)
+	at android.view.View.updateDisplayListIfDirty(View.java:23646)
+	at android.view.ViewGroup.recreateChildDisplayList(ViewGroup.java:4521)
+	at android.view.ViewGroup.dispatchGetDisplayList(ViewGroup.java:4494)
+	at android.view.View.updateDisplayListIfDirty(View.java:23646)
+	at android.view.ViewGroup.recreateChildDisplayList(ViewGroup.java:4521)
+	at android.view.ViewGroup.dispatchGetDisplayList(ViewGroup.java:4494)
+	at android.view.View.updateDisplayListIfDirty(View.java:23646)
+	at android.view.ThreadedRenderer.updateViewTreeDisplayList(ThreadedRenderer.java:694)
+	at android.view.ThreadedRenderer.updateRootDisplayList(ThreadedRenderer.java:700)
+	at android.view.ThreadedRenderer.draw(ThreadedRenderer.java:798)
+	at android.view.ViewRootImpl.draw(ViewRootImpl.java:5659)
+	at android.view.ViewRootImpl.performDraw(ViewRootImpl.java:5312)
+	at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:4303)
+	at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:2917)
+	at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:10324)
+	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1406)
+	at android.view.Choreographer$CallbackRecord.run(Choreographer.java:1415)
+	at android.view.Choreographer.doCallbacks(Choreographer.java:1015)
+	at android.view.Choreographer.doFrame(Choreographer.java:945)
+	at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:1389)
+	at android.os.Handler.handleCallback(Handler.java:959)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at androidx.test.espresso.base.Interrogator.loopAndInterrogate(Interrogator.java:14)
+	at androidx.test.espresso.base.UiControllerImpl.loopUntil(UiControllerImpl.java:8)
+	at androidx.test.espresso.base.UiControllerImpl.loopMainThreadUntilIdle(UiControllerImpl.java:16)
+	at androidx.test.espresso.Espresso$1.run(Espresso.java:1)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:487)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at android.os.Handler.handleCallback(Handler.java:959)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8705)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)
+
+INSTRUMENTATION_STATUS: test=publicPresetsSaveTheirOfficialUrlFetchToolsAndRetryWithoutDuplicates
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.McpPresetFlowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=credentialPresetsRequireTokensAndKeepDifferentAccountsSeparate
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.pathpilot.app.ui.settings.McpPresetFlowTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stack=java.lang.ArrayIndexOutOfBoundsException: length=640; index=-1
+	at androidx.compose.runtime.composer.gapbuffer.SlotWriter.moveSlotGapTo(SlotTable.kt:4483)
+	at androidx.compose.runtime.composer.gapbuffer.SlotWriter.removeSlots(SlotTable.kt:3155)
+	at androidx.compose.runtime.composer.gapbuffer.SlotWriter.removeGroup(SlotTable.kt:2163)
+	at androidx.compose.runtime.ComposerKt.removeCurrentGroup(Composer.kt:1330)
+	at androidx.compose.runtime.composer.gapbuffer.SlotTable.clear(SlotTable.kt:181)
+	at androidx.compose.runtime.CompositionImpl.dispose(Composition.kt:952)
+	at androidx.compose.ui.layout.LayoutNodeSubcompositionsState.disposeCurrentNodes(SubcomposeLayout.kt:835)
+	at androidx.compose.ui.layout.LayoutNodeSubcompositionsState.onRelease(SubcomposeLayout.kt:580)
+	at androidx.compose.ui.node.LayoutNode.onRelease(LayoutNode.kt:1502)
+	at androidx.compose.runtime.internal.RememberEventDispatcher.dispatchRememberObservers(RememberEventDispatcher.kt:228)
+	at androidx.compose.runtime.CompositionImpl.dispose(Composition.kt:955)
+	at androidx.compose.ui.layout.LayoutNodeSubcompositionsState.disposeCurrentNodes(SubcomposeLayout.kt:835)
+	at androidx.compose.ui.layout.LayoutNodeSubcompositionsState.onRelease(SubcomposeLayout.kt:580)
+	at androidx.compose.ui.node.LayoutNode.onRelease(LayoutNode.kt:1502)
+	at androidx.compose.runtime.internal.RememberEventDispatcher.dispatchRememberObservers(RememberEventDispatcher.kt:228)
+	at androidx.compose.runtime.CompositionImpl.dispose(Composition.kt:955)
+	at androidx.compose.ui.platform.WrappedComposition.dispose(Wrapper.android.kt:141)
+	at androidx.compose.ui.platform.WrappedComposition.onStateChanged(Wrapper.android.kt:152)
+	at androidx.lifecycle.LifecycleRegistry$ObserverWithState.dispatchEvent(LifecycleRegistry.jvm.kt:316)
+	at androidx.lifecycle.LifecycleRegistry.backwardPass(LifecycleRegistry.jvm.kt:268)
+	at androidx.lifecycle.LifecycleRegistry.sync(LifecycleRegistry.jvm.kt:287)
+	at androidx.lifecycle.LifecycleRegistry.moveToState(LifecycleRegistry.jvm.kt:136)
+	at androidx.lifecycle.LifecycleRegistry.handleLifecycleEvent(LifecycleRegistry.jvm.kt:119)
+	at androidx.lifecycle.ReportFragment$Companion.dispatch$lifecycle_runtime(ReportFragment.android.kt:181)
+	at androidx.lifecycle.ReportFragment$LifecycleCallbacks.onActivityPreDestroyed(ReportFragment.android.kt:137)
+	at android.app.Activity.dispatchActivityPreDestroyed(Activity.java:1721)
+	at android.app.Activity.performDestroy(Activity.java:9288)
+	at android.app.Instrumentation.callActivityOnDestroy(Instrumentation.java:1561)
+	at androidx.test.runner.MonitoringInstrumentation.callActivityOnDestroy(MonitoringInstrumentation.java:753)
+	at android.app.ActivityThread.performDestroyActivity(ActivityThread.java:5950)
+	at android.app.ActivityThread.handleDestroyActivity(ActivityThread.java:5995)
+	at android.app.servertransaction.DestroyActivityItem.execute(DestroyActivityItem.java:46)
+	at android.app.servertransaction.ActivityTransactionItem.execute(ActivityTransactionItem.java:60)
+	at android.app.servertransaction.TransactionExecutor.executeLifecycleItem(TransactionExecutor.java:225)
+	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:107)
+	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:81)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2636)
+	at android.os.Handler.dispatchMessage(Handler.java:107)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8705)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)
+
+INSTRUMENTATION_STATUS: stream=
+Process crashed while executing credentialPresetsRequireTokensAndKeepDifferentAccountsSeparate(dev.pathpilot.app.ui.settings.McpPresetFlowTest):
+java.lang.ArrayIndexOutOfBoundsException: length=640; index=-1
+	at androidx.compose.runtime.composer.gapbuffer.SlotWriter.moveSlotGapTo(SlotTable.kt:4483)
+	at androidx.compose.runtime.composer.gapbuffer.SlotWriter.removeSlots(SlotTable.kt:3155)
+	at androidx.compose.runtime.composer.gapbuffer.SlotWriter.removeGroup(SlotTable.kt:2163)
+	at androidx.compose.runtime.ComposerKt.removeCurrentGroup(Composer.kt:1330)
+	at androidx.compose.runtime.composer.gapbuffer.SlotTable.clear(SlotTable.kt:181)
+	at androidx.compose.runtime.CompositionImpl.dispose(Composition.kt:952)
+	at androidx.compose.ui.layout.LayoutNodeSubcompositionsState.disposeCurrentNodes(SubcomposeLayout.kt:835)
+	at androidx.compose.ui.layout.LayoutNodeSubcompositionsState.onRelease(SubcomposeLayout.kt:580)
+	at androidx.compose.ui.node.LayoutNode.onRelease(LayoutNode.kt:1502)
+	at androidx.compose.runtime.internal.RememberEventDispatcher.dispatchRememberObservers(RememberEventDispatcher.kt:228)
+	at androidx.compose.runtime.CompositionImpl.dispose(Composition.kt:955)
+	at androidx.compose.ui.layout.LayoutNodeSubcompositionsState.disposeCurrentNodes(SubcomposeLayout.kt:835)
+	at androidx.compose.ui.layout.LayoutNodeSubcompositionsState.onRelease(SubcomposeLayout.kt:580)
+	at androidx.compose.ui.node.LayoutNode.onRelease(LayoutNode.kt:1502)
+	at androidx.compose.runtime.internal.RememberEventDispatcher.dispatchRememberObservers(RememberEventDispatcher.kt:228)
+	at androidx.compose.runtime.CompositionImpl.dispose(Composition.kt:955)
+	at androidx.compose.ui.platform.WrappedComposition.dispose(Wrapper.android.kt:141)
+	at androidx.compose.ui.platform.WrappedComposition.onStateChanged(Wrapper.android.kt:152)
+	at androidx.lifecycle.LifecycleRegistry$ObserverWithState.dispatchEvent(LifecycleRegistry.jvm.kt:316)
+	at androidx.lifecycle.LifecycleRegistry.backwardPass(LifecycleRegistry.jvm.kt:268)
+	at androidx.lifecycle.LifecycleRegistry.sync(LifecycleRegistry.jvm.kt:287)
+	at androidx.lifecycle.LifecycleRegistry.moveToState(LifecycleRegistry.jvm.kt:136)
+	at androidx.lifecycle.LifecycleRegistry.handleLifecycleEvent(LifecycleRegistry.jvm.kt:119)
+	at androidx.lifecycle.ReportFragment$Companion.dispatch$lifecycle_runtime(ReportFragment.android.kt:181)
+	at androidx.lifecycle.ReportFragment$LifecycleCallbacks.onActivityPreDestroyed(ReportFragment.android.kt:137)
+	at android.app.Activity.dispatchActivityPreDestroyed(Activity.java:1721)
+	at android.app.Activity.performDestroy(Activity.java:9288)
+	at android.app.Instrumentation.callActivityOnDestroy(Instrumentation.java:1561)
+	at androidx.test.runner.MonitoringInstrumentation.callActivityOnDestroy(MonitoringInstrumentation.java:753)
+	at android.app.ActivityThread.performDestroyActivity(ActivityThread.java:5950)
+	at android.app.ActivityThread.handleDestroyActivity(ActivityThread.java:5995)
+	at android.app.servertransaction.DestroyActivityItem.execute(DestroyActivityItem.java:46)
+	at android.app.servertransaction.ActivityTransactionItem.execute(ActivityTransactionItem.java:60)
+	at android.app.servertransaction.TransactionExecutor.executeLifecycleItem(TransactionExecutor.java:225)
+	at android.app.servertransaction.TransactionExecutor.executeTransactionItems(TransactionExecutor.java:107)
+	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:81)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2636)
+	at android.os.Handler.dispatchMessage(Handler.java:107)
+	at android.os.Looper.loopOnce(Looper.java:232)
+	at android.os.Looper.loop(Looper.java:317)
+	at android.app.ActivityThread.main(ActivityThread.java:8705)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)
+
+INSTRUMENTATION_STATUS: test=credentialPresetsRequireTokensAndKeepDifferentAccountsSeparate
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: shortMsg=Process crashed.
+INSTRUMENTATION_CODE: 0

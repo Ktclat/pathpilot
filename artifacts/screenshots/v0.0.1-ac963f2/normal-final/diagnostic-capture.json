@@ -1,0 +1,47 @@
+{
+  "utc": "2026-11-27T04:31:18.057667+00:00",
+  "scope": "Read-only capture during running instrumentation; diagnostic screenshot is not an assertion screenshot.",
+  "commands": [
+    {
+      "file": "diagnostic-current.png",
+      "args": [
+        "exec-out",
+        "screencap",
+        "-p"
+      ],
+      "exitCode": 0
+    },
+    {
+      "file": "diagnostic-window.txt",
+      "args": [
+        "shell",
+        "dumpsys",
+        "window",
+        "windows"
+      ],
+      "exitCode": 0
+    },
+    {
+      "file": "diagnostic-logcat-current.txt",
+      "args": [
+        "logcat",
+        "-d",
+        "-v",
+        "threadtime",
+        "-t",
+        "650"
+      ],
+      "exitCode": 0
+    },
+    {
+      "file": "diagnostic-java-threads.txt",
+      "args": [
+        "shell",
+        "debuggerd",
+        "-j",
+        "3322"
+      ],
+      "exitCode": 1
+    }
+  ]
+}

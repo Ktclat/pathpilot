@@ -1,65 +1,80 @@
-# 0.0.1-ee2b4dd 验证记录
+# 0.0.1-ac963f2 验证记录
 
-更新日期：2026-11-27（香港时间）。最终 APK 源码提交为 [`ee2b4dd539aecad2a98f22b4c33dee15f300c6d6`](https://github.com/Ktclat/pathpilot/commit/ee2b4dd539aecad2a98f22b4c33dee15f300c6d6)，已推送 `main`。本轮将导航收敛为四页，统一供应商与模型管理，并完善手机 MCP 操作文档。[0.1.10 验证记录](validation-0.1.10.md)已归档。
+更新日期：2026-11-27（香港时间）。源码 [`ac963f2e59a8af13a66ae950233d6fd102dd423a`](https://github.com/Ktclat/pathpilot/commit/ac963f2e59a8af13a66ae950233d6fd102dd423a) 已推送 `main`。本轮完善主题选项和远程 MCP 快捷添加，本地构建及 CI 已通过。下文记录设备自动测试、人工检查、调度修正及未解决的观测；此前四页导航与模型获取验证见 [ee2b4dd 归档](validation-0.0.1-ee2b4dd.md)。
 
 ## 改动
 
-- 主导航为共享、模型、MCP、设置。模型首页按供应商组织，二级统一编辑配置、登录、获取模型和管理共享模型。
-- 修复 API 供应商二级页点击「获取模型」后未自动请求目录：此前错误要求 Codex 登录状态；现在仅 Codex 检查登录，API 来源按自己的配置获取。另修复供应商编辑 Dialog 在浅色主题下使用白色系统栏文字，只调整该 Dialog 的图标明暗。
-- 统计从模型首页右上角进入；保留最近请求、供应商和模型的统计入口。统计、供应商模型详情及 MCP 连接详情隐藏主导航，返回恢复来源层级。
-- 共享开关、地址和密钥控件共用实现；中文与英文保持一致。MCP 通知复用已有 Activity 并打开 MCP 首页。
-- 应用版本采用 `0.0.1-<实际检出提交前7位>`，`versionCode` 保持递增。本次为 12；Actions 从 APK 读取版本，发布标签对应 `v<APK版本>`。
-- [手机 MCP 操作说明](android-mcp.md)提供 GitHub PAT 与 Codex 客户端配置，说明远程服务、手机网关和 Agent 的分工；[来源研究](mcp-catalog-research.md)区分远程目录与本地包安装。目录 UI 与手机通用脚本运行时尚未实现。
+- 「设置 → 主题」统一提供跟随系统/浅色/深色、动态取色和五种固定配色：森林绿、海蓝、紫晶、玫瑰、琥珀。选择固定配色会关闭动态取色，重新开启动态取色时保留原固定色；偏好持久化并进入加密备份。
+- 旧配置及旧备份保留原明暗、语言和动态取色偏好，新增固定配色默认森林绿。Android 8–11 使用固定配色，动态选项标明版本要求。
+- MCP 添加入口提供 Microsoft Learn、OpenAI Docs、Context7、GitHub 四项预设及自定义连接。前两项直接添加，Context7 填 API Key，GitHub 填 PAT；使用已核查的官方 URL 和 Bearer 配置。
+- 预设保存后自动进入详情并获取工具。失败保留连接，可重新获取；同一地址和令牌复用已有连接，不同令牌可分别保存。后续编辑仍使用统一表单，添加不会启动共享。
+- 版本为 `0.0.1-ac963f2`，`versionCode` 为 13，常规产物仍仅包含 ARM64。首批测试发现的调度问题通过官方 `junit4.v2` 测试入口处理，见下方失败记录。
 
-## 本地构建
+## 构建与产物
 
 ```sh
 ./gradlew --no-daemon :core:test :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
-python3 scripts/verify-apk.py artifacts/PathPilot-0.0.1-ee2b4dd-arm64.apk
-$ANDROID_HOME/build-tools/36.0.0/apksigner verify artifacts/PathPilot-0.0.1-ee2b4dd-arm64.apk
+python3 scripts/verify-apk.py artifacts/PathPilot-0.0.1-ac963f2-arm64.apk
+$ANDROID_HOME/build-tools/36.0.0/apksigner verify artifacts/PathPilot-0.0.1-ac963f2-arm64.apk
 ```
 
 | 检查 | 结果 | 证据 |
 | --- | --- | --- |
-| Gradle | 最终 `ee2b4dd` 完整检查通过，1 分 45 秒；隔离截图包构建通过，32 秒 | [完整检查](../artifacts/validation/v0.0.1/gradle-editor-bars.log) · [截图包构建](../artifacts/validation/v0.0.1/capture-editor-bars.log) |
-| JVM | 核心 110 项、App 51 项，0 失败、0 错误 | [逐模块汇总](../artifacts/validation/v0.0.1/jvm-results.json) |
-| Android Lint | 0 错误、42 条警告 | [XML 报告](../artifacts/validation/v0.0.1/lint-results-debug.xml) |
-| 最终 ARM64 APK | `ee2b4dd` 产物已构建；ZIP、包名、签名和 ARM64-only 检查通过 | [产物元数据](../artifacts/validation/v0.0.1/apk.json) |
-| 工作流与资源 | actionlint 已通过；506 对中英文资源名称一致，无重复，文档链接检查通过 | 当前仓库检查结果 |
-| GitHub Actions | 最终 `ee2b4dd` 构建成功 | [最终运行 45863708697](https://github.com/Ktclat/pathpilot/actions/runs/45863708697) · [运行记录](../artifacts/validation/v0.0.1/actions.json) |
-| 模拟器 | 13 项不同用例、16 次执行全部通过，包含基线 12 项与最终包 4 次定向执行 | [基线](../artifacts/screenshots/v0.0.1-4e19d6e/README.md) · [最终包](../artifacts/screenshots/v0.0.1-ee2b4dd/README.md) |
+| 本地 Gradle | 完整检查通过，1 分 56 秒 | [日志](../artifacts/validation/v0.0.1-ac963f2/gradle.log) |
+| JVM | 核心 110 项、App 58 项，共 168 项，0 失败、0 错误 | [逐模块结果](../artifacts/validation/v0.0.1-ac963f2/jvm-results.json) |
+| Android Lint | 0 错误、42 条警告 | [XML 报告](../artifacts/validation/v0.0.1-ac963f2/lint-results-debug.xml) |
+| ARM64 APK | ZIP、包名、签名与 ARM64-only 检查通过 | [产物元数据](../artifacts/validation/v0.0.1-ac963f2/apk.json) |
+| GitHub Actions | `ac963f2` 构建成功 | [运行 45939458176](https://github.com/Ktclat/pathpilot/actions/runs/45939458176) · [状态记录](../artifacts/validation/v0.0.1-ac963f2/actions.json) |
+| 截图包 | 构建通过，42 秒，已安装 | [构建日志](../artifacts/validation/v0.0.1-ac963f2/capture-build.log) |
+| 模拟器 | 最终包 6 次自动执行：4 次通过、2 次失败；4 项不同用例自动通过。大字体人工操作与原图检查通过，自动失败记录保留 | [本轮批次](../artifacts/screenshots/v0.0.1-ac963f2/README.md) |
 
-交付产物为 `artifacts/PathPilot-0.0.1-ee2b4dd-arm64.apk`：版本 `0.0.1-ee2b4dd` / `versionCode` 12，包名 `dev.pathpilot.app`，仅包含 `arm64-v8a`，大小 21,088,845 字节。
+新增 JVM 检查覆盖旧偏好与旧备份的配色默认值、预设令牌校验、同地址不同账号、已有连接状态保留及 URL 规范化后的复用。
 
-SHA-256：`00aa149c93e76cc2e706709f5cba3e2d82d309e94db4be6db772258a90bd28c6`。
+最终产物为 `artifacts/PathPilot-0.0.1-ac963f2-arm64.apk`，包名 `dev.pathpilot.app`，版本 `0.0.1-ac963f2` / `versionCode` 13，大小 21,147,317 字节。
 
-常规产物是 ARM64 debug 签名 APK；模拟器使用独立的 x86_64 `.capture` 包，二者分别记录。版本后缀对应实际构建提交，不随后续文档提交替换。
+SHA-256：`4a40758c99faabca1b3fba54de3491adfc9f85c7f8b91daa10b78a8f0ccdad9b`。
+
+初始 `aff1629` 的[完整构建](../artifacts/validation/v0.0.1-aff1629/gradle.log)、[截图包构建](../artifacts/validation/v0.0.1-aff1629/capture-build.log)与[APK 元数据](../artifacts/validation/v0.0.1-aff1629/apk.json)单独保留。常规产物为 ARM64 debug 签名 APK；模拟器使用独立的 x86_64 `.capture` 包。
 
 ## 设备验证
 
-设备检查按源码和影响范围分别记录：
+以下为 `ac963f2` 最终截图包的自动结果，共 6 次执行、4 次通过、2 次失败，4 项不同用例获得通过结果：
 
-| 源码 | 范围 | 当前结果 |
+| 配置 | 用例 | 自动结果 |
 | --- | --- | --- |
-| `4e19d6e` | 四页导航、设置、MCP、统计、3 项 Codex 目录、3 项供应商模型及 2 项大字体，共 12 项 | 12 项全部通过，相关原图已审阅 |
-| `ee2b4dd` | API 供应商自动获取目录 1 项、Codex 目录 3 项复测 | [4 项全部通过](../artifacts/screenshots/v0.0.1-ee2b4dd/catalog-final/results.json)，目录与浅色编辑页原图已审阅 |
+| 普通字体 | 主题配色、动态取色、语言与 Activity 重建后的持久化，1 项 | `normal-final` 超时；[同包独立复测通过](../artifacts/screenshots/v0.0.1-ac963f2/theme-isolated/results.json)，204.703 秒 |
+| 普通字体 | MCP 免凭据预设自动获取/失败重试，以及凭据预设/账号复用，2 项 | [normal-final 两项通过](../artifacts/screenshots/v0.0.1-ac963f2/normal-final/results.json) |
+| 普通字体 | 原 MCP 自定义连接、工具选择与独立共享服务，1 项 | [normal-final 通过](../artifacts/screenshots/v0.0.1-ac963f2/normal-final/results.json) |
+| 大字体 | 主题面板、色板、MCP 目录与令牌表单的滚动和操作，1 项 | [large-final 失败](../artifacts/screenshots/v0.0.1-ac963f2/large-final/results.json)，136.934 秒；不计自动通过 |
 
-最终修复改变 API 目录获取的触发条件和供应商编辑 Dialog 的系统栏明暗，没有修改四页导航布局。保留 `4e19d6e` 的导航验证基线，对最终包执行受影响的目录流程与编辑页检查；中间版 `db21b5c` 不另作设备重复测试。两批合计覆盖 13 项不同用例、16 次执行，全部通过；3 项重复的 Codex 用例不重复计入不同用例数。
+主题、自定义 MCP 和大字体用例运行生产 MainActivity；预设用例在测试宿主挂载生产 `McpPage`，通过真实 `McpClient` 将 HTTP 目的地重定向到设备回环服务器，保存的连接仍为官方 URL。它们验证界面、存储与请求行为，不代表远程服务的实际账号联调。每批分别保存 runner、APK SHA 和原始截图。
 
-Codex 与供应商分组用例直接挂载生产组件，不代表完整 MainActivity 导航。完整主导航证据来自基线 `normal-attempt1` 的 17–20 号原图；新增 API 用例通过生产 MainActivity 完成实际流程。每批同时保留 runner、APK SHA 和原始截图。
+### 失败记录与调度修正
 
-最终包的 API [一次获取](../artifacts/screenshots/v0.0.1-ee2b4dd/catalog-final/24-api-model-selection.png)、[保存后模型页](../artifacts/screenshots/v0.0.1-ee2b4dd/catalog-final/25-api-model-saved.png)和[浅色编辑器](../artifacts/screenshots/v0.0.1-ee2b4dd/catalog-final/01a-provider-settings.png)已审阅，浅色 Dialog 时钟颜色修复已确认。同一最终包的[关于页](../artifacts/screenshots/v0.0.1-ee2b4dd/system-bars/05-about-final-version.png)显示 `0.0.1-ee2b4dd`（12）；[深色编辑器](../artifacts/screenshots/v0.0.1-ee2b4dd/system-bars/06-provider-editor-dark-steady.png)的白色时钟与深色背景匹配，浅色编辑器则使用灰色时钟。以上人工检查与原图审阅已完成。
+初始 `aff1629/normal-attempt1` 有 3 项失败：主题面板 `ComposeNotIdleException`、无凭据预设 `SnapshotStateObserver` 多线程访问异常、令牌预设 `ArrayIndexOutOfBoundsException`；第四项 MCP 自定义共享未运行，大字体也未运行。[原始结果](../artifacts/screenshots/v0.0.1-aff1629/normal-attempt1/results.json)与 [runner](../artifacts/screenshots/v0.0.1-aff1629/normal-attempt1/instrumentation.log)保留，不计通过。
 
-此模拟器仍有深色三键导航低对比的呈现差异。浅/深对照使用同一个 Activity 窗口，各静置 15 秒；应用窗口的状态栏/导航栏明暗标记正确，Launcher3 Taskbar 的 `darkIntensity` 从 1 变为 0，但背景颜色 override 仍为 1，三键图标保持 RGB（69, 70, 79）。该差异仍未解决，具体平台原因与其他设备表现待复现。原图与窗口记录见[本批截图说明](../artifacts/screenshots/v0.0.1-ee2b4dd/README.md)。
+[logcat](../artifacts/screenshots/v0.0.1-aff1629/normal-attempt1/logcat-after.txt)第 940–1022 行记录网络 IO 恢复经过旧测试 `Unconfined` 路径，在 `DefaultDispatcher-worker` 执行 Recomposer/布局观察。三个相关类改用官方 `junit4.v2` 工厂的 `StandardTestDispatcher` 排队调度，随后 3 个 MCP 用例均通过，未再出现原多线程异常。具体依据见 [调度核查](../artifacts/validation/v0.0.1-ac963f2/test-scheduling.json)。
 
-验收后已恢复设备参数，清理两个 `.capture` 包的数据并停止本轮启动的模拟器。[设备结果汇总](../artifacts/validation/v0.0.1/device-results.json)与[清理记录](../artifacts/screenshots/v0.0.1-ee2b4dd/cleanup.json)已保存。
+主题的空闲超时仍未确定根因：切换调度后的 `normal-final` 中主题失败，`large-final` 也在打开主题后检查动态取色时超时，仅留下设置页截图；同一 APK、测试规则和时限下的 `theme-isolated` 则完整通过。各次原始结果均保留。
 
-前序五页导航 `b637973` 记录单独保留：普通字体首批 2 项通过，MCP 用例在退出清理阶段失败；统计复测 1 项通过，大字体 1 项通过。相关通知返回栈修正已纳入当前代码，已由四页导航基线的 MCP 流程重新验证通过。旧图不作为四页导航的展示证据。
+### 截图与人工检查
 
-更早的 `0.1.10` 已确认 9 项不同设备用例通过；其大字体补跑在用例执行前遇到启动 ANR，失败与原图保留在 [归档](validation-0.1.10.md)。
+`theme-isolated` 的 8 张原图已全部审阅，包含[动态取色](../artifacts/screenshots/v0.0.1-ac963f2/theme-isolated/27-theme-dynamic.png)、[海蓝深色](../artifacts/screenshots/v0.0.1-ac963f2/theme-isolated/28-theme-ocean-dark.png)、[英文动态取色](../artifacts/screenshots/v0.0.1-ac963f2/theme-isolated/30-theme-dynamic-english.png)和[琥珀配色](../artifacts/screenshots/v0.0.1-ac963f2/theme-isolated/31-theme-amber-english.png)。初始 `aff1629` 截图包在测试框架外手动打开主题面板、静置 15 秒的[对照图](../artifacts/screenshots/v0.0.1-aff1629/manual-theme-diagnosis/02-theme-open-steady.png)也正常显示，作为独立诊断证据保留。
 
-## 外部服务与发布
+`ac963f2` 的大字体人工检查已完成并通过原图审阅：在生产 MainActivity、真实 density 360 / 字体 1.5 下，[主题明暗、动态取色与完成按钮](../artifacts/screenshots/v0.0.1-ac963f2/manual-large/01-theme-controls.png)可达，模式文字正常换行，[五种色板](../artifacts/screenshots/v0.0.1-ac963f2/manual-large/02-theme-palettes-visible.png)可滚动查看；实际切换琥珀和海蓝、开启动态取色后，点击完成回到[正确设置摘要](../artifacts/screenshots/v0.0.1-ac963f2/manual-large/06-settings-after-done.png)。
 
-官方 MCP 资料已按固定提交核查。当前环境对 Registry 及相关远程 MCP 域名的连接在代理 CONNECT 阶段返回 403，请求未到达服务；真实 GitHub PAT 握手与工具调用尚未验证。具体来源和协议依据见 [手机 MCP 文档](android-mcp.md)。
+[MCP 目录底部](../artifacts/screenshots/v0.0.1-ac963f2/manual-large/09-mcp-catalog-bottom.png)可滚动到 GitHub 与自定义入口；[GitHub 表单](../artifacts/screenshots/v0.0.1-ac963f2/manual-large/10-github-token-controls.png)的 URL、令牌输入、获取令牌和添加按钮显示清晰并可达。此人工检查未填写或提交凭据。人工操作通过单独记录，不改写大字体自动用例的超时失败。
 
-本轮尚未发布新的 Release。真实订阅账号、外部 MCP 服务和实体手机跨设备联调与本地回环测试分别记录。
+恢复 density 320、字体 1.0 后，另一次 MainActivity 冷启动出现 [ANR 弹窗](../artifacts/screenshots/v0.0.1-ac963f2/manual-main-activity/00-startup-anr.png)：[启动等待](../artifacts/screenshots/v0.0.1-ac963f2/manual-main-activity/launch.txt)在 21.308 秒超时，[系统记录](../artifacts/screenshots/v0.0.1-ac963f2/manual-main-activity/startup-lastanr.txt)为触摸分发等待 5,001 毫秒。[主线程转储](../artifacts/screenshots/v0.0.1-ac963f2/manual-main-activity/startup-anr-main-thread.txt)采样时为 Runnable，调用栈位于 Android 双向文本/宽度测量及 Compose LazyList 布局；同期有高 CPU 压力。这项人工观测单独记录，自动执行计数保持 6 次。随后一次 force-stop 后[冷启动成功](../artifacts/screenshots/v0.0.1-ac963f2/manual-main-activity/launch-recovery.txt)，耗时 13.143 秒并恢复共享页显示；根因仍待定位。
+
+上一轮 13 项不同用例、16 次执行以及深色三键导航低对比的观测保留在 [历史归档](validation-0.0.1-ee2b4dd.md)，不计入本轮结果。
+
+恢复后的生产 MainActivity [预设目录](../artifacts/screenshots/v0.0.1-ac963f2/manual-main-activity/03-mcp-preset-catalog.png)与[关于页](../artifacts/screenshots/v0.0.1-ac963f2/manual-main-activity/04-about-version.png)已截图并审查，版本显示 `0.0.1-ac963f2（13）`，与正常 ARM64 产物一致。
+
+验证结束后已恢复设备字号、density 与系统明暗，清理隔离截图包并停止本轮模拟器，见[清理记录](../artifacts/screenshots/v0.0.1-ac963f2/cleanup.json)。
+
+## 远程服务与发布
+
+四项预设字段已按官方资料核查，Context7 的 API Key 要求依据 HTTP 服务默认认证实现。当前云环境的四次无凭据初始化均在代理 CONNECT 阶段返回 403，未到达远程服务；没有在线协议协商、真实 PAT 或远程工具调用成功记录。来源与原始摘要见 [远程 MCP 预设](mcp-presets.md)。
+
+当前提供精选静态预设；在线 Registry 搜索、MCP OAuth 和本地 stdio 运行时尚未实现。本轮尚未发布新的 Release。

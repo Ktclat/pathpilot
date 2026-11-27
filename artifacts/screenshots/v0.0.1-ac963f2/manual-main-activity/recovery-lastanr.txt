@@ -1,0 +1,80 @@
+ACTIVITY MANAGER LAST ANR (dumpsys activity lastanr)
+  ANR time: Nov 27, 2026 4:53:40 AM
+  Reason: Input dispatching timed out (d0e1068 dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity (server) is not responding. Waited 5001ms for MotionEvent(deviceId=-1, eventTime=4456297000000, source=TOUCHSCREEN, displayId=0, action=DOWN, actionButton=0x00000000, flags=0x00000000, metaState=0x00000000, buttonState=0x00000000, classification=NONE, edgeFlags=0x00000000, xPrecision=1.0, yPrecision=1.0, xCursorPosition=nan, yCursorPosition=nan, pointers=[0: (450.0, 1090.0)]), policyFlags=0x6b000000).
+
+  * Task{1882dcf #35 type=standard A=10149:dev.pathpilot.app.capture U=0 visible=true visibleRequested=true mode=fullscreen translucent=false sz=1}
+    mLastNonFullscreenBounds=Rect(129, 253 - 592, 973)
+    isSleeping=false
+    topResumedActivity=ActivityRecord{5d5be2e u0 dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity t35}
+
+  mLastHomeActivityStartResult=0
+  mLastStarter:
+    mCurrentUser=0
+    mLastStartReason=startActivityAndWait
+    mLastStartActivityTimeMs=Nov 27, 2026 4:52:59 AM
+    mLastStartActivityResult=0
+    mStartActivity:
+      packageName=dev.pathpilot.app.capture processName=dev.pathpilot.app.capture
+      launchedFromUid=2000 launchedFromPackage=com.android.shell launchedFromFeature=null userId=0
+      app=ProcessRecord{2e54e19 4201:dev.pathpilot.app.capture/u0a149}
+      Intent { flg=0x10000000 cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity }
+      rootOfTask=true task=Task{1882dcf #35 type=standard A=10149:dev.pathpilot.app.capture}
+      taskAffinity=10149:dev.pathpilot.app.capture
+      mActivityComponent=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity
+      baseDir=/data/app/~~DBHl9jKBPh8e4kfFxDwlZA==/dev.pathpilot.app.capture-uJ3T7fgi5vK2JqXrPfgmjw==/base.apk
+      dataDir=/data/user/0/dev.pathpilot.app.capture
+      stateNotNeeded=false componentSpecified=true mActivityType=standard
+      compat={320dpi} theme=0x7f0a0009
+      mLastReportedConfigurations:
+        mGlobalConfig={1.0 310mcc260mnc [zh_CN,en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.212 fontWeightAdjustment=0}
+        mOverrideConfig={1.0 310mcc260mnc [zh_CN,en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.2 fontWeightAdjustment=0}
+      mLastReportedActivityWindowInfo=ActivityWindowInfo{isEmbedded=false, taskBounds=Rect(0, 0 - 720, 1280), taskFragmentBounds=Rect(0, 0 - 720, 1280)}
+      CurrentConfiguration={1.0 310mcc260mnc [zh_CN,en_US] ldltr sw360dp w360dp h640dp 320dpi nrml long port finger qwerty/v/v -nav/h winConfig={ mBounds=Rect(0, 0 - 720, 1280) mAppBounds=Rect(0, 0 - 720, 1280) mMaxBounds=Rect(0, 0 - 720, 1280) mDisplayRotation=ROTATION_0 mWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0} as.3 s.2 fontWeightAdjustment=0}
+      RequestedOverrideConfiguration={0.0 ?mcc0mnc [zh_CN,en_US] ldltr ?swdp ?wdp ?hdp ?density ?lsize ?long ?ldr ?wideColorGamut ?orien ?uimode ?night ?touch ?keyb/?/? ?nav/? winConfig={ mBounds=Rect(0, 0 - 0, 0) mAppBounds=null mMaxBounds=Rect(0, 0 - 0, 0) mDisplayRotation=undefined mWindowingMode=undefined mActivityType=standard mAlwaysOnTop=undefined mRotation=undefined} ?fontWeightAdjustment}
+      ResolvedOverrideConfiguration={0.0 ?mcc0mnc [zh_CN,en_US] ldltr ?swdp ?wdp ?hdp ?density ?lsize ?long ?ldr ?wideColorGamut ?orien ?uimode ?night ?touch ?keyb/?/? ?nav/? winConfig={ mBounds=Rect(0, 0 - 0, 0) mAppBounds=null mMaxBounds=Rect(0, 0 - 0, 0) mDisplayRotation=undefined mWindowingMode=undefined mActivityType=undefined mAlwaysOnTop=undefined mRotation=undefined} s.2 ?fontWeightAdjustment}
+      taskDescription: label="null" icon=null iconResource=/0 iconFilename=null primaryColor=fff5f5f5
+        backgroundColor=fffafafa statusBarColor=0 navigationBarColor=fffefbff
+       backgroundColorFloating=ffffffff
+      launchFailed=false launchCount=1 lastLaunchTime=-31s140ms
+      mHaveState=false mIcicle=null
+      state=RESUMED delayedResume=false finishing=false
+      keysPaused=false inHistory=true idle=true
+      occludesParent=true noDisplay=false immersive=false launchMode=0
+      mActivityType=standard
+      mImeInsetsFrozenUntilStartInput=false
+      windows=[Window{d0e1068 u0 dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity}]
+      windowType=2
+      mOccludesParent=true
+      overrideOrientation=SCREEN_ORIENTATION_UNSPECIFIED
+      requestedOrientation=SCREEN_ORIENTATION_UNSPECIFIED
+      mVisibleRequested=true mVisible=true mClientVisible=true reportedDrawn=true reportedVisible=true
+      mNumInterestingWindows=1 mNumDrawnWindows=1 allDrawn=true lastAllDrawn=false)
+      startingData=null firstWindowDrawn=true mIsExiting=false
+      nowVisible=true lastVisibleTime=-17s405ms
+      resizeMode=RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION
+      mLastReportedMultiWindowMode=false mLastReportedPictureInPictureMode=false
+      supportsSizeChanges=SIZE_CHANGES_UNSUPPORTED_METADATA
+      configChanges=0x3
+      neverSandboxDisplayApis=false
+      alwaysSandboxDisplayApis=false
+      areBoundsLetterboxed=false
+      mCameraCompatControlState=hidden
+      mCameraCompatControlEnabled=false
+    mIntent=Intent { flg=0x10000000 cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity }
+    mLaunchMode=LAUNCH_MULTIPLE    mLaunchFlags=0x10000000 mDoResume=true mAddingToTask=true mInTaskFragment=null
+
+  ResumedActivity: ActivityRecord{5d5be2e u0 dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity t35}
+  LockTaskController:
+    mLockTaskModeState=NONE
+    mLockTaskModeTasks=
+    mLockTaskPackages (userId:packages)=
+
+  KeyguardController:
+    mKeyguardShowing=false
+    mAodShowing=false
+    mKeyguardGoingAway=false
+   KeyguardShowing=false AodShowing=false KeyguardGoingAway=false DismissalRequested=false  Occluded=false DismissingKeyguardActivity=null TurnScreenOnActivity=null at display=0
+    mDismissalRequested=false
+
+-------------------------------------------------------------------------------
+

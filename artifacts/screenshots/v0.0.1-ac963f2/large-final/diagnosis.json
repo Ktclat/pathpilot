@@ -1,0 +1,18 @@
+{
+  "passed": 0,
+  "failed": 1,
+  "failure": "ComposeNotIdleException after Theme click at SettingsFlowTest.kt190; dynamic-color assertion could not reach idle.",
+  "attempts": 1,
+  "automaticScreenshots": [
+    "14-settings-large-font.png",
+    "14a-navigation-large-font.png"
+  ],
+  "nextAction": "No retry, timeout, animation, or production change. Manual production MainActivity large-font review archived separately in manual-large/.",
+  "manualObserved": [
+    "Palette scrolling and selection",
+    "Dynamic-color switch",
+    "Done returns to settings summary",
+    "MCP preset scrolling",
+    "GitHub token input and Add button visible"
+  ]
+}

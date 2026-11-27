@@ -1,0 +1,254 @@
+--------- beginning of main
+11-27 04:28:43.090   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:44.099   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:44.127   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:44.136   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:45.150   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:45.165   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:45.182   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:46.194   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:46.202   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:46.212   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:46.601   862   970 I QuickAccessWalletTile: QAW service is unavailable, recreating the wallet client.
+11-27 04:28:46.732   862   970 D ControlsListingControllerImpl: Subscribing callback, service count: 0
+11-27 04:28:46.754   862   970 D ControlsListingControllerImpl: Unsubscribing callback
+11-27 04:28:47.230   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:47.239   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:47.248   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:48.274   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:48.287   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:48.299   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:49.307   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:49.326   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:49.334   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:50.334  3322  3322 I Choreographer: Skipped 537 frames!  The application may be doing too much work on its main thread.
+11-27 04:28:50.359   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:50.379   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:50.395   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:51.412   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:51.421   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:51.428   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:52.449   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:52.461   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:52.467   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:52.985  3322  3322 I Choreographer: Skipped 77 frames!  The application may be doing too much work on its main thread.
+11-27 04:28:53.486   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:53.491   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:53.504   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:54.280  3322  3332 I HWUI    : Davey! duration=21810ms; Flags=0, FrameTimelineVsyncId=11410, IntendedVsync=2953579673713, Vsync=2971479673534, InputEventId=0, HandleInputStart=2971517520852, AnimationStart=2971517700080, PerformTraversalsStart=2971522770639, DrawStart=2972718319334, FrameDeadline=2953613007046, FrameInterval=2971509024187, FrameStartTime=33333333, SyncQueued=2973935743068, SyncStart=2973936413796, IssueDrawCommandsStart=2973937555483, SwapBuffers=2975265862170, FrameCompleted=2975390527900, DequeueBufferDuration=58671, QueueBufferDuration=2160249, GpuCompleted=2975390527900, SwapBuffersCompleted=2975355042049, DisplayPresentTime=0, CommandSubmissionCompleted=2975265862170, 
+11-27 04:28:54.523   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:54.543   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:54.548   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:55.329  3322  3340 D EGL_emulation: app_time_stats: avg=8090.91ms min=50.34ms max=23169.04ms count=3
+11-27 04:28:55.379  3322  3332 I HWUI    : Davey! duration=1074ms; Flags=0, FrameTimelineVsyncId=11436, IntendedVsync=2975446340161, Vsync=2976413006818, InputEventId=0, HandleInputStart=2976433202011, AnimationStart=2976433216148, PerformTraversalsStart=2976433224109, DrawStart=2976441954323, FrameDeadline=2975479673494, FrameInterval=2976431011798, FrameStartTime=33333333, SyncQueued=2976446688848, SyncStart=2976447847761, IssueDrawCommandsStart=2976449133425, SwapBuffers=2976482905772, FrameCompleted=2976521886285, DequeueBufferDuration=64259, QueueBufferDuration=1478660, GpuCompleted=2976521886285, SwapBuffersCompleted=2976506530980, DisplayPresentTime=0, CommandSubmissionCompleted=2976482905772, 
+11-27 04:28:55.566   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:55.575   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:55.610   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:56.631   383   766 D audioserver: logFgsApiBegin: FGS Logger Transaction failed, -129
+11-27 04:28:56.650   562  1054 W AS.PlaybackActivityMon: No piid assigned for invalid/internal port id 15
+11-27 04:28:56.721   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:56.769   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:56.779   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:57.200  3322  3340 D EGL_emulation: app_time_stats: avg=1869.05ms min=1869.05ms max=1869.05ms count=1
+11-27 04:28:57.330  3322  3333 I HWUI    : Davey! duration=830ms; Flags=0, FrameTimelineVsyncId=11450, IntendedVsync=2977546340140, Vsync=2977746340138, InputEventId=0, HandleInputStart=2977781592062, AnimationStart=2977781605842, PerformTraversalsStart=2977783951825, DrawStart=2977794212583, FrameDeadline=2977579673473, FrameInterval=2977773583387, FrameStartTime=33333333, SyncQueued=2977973117446, SyncStart=2977973906307, IssueDrawCommandsStart=2977986807511, SwapBuffers=2978236844852, FrameCompleted=2978378036468, DequeueBufferDuration=65947, QueueBufferDuration=22410678, GpuCompleted=2978375068822, SwapBuffersCompleted=2978378036468, DisplayPresentTime=0, CommandSubmissionCompleted=2978236844852, 
+11-27 04:28:57.454   383   518 D audioserver: logFgsApiEnd: FGS Logger Transaction failed, -129
+11-27 04:28:57.526   862   975 D EGL_emulation: app_time_stats: avg=30123.10ms min=30123.10ms max=30123.10ms count=1
+11-27 04:28:57.638   862   975 W ndroid.systemui: Long monitor contention with owner SysUiBg (970) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:695) waiters=1 in boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long) for 109ms
+11-27 04:28:57.791   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:57.797   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:57.828   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:58.864   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:58.880   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:58.894   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:59.908   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:59.931   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:28:59.960   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:00.091   346  2702 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 3023552
+11-27 04:29:00.334   862   975 D EGL_emulation: app_time_stats: avg=2806.01ms min=2806.01ms max=2806.01ms count=1
+11-27 04:29:01.036   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:01.055   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:01.083   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:02.111   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:02.118   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:02.123   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:03.129   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:03.137   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:03.147   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:04.161   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:04.167   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:04.182   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:05.190   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:05.198   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:05.207   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:06.230   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:06.239   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:06.248   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:07.266   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:07.275   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:07.294   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:08.307   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:08.316   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:08.326   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:08.449  3322  3326 I lot.app.capture: Compiler allocated 5174KB to compile void android.view.ViewRootImpl.performTraversals()
+11-27 04:29:09.352   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:09.365   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:09.373   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:10.387   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:10.408   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:10.422   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:11.452   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:11.469   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:11.515   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:12.536   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:12.586   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:12.658   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:13.746   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:13.760   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:13.784   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:14.810   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:14.822   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:14.831   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:15.868   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:15.890   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:15.901   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:16.926   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:16.934   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:16.944   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:17.959   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:17.983   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:17.996   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:18.043   562   724 E WifiScoringParams: Invalid frequency(-1), using 5G as default rssi array
+11-27 04:29:19.015   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:19.027   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:19.038   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:20.054   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:20.062   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:20.074   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:21.087   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:21.090   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:21.096   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:21.236  3322  3322 I Choreographer: Skipped 735 frames!  The application may be doing too much work on its main thread.
+11-27 04:29:22.114   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:22.121   562   943 D WifiNl80211Manager: Scan result ready event
+11-27 04:29:22.122   562   943 D WifiNative: Scan result ready event
+11-27 04:29:22.130   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:22.144   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+--------- beginning of kernel
+11-27 04:29:22.171     0     0 W healthd : battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+11-27 04:29:22.326   562   724 I HalDevMgr: bestIfaceCreationProposal is null, requestIface=STA, existingIface=[name=wlan0 type=STA]
+11-27 04:29:22.371  3322  3340 D EGL_emulation: app_time_stats: avg=25168.26ms min=25168.26ms max=25168.26ms count=1
+11-27 04:29:22.455  3322  3333 I HWUI    : Davey! duration=25659ms; Flags=0, FrameTimelineVsyncId=11459, IntendedVsync=2977879673470, Vsync=3002379673225, InputEventId=0, HandleInputStart=3002421041019, AnimationStart=3002421055614, PerformTraversalsStart=3002428018108, DrawStart=3002447100838, FrameDeadline=2978413006798, FrameInterval=3002410874312, FrameStartTime=33333333, SyncQueued=3003123015885, SyncStart=3003130581388, IssueDrawCommandsStart=3003132442732, SwapBuffers=3003447136366, FrameCompleted=3003546987456, DequeueBufferDuration=60729, QueueBufferDuration=3404105, GpuCompleted=3003545841897, SwapBuffersCompleted=3003546987456, DisplayPresentTime=0, CommandSubmissionCompleted=3003447136366, 
+11-27 04:29:23.166   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:23.176   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:23.203   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:23.295  3322  3336 I UiAutomation: Initialized for user 0 on display 0
+--------- beginning of system
+11-27 04:29:23.353   562   943 D AccessibilityManagerService: changeCurrentUserForTestAutomationIfNeededLocked(0): ignoring because device doesn't support visible background users
+11-27 04:29:23.355   562   943 I UiAutomationManager: Registering UiTestAutomationService (id=com.android.server.accessibility/UiAutomation, flags=0x0) when called by user 0
+11-27 04:29:23.403   562   943 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+11-27 04:29:23.492   562   562 W Looper  : Slow dispatch took 123ms main h=com.android.server.accessibility.AccessibilityManagerService$MainHandler c=com.android.server.accessibility.UiAutomationManager$UiAutomationService$$ExternalSyntheticLambda0@9e7d2fa m=0
+11-27 04:29:23.503   562   562 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 04:29:23.514   562   562 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 04:29:23.526   562   562 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 04:29:23.528   562   562 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 04:29:23.532   562   562 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 04:29:23.561   562  1054 D WindowManager: captureDisplay
+11-27 04:29:23.575  3322  3357 V UiAutomation: Init UiAutomation@da06be0[id=2, displayId=0, flags=0]
+11-27 04:29:23.638   562   562 W IPCThreadState: Sending oneway calls to frozen process.
+11-27 04:29:23.646   562   562 W Looper  : Slow dispatch took 113ms main h=com.android.server.accessibility.AccessibilityManagerService$MainHandler c=com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticLambda3@15930ab m=0
+11-27 04:29:23.647   562   562 D BatterySaverPolicy: accessibility changed to true, updating policy.
+11-27 04:29:23.796   862   932 W Looper  : Slow delivery took 51ms wmshell.main h=android.view.ViewRootImpl$ViewRootHandler c=android.view.accessibility.AccessibilityManager$$ExternalSyntheticLambda0@17ca87b m=0
+11-27 04:29:23.796   862   932 W Looper  : Slow dispatch took 66ms wmshell.main h=android.view.ViewRootImpl$ViewRootHandler c=android.view.accessibility.AccessibilityManager$$ExternalSyntheticLambda0@17ca87b m=0
+11-27 04:29:24.219   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:24.226   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:24.234   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:25.250   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:25.254   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:25.264   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:26.272   383   766 D audioserver: logFgsApiBegin: FGS Logger Transaction failed, -129
+11-27 04:29:26.318   562  1328 W AS.PlaybackActivityMon: No piid assigned for invalid/internal port id 15
+11-27 04:29:26.328   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:26.344   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:26.440   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:26.545   383   518 D audioserver: logFgsApiEnd: FGS Logger Transaction failed, -129
+11-27 04:29:26.783  3322  3340 D EGL_emulation: app_time_stats: avg=2195.95ms min=65.13ms max=4326.77ms count=2
+11-27 04:29:26.823  3322  3333 I HWUI    : Davey! duration=745ms; Flags=0, FrameTimelineVsyncId=11517, IntendedVsync=3007213006510, Vsync=3007713006505, InputEventId=0, HandleInputStart=3007717325266, AnimationStart=3007717338778, PerformTraversalsStart=3007719787564, DrawStart=3007729306726, FrameDeadline=3007246339843, FrameInterval=3007713214843, FrameStartTime=33333333, SyncQueued=3007815109927, SyncStart=3007815533366, IssueDrawCommandsStart=3007832519859, SwapBuffers=3007887236097, FrameCompleted=3007959091923, DequeueBufferDuration=68661, QueueBufferDuration=7029413, GpuCompleted=3007908030966, SwapBuffersCompleted=3007959091923, DisplayPresentTime=0, CommandSubmissionCompleted=3007887236097, 
+11-27 04:29:27.458   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:27.480   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:27.511   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:27.784  3322  3322 I Choreographer: Skipped 35 frames!  The application may be doing too much work on its main thread.
+11-27 04:29:28.034  3322  3340 D EGL_emulation: app_time_stats: avg=1249.87ms min=1249.87ms max=1249.87ms count=1
+11-27 04:29:28.567   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:28.579   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:28.622   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:29.208   562  1328 D CoreBackPreview: Window{ef0257f u0 dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@dd14b76, mPriority=0, mIsAnimationCallback=false}
+11-27 04:29:29.414   346  2702 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 3169344
+11-27 04:29:29.640   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:29.653   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:29.660   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:30.598  3322  3335 I lot.app.capture: Waiting for a blocking GC ProfileSaver
+11-27 04:29:30.602  3322  3327 I lot.app.capture: Background concurrent mark compact GC freed 2148KB AllocSpace bytes, 0(0B) LOS objects, 49% free, 5213KB/10MB, paused 4.905ms,14.569ms total 896.189ms
+11-27 04:29:30.618  3322  3335 I lot.app.capture: WaitForGcToComplete blocked ProfileSaver on Background for 20.073ms
+11-27 04:29:30.674   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:30.680   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:30.702   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:31.719   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:31.727   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:31.741   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:31.789   862   932 W Looper  : Drained
+11-27 04:29:32.754   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:32.774   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:32.784   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:33.793   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:33.804   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:33.817   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:34.833   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:34.841   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:34.851   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:35.333  3322  3345 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(wmsSync-VRI[MainActivity]#2) as ready
+11-27 04:29:35.378  3322  3345 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(VRI[MainActivity]#3) as ready
+11-27 04:29:35.556  3322  3322 I Choreographer: Skipped 230 frames!  The application may be doing too much work on its main thread.
+11-27 04:29:35.585  3322  3333 I HWUI    : Davey! duration=8841ms; Flags=1, FrameTimelineVsyncId=11526, IntendedVsync=3007779673171, Vsync=3008946339826, InputEventId=0, HandleInputStart=3008975606559, AnimationStart=3008975620422, PerformTraversalsStart=3008975903021, DrawStart=3015503180223, FrameDeadline=3007813006504, FrameInterval=3008959112486, FrameStartTime=33333333, SyncQueued=3016536829674, SyncStart=3016540526476, IssueDrawCommandsStart=3016541419450, SwapBuffers=3016559099600, FrameCompleted=3016624904012, DequeueBufferDuration=55496, QueueBufferDuration=20483196, GpuCompleted=3016624535307, SwapBuffersCompleted=3016624904012, DisplayPresentTime=0, CommandSubmissionCompleted=3016559099600, 
+11-27 04:29:35.727  3322  3322 W IdlingPolicy: These resources are not idle: [Compose-Espresso link]
+11-27 04:29:35.788  3322  3333 I HWUI    : Davey! duration=7835ms; Flags=0, FrameTimelineVsyncId=11551, IntendedVsync=3009046339825, Vsync=3016713006415, InputEventId=0, HandleInputStart=3016738528104, AnimationStart=3016738574439, PerformTraversalsStart=3016755346159, DrawStart=3016755686193, FrameDeadline=3016679673082, FrameInterval=3016730911100, FrameStartTime=33333333, SyncQueued=3016834370348, SyncStart=3016834698482, IssueDrawCommandsStart=3016836431136, SwapBuffers=3016853266787, FrameCompleted=3016881704180, DequeueBufferDuration=57232, QueueBufferDuration=3965138, GpuCompleted=3016881156539, SwapBuffersCompleted=3016881704180, DisplayPresentTime=0, CommandSubmissionCompleted=3016853266787, 
+11-27 04:29:35.832   562   704 I ImeTracker: dev.pathpilot.app.capture:fb351a09: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+11-27 04:29:35.841   562   704 I ImeTracker: dev.pathpilot.app.capture:fb351a09: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 04:29:35.884   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:35.900  3322  3340 D EGL_emulation: app_time_stats: avg=7864.45ms min=7864.45ms max=7864.45ms count=1
+11-27 04:29:35.950   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:36.030  3322  3332 I HWUI    : Davey! duration=8059ms; Flags=0, FrameTimelineVsyncId=11551, IntendedVsync=3009046339825, Vsync=3016713006415, InputEventId=0, HandleInputStart=3016738528104, AnimationStart=3016738574439, PerformTraversalsStart=3016755346159, DrawStart=3016843435191, FrameDeadline=3009079673158, FrameInterval=3016730911100, FrameStartTime=33333333, SyncQueued=3016890389254, SyncStart=3016894142445, IssueDrawCommandsStart=3016895651623, SwapBuffers=3017011914299, FrameCompleted=3017109873645, DequeueBufferDuration=65248, QueueBufferDuration=41352976, GpuCompleted=3017074950288, SwapBuffersCompleted=3017109873645, DisplayPresentTime=0, CommandSubmissionCompleted=3017011914299, 
+11-27 04:29:36.114   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:37.155   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:37.173   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:37.195   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:37.912  3322  3322 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-27 04:29:37.912  3322  3322 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-27 04:29:38.238   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:38.254   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:38.271   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:39.286   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:39.302   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:39.318   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:40.336   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:40.380   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:40.587   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:41.606   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:41.627   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:41.655   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:41.680  3365  3365 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+11-27 04:29:41.694  3365  3365 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+11-27 04:29:41.805     0     0 I servicemanager: Caller(pid=3365,uid=2000,sid=u:r:shell:s0) Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest. No alternative instances declared in VINTF.
+11-27 04:29:41.799   143   143 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-27 04:29:41.807  3365  3367 I Gralloc4: mapper 4.x is not supported
+11-27 04:29:42.690   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:42.704   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:42.721   562  1054 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:43.748   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:43.763   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:43.769   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:44.797   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:44.800   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:44.819   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:45.841   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:45.857   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:29:45.865   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix

@@ -1,0 +1,9 @@
+{
+  "commit": "aff16297225dadd2bc505590db53929cbcf5f763",
+  "file": "artifacts/PathPilot-0.0.1-aff1629-arm64.apk",
+  "sha256": "917051d0ec17d9238fa15febf3dbe3f03c5de528ff97cd47c56c887127fb8934",
+  "bytes": 21147317,
+  "packageBadging": "package: name='dev.pathpilot.app' versionCode='13' versionName='0.0.1-aff1629' platformBuildVersionName='17' platformBuildVersionCode='37' compileSdkVersion='37' compileSdkVersionCodename='17'",
+  "signatureVerified": true,
+  "arm64OnlyVerified": true
+}

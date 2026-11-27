@@ -1,0 +1,46 @@
+{
+  "startedUtc": "2026-11-27T04:41:31Z",
+  "classes": "dev.pathpilot.app.ui.settings.SettingsFlowTest#largeSystemFontKeepsSettingsAndMcpControlsReachable",
+  "gitBase": "ac963f2e59a8af13a66ae950233d6fd102dd423a",
+  "worktreeDiffSha256": "f859ab27fb09f557ce3c19c8f8298dae81e339d73c71d186fbbc8438c93fa260",
+  "apkSha256": {
+    "capture.apk": "5d3f8c4e558157180e76b289c377765d84da94c648e123b7c43a37f5facd017b",
+    "capture-test.apk": "1dd472398d3d0ea0721346ffc1a92800cac50a4ee776d7927a766bd50af144c1"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320\nOverride density: 360",
+    "fontScale": "1.5",
+    "nightMode": "Night mode: no",
+    "locales": "Locales for dev.pathpilot.app.capture for user 0 are [en]"
+  },
+  "sourceManifestSha256": "bc864202d77c76638720736444031680337ab7c5c06c5359f23da42bbb6567a2",
+  "elapsedSeconds": 136.934,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "1",
+      "stack": "androidx.compose.ui.test.junit4.android.ComposeNotIdleException: Idling resource timed out: possibly due to compose being busy.",
+      "stream": "",
+      "test": "largeSystemFontKeepsSettingsAndMcpControlsReachable",
+      "statusCode": -2
+    }
+  ],
+  "images": [
+    {
+      "name": "14-settings-large-font.png",
+      "bytes": 78373,
+      "sha256": "9c137c2ba626afefc59c23cbb48305f7bb715252f4e8960447a8d4db3db16d65"
+    },
+    {
+      "name": "14a-navigation-large-font.png",
+      "bytes": 78373,
+      "sha256": "9c137c2ba626afefc59c23cbb48305f7bb715252f4e8960447a8d4db3db16d65"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+Starting: Intent { cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity }
+Status: timeout
+LaunchState: UNKNOWN (-1)
+Activity: dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity
+WaitTime: 21308
+Complete

@@ -1,0 +1,7 @@
+Starting: Intent { cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity }
+Status: ok
+LaunchState: COLD
+Activity: dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity
+TotalTime: 13143
+WaitTime: 13492
+Complete

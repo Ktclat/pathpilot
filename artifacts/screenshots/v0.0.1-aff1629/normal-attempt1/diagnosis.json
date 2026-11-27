@@ -1,0 +1,26 @@
+{
+  "plannedTests": 4,
+  "startedTests": 3,
+  "passed": 0,
+  "failed": 3,
+  "notStarted": [
+    "dev.pathpilot.app.ui.settings.McpFlowTest#connectionToolsAndIndependentSharingReachAnActualHttpUpstream"
+  ],
+  "runnerResult": "Process crashed.",
+  "failures": [
+    {
+      "test": "themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity",
+      "observed": "ComposeNotIdleException after opening Theme; SettingsFlowTest.kt56; theme picker not captured by test."
+    },
+    {
+      "test": "publicPresetsSaveTheirOfficialUrlFetchToolsAndRetryWithoutDuplicates",
+      "observed": "SnapshotStateObserver rejects concurrent layout/draw observation, previousThreadId46 versus main2. Captures37-39 completed before failure."
+    },
+    {
+      "test": "credentialPresetsRequireTokensAndKeepDifferentAccountsSeparate",
+      "observed": "SlotWriter ArrayIndexOutOfBoundsException during Activity destruction; process crash; captures40-41 completed,42 not generated."
+    }
+  ],
+  "subsequentAction": "Preserved this batch, paused large test. Manual production MainActivity theme picker capture taken separately. Root investigates official Compose test rule dispatcher; no retry, timeout adjustment or animation setting change yet.",
+  "countsNote": "Images are retained evidence, not passing test status."
+}

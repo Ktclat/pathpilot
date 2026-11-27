@@ -1,0 +1,20 @@
+{
+  "startedUtc": "2026-11-27T04:13:16Z",
+  "classes": "dev.pathpilot.app.ui.settings.SettingsFlowTest#themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.McpPresetFlowTest,dev.pathpilot.app.ui.settings.McpFlowTest#connectionToolsAndIndependentSharingReachAnActualHttpUpstream",
+  "gitBase": "aff16297225dadd2bc505590db53929cbcf5f763",
+  "worktreeDiffSha256": "7c1fce154c2d6be8561cc69e1dc91dcadab23d20f76eef191486278a29fd0a6a",
+  "apkSha256": {
+    "capture.apk": "305198b69d2b84cc8f0072355bd07aae5b879eb22ca929e5bf536e2b8419c1dc",
+    "capture-test.apk": "ea7a1b6d672e30ac6cfb7c522c98892fc863057b0542ef508ffe387c80ec8af9"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0",
+    "nightMode": "Night mode: no",
+    "locales": "Locales for dev.pathpilot.app.capture for user 0 are [zh-CN]"
+  },
+  "sourceManifestSha256": "1d2b1be9357536db02e1da89e7b201583dfd44ad383a37d8cbe7cae40a5d436c"
+}

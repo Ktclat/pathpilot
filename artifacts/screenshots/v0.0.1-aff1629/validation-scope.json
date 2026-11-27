@@ -1,0 +1,30 @@
+{
+  "sourceCommit": "aff16297225dadd2bc505590db53929cbcf5f763",
+  "normal": {
+    "count": 4,
+    "classes": [
+      "dev.pathpilot.app.ui.settings.SettingsFlowTest#themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity",
+      "dev.pathpilot.app.ui.settings.McpPresetFlowTest",
+      "dev.pathpilot.app.ui.settings.McpFlowTest#connectionToolsAndIndependentSharingReachAnActualHttpUpstream"
+    ],
+    "density": 320,
+    "fontScale": 1.0
+  },
+  "large": {
+    "count": 1,
+    "classes": [
+      "dev.pathpilot.app.ui.settings.SettingsFlowTest#largeSystemFontKeepsSettingsAndMcpControlsReachable"
+    ],
+    "density": 360,
+    "fontScale": 1.5
+  },
+  "testHosts": {
+    "SettingsFlowTest": "Production MainActivity; real Android preferences and locale/recreation.",
+    "McpPresetFlowTest": "Production McpPage and AppStore inside test ComponentActivity; HTTP interceptor redirects official destinations to on-device MockWebServer, while persisted official URLs/credentials and production client are exercised. Does not include the app primary navigation host or actual external service accounts.",
+    "McpFlowTest": "Production MainActivity/services and actual loopback HTTP upstream fixture."
+  },
+  "manual": [
+    "Normal-font MainActivity MCP preset picker",
+    "MainActivity About version"
+  ]
+}

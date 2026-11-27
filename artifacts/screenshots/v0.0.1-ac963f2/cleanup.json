@@ -1,0 +1,160 @@
+{
+  "startedUtc": "2026-11-27T05:05:48.939403+00:00",
+  "serial": "emulator-5554",
+  "scope": [
+    "dev.pathpilot.app.capture",
+    "dev.pathpilot.app.capture.test"
+  ],
+  "productionPackageTouched": false,
+  "originalDeviceRecord": "/tmp/pathpilot-theme-mcp-device/original-device.json",
+  "commands": [
+    {
+      "argv": [
+        "/workspace/toolchains/android-sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "shell",
+        "wm",
+        "density",
+        "reset"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "argv": [
+        "/workspace/toolchains/android-sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "shell",
+        "settings",
+        "put",
+        "system",
+        "font_scale",
+        "1.0"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "argv": [
+        "/workspace/toolchains/android-sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "shell",
+        "cmd",
+        "uimode",
+        "night",
+        "no"
+      ],
+      "exitCode": 0,
+      "output": "Night mode: no"
+    },
+    {
+      "argv": [
+        "/workspace/toolchains/android-sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "shell",
+        "am",
+        "force-stop",
+        "dev.pathpilot.app.capture"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "argv": [
+        "/workspace/toolchains/android-sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "shell",
+        "am",
+        "force-stop",
+        "dev.pathpilot.app.capture.test"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "argv": [
+        "/workspace/toolchains/android-sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "shell",
+        "pm",
+        "clear",
+        "dev.pathpilot.app.capture"
+      ],
+      "exitCode": 0,
+      "output": "Success"
+    },
+    {
+      "argv": [
+        "/workspace/toolchains/android-sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "shell",
+        "pm",
+        "clear",
+        "dev.pathpilot.app.capture.test"
+      ],
+      "exitCode": 0,
+      "output": "Success"
+    },
+    {
+      "argv": [
+        "/workspace/toolchains/android-sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "shell",
+        "wm",
+        "density"
+      ],
+      "exitCode": 0,
+      "output": "Physical density: 320"
+    },
+    {
+      "argv": [
+        "/workspace/toolchains/android-sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "shell",
+        "settings",
+        "get",
+        "system",
+        "font_scale"
+      ],
+      "exitCode": 0,
+      "output": "1.0"
+    },
+    {
+      "argv": [
+        "/workspace/toolchains/android-sdk/platform-tools/adb",
+        "-s",
+        "emulator-5554",
+        "shell",
+        "cmd",
+        "uimode",
+        "night"
+      ],
+      "exitCode": 0,
+      "output": "Night mode: no"
+    },
+    {
+      "argv": [
+        "/workspace/toolchains/android-sdk/platform-tools/adb",
+        "devices"
+      ],
+      "exitCode": 0,
+      "output": "List of devices attached"
+    }
+  ],
+  "emulatorStop": {
+    "pid": 1136,
+    "command": "/workspace/toolchains/android-sdk/emulator/qemu/linux-x86_64/qemu-system-x86_64-headless -avd pathpilot-api35 -no-window -no-audio -no-boot-anim -no-snapshot -no-metrics -gpu swiftshader_indirect -accel off -cores 2 -memory 3072 -port 5554",
+    "signal": "SIGTERM",
+    "finalProcessState": "Z"
+  },
+  "completedUtc": "2026-11-27T05:06:10.385469+00:00"
+}

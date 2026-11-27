@@ -1,0 +1,34 @@
+{
+  "sourceCommit": "ac963f2e59a8af13a66ae950233d6fd102dd423a",
+  "versionName": "0.0.1-ac963f2",
+  "versionCode": 13,
+  "automaticBatches": [
+    {
+      "directory": "normal-final",
+      "started": 4,
+      "passed": 3,
+      "failed": 1,
+      "notes": "MCP presets2 and actual HTTP/service flow passed. Theme idling timeout retained."
+    },
+    {
+      "directory": "theme-isolated",
+      "started": 1,
+      "passed": 1,
+      "failed": 0,
+      "notes": "Same APK/rule/timeouts/animation settings; full theme/palette/recreation/language flow passed on the one authorized isolated rerun."
+    },
+    {
+      "directory": "large-final",
+      "started": 1,
+      "passed": 0,
+      "failed": 1,
+      "notes": "At density360/font1.5 Theme entry idling timeout. No retry; failure preserved."
+    }
+  ],
+  "distinctAutomaticScenarios": 5,
+  "distinctAutomaticScenariosEventuallyPassed": 4,
+  "manualLargeReview": "manual-large/metadata.json; actual MainActivity, density360/font1.5, theme controls/palettes/dynamic/Done and MCP catalog/token controls checked. Does not turn automatic failure into pass.",
+  "finalMainActivityReview": "manual-main-activity/metadata.json; actual normal-font MCP catalog and About captured after recorded ANR/recovery.",
+  "priorFailedBuild": "../v0.0.1-aff1629/normal-attempt1;3failed,4th notstarted; originals retained.",
+  "sourceAndTestBoundaries": "validation-scope.json; preset tests use production page/storage with on-device redirected HTTP, not real external accounts."
+}

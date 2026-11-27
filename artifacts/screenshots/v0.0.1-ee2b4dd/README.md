@@ -34,6 +34,6 @@
 
 - Capture APK SHA-256：`4cf8e85ffa679b6178028c7635c2e8faeac32d780ec0e8e6b315d88d1a0a5e1a`
 - Test APK SHA-256：`db3003a9d68743c8c3fb7602fa697fd48bdba7050177181ed71c305485a8ed47`
-- 正常 ARM64 产物、签名与完整构建记录见[验证文档](../../../docs/validation.md)。
+- 本版本正常 ARM64 产物、签名与完整构建记录见[验证归档](../../../docs/validation-0.0.1-ee2b4dd.md)。
 
 测试截图包使用独立 `.capture` 包名；常规分发 APK 仅包含 ARM64。

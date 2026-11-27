@@ -1,0 +1,20 @@
+{
+  "commit": "ac963f2e59a8af13a66ae950233d6fd102dd423a",
+  "batches": [
+    {
+      "manifest": "artifacts/screenshots/v0.0.1-ac963f2/normal-final/source-files.json",
+      "files": 123,
+      "differences": []
+    },
+    {
+      "manifest": "artifacts/screenshots/v0.0.1-ac963f2/theme-isolated/source-files.json",
+      "files": 123,
+      "differences": []
+    },
+    {
+      "manifest": "artifacts/screenshots/v0.0.1-ac963f2/large-final/source-files.json",
+      "files": 123,
+      "differences": []
+    }
+  ]
+}

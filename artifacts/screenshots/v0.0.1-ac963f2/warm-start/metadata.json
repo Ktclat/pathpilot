@@ -1,0 +1,8 @@
+{
+  "sourceCommit": "ac963f2e59a8af13a66ae950233d6fd102dd423a",
+  "capture": "Original adb screencap after successful cold launch+15sec,system night no,density320,font1.0",
+  "files": {
+    "01-sharing-light.png": "7720554b3d923081738c8cbabdef45e3c51c825518fed4f767003ab4ef5c5e9f",
+    "install.json": "90c337504aec5ca8b5ecb8572e2b02bf1451a9197499154d4676bcec6ac099a4"
+  }
+}

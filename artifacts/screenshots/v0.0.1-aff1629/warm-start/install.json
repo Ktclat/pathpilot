@@ -1,0 +1,89 @@
+{
+  "sourceCommit": "aff16297225dadd2bc505590db53929cbcf5f763",
+  "apkSha256": {
+    "capture.apk": "305198b69d2b84cc8f0072355bd07aae5b879eb22ca929e5bf536e2b8419c1dc",
+    "capture-test.apk": "ea7a1b6d672e30ac6cfb7c522c98892fc863057b0542ef508ffe387c80ec8af9"
+  },
+  "startedUtc": "2026-11-27T04:10:42.904444+00:00",
+  "commands": [
+    {
+      "args": [
+        "install",
+        "-r",
+        "/tmp/pathpilot-theme-mcp-device/apks-aff1629/capture.apk"
+      ],
+      "exitCode": 0,
+      "stdout": "Performing Streamed Install\nSuccess\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "install",
+        "-r",
+        "/tmp/pathpilot-theme-mcp-device/apks-aff1629/capture-test.apk"
+      ],
+      "exitCode": 0,
+      "stdout": "Performing Streamed Install\nSuccess\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "shell",
+        "cmd",
+        "package",
+        "compile",
+        "-m",
+        "speed",
+        "-f",
+        "dev.pathpilot.app.capture"
+      ],
+      "exitCode": 0,
+      "stdout": "Success\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "shell",
+        "cmd",
+        "package",
+        "compile",
+        "-m",
+        "speed",
+        "-f",
+        "dev.pathpilot.app.capture.test"
+      ],
+      "exitCode": 0,
+      "stdout": "Success\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "shell",
+        "cmd",
+        "locale",
+        "set-app-locales",
+        "dev.pathpilot.app.capture",
+        "--user",
+        "0",
+        "--locales",
+        "zh-CN"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "shell",
+        "am",
+        "start",
+        "-W",
+        "-n",
+        "dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity"
+      ],
+      "exitCode": 0,
+      "stdout": "Starting: Intent { cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity }\nStatus: ok\nLaunchState: COLD\nActivity: dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity\nTotalTime: 14476\nWaitTime: 14711\nComplete\n",
+      "stderr": ""
+    }
+  ]
+}

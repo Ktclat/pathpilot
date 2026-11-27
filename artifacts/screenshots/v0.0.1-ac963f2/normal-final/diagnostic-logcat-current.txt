@@ -1,0 +1,702 @@
+--------- beginning of system
+11-27 04:30:07.036   862   932 V WindowManagerShell:  animated by com.android.wm.shell.transition.RemoteTransitionHandler@f323c4a
+11-27 04:30:07.045   562  1862 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 04:30:07.091   862   932 W Looper  : Drained
+11-27 04:30:07.092   862   932 W Looper  : Slow dispatch took 957ms wmshell.main h=android.os.Handler c=com.android.wm.shell.transition.Transitions$TransitionPlayerImpl$$ExternalSyntheticLambda0@b6f3fa3 m=0
+11-27 04:30:07.093   862   932 W Looper  : Slow delivery took 36ms wmshell.main h=android.os.Handler c=null m=2
+--------- beginning of main
+11-27 04:30:07.120   862   862 W ndroid.systemui: Long monitor contention with owner binder:862_6 (1393) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:695) waiters=0 in android.os.Message android.os.MessageQueue.next() for 167ms
+11-27 04:30:07.153  3372  3383 I HWUI    : Davey! duration=3042ms; Flags=1, FrameTimelineVsyncId=11798, IntendedVsync=3045113006131, Vsync=3045379672795, InputEventId=0, HandleInputStart=3045391628348, AnimationStart=3045391692385, PerformTraversalsStart=3045391731731, DrawStart=3047078419667, FrameDeadline=3045146339464, FrameInterval=3045381502307, FrameStartTime=33333333, SyncQueued=3047206490551, SyncStart=3047207980644, IssueDrawCommandsStart=3047235943520, SwapBuffers=3047859630180, FrameCompleted=3048157223492, DequeueBufferDuration=54437, QueueBufferDuration=6923157, GpuCompleted=3048151596225, SwapBuffersCompleted=3048157223492, DisplayPresentTime=0, CommandSubmissionCompleted=3047859630180, 
+11-27 04:30:07.163   862   891 W ndroid.systemui: Long monitor contention with owner binder:862_6 (1393) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:695) waiters=1 in boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long) for 111ms
+11-27 04:30:07.172   862  1050 W ndroid.systemui: Long monitor contention with owner binder:862_6 (1393) at boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long)(MessageQueue.java:695) waiters=2 in boolean android.os.MessageQueue.enqueueMessage(android.os.Message, long) for 117ms
+11-27 04:30:07.230  2600  3086 I HWUI    : Davey! duration=718ms; Flags=0, FrameTimelineVsyncId=11916, IntendedVsync=3047446339441, Vsync=3047579672773, InputEventId=0, HandleInputStart=3047606742513, AnimationStart=3047606748279, PerformTraversalsStart=3047674683407, DrawStart=3047779704139, FrameDeadline=3047479672774, FrameInterval=3047598570806, FrameStartTime=33333333, SyncQueued=3047957159421, SyncStart=3048001556726, IssueDrawCommandsStart=3048002241520, SwapBuffers=3048069117303, FrameCompleted=3048209597595, DequeueBufferDuration=51239, QueueBufferDuration=47965274, GpuCompleted=3048177746118, SwapBuffersCompleted=3048209597595, DisplayPresentTime=0, CommandSubmissionCompleted=3048069117303, 
+11-27 04:30:07.364  2600  2600 D StateManager: createAtomicAnimation - fromState: Background, toState: Normal, partial trace:
+11-27 04:30:07.364  2600  2600 D StateManager: 	at com.android.quickstep.util.WorkspaceRevealAnim.prepareToAnimate(WorkspaceRevealAnim.java:130)
+11-27 04:30:07.364  2600  2600 D StateManager: 	at com.android.quickstep.util.WorkspaceRevealAnim.<init>(WorkspaceRevealAnim.java:66)
+11-27 04:30:07.364  2600  2600 D StateManager: 	at com.android.launcher3.QuickstepTransitionManager.createWallpaperOpenAnimations(QuickstepTransitionManager.java:1716)
+11-27 04:30:07.445   862   932 W Looper  : Drained
+11-27 04:30:07.446   862   932 W Looper  : Slow dispatch took 52ms wmshell.main h=android.os.Handler c=android.window.TaskOrganizer$1$$ExternalSyntheticLambda3@1feda1e m=0
+11-27 04:30:07.614   862   932 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#27) android.os.BinderProxy@6b48e9@0
+11-27 04:30:07.748   562   704 I ImeTracker: com.android.launcher3:337a4bac: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+11-27 04:30:07.755   862   954 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@ac02eae
+11-27 04:30:07.807   562   704 I ImeTracker: com.android.launcher3:337a4bac: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 04:30:07.823   562  1862 D CoreBackPreview: Window{7f756b2 u0 Splash Screen dev.pathpilot.app.capture.test EXITING}: Setting back callback null
+11-27 04:30:07.836  2600  2620 D EGL_emulation: app_time_stats: avg=715.15ms min=102.16ms max=1116.97ms count=3
+11-27 04:30:07.860   562   594 V WindowManager: Finish Transition (#27): created at 11-27 04:30:04.132 collect-started=0.276ms request-sent=0.806ms started=65.866ms ready=670.063ms sent=1814.863ms finished=3696.519ms
+11-27 04:30:07.903  3372  3372 D VRI[InstrumentationActivityInvoker$EmptyActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-27 04:30:07.992   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:08.043   862   932 V WindowManagerShell: Track 0 became idle
+11-27 04:30:08.043   862   932 V WindowManagerShell: All active transition animations finished
+11-27 04:30:08.044   862   932 W Looper  : Slow dispatch took 523ms wmshell.main h=android.os.Handler c=com.android.wm.shell.transition.RemoteTransitionHandler$1$$ExternalSyntheticLambda0@9086715 m=0
+11-27 04:30:08.064   562  1328 W InputManager-JNI: Input channel object '7f756b2 Splash Screen dev.pathpilot.app.capture.test (client)' was disposed without first being removed with the input manager!
+11-27 04:30:08.341   337   402 I netd    : tetherGetStats() -> {[]} <10.69ms>
+11-27 04:30:08.454   562   598 W system_server: Long monitor contention with owner binder:562_C (1267) at void com.android.server.wm.WindowManagerService$LocalService.updateInputMethodTargetWindow(android.os.IBinder, android.os.IBinder)(WindowManagerService.java:8154) waiters=2 in void com.android.server.wm.WindowSurfacePlacer$Traverser.run() for 125ms
+11-27 04:30:08.550   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:08.643   562  1267 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:08.690   562  1360 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 04:30:08.699   862   932 W Looper  : Slow dispatch took 48ms wmshell.main h=android.os.Handler c=com.android.wm.shell.common.DisplayInsetsController$PerDisplay$DisplayWindowInsetsControllerImpl$$ExternalSyntheticLambda3@b9b001b m=0
+11-27 04:30:08.726   562  1328 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 04:30:08.811  3372  3372 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@d393d93
+11-27 04:30:08.826   562  1267 D CoreBackPreview: Window{6c063d1 u0 dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity}: Setting back callback null
+11-27 04:30:08.862   562  1328 W InputManager-JNI: Input channel object '6c063d1 dev.pathpilot.app.capture.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity (client)' was disposed without first being removed with the input manager!
+11-27 04:30:09.162  2600  2600 I TopTaskTracker: onTaskRemoved: taskId=23
+11-27 04:30:09.163  2600  2600 I TopTaskTracker: onTaskRemoved: taskId=23
+11-27 04:30:09.732   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:09.761   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:09.782   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:10.375  3322  3322 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@59c2d67
+11-27 04:30:10.383   562  1328 D CoreBackPreview: Window{ef0257f u0 dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity}: Setting back callback null
+11-27 04:30:10.484   562  1328 W InputManager-JNI: Input channel object 'ef0257f dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity (client)' was disposed without first being removed with the input manager!
+11-27 04:30:10.824   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:10.853   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:10.886   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:11.370  3322  3322 D LifecycleMonitor: Lifecycle status change: dev.pathpilot.app.MainActivity@c692d63 in: DESTROYED
+11-27 04:30:11.372  3322  3322 V ActivityScenario: Update currentActivityStage to DESTROYED, currentActivity=null
+11-27 04:30:11.380  3322  3322 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@d2d577a
+11-27 04:30:11.402   562  1360 D CoreBackPreview: Window{2e321bf u0 dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity}: Setting back callback null
+11-27 04:30:11.532   562  1360 W InputManager-JNI: Input channel object '2e321bf dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity (client)' was disposed without first being removed with the input manager!
+11-27 04:30:11.596  3322  3322 I Choreographer: Skipped 212 frames!  The application may be doing too much work on its main thread.
+11-27 04:30:11.706  2600  2600 I TopTaskTracker: onTaskRemoved: taskId=22
+11-27 04:30:11.769  2600  2600 I TopTaskTracker: onTaskRemoved: taskId=22
+11-27 04:30:11.827   862   932 W Looper  : Slow dispatch took 31ms wmshell.main h=android.os.Handler c=null m=11
+11-27 04:30:11.827   862   932 W Looper  : Slow delivery took 59ms wmshell.main h=android.os.Handler c=null m=11
+11-27 04:30:11.905   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:11.916   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:11.931   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:12.862   562  1298 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-27 04:30:13.001   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:13.034   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:13.050   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:13.351  3322  3336 D IdlingRegistry: Unregistering idling resources: [androidx.compose.ui.test.EspressoLink@8c9538a]
+11-27 04:30:13.442  3322  3336 E TestRunner: failed: themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity(dev.pathpilot.app.ui.settings.SettingsFlowTest)
+11-27 04:30:13.488  3322  3336 E TestRunner: ----- begin exception -----
+11-27 04:30:13.488  3322  3336 E TestRunner: androidx.test.espresso.IdlingResourceTimeoutException: Wait for [Compose-Espresso link] to become idle timed out
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at androidx.test.espresso.IdlingPolicy.handleTimeout(IdlingPolicy.java:4)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at androidx.test.espresso.base.UiControllerImpl$5.resourcesHaveTimedOut(UiControllerImpl.java:1)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at androidx.test.espresso.base.IdlingResourceRegistry$Dispatcher.handleTimeout(IdlingResourceRegistry.java:4)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at androidx.test.espresso.base.IdlingResourceRegistry$Dispatcher.handleMessage(IdlingResourceRegistry.java:6)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at android.os.Handler.dispatchMessage(Handler.java:103)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at androidx.test.espresso.base.Interrogator.loopAndInterrogate(Interrogator.java:14)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at androidx.test.espresso.base.UiControllerImpl.loopUntil(UiControllerImpl.java:8)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at androidx.test.espresso.base.UiControllerImpl.loopMainThreadUntilIdle(UiControllerImpl.java:16)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at androidx.test.espresso.Espresso$1.run(Espresso.java:1)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:487)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at android.os.Handler.handleCallback(Handler.java:959)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at android.os.Handler.dispatchMessage(Handler.java:100)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at android.os.Looper.loopOnce(Looper.java:232)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at android.os.Looper.loop(Looper.java:317)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at android.app.ActivityThread.main(ActivityThread.java:8705)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at java.lang.reflect.Method.invoke(Native Method)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:580)
+11-27 04:30:13.488  3322  3336 E TestRunner: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:886)
+11-27 04:30:13.493  3322  3336 E TestRunner: ----- end exception -----
+11-27 04:30:13.582  3322  3336 I TestRunner: finished: themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity(dev.pathpilot.app.ui.settings.SettingsFlowTest)
+11-27 04:30:13.665  3322  3336 I TestRunner: started: publicPresetsSaveTheirOfficialUrlFetchToolsAndRetryWithoutDuplicates(dev.pathpilot.app.ui.settings.McpPresetFlowTest)
+11-27 04:30:13.845  3322  3336 D IdlingRegistry: Registering idling resources: [androidx.compose.ui.test.EspressoLink@a27be8]
+11-27 04:30:14.066   562  1862 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10149, packageName = null, attributionTag = null, token = android.os.Binder@830b10d, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+11-27 04:30:14.099   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:14.183   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:14.284   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:14.718  3322  3336 D TrafficStats: tagSocket(99) with statsTag=0xffffffff, statsUid=-1
+11-27 04:30:14.975  3322  3336 W Settings: Setting always_finish_activities has moved from android.provider.Settings.System to android.provider.Settings.Global, returning read-only value.
+11-27 04:30:15.076   562  1360 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+11-27 04:30:15.083   562  1360 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10149, packageName = null, attributionTag = null, token = android.os.Binder@830b10d, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+11-27 04:30:15.084   562  1360 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+11-27 04:30:15.091   562  1360 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+11-27 04:30:15.138   862   932 W Looper  : Drained
+11-27 04:30:15.212   562  1360 V SplashScreenExceptionList: SplashScreen checking exception for package dev.pathpilot.app.capture (target sdk:35) -> false
+11-27 04:30:15.251   562  1360 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=dev.pathpilot.app.capture/androidx.activity.ComponentActivity} with LAUNCH_MULTIPLE from uid 10149 (BAL_ALLOW_PERMISSION) result code=0
+11-27 04:30:15.270   562   598 W system_server: Long monitor contention with owner binder:562_11 (1360) at int com.android.server.wm.ActivityStarter.execute()(ActivityStarter.java:825) waiters=1 in void com.android.server.wm.WindowAnimator.lambda$new$1(long) for 126ms
+11-27 04:30:15.300  2600  2600 W SplitSelectStateCtor: Missing session instanceIds
+11-27 04:30:15.300  2600  2600 D StatsLog: LAUNCHER_SPLIT_SELECTION_EXIT_INTERRUPTED
+11-27 04:30:15.331   862   932 W Looper  : Slow delivery took 62ms wmshell.main h=android.os.Handler c=null m=16
+11-27 04:30:15.332   862   932 D WindowManagerShell: setLauncherKeepClearAreaHeight: visible=false, height=208
+11-27 04:30:15.333   862   932 W Looper  : Drained
+11-27 04:30:15.459   862   932 V WindowManagerShell: Transition requested (#28): android.os.BinderProxy@39c3564 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=24 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=dev.pathpilot.app.capture/androidx.activity.ComponentActivity } baseActivity=ComponentInfo{dev.pathpilot.app.capture/androidx.activity.ComponentActivity} topActivity=ComponentInfo{dev.pathpilot.app.capture/androidx.activity.ComponentActivity} origActivity=null realActivity=ComponentInfo{dev.pathpilot.app.capture/androidx.activity.ComponentActivity} numActivities=1 lastActiveTime=3056417 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@11f63cd} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{8542482 androidx.activity.ComponentActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=720 topActivityLetterboxHeight=1280 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 28 }
+11-27 04:30:15.507   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:15.505   862   956 D SplashScreenView: Build android.window.SplashScreenView{cde0ef6 V.E...... ......ID 0,0-0,0}
+11-27 04:30:15.505   862   956 D SplashScreenView: Icon: view: null drawable: null size: 0
+11-27 04:30:15.505   862   956 D SplashScreenView: Branding: view: android.view.View{b5f82f7 G.ED..... ......I. 0,0-0,0 #1020503 android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-27 04:30:15.630  2600  2600 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=24, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=dev.pathpilot.app.capture/androidx.activity.ComponentActivity }
+11-27 04:30:15.656   562   597 W system_server: Long monitor contention with owner binder:562_1B (1862) at void com.android.server.wm.ActivityClientController.activityPaused(android.os.IBinder)(ActivityClientController.java:234) waiters=1 in void com.android.server.wm.ActivityTaskSupervisor$ActivityTaskSupervisorHandler.handleMessage(android.os.Message) for 200ms
+11-27 04:30:15.691   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:15.780   389   389 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+11-27 04:30:15.842   337   402 I netd    : tetherGetStats() -> {[]} <22.76ms>
+11-27 04:30:15.848   862   932 W Looper  : Slow dispatch took 367ms wmshell.main h=android.os.Handler c=com.android.wm.shell.transition.Transitions$TransitionPlayerImpl$$ExternalSyntheticLambda1@8cb6fc9 m=0
+11-27 04:30:15.848   862   932 W Looper  : Slow delivery took 379ms wmshell.main h=android.os.Handler c=null m=10
+11-27 04:30:15.856   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:15.908   862   932 W Looper  : Slow dispatch took 60ms wmshell.main h=android.os.Handler c=null m=17
+11-27 04:30:15.975   862   932 W Looper  : Drained
+11-27 04:30:16.074   562   597 W system_server: Long monitor contention with owner android.anim (598) at void com.android.server.wm.WindowAnimator.lambda$new$1(long)(WindowAnimator.java:103) waiters=4 in void com.android.server.wm.ActivityRecord$2.run() for 152ms
+11-27 04:30:16.079   562   943 D CoreBackPreview: Window{3d9007a u0 Splash Screen dev.pathpilot.app.capture}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@de6aa46, mPriority=0, mIsAnimationCallback=false}
+11-27 04:30:16.188  3322  3322 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@ad93d7 in: PRE_ON_CREATE
+11-27 04:30:16.206  3322  3322 V ActivityScenario: Activity lifecycle changed event received but ignored because the reported transition was not ON_CREATE while the last known transition was PRE_ON_CREATE
+11-27 04:30:16.236  2600  2620 D EGL_emulation: app_time_stats: avg=8394.49ms min=8394.49ms max=8394.49ms count=1
+11-27 04:30:16.410   862   932 W Looper  : Slow dispatch took 131ms wmshell.main h=android.os.Handler c=com.android.wm.shell.common.ShellExecutor$$ExternalSyntheticLambda0@eb8260b m=0
+11-27 04:30:16.476   862  2009 I HWUI    : Davey! duration=907ms; Flags=1, FrameTimelineVsyncId=12194, IntendedVsync=3056646339349, Vsync=3057046339345, InputEventId=0, HandleInputStart=3057061887753, AnimationStart=3057061895687, PerformTraversalsStart=3057062161165, DrawStart=3057501189472, FrameDeadline=3056679672682, FrameInterval=3057060752563, FrameStartTime=33333333, SyncQueued=3057501888606, SyncStart=3057554071410, IssueDrawCommandsStart=3057555445385, SwapBuffers=3057572985236, FrameCompleted=3057606230399, DequeueBufferDuration=50891, QueueBufferDuration=9370673, GpuCompleted=3057605899184, SwapBuffersCompleted=3057606230399, DisplayPresentTime=0, CommandSubmissionCompleted=3057572985236, 
+11-27 04:30:16.647  3322  3322 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@ad93d7 in: CREATED
+11-27 04:30:16.655  3322  3322 V ActivityScenario: Update currentActivityStage to CREATED, currentActivity=androidx.activity.ComponentActivity@ad93d7
+11-27 04:30:16.672  3322  3322 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@ad93d7 in: STARTED
+11-27 04:30:16.678  3322  3322 V ActivityScenario: Update currentActivityStage to STARTED, currentActivity=androidx.activity.ComponentActivity@ad93d7
+11-27 04:30:16.684   562  1328 W system_server: Long monitor contention with owner android.anim (598) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=0 in android.window.TaskSnapshot com.android.server.wm.ActivityTaskManagerService.getTaskSnapshot(int, boolean) for 121ms
+11-27 04:30:16.724  3322  3322 D LifecycleMonitor: Lifecycle status change: androidx.activity.ComponentActivity@ad93d7 in: RESUMED
+11-27 04:30:16.730  3322  3322 V ActivityScenario: Update currentActivityStage to RESUMED, currentActivity=androidx.activity.ComponentActivity@ad93d7
+11-27 04:30:16.709   562   594 V WindowManager: Sent Transition (#28) createdAt=11-27 04:30:15.099 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=24 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=dev.pathpilot.app.capture/androidx.activity.ComponentActivity } baseActivity=ComponentInfo{dev.pathpilot.app.capture/androidx.activity.ComponentActivity} topActivity=ComponentInfo{dev.pathpilot.app.capture/androidx.activity.ComponentActivity} origActivity=null realActivity=ComponentInfo{dev.pathpilot.app.capture/androidx.activity.ComponentActivity} numActivities=1 lastActiveTime=3056417 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{453f35d Task{1a9b6e #24 type=standard A=10149:dev.pathpilot.app.capture}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{2d324d2 androidx.activity.ComponentActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=720 topActivityLetterboxHeight=1280 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 28 }
+11-27 04:30:16.757   562   594 V WindowManager:     startWCT=WindowContainerTransaction { changes = {} hops = [] errorCallbackToken=null taskFragmentOrganizer=null }
+11-27 04:30:16.758   562   594 V WindowManager:     info={id=28 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+11-27 04:30:16.758   562   594 V WindowManager:         {WCT{RemoteToken{453f35d Task{1a9b6e #24 type=standard A=10149:dev.pathpilot.app.capture}}} m=OPEN f=NONE leash=Surface(name=Task=24)/@0xb3c0407 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1},
+11-27 04:30:16.758   562   594 V WindowManager:         {WCT{RemoteToken{e7c8204 Task{f752b8e #1 type=home}}} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xb718a1f sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1}
+11-27 04:30:16.758   562   594 V WindowManager:     ]}
+11-27 04:30:16.767   862  2009 V WindowManagerShell: onTransitionReady(transaction=2413771621952)
+11-27 04:30:16.771   862   932 V WindowManagerShell: onTransitionReady (#28) android.os.BinderProxy@39c3564: {id=28 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@a9dda3d} m=OPEN f=NONE leash=Surface(name=Task=24)/@0xe8621a6 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@5e2b232} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x9c117e7 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1}]}
+11-27 04:30:16.785   862   932 V WindowManagerShell: Playing animation for (#28) android.os.BinderProxy@39c3564@0
+11-27 04:30:16.787   862   932 V WindowManagerShell:  try handler com.android.wm.shell.transition.DefaultMixedHandler@f858dc0
+11-27 04:30:16.788   862   932 V WindowManagerShell:  try handler com.android.wm.shell.keyguard.KeyguardTransitionHandler@f8e0af9
+11-27 04:30:16.789   862   932 V WindowManagerShell:  try handler com.android.wm.shell.pip.PipTransition@c68ba3e
+11-27 04:30:16.807   862   932 V WindowManagerShell:  try handler com.android.wm.shell.activityembedding.ActivityEmbeddingController@b4a609f
+11-27 04:30:16.807   862   932 V WindowManagerShell:  try handler com.android.wm.shell.recents.RecentsTransitionHandler@215c5ec
+11-27 04:30:16.807   862   932 V ShellRecents: RecentsTransitionHandler.startAnimation: no controller found
+11-27 04:30:16.807   862   932 V WindowManagerShell:  try handler com.android.wm.shell.splitscreen.StageCoordinator@61b5db5
+11-27 04:30:16.808   862   932 V WindowManagerShell:  try handler com.android.wm.shell.transition.RemoteTransitionHandler@f323c4a
+11-27 04:30:16.808   862   932 V WindowManagerShell: Transition doesn't have explicit remote, search filters for match for {id=28 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@a9dda3d} m=OPEN f=NONE leash=Surface(name=Task=24)/@0xe8621a6 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@5e2b232} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x9c117e7 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1}]}
+11-27 04:30:16.822   862   932 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} launchCookie=null},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@1e0ca5f, appThread = android.app.IApplicationThread$Stub$Proxy@ed94cac, debugName = QuickstepLaunchHome }}
+11-27 04:30:16.823   862   932 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.android.launcher3/com.android.launcher3.uioverrides.QuickstepLauncher} launchCookie=null},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@ea3d75, appThread = android.app.IApplicationThread$Stub$Proxy@ff4010a, debugName = QuickstepLaunchHome }}
+11-27 04:30:16.824   862   932 V WindowManagerShell:  Delegate animation for (#28) to null
+11-27 04:30:16.824   862   932 V WindowManagerShell:  try handler com.android.wm.shell.transition.DefaultTransitionHandler@1fe67bb
+11-27 04:30:16.835   562  1862 W ActivityTaskManager: takeTaskSnapshot: taskId=11 not found or not visible
+11-27 04:30:16.875   862   932 V WindowManagerShell: start default transition animation, info = {id=28 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{android.window.IWindowContainerToken$Stub$Proxy@a9dda3d} m=OPEN f=NONE leash=Surface(name=Task=24)/@0xe8621a6 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1},{WCT{android.window.IWindowContainerToken$Stub$Proxy@5e2b232} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x9c117e7 sb=Rect(0, 0 - 720, 1280) eb=Rect(0, 0 - 720, 1280) d=0 taskParent=-1}]}
+11-27 04:30:16.880   562  1328 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 04:30:16.898   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:16.919   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:16.925   862   932 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@4ad4100 animAttr=0x13 type=OPEN isEntrance=false
+11-27 04:30:16.960   862   932 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@f256d2c animAttr=0x12 type=OPEN isEntrance=true
+11-27 04:30:16.968   862   932 V WindowManagerShell:  animated by com.android.wm.shell.transition.DefaultTransitionHandler@1fe67bb
+11-27 04:30:16.999   862   932 W Looper  : Slow dispatch took 230ms wmshell.main h=android.os.Handler c=com.android.wm.shell.transition.Transitions$TransitionPlayerImpl$$ExternalSyntheticLambda0@722a7fb m=0
+11-27 04:30:17.025   862   942 W Looper  : Slow dispatch took 58ms wmshell.anim h=android.os.Handler c=com.android.wm.shell.transition.DefaultTransitionHandler$$ExternalSyntheticLambda0@123018 m=0
+11-27 04:30:17.058   862   942 W Looper  : Slow delivery took 55ms wmshell.anim h=android.view.Choreographer$FrameHandler c=android.view.Choreographer$FrameDisplayEventReceiver@8a01e25 m=0
+11-27 04:30:17.066   862   942 W Looper  : Slow dispatch took 31ms wmshell.anim h=android.view.Choreographer$FrameHandler c=android.view.Choreographer$FrameDisplayEventReceiver@8a01e25 m=0
+11-27 04:30:17.066   862   932 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#28) android.os.BinderProxy@39c3564@0
+11-27 04:30:17.087  2600  2620 D EGL_emulation: app_time_stats: avg=10052.98ms min=10052.98ms max=10052.98ms count=1
+11-27 04:30:17.098   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:17.384   562   594 V WindowManager: Finish Transition (#28): created at 11-27 04:30:15.099 collect-started=1.937ms request-sent=144.798ms started=605.906ms ready=605.802ms sent=1535.28ms finished=2239.73ms
+11-27 04:30:17.454  2600  2600 D VRI[QuickstepLauncher]: visibilityChanged oldVisibility=true newVisibility=false
+11-27 04:30:17.471  2600  2620 D EGL_emulation: app_time_stats: avg=1223.93ms min=1223.93ms max=1223.93ms count=1
+11-27 04:30:17.506   862   932 V WindowManagerShell: Track 0 became idle
+11-27 04:30:17.513   862   932 V WindowManagerShell: All active transition animations finished
+11-27 04:30:17.514   862   932 W Looper  : Slow dispatch took 455ms wmshell.main h=android.os.Handler c=com.android.wm.shell.transition.DefaultTransitionHandler$$ExternalSyntheticLambda11@ae9c8d7 m=0
+11-27 04:30:17.570   562   943 D CoreBackPreview: Window{18084a0 u0 dev.pathpilot.app.capture/androidx.activity.ComponentActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@a676cff, mPriority=0, mIsAnimationCallback=false}
+11-27 04:30:17.583   562   668 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 04:30:17.648   862   932 W Looper  : Slow delivery took 32ms wmshell.main h=android.os.Handler c=android.window.TaskOrganizer$1$$ExternalSyntheticLambda4@e0635c4 m=0
+11-27 04:30:17.882   562   943 W UserManagerService: Requested status bar icon for non-badged user 0
+11-27 04:30:18.028   862   975 D EGL_emulation: app_time_stats: avg=5680.47ms min=208.88ms max=11152.06ms count=2
+11-27 04:30:18.978   562   684 D ActivityManager: freezing 3372 dev.pathpilot.app.capture.test
+11-27 04:30:19.252   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:19.326   562  1862 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:19.446   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:19.570   862   975 D EGL_emulation: app_time_stats: avg=1532.24ms min=1532.24ms max=1532.24ms count=1
+11-27 04:30:19.664   862  1393 I HWUI    : Davey! duration=1110ms; Flags=0, FrameTimelineVsyncId=12328, IntendedVsync=3059046339325, Vsync=3059079672658, InputEventId=0, HandleInputStart=3059080229256, AnimationStart=3059080242540, PerformTraversalsStart=3059080247403, DrawStart=3059080472297, FrameDeadline=3059246339323, FrameInterval=3059079705742, FrameStartTime=33333333, SyncQueued=3059080828519, SyncStart=3059669851114, IssueDrawCommandsStart=3059719901887, SwapBuffers=3060679156733, FrameCompleted=3060746104605, DequeueBufferDuration=293931, QueueBufferDuration=29820413, GpuCompleted=3060735288348, SwapBuffersCompleted=3060746104605, DisplayPresentTime=0, CommandSubmissionCompleted=3060679156733, 
+11-27 04:30:19.667   562   562 W Looper  : Slow dispatch took 185ms main h=com.android.server.alarm.AlarmManagerService$AlarmHandler c=android.app.ActivityManager$1$$ExternalSyntheticLambda0@28a6682 m=0
+11-27 04:30:19.679   562   598 I Choreographer: Skipped 52 frames!  The application may be doing too much work on its main thread.
+11-27 04:30:19.709   562   668 W system_server: Long monitor contention with owner android.anim (598) at void com.android.server.wm.InputMonitor$UpdateInputWindows.run()(InputMonitor.java:139) waiters=1 in void com.android.server.wm.WindowManagerService.reportSystemGestureExclusionChanged(com.android.server.wm.Session, android.view.IWindow, java.util.List) for 1.584s
+11-27 04:30:19.712   562  1298 W system_server: Long monitor contention with owner android.anim (598) at void com.android.server.wm.InputMonitor$UpdateInputWindows.run()(InputMonitor.java:139) waiters=2 in void com.android.server.wm.TaskPersister$TaskWriteQueueItem.process() for 673ms
+11-27 04:30:19.994  3322  3363 I HWUI    : Davey! duration=2633ms; Flags=1, FrameTimelineVsyncId=12287, IntendedVsync=3058413005998, Vsync=3058546339330, InputEventId=0, HandleInputStart=3058550893146, AnimationStart=3058550975316, PerformTraversalsStart=3058550982867, DrawStart=3060732733712, FrameDeadline=3058446339331, FrameInterval=3058549438438, FrameStartTime=33333333, SyncQueued=3060916615228, SyncStart=3060943802167, IssueDrawCommandsStart=3060965124009, SwapBuffers=3061005546958, FrameCompleted=3061073253337, DequeueBufferDuration=50316, QueueBufferDuration=28323778, GpuCompleted=3061072804606, SwapBuffersCompleted=3061073253337, DisplayPresentTime=0, CommandSubmissionCompleted=3061005546958, 
+11-27 04:30:20.195   862   932 W Looper  : Drained
+11-27 04:30:20.522   562  1862 W system_server: Long monitor contention with owner android.anim (598) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=0 in void com.android.server.wm.ActivityClientController.activityIdle(android.os.IBinder, android.content.res.Configuration, boolean) for 500ms
+11-27 04:30:20.584   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:20.648   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:20.799  2600  2600 D BaseDepthController: setSurface:
+11-27 04:30:20.799  2600  2600 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
+11-27 04:30:20.799  2600  2600 D BaseDepthController: 	mSurface: null
+11-27 04:30:20.884  2600  2600 D BaseDepthController: mSurface is null and mCurrentBlur is: 0
+11-27 04:30:20.944   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:21.067   862   954 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@92406ce
+11-27 04:30:21.157   562  1298 W system_server: Long monitor contention with owner android.anim (598) at void com.android.server.wm.WindowSurfacePlacer$Traverser.run()(WindowSurfacePlacer.java:58) waiters=1 in void com.android.server.wm.TaskPersister$TaskWriteQueueItem.process() for 158ms
+11-27 04:30:21.189   562   668 D CoreBackPreview: Window{3d9007a u0 Splash Screen dev.pathpilot.app.capture}: Setting back callback null
+11-27 04:30:21.204   562   597 W system_server: Long monitor contention with owner binder:562_C (1267) at void com.android.server.am.ActivityManagerService.setHasTopUi(boolean)(ActivityManagerService.java:8453) waiters=1 in void com.android.server.am.ActivityManagerService.trimApplications(boolean, int) for 533ms
+11-27 04:30:21.221   562  3114 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-27 04:30:21.250   562   943 W InputManager-JNI: Input channel object '3d9007a Splash Screen dev.pathpilot.app.capture (client)' was disposed without first being removed with the input manager!
+11-27 04:30:21.258  2600  2600 D StateManager: goToState - fromState: Normal, toState: Normal, partial trace:
+11-27 04:30:21.258  2600  2600 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(StateManager.java:453)
+11-27 04:30:21.258  2600  2600 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(StateManager.java:444)
+11-27 04:30:21.258  2600  2600 D StateManager: 	at com.android.launcher3.statemanager.StatefulActivity.onStop(StatefulActivity.java:119)
+11-27 04:30:21.274   562   593 W system_server: Long monitor contention with owner binder:562_C (1267) at void com.android.server.am.ActivityManagerService.setHasTopUi(boolean)(ActivityManagerService.java:8453) waiters=0 in void com.android.server.am.ActivityManagerService.monitor() for 617ms
+11-27 04:30:21.376   562   595 W Looper  : Slow dispatch took 131ms android.ui h=com.android.server.am.ActivityManagerService$UiHandler c=com.android.server.am.UidObserverController$$ExternalSyntheticLambda0@80e017a m=0
+11-27 04:30:21.440  2600  2600 D StatsLog: LAUNCHER_ONSTOP
+11-27 04:30:21.480   562   943 I AppWidgetServiceImpl: setAppWidgetHidden() 0
+11-27 04:30:21.643   562   594 I ActivityTaskManager: Displayed dev.pathpilot.app.capture/androidx.activity.ComponentActivity for user 0: +5s148ms
+11-27 04:30:21.643   562   594 W Looper  : Slow dispatch took 1413ms android.fg h=android.os.Handler c=com.android.server.wm.ActivityMetricsLogger$$ExternalSyntheticLambda0@548c3a6 m=0
+11-27 04:30:21.644   562   594 W Looper  : Slow delivery took 1421ms android.fg h=android.os.Handler c=com.android.server.wm.ActivityMetricsLogger$$ExternalSyntheticLambda7@3fc11e7 m=0
+11-27 04:30:21.815   337   402 I netd    : tetherGetStats() -> {[]} <108.01ms>
+11-27 04:30:21.938   862   932 W Looper  : Slow dispatch took 36ms wmshell.main h=android.os.Handler c=com.android.wm.shell.pip.PinnedStackListenerForwarder$PinnedTaskListenerImpl$$ExternalSyntheticLambda1@af4795c m=0
+11-27 04:30:21.947  3322  3322 I Choreographer: Skipped 50 frames!  The application may be doing too much work on its main thread.
+11-27 04:30:22.024   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:22.053   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:22.062   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+--------- beginning of kernel
+11-27 04:30:22.181     0     0 W healthd : battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+11-27 04:30:22.227   862   975 D EGL_emulation: app_time_stats: avg=2656.56ms min=2656.56ms max=2656.56ms count=1
+11-27 04:30:22.336   862  2009 I HWUI    : Davey! duration=727ms; Flags=0, FrameTimelineVsyncId=12473, IntendedVsync=3062713005955, Vsync=3062813005954, InputEventId=0, HandleInputStart=3062835635668, AnimationStart=3062835651020, PerformTraversalsStart=3062847168260, DrawStart=3062847998898, FrameDeadline=3062746339288, FrameInterval=3062834506717, FrameStartTime=33333333, SyncQueued=3063222545927, SyncStart=3063238804011, IssueDrawCommandsStart=3063239587351, SwapBuffers=3063386051323, FrameCompleted=3063456888343, DequeueBufferDuration=133354, QueueBufferDuration=7796061, GpuCompleted=3063401998796, SwapBuffersCompleted=3063456888343, DisplayPresentTime=0, CommandSubmissionCompleted=3063386051323, 
+11-27 04:30:22.511   562  1298 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-27 04:30:23.078   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:23.094   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:23.117   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:23.658   862   975 D EGL_emulation: app_time_stats: avg=714.68ms min=131.06ms max=1298.30ms count=2
+11-27 04:30:24.135   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:24.139  3322  3363 I HWUI    : Davey! duration=3845ms; Flags=0, FrameTimelineVsyncId=12376, IntendedVsync=3061413005968, Vsync=3063079672618, InputEventId=0, HandleInputStart=3063137569811, AnimationStart=3063137619089, PerformTraversalsStart=3063137664935, DrawStart=3064842826978, FrameDeadline=3061446339301, FrameInterval=3063111870892, FrameStartTime=33333333, SyncQueued=3065077963953, SyncStart=3065078234153, IssueDrawCommandsStart=3065081858813, SwapBuffers=3065225227024, FrameCompleted=3065259249146, DequeueBufferDuration=162689, QueueBufferDuration=9406679, GpuCompleted=3065258639625, SwapBuffersCompleted=3065259249146, DisplayPresentTime=0, CommandSubmissionCompleted=3065225227024, 
+11-27 04:30:24.144   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:24.158   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:24.208   562   704 I ImeTracker: dev.pathpilot.app.capture:a60e0458: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+11-27 04:30:24.219   562   704 I ImeTracker: dev.pathpilot.app.capture:a60e0458: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 04:30:24.234  3322  3322 I Choreographer: Skipped 58 frames!  The application may be doing too much work on its main thread.
+11-27 04:30:24.599   171  3395 I keystore2: system/security/keystore2/watchdog/src/lib.rs:319 - Watchdog thread idle -> terminating. Have a great day.
+11-27 04:30:24.936   383   766 D audioserver: logFgsApiBegin: FGS Logger Transaction failed, -129
+11-27 04:30:25.015   562  1328 W AS.PlaybackActivityMon: No piid assigned for invalid/internal port id 15
+11-27 04:30:25.246   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:25.248   383   518 D AudioFlinger: mixer(0x7100b9fd08e0) throttle end: throttle time(30)
+11-27 04:30:25.274   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:25.305   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:25.666   383   518 D audioserver: logFgsApiEnd: FGS Logger Transaction failed, -129
+11-27 04:30:25.692  3322  3340 D EGL_emulation: app_time_stats: avg=2897.15ms min=1608.54ms max=4185.76ms count=2
+11-27 04:30:25.756  3322  3333 I HWUI    : Davey! duration=919ms; Flags=0, FrameTimelineVsyncId=12562, IntendedVsync=3065946339256, Vsync=3066013005922, InputEventId=0, HandleInputStart=3066017396709, AnimationStart=3066017408336, PerformTraversalsStart=3066018489142, DrawStart=3066019329962, FrameDeadline=3065979672589, FrameInterval=3066017294027, FrameStartTime=33333333, SyncQueued=3066197835000, SyncStart=3066208747210, IssueDrawCommandsStart=3066210585462, SwapBuffers=3066690321455, FrameCompleted=3066876825974, DequeueBufferDuration=62148, QueueBufferDuration=6374742, GpuCompleted=3066867332857, SwapBuffersCompleted=3066876825974, DisplayPresentTime=0, CommandSubmissionCompleted=3066690321455, 
+11-27 04:30:26.098  3322  3322 I Choreographer: Skipped 36 frames!  The application may be doing too much work on its main thread.
+11-27 04:30:26.354   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:26.371   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:26.452   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:27.206   562  1328 D CoreBackPreview: Window{cca1f2c u0 dev.pathpilot.app.capture/androidx.activity.ComponentActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@ed742d7, mPriority=0, mIsAnimationCallback=false}
+11-27 04:30:27.473   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:27.498   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:27.586   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:28.366   346  2702 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 3308608
+11-27 04:30:28.620  3322  3363 I HWUI    : Davey! duration=3673ms; Flags=1, FrameTimelineVsyncId=12566, IntendedVsync=3066046339255, Vsync=3067246339243, InputEventId=0, HandleInputStart=3067286901286, AnimationStart=3067286916368, PerformTraversalsStart=3067301032513, DrawStart=3069282441655, FrameDeadline=3066079672588, FrameInterval=3067273668469, FrameStartTime=33333333, SyncQueued=3069687226637, SyncStart=3069689307358, IssueDrawCommandsStart=3069691398751, SwapBuffers=3069703691086, FrameCompleted=3069721671291, DequeueBufferDuration=56442, QueueBufferDuration=2304501, GpuCompleted=3069721171259, SwapBuffersCompleted=3069721671291, DisplayPresentTime=0, CommandSubmissionCompleted=3069703691086, 
+11-27 04:30:28.646   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:28.654  3322  3340 D EGL_emulation: app_time_stats: avg=2952.56ms min=2952.56ms max=2952.56ms count=1
+11-27 04:30:28.662   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:28.704  3322  3363 I HWUI    : Davey! duration=3780ms; Flags=1, FrameTimelineVsyncId=12566, IntendedVsync=3066046339255, Vsync=3067246339243, InputEventId=0, HandleInputStart=3067286901286, AnimationStart=3067286916368, PerformTraversalsStart=3067301032513, DrawStart=3069734240800, FrameDeadline=3066913005913, FrameInterval=3067273668469, FrameStartTime=33333333, SyncQueued=3069759045047, SyncStart=3069762906899, IssueDrawCommandsStart=3069771221214, SwapBuffers=3069807784493, FrameCompleted=3069830976140, DequeueBufferDuration=60530, QueueBufferDuration=18118430, GpuCompleted=3069829005435, SwapBuffersCompleted=3069830976140, DisplayPresentTime=0, CommandSubmissionCompleted=3069807784493, 
+11-27 04:30:28.727  3322  3322 I Choreographer: Skipped 77 frames!  The application may be doing too much work on its main thread.
+11-27 04:30:28.732   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:28.859   562   704 I ImeTracker: dev.pathpilot.app.capture:50e9ca97: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+11-27 04:30:28.864   562   704 I ImeTracker: dev.pathpilot.app.capture:50e9ca97: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 04:30:28.875  3322  3333 I HWUI    : Davey! duration=2648ms; Flags=0, FrameTimelineVsyncId=12593, IntendedVsync=3067313005909, Vsync=3069879672550, InputEventId=0, HandleInputStart=3069910352094, AnimationStart=3069910366508, PerformTraversalsStart=3069911763579, DrawStart=3069915832186, FrameDeadline=3069779672551, FrameInterval=3069902157942, FrameStartTime=33333333, SyncQueued=3069935617118, SyncStart=3069937766941, IssueDrawCommandsStart=3069938793906, SwapBuffers=3069953709057, FrameCompleted=3069963773494, DequeueBufferDuration=50193, QueueBufferDuration=6148390, GpuCompleted=3069963340909, SwapBuffersCompleted=3069963773494, DisplayPresentTime=0, CommandSubmissionCompleted=3069953709057, 
+11-27 04:30:28.894  3322  3364 I HWUI    : Davey! duration=2681ms; Flags=0, FrameTimelineVsyncId=12593, IntendedVsync=3067313005909, Vsync=3069879672550, InputEventId=0, HandleInputStart=3069910352094, AnimationStart=3069910366508, PerformTraversalsStart=3069911763579, DrawStart=3069940880649, FrameDeadline=3069879672550, FrameInterval=3069902157942, FrameStartTime=33333333, SyncQueued=3069962432246, SyncStart=3069969685312, IssueDrawCommandsStart=3069978463983, SwapBuffers=3069993550341, FrameCompleted=3070001300704, DequeueBufferDuration=41450, QueueBufferDuration=4640185, GpuCompleted=3070000818532, SwapBuffersCompleted=3070001300704, DisplayPresentTime=0, CommandSubmissionCompleted=3069993550341, 
+11-27 04:30:29.592  3322  3322 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-27 04:30:29.592  3322  3322 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-27 04:30:29.786   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:29.794   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:29.818   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:30.838   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:30.846   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:30.858   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:31.642  3322  3326 I lot.app.capture: Compiler allocated 5688KB to compile void androidx.compose.material3.ListItemKt.InteractiveListItem(androidx.compose.ui.Modifier, kotlin.jvm.functions.Function2, kotlin.jvm.functions.Function2, kotlin.jvm.functions.Function2, kotlin.jvm.functions.Function2, kotlin.jvm.functions.Function2, androidx.compose.ui.Alignment$Vertical, boolean, boolean, kotlin.jvm.functions.Function1, kotlin.jvm.functions.Function0, kotlin.jvm.functions.Function0, java.lang.String, androidx.compose.foundation.interaction.MutableInteractionSource, androidx.compose.material3.ListItemColors, androidx.compose.material3.ListItemShapes, androidx.compose.material3.ListItemElevation, androidx.compose.foundation.layout.PaddingValues, androidx.compose.runtime.Composer, int, int)
+11-27 04:30:31.675   955  3406 D TrafficStats: tagSocket(71) with statsTag=0xffffff81, statsUid=-1
+11-27 04:30:31.701   955  3407 D TrafficStats: tagSocket(72) with statsTag=0xffffff81, statsUid=-1
+11-27 04:30:31.775   955  3406 D TrafficStats: tagSocket(71) with statsTag=0xffffff81, statsUid=-1
+11-27 04:30:31.782   955  3407 D TrafficStats: tagSocket(73) with statsTag=0xffffff81, statsUid=-1
+11-27 04:30:31.886   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:31.895   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:31.901   337  3408 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-27 04:30:31.905   337  3410 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-27 04:30:31.910   337  3409 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-27 04:30:31.911   337  3411 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-27 04:30:31.918   337  3409 I resolv  : res_stats_usable_server: too many resolution errors, ignoring server
+11-27 04:30:31.926   337  3411 I resolv  : res_stats_usable_server: too many resolution errors, ignoring server
+11-27 04:30:31.930   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:31.932   337  3410 I resolv  : res_stats_usable_server: too many resolution errors, ignoring server
+11-27 04:30:31.942   337  3408 I resolv  : res_stats_usable_server: too many resolution errors, ignoring server
+11-27 04:30:32.054   562   737 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+11-27 04:30:32.062   562   737 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+11-27 04:30:32.071   562   737 D InetDiagMessage: Destroyed live tcp sockets for uids={10143, 10150} in 83ms
+11-27 04:30:32.971   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:32.980   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:33.011   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:34.033   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:34.038   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:34.051   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:34.758   337  3412 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+11-27 04:30:34.780   337  3414 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-27 04:30:34.790   337  3414 I resolv  : resolv_cache_lookup: Waiting for previous request
+11-27 04:30:34.798   337  3413 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-27 04:30:34.806   337  3413 I resolv  : resolv_cache_lookup: Waiting for previous request
+11-27 04:30:35.061   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:35.064   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:35.071   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:36.082   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:36.094   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:36.112   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:36.955   337  3410 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:36.969   337  3408 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:36.977   337  3411 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:36.982   337  3409 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:37.132   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:37.148   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:37.171   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:37.352   862   975 D EGL_emulation: app_time_stats: avg=6846.24ms min=73.31ms max=13619.17ms count=2
+11-27 04:30:38.183   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:38.191   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:38.200   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:39.222   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:39.227   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:39.243   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:40.254   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:40.261   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:40.288   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:41.313   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:41.324   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:41.344   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:41.974   337  3408 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:41.977   337  3410 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:41.983   337  3411 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:42.001   337  3409 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:42.004   337  3413 I resolv  : res_stats_usable_server: too many resolution errors, ignoring server
+11-27 04:30:42.009   337  3414 I resolv  : res_stats_usable_server: too many resolution errors, ignoring server
+11-27 04:30:42.056   955   955 W DnsResolver: resNetworkResult:android.system.ErrnoException: resNetworkResult failed: ETIMEDOUT (Connection timed out)
+11-27 04:30:42.067   955   955 W DnsResolver: resNetworkResult:android.system.ErrnoException: resNetworkResult failed: ETIMEDOUT (Connection timed out)
+11-27 04:30:42.075   955   955 W DnsResolver: resNetworkResult:android.system.ErrnoException: resNetworkResult failed: ETIMEDOUT (Connection timed out)
+11-27 04:30:42.083   955  3406 D NetworkMonitor/100: PROBE_DNS www.google.com 10408ms FAIL in type ADDRCONFIG android.net.DnsResolver$DnsException: android.system.ErrnoException: resNetworkResult failed: ETIMEDOUT (Connection timed out)
+11-27 04:30:42.094   955   955 W DnsResolver: resNetworkResult:android.system.ErrnoException: resNetworkResult failed: ETIMEDOUT (Connection timed out)
+11-27 04:30:42.119   955  3407 D NetworkMonitor/100: PROBE_DNS connectivitycheck.gstatic.com 10452ms FAIL in type ADDRCONFIG android.net.DnsResolver$DnsException: android.system.ErrnoException: resNetworkResult failed: ETIMEDOUT (Connection timed out)
+11-27 04:30:42.133   337  3415 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+11-27 04:30:42.146   337  3416 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-27 04:30:42.147   337  3416 I resolv  : res_stats_usable_server: too many resolution errors, ignoring server
+11-27 04:30:42.152   337  3417 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-27 04:30:42.157   337  3417 I resolv  : res_stats_usable_server: too many resolution errors, ignoring server
+11-27 04:30:42.266   337  3418 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+11-27 04:30:42.284   337  3420 I resolv  : res_nmkquery: (QUERY, IN, A)
+11-27 04:30:42.287   337  3419 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-27 04:30:42.288   337  3419 I resolv  : res_stats_usable_server: too many resolution errors, ignoring server
+11-27 04:30:42.289   337  3420 I resolv  : res_stats_usable_server: too many resolution errors, ignoring server
+11-27 04:30:42.362   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:42.366   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:42.376   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:42.564  3322  3322 I Choreographer: Skipped 411 frames!  The application may be doing too much work on its main thread.
+11-27 04:30:42.759  3322  3322 W IdlingPolicy: These resources are not idle: [Compose-Espresso link]
+11-27 04:30:43.042  3322  3340 D EGL_emulation: app_time_stats: avg=7248.04ms min=242.16ms max=14253.91ms count=2
+11-27 04:30:43.110  3322  3332 I HWUI    : Davey! duration=14199ms; Flags=0, FrameTimelineVsyncId=12625, IntendedVsync=3070013005882, Vsync=3083713005745, InputEventId=0, HandleInputStart=3083744934838, AnimationStart=3083744950862, PerformTraversalsStart=3083746000480, DrawStart=3083754600632, FrameDeadline=3070046339215, FrameInterval=3083738939009, FrameStartTime=33333333, SyncQueued=3083781331496, SyncStart=3083787923228, IssueDrawCommandsStart=3083799265519, SwapBuffers=3084108445623, FrameCompleted=3084219454249, DequeueBufferDuration=128260, QueueBufferDuration=8681216, GpuCompleted=3084217299940, SwapBuffersCompleted=3084219454249, DisplayPresentTime=0, CommandSubmissionCompleted=3084108445623, 
+11-27 04:30:43.392   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:43.410   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:43.415   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:44.433   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:44.436   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:44.453   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:44.601  3322  3322 I Choreographer: Skipped 53 frames!  The application may be doing too much work on its main thread.
+11-27 04:30:44.667  3322  3340 D EGL_emulation: app_time_stats: avg=1623.03ms min=1623.03ms max=1623.03ms count=1
+11-27 04:30:44.727  3322  3332 I HWUI    : Davey! duration=1869ms; Flags=0, FrameTimelineVsyncId=12660, IntendedVsync=3083979672409, Vsync=3085746339058, InputEventId=0, HandleInputStart=3085779582614, AnimationStart=3085779598829, PerformTraversalsStart=3085779604831, DrawStart=3085782916761, FrameDeadline=3084279672406, FrameInterval=3085775739854, FrameStartTime=33333333, SyncQueued=3085783914154, SyncStart=3085784580776, IssueDrawCommandsStart=3085785062606, SwapBuffers=3085821127550, FrameCompleted=3085850005836, DequeueBufferDuration=85657, QueueBufferDuration=9956734, GpuCompleted=3085842095373, SwapBuffersCompleted=3085850005836, DisplayPresentTime=0, CommandSubmissionCompleted=3085821127550, 
+11-27 04:30:44.930   562  1360 D WindowManager: captureDisplay
+11-27 04:30:45.472   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:45.486   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:45.495   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:46.509   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:46.515   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:46.528   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:47.013   337  3414 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:47.026   337  3413 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:47.169   337  3417 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:47.175   337  3416 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:47.301   337  3420 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:47.314   337  3419 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:47.390   383   766 D audioserver: logFgsApiBegin: FGS Logger Transaction failed, -129
+11-27 04:30:47.404   562  1360 W AS.PlaybackActivityMon: No piid assigned for invalid/internal port id 15
+11-27 04:30:47.487   383   518 D AudioFlinger: mixer(0x7100b9fd08e0) throttle end: throttle time(30)
+11-27 04:30:47.551   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:47.574   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:47.626   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:47.649   383   518 D audioserver: logFgsApiEnd: FGS Logger Transaction failed, -129
+11-27 04:30:47.724  3322  3340 D EGL_emulation: app_time_stats: avg=3049.63ms min=3049.63ms max=3049.63ms count=1
+11-27 04:30:48.640   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:48.648   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:48.661   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:49.147  3322  3322 I Choreographer: Skipped 44 frames!  The application may be doing too much work on its main thread.
+11-27 04:30:49.427  3322  3340 D EGL_emulation: app_time_stats: avg=844.07ms min=107.09ms max=1581.04ms count=2
+11-27 04:30:49.475  3322  3332 I HWUI    : Davey! duration=1756ms; Flags=0, FrameTimelineVsyncId=12704, IntendedVsync=3088846339027, Vsync=3090313005679, InputEventId=0, HandleInputStart=3090329177921, AnimationStart=3090329192818, PerformTraversalsStart=3090330200889, DrawStart=3090338666434, FrameDeadline=3089046339025, FrameInterval=3090321796362, FrameStartTime=33333333, SyncQueued=3090475071109, SyncStart=3090475836378, IssueDrawCommandsStart=3090477858952, SwapBuffers=3090564375902, FrameCompleted=3090603905727, DequeueBufferDuration=63397, QueueBufferDuration=13203448, GpuCompleted=3090601320085, SwapBuffersCompleted=3090603905727, DisplayPresentTime=0, CommandSubmissionCompleted=3090564375902, 
+11-27 04:30:49.560  3322  3322 D AutofillManager: Fill dialog is enabled:false, hints=[]
+11-27 04:30:49.686   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:49.710   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:49.734   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:50.297  3322  3340 D EGL_emulation: app_time_stats: avg=10820.73ms min=170.20ms max=21471.27ms count=2
+11-27 04:30:50.355  3322  3332 I HWUI    : Davey! duration=2619ms; Flags=0, FrameTimelineVsyncId=12704, IntendedVsync=3088846339027, Vsync=3090313005679, InputEventId=0, HandleInputStart=3090329177921, AnimationStart=3090329192818, PerformTraversalsStart=3090330200889, DrawStart=3090489006589, FrameDeadline=3088879672360, FrameInterval=3090321796362, FrameStartTime=33333333, SyncQueued=3091382364229, SyncStart=3091393113112, IssueDrawCommandsStart=3091398035661, SwapBuffers=3091438185754, FrameCompleted=3091476783625, DequeueBufferDuration=62231, QueueBufferDuration=17550476, GpuCompleted=3091463953778, SwapBuffersCompleted=3091476783625, DisplayPresentTime=0, CommandSubmissionCompleted=3091438185754, 
+11-27 04:30:50.490   346  2702 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 3456576
+11-27 04:30:50.596  3322  3322 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@ba8eeab
+11-27 04:30:50.662   562  1328 D CoreBackPreview: Window{cca1f2c u0 dev.pathpilot.app.capture/androidx.activity.ComponentActivity}: Setting back callback null
+11-27 04:30:50.758   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:50.784   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:50.798   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:50.976  3322  3327 I lot.app.capture: Background concurrent mark compact GC freed 4030KB AllocSpace bytes, 10(360KB) LOS objects, 49% free, 6166KB/12MB, paused 8.656ms,24.837ms total 1.324s
+11-27 04:30:51.127   562  1360 W InputManager-JNI: Input channel object 'cca1f2c dev.pathpilot.app.capture/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-27 04:30:51.323   562   597 V WindowManager: Unknown focus tokens, dropping reportFocusChanged
+11-27 04:30:51.345  3322  3322 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-27 04:30:51.345  3322  3322 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-27 04:30:51.815   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:51.822   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:51.849   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:52.030   337  3413 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:52.041   337  3414 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:52.042   337  3414 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 04:30:52.048   337  3413 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 04:30:52.103   955  3405 D NetworkMonitor/100: PROBE_FALLBACK http://www.google.com/gen_204 Probe failed with exception java.net.UnknownHostException: Unable to resolve host "www.google.com": No address associated with hostname
+11-27 04:30:52.176   337  3417 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:52.185   337  3416 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:52.188   337  3416 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 04:30:52.189   337  3417 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 04:30:52.219   955  3406 D NetworkMonitor/100: PROBE_HTTPS https://www.google.com/generate_204 Probe failed with exception java.net.UnknownHostException: Unable to resolve host "www.google.com": No address associated with hostname
+11-27 04:30:52.305   337  3420 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:52.307   337  3420 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 04:30:52.322   337  3419 I resolv  : res_nsend: used send_dg 0 terrno: 110
+11-27 04:30:52.335   337  3419 I resolv  : doQuery: rcode=255, ancount=0, return value=-110
+11-27 04:30:52.347   955  3407 D NetworkMonitor/100: PROBE_HTTP http://connectivitycheck.gstatic.com/generate_204 Probe failed with exception java.net.UnknownHostException: Unable to resolve host "connectivitycheck.gstatic.com": No address associated with hostname
+11-27 04:30:52.371   955  3405 D NetworkMonitor/100: isCaptivePortal: isSuccessful()=false isPortal()=false RedirectUrl=null isPartialConnectivity()=false Time=20744ms
+11-27 04:30:52.402   562   737 D ConnectivityService: [100 CELLULAR] validation failed
+11-27 04:30:52.871   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:52.878   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:52.898   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:53.551  3322  3322 I Choreographer: Skipped 124 frames!  The application may be doing too much work on its main thread.
+11-27 04:30:53.555   562   696 I InputDispatcher: 18084a0 dev.pathpilot.app.capture/androidx.activity.ComponentActivity (server) spent 2207ms processing FocusEvent(hasFocus=true)
+11-27 04:30:53.906   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:53.918   562   704 I ImeTracker: dev.pathpilot.app.capture:d93d289a: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+11-27 04:30:53.919   562   704 I ImeTracker: dev.pathpilot.app.capture:d93d289a: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 04:30:53.926   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:53.947   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:54.199   337  3426 I resolv  : GetHostByAddrHandler::run: {100 100 100 983140 10149 0}
+11-27 04:30:54.230  3322  3340 D EGL_emulation: app_time_stats: avg=3928.68ms min=3928.68ms max=3928.68ms count=1
+11-27 04:30:54.263   337  3427 I resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10149 0}
+11-27 04:30:54.279  3322  3364 I HWUI    : Davey! duration=4824ms; Flags=0, FrameTimelineVsyncId=12725, IntendedVsync=3090579672343, Vsync=3094713005635, InputEventId=0, HandleInputStart=3094736986373, AnimationStart=3094737002184, PerformTraversalsStart=3094737008538, DrawStart=3094737340660, FrameDeadline=3091513005667, FrameInterval=3094725970159, FrameStartTime=33333333, SyncQueued=3095015608924, SyncStart=3095018445978, IssueDrawCommandsStart=3095019301849, SwapBuffers=3095377276888, FrameCompleted=3095406977721, DequeueBufferDuration=104895, QueueBufferDuration=9547197, GpuCompleted=3095405067088, SwapBuffersCompleted=3095406977721, DisplayPresentTime=0, CommandSubmissionCompleted=3095377276888, 
+11-27 04:30:54.398  3322  3349 D TrafficStats: tagSocket(119) with statsTag=0xffffffff, statsUid=-1
+11-27 04:30:54.499  3322  3397 D TrafficStats: tagSocket(123) with statsTag=0xffffffff, statsUid=-1
+11-27 04:30:54.660  3322  3364 I HWUI    : Davey! duration=735ms; Flags=0, FrameTimelineVsyncId=12755, IntendedVsync=3095046338965, Vsync=3095613005626, InputEventId=0, HandleInputStart=3095628921540, AnimationStart=3095628936972, PerformTraversalsStart=3095630394368, DrawStart=3095630761507, FrameDeadline=3095446338961, FrameInterval=3095626056602, FrameStartTime=33333333, SyncQueued=3095659793453, SyncStart=3095660883866, IssueDrawCommandsStart=3095661417468, SwapBuffers=3095763673829, FrameCompleted=3095783186704, DequeueBufferDuration=56643, QueueBufferDuration=7604057, GpuCompleted=3095782585189, SwapBuffersCompleted=3095783186704, DisplayPresentTime=0, CommandSubmissionCompleted=3095763673829, 
+11-27 04:30:54.809   337  3431 I resolv  : GetHostByAddrHandler::run: {100 100 100 983140 10149 0}
+11-27 04:30:54.959   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: get tools: McpException
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: dev.pathpilot.core.mcp.McpClient.rpc(McpClient.kt:134)
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: dev.pathpilot.core.mcp.McpClient.rpc$default(McpClient.kt:121)
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: dev.pathpilot.core.mcp.McpClient.connect(McpClient.kt:54)
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: dev.pathpilot.app.McpPageKt$McpConnectionDetails$fetchTools$1$result$1.invokeSuspend(McpPage.kt:328)
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:101)
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:113)
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:589)
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:823)
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:720)
+11-27 04:30:54.962  3322  3322 E PathPilotMcp: kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:707)
+11-27 04:30:54.970   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:54.983   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:55.340  3322  3340 D EGL_emulation: app_time_stats: avg=554.29ms min=376.03ms max=732.55ms count=2
+11-27 04:30:55.612   562  1360 D WindowManager: captureDisplay
+11-27 04:30:55.995   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:56.003   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:56.016   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:57.033   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:57.041   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:57.055   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:57.363   562   594 W Looper  : Drained
+11-27 04:30:57.604   562  1360 D TelephonyManager: requestModemActivityInfo: Sending result to app: ModemActivityInfo{ mTimestamp=3098766 mSleepTimeMs=0 mIdleTimeMs=3098727 mActivityStatsTechSpecificInfo=[{mRat=UNKNOWN,mFrequencyRange=UNKNOWN,mTxTimeMs[]=[0, 0, 0, 0, 0],mRxTimeMs=0}]}
+11-27 04:30:57.748   337   402 I netd    : tetherGetStats() -> {[]} <9.42ms>
+11-27 04:30:57.915   383   766 D audioserver: logFgsApiBegin: FGS Logger Transaction failed, -129
+11-27 04:30:57.921   562   943 W AS.PlaybackActivityMon: No piid assigned for invalid/internal port id 15
+11-27 04:30:58.076   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:58.070   383   518 D AudioFlinger: mixer(0x7100b9fd08e0) throttle end: throttle time(6)
+11-27 04:30:58.135   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:58.195  3322  3340 D EGL_emulation: app_time_stats: avg=2851.51ms min=2851.51ms max=2851.51ms count=1
+11-27 04:30:58.214   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:58.272   383   518 D audioserver: logFgsApiEnd: FGS Logger Transaction failed, -129
+11-27 04:30:58.724   337  3434 I resolv  : GetHostByAddrHandler::run: {100 100 100 983140 10149 0}
+11-27 04:30:58.742   337  3435 I resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10149 0}
+11-27 04:30:58.816   171  3423 I keystore2: system/security/keystore2/watchdog/src/lib.rs:319 - Watchdog thread idle -> terminating. Have a great day.
+11-27 04:30:59.310   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:59.316   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:59.335   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:30:59.339   337  3436 I resolv  : GetHostByAddrHandler::run: {100 100 100 983140 10149 0}
+11-27 04:30:59.598   337  3437 I resolv  : GetHostByAddrHandler::run: {100 100 100 983140 10149 0}
+11-27 04:31:00.439   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:00.447   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:00.467   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:00.876  3322  3340 D EGL_emulation: app_time_stats: avg=893.50ms min=279.20ms max=2017.38ms count=3
+11-27 04:31:01.045  3322  3363 I HWUI    : Davey! duration=743ms; Flags=0, FrameTimelineVsyncId=12846, IntendedVsync=3101313005569, Vsync=3101813005564, InputEventId=0, HandleInputStart=3101814536801, AnimationStart=3101814551357, PerformTraversalsStart=3101814557756, DrawStart=3101815211621, FrameDeadline=3101346338902, FrameInterval=3101813098383, FrameStartTime=33333333, SyncQueued=3101862899069, SyncStart=3101863326078, IssueDrawCommandsStart=3101872954511, SwapBuffers=3101973884297, FrameCompleted=3102057388088, DequeueBufferDuration=67125, QueueBufferDuration=20445551, GpuCompleted=3102015892896, SwapBuffersCompleted=3102057388088, DisplayPresentTime=0, CommandSubmissionCompleted=3101973884297, 
+11-27 04:31:01.093   346  2702 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 3588224
+11-27 04:31:01.207   862   975 D EGL_emulation: app_time_stats: avg=23836.52ms min=23836.52ms max=23836.52ms count=1
+11-27 04:31:01.277   337  3439 I resolv  : GetHostByAddrHandler::run: {100 100 100 983140 10149 0}
+11-27 04:31:01.282   862  1393 I HWUI    : Davey! duration=934ms; Flags=0, FrameTimelineVsyncId=12850, IntendedVsync=3101446338901, Vsync=3101479672234, InputEventId=0, HandleInputStart=3101510916502, AnimationStart=3101510927040, PerformTraversalsStart=3101510932193, DrawStart=3102044829388, FrameDeadline=3101479672234, FrameInterval=3101510871747, FrameStartTime=33333333, SyncQueued=3102082298953, SyncStart=3102085112393, IssueDrawCommandsStart=3102085463950, SwapBuffers=3102374199421, FrameCompleted=3102383223038, DequeueBufferDuration=66163, QueueBufferDuration=5354561, GpuCompleted=3102381607052, SwapBuffersCompleted=3102383223038, DisplayPresentTime=0, CommandSubmissionCompleted=3102374199421, 
+11-27 04:31:01.307   337  3440 I resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10149 0}
+11-27 04:31:01.518   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:01.523   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:01.531   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:01.589  3322  3322 W lot.app.capture: Accessing hidden method Landroid/view/ViewTreeObserver;->dispatchOnScrollChanged()V (unsupported, reflection, allowed)
+11-27 04:31:02.494  3322  3340 D EGL_emulation: app_time_stats: avg=805.91ms min=560.44ms max=1051.39ms count=2
+11-27 04:31:02.546  3322  3363 I HWUI    : Davey! duration=908ms; Flags=0, FrameTimelineVsyncId=12878, IntendedVsync=3102779672221, Vsync=3103513005547, InputEventId=0, HandleInputStart=3103533106806, AnimationStart=3103533121090, PerformTraversalsStart=3103533126910, DrawStart=3103533458182, FrameDeadline=3102813005554, FrameInterval=3103530859147, FrameStartTime=33333333, SyncQueued=3103558151298, SyncStart=3103558712781, IssueDrawCommandsStart=3103559526073, SwapBuffers=3103655118904, FrameCompleted=3103688814076, DequeueBufferDuration=66841, QueueBufferDuration=2618891, GpuCompleted=3103688814076, SwapBuffersCompleted=3103673967153, DisplayPresentTime=0, CommandSubmissionCompleted=3103655118904, 
+11-27 04:31:02.562   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:02.570   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:02.591   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:02.870   562   943 D WindowManager: captureDisplay
+11-27 04:31:03.609   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:03.625   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:03.631   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:04.643   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:04.651   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:04.664   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:04.882   383   766 D audioserver: logFgsApiBegin: FGS Logger Transaction failed, -129
+11-27 04:31:04.898   562   668 W AS.PlaybackActivityMon: No piid assigned for invalid/internal port id 15
+11-27 04:31:04.992   383   518 D AudioFlinger: mixer(0x7100b9fd08e0) throttle end: throttle time(8)
+11-27 04:31:04.999  3322  3340 D EGL_emulation: app_time_stats: avg=2500.01ms min=2500.01ms max=2500.01ms count=1
+11-27 04:31:05.186   383   518 D audioserver: logFgsApiEnd: FGS Logger Transaction failed, -129
+11-27 04:31:05.684   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:05.688   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:05.791   562  1328 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:06.071  3322  3322 I Choreographer: Skipped 34 frames!  The application may be doing too much work on its main thread.
+11-27 04:31:06.224  3322  3340 D EGL_emulation: app_time_stats: avg=1219.33ms min=1219.33ms max=1219.33ms count=1
+11-27 04:31:06.278  3322  3363 I HWUI    : Davey! duration=1320ms; Flags=0, FrameTimelineVsyncId=12912, IntendedVsync=3106079672188, Vsync=3107213005510, InputEventId=0, HandleInputStart=3107252712177, AnimationStart=3107252727650, PerformTraversalsStart=3107254237711, DrawStart=3107254556998, FrameDeadline=3106213005520, FrameInterval=3107246086762, FrameStartTime=33333333, SyncQueued=3107363708263, SyncStart=3107365482687, IssueDrawCommandsStart=3107368222642, SwapBuffers=3107387960869, FrameCompleted=3107402089690, DequeueBufferDuration=63391, QueueBufferDuration=3410641, GpuCompleted=3107398796362, SwapBuffersCompleted=3107402089690, DisplayPresentTime=0, CommandSubmissionCompleted=3107387960869, 
+11-27 04:31:06.464   383   766 D audioserver: logFgsApiBegin: FGS Logger Transaction failed, -129
+11-27 04:31:06.479   562   943 W AS.PlaybackActivityMon: No piid assigned for invalid/internal port id 15
+11-27 04:31:06.539   383   518 D AudioFlinger: mixer(0x7100b9fd08e0) throttle end: throttle time(7)
+11-27 04:31:06.717   383   518 D audioserver: logFgsApiEnd: FGS Logger Transaction failed, -129
+11-27 04:31:06.860   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:06.883   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:06.888   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:07.476   862   975 D EGL_emulation: app_time_stats: avg=6268.00ms min=6268.00ms max=6268.00ms count=1
+11-27 04:31:07.914   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:07.927   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:07.946   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:08.133   562  1360 D CoreBackPreview: Window{222f392 u0 dev.pathpilot.app.capture/androidx.activity.ComponentActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@18e7ad5, mPriority=0, mIsAnimationCallback=false}
+11-27 04:31:08.971   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:09.034   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:09.086   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:09.303  3322  3363 I HWUI    : Davey! duration=2711ms; Flags=1, FrameTimelineVsyncId=12931, IntendedVsync=3107679672172, Vsync=3108346338832, InputEventId=0, HandleInputStart=3108367651762, AnimationStart=3108367666752, PerformTraversalsStart=3108377126743, DrawStart=3110021006478, FrameDeadline=3107713005505, FrameInterval=3108363325019, FrameStartTime=33333333, SyncQueued=3110351000209, SyncStart=3110353469965, IssueDrawCommandsStart=3110354319513, SwapBuffers=3110364311468, FrameCompleted=3110393701974, DequeueBufferDuration=55742, QueueBufferDuration=14868751, GpuCompleted=3110393350369, SwapBuffersCompleted=3110393701974, DisplayPresentTime=72904372626980942, CommandSubmissionCompleted=3110364311468, 
+11-27 04:31:09.394  3322  3340 D EGL_emulation: app_time_stats: avg=1583.46ms min=371.29ms max=2795.64ms count=2
+11-27 04:31:09.438  3322  3363 I HWUI    : Davey! duration=2871ms; Flags=1, FrameTimelineVsyncId=12931, IntendedVsync=3107679672172, Vsync=3108346338832, InputEventId=0, HandleInputStart=3108367651762, AnimationStart=3108367666752, PerformTraversalsStart=3108377126743, DrawStart=3110413189220, FrameDeadline=3107813005504, FrameInterval=3108363325019, FrameStartTime=33333333, SyncQueued=3110482734395, SyncStart=3110501860847, IssueDrawCommandsStart=3110502275472, SwapBuffers=3110554559526, FrameCompleted=3110570282047, DequeueBufferDuration=63833, QueueBufferDuration=4127406, GpuCompleted=3110568693303, SwapBuffersCompleted=3110570282047, DisplayPresentTime=0, CommandSubmissionCompleted=3110554559526, 
+11-27 04:31:09.453  3322  3322 I Choreographer: Skipped 66 frames!  The application may be doing too much work on its main thread.
+11-27 04:31:09.556   346  2702 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 3808000
+11-27 04:31:09.589  3322  3363 I HWUI    : Davey! duration=2259ms; Flags=0, FrameTimelineVsyncId=12957, IntendedVsync=3108413005498, Vsync=3110613005476, InputEventId=0, HandleInputStart=3110630297235, AnimationStart=3110630311517, PerformTraversalsStart=3110630317915, DrawStart=3110633932332, FrameDeadline=3110446338811, FrameInterval=3110628539019, FrameStartTime=33333333, SyncQueued=3110642675481, SyncStart=3110663915583, IssueDrawCommandsStart=3110667350631, SwapBuffers=3110675348737, FrameCompleted=3110693605070, DequeueBufferDuration=54511, QueueBufferDuration=10435681, GpuCompleted=3110693103541, SwapBuffersCompleted=3110693605070, DisplayPresentTime=144115222452437076, CommandSubmissionCompleted=3110675348737, 
+11-27 04:31:09.627   562   704 I ImeTracker: dev.pathpilot.app.capture:55c2d2b1: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+11-27 04:31:09.638  3322  3332 I HWUI    : Davey! duration=2334ms; Flags=0, FrameTimelineVsyncId=12957, IntendedVsync=3108413005498, Vsync=3110613005476, InputEventId=0, HandleInputStart=3110630297235, AnimationStart=3110630311517, PerformTraversalsStart=3110630317915, DrawStart=3110676798148, FrameDeadline=3110613005476, FrameInterval=3110628539019, FrameStartTime=33333333, SyncQueued=3110679883354, SyncStart=3110694437891, IssueDrawCommandsStart=3110694802962, SwapBuffers=3110715269162, FrameCompleted=3110761924730, DequeueBufferDuration=48361, QueueBufferDuration=3777889, GpuCompleted=3110761367960, SwapBuffersCompleted=3110761924730, DisplayPresentTime=0, CommandSubmissionCompleted=3110715269162, 
+11-27 04:31:09.629   562   704 I ImeTracker: dev.pathpilot.app.capture:55c2d2b1: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 04:31:10.107  3322  3322 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-27 04:31:10.107  3322  3322 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-27 04:31:10.126   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:10.128   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:10.146   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:11.163   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:11.167   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:11.178   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:12.195   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:12.202   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:12.231   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:13.247   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:13.269   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:13.279   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:14.290   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:14.293   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:14.315   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:15.276  3322  3322 I Choreographer: Skipped 164 frames!  The application may be doing too much work on its main thread.
+11-27 04:31:15.332   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:15.347  3322  3322 W IdlingPolicy: These resources are not idle: [Compose-Espresso link]
+11-27 04:31:15.430   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:15.442   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:15.466  3322  3340 D EGL_emulation: app_time_stats: avg=3123.96ms min=299.80ms max=5948.11ms count=2
+11-27 04:31:15.527  3322  3363 I HWUI    : Davey! duration=5659ms; Flags=0, FrameTimelineVsyncId=13007, IntendedVsync=3110979672139, Vsync=3116446338751, InputEventId=0, HandleInputStart=3116457630245, AnimationStart=3116457644786, PerformTraversalsStart=3116457651150, DrawStart=3116464045196, FrameDeadline=3111013005472, FrameInterval=3116450767877, FrameStartTime=33333333, SyncQueued=3116483088345, SyncStart=3116486398038, IssueDrawCommandsStart=3116487062735, SwapBuffers=3116593719265, FrameCompleted=3116642664850, DequeueBufferDuration=64096, QueueBufferDuration=14960193, GpuCompleted=3116641328489, SwapBuffersCompleted=3116642664850, DisplayPresentTime=0, CommandSubmissionCompleted=3116593719265, 
+11-27 04:31:16.452   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:16.460   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:16.475   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:16.570   383   766 D audioserver: logFgsApiBegin: FGS Logger Transaction failed, -129
+11-27 04:31:16.577   562  1360 W AS.PlaybackActivityMon: No piid assigned for invalid/internal port id 15
+11-27 04:31:16.702   383   518 D AudioFlinger: mixer(0x7100b9fd08e0) throttle end: throttle time(11)
+11-27 04:31:16.854  3322  3340 D EGL_emulation: app_time_stats: avg=693.52ms min=544.06ms max=842.97ms count=2
+11-27 04:31:16.970   383   518 D audioserver: logFgsApiEnd: FGS Logger Transaction failed, -129
+11-27 04:31:17.334  3322  3322 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda11@e0768ab
+11-27 04:31:17.335   562   668 D CoreBackPreview: Window{222f392 u0 dev.pathpilot.app.capture/androidx.activity.ComponentActivity}: Setting back callback null
+11-27 04:31:17.631   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:17.652   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:17.686   562  1360 W InputManager-JNI: Input channel object '222f392 dev.pathpilot.app.capture/androidx.activity.ComponentActivity (client)' was disposed without first being removed with the input manager!
+11-27 04:31:17.791   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:17.956   562   598 W system_server: Long monitor contention with owner binder:562_11 (1360) at void com.android.server.wm.WindowManagerService.notifyWindowRemovedListeners(android.os.IBinder)(WindowManagerService.java:5339) waiters=0 in void com.android.server.wm.WindowSurfacePlacer$Traverser.run() for 202ms
+11-27 04:31:17.980  3322  3322 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-27 04:31:17.980  3322  3322 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-27 04:31:18.151   562   597 V WindowManager: Unknown focus tokens, dropping reportFocusChanged
+11-27 04:31:18.823   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:18.841   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:18.854   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:19.676   346  2702 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 3930944
+11-27 04:31:19.906   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:19.917   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:19.939   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:20.259   562   696 I InputDispatcher: 18084a0 dev.pathpilot.app.capture/androidx.activity.ComponentActivity (server) spent 2099ms processing FocusEvent(hasFocus=true)
+11-27 04:31:20.286  3322  3322 I Choreographer: Skipped 102 frames!  The application may be doing too much work on its main thread.
+11-27 04:31:20.712   562   704 I ImeTracker: dev.pathpilot.app.capture:fb37eb6e: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+11-27 04:31:20.728   562   704 I ImeTracker: dev.pathpilot.app.capture:fb37eb6e: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-27 04:31:20.791  3322  3340 D EGL_emulation: app_time_stats: avg=5698.23ms min=191.45ms max=11205.00ms count=2
+11-27 04:31:20.967   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:20.978   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:21.027   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:21.059  3322  3332 I HWUI    : Davey! duration=3920ms; Flags=0, FrameTimelineVsyncId=13066, IntendedVsync=3118046338735, Vsync=3121446338701, InputEventId=0, HandleInputStart=3121463812226, AnimationStart=3121463826753, PerformTraversalsStart=3121471074817, DrawStart=3121471391661, FrameDeadline=3118079672068, FrameInterval=3121460881138, FrameStartTime=33333333, SyncQueued=3121786488723, SyncStart=3121787704870, IssueDrawCommandsStart=3121793339901, SwapBuffers=3121935330766, FrameCompleted=3121967883621, DequeueBufferDuration=64814, QueueBufferDuration=1797965, GpuCompleted=3121966156792, SwapBuffersCompleted=3121967883621, DisplayPresentTime=0, CommandSubmissionCompleted=3121935330766, 
+11-27 04:31:21.427  3322  3332 I HWUI    : Davey! duration=725ms; Flags=0, FrameTimelineVsyncId=13101, IntendedVsync=3121813005364, Vsync=3122346338692, InputEventId=0, HandleInputStart=3122379843210, AnimationStart=3122379858451, PerformTraversalsStart=3122385634870, DrawStart=3122385941307, FrameDeadline=3122013005362, FrameInterval=3122373881917, FrameStartTime=33333333, SyncQueued=3122398209141, SyncStart=3122398585418, IssueDrawCommandsStart=3122399538533, SwapBuffers=3122507911008, FrameCompleted=3122538744519, DequeueBufferDuration=55474, QueueBufferDuration=1854997, GpuCompleted=3122538181688, SwapBuffersCompleted=3122538744519, DisplayPresentTime=0, CommandSubmissionCompleted=3122507911008, 
+11-27 04:31:21.622   337  3448 I resolv  : GetHostByAddrHandler::run: {100 100 100 983140 10149 0}
+11-27 04:31:21.644   337  3449 I resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10149 0}
+11-27 04:31:22.041   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:22.073   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:22.082   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:22.143     0     0 W healthd : battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+11-27 04:31:22.222   337  3450 I resolv  : GetHostByAddrHandler::run: {100 100 100 983140 10149 0}
+11-27 04:31:22.578   337  3451 I resolv  : GetHostByAddrHandler::run: {100 100 100 983140 10149 0}
+11-27 04:31:23.095   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:23.110   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:23.116   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:23.973  3447  3447 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+11-27 04:31:23.983  3447  3447 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+11-27 04:31:24.090     0     0 I servicemanager: Caller(pid=3447,uid=2000,sid=u:r:shell:s0) Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest. No alternative instances declared in VINTF.
+11-27 04:31:24.078  3322  3340 D EGL_emulation: app_time_stats: avg=1642.90ms min=570.68ms max=2715.12ms count=2
+11-27 04:31:24.130   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:24.182   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:24.202   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:24.278   337  3453 I resolv  : GetHostByAddrHandler::run: {100 100 100 983140 10149 0}
+11-27 04:31:24.291   143   143 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-27 04:31:24.298   337  3454 I resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10149 0}
+11-27 04:31:24.324  3447  3452 I Gralloc4: mapper 4.x is not supported
+11-27 04:31:25.228   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:25.244   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:25.258   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:25.687  3322  3340 D EGL_emulation: app_time_stats: avg=802.74ms min=549.72ms max=1055.76ms count=2
+11-27 04:31:25.721  3322  3364 I HWUI    : Davey! duration=881ms; Flags=0, FrameTimelineVsyncId=13198, IntendedVsync=3125979671989, Vsync=3126713005315, InputEventId=0, HandleInputStart=3126734188552, AnimationStart=3126734203559, PerformTraversalsStart=3126734210001, DrawStart=3126734538635, FrameDeadline=3126013005322, FrameInterval=3126727942970, FrameStartTime=33333333, SyncQueued=3126762423466, SyncStart=3126764558561, IssueDrawCommandsStart=3126765546998, SwapBuffers=3126820669722, FrameCompleted=3126863053258, DequeueBufferDuration=62081, QueueBufferDuration=37115123, GpuCompleted=3126852679427, SwapBuffersCompleted=3126863053258, DisplayPresentTime=0, CommandSubmissionCompleted=3126820669722, 
+11-27 04:31:26.224   383   766 D audioserver: logFgsApiBegin: FGS Logger Transaction failed, -129
+11-27 04:31:26.244   562  1328 W AS.PlaybackActivityMon: No piid assigned for invalid/internal port id 15
+11-27 04:31:26.267   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:26.280   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:26.293   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:26.580   383   518 D audioserver: logFgsApiEnd: FGS Logger Transaction failed, -129
+11-27 04:31:27.247  3322  3335 I lot.app.capture: Waiting for a blocking GC ProfileSaver
+11-27 04:31:27.390   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:27.493   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:27.655   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:28.061  3322  3322 I Choreographer: Skipped 49 frames!  The application may be doing too much work on its main thread.
+11-27 04:31:28.287  3322  3340 D EGL_emulation: app_time_stats: avg=866.32ms min=148.08ms max=1660.55ms count=3
+11-27 04:31:28.384  3322  3333 I HWUI    : Davey! duration=1883ms; Flags=0, FrameTimelineVsyncId=13237, IntendedVsync=3127579671973, Vsync=3129213005290, InputEventId=0, HandleInputStart=3129246201189, AnimationStart=3129246216298, PerformTraversalsStart=3129246800153, DrawStart=3129247138582, FrameDeadline=3127846338637, FrameInterval=3129236437068, FrameStartTime=33333333, SyncQueued=3129367203506, SyncStart=3129367590266, IssueDrawCommandsStart=3129373254044, SwapBuffers=3129420563431, FrameCompleted=3129463745972, DequeueBufferDuration=66226, QueueBufferDuration=27225331, GpuCompleted=3129461968860, SwapBuffersCompleted=3129463745972, DisplayPresentTime=0, CommandSubmissionCompleted=3129420563431, 
+11-27 04:31:28.562   383   766 D audioserver: logFgsApiBegin: FGS Logger Transaction failed, -129
+11-27 04:31:28.564   562   668 W AS.PlaybackActivityMon: No piid assigned for invalid/internal port id 15
+11-27 04:31:28.598   383   518 D AudioFlinger: mixer(0x7100b9fd08e0) throttle end: throttle time(10)
+11-27 04:31:28.654   383   518 D AudioFlinger: mixer(0x7100b9fd08e0) throttle end: throttle time(9)
+11-27 04:31:28.739   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:28.765   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:28.816   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:28.915   383   518 D audioserver: logFgsApiEnd: FGS Logger Transaction failed, -129
+11-27 04:31:29.684  3322  3322 I Choreographer: Skipped 33 frames!  The application may be doing too much work on its main thread.
+11-27 04:31:29.854   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:29.915   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:29.947   562   668 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:30.982   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:31.014   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:31.042   562  1360 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:31.291  3322  3327 I lot.app.capture: Background concurrent mark compact GC freed 6797KB AllocSpace bytes, 0(0B) LOS objects, 49% free, 6041KB/11MB, paused 3.637ms,36.494ms total 4.418s
+11-27 04:31:31.434  3322  3335 I lot.app.capture: WaitForGcToComplete blocked ProfileSaver on Background for 4.186s
+11-27 04:31:31.685   346  2702 D android.hardware.audio@7.1-impl.ranchu: threadLoop: entering standby, frames: 4151808
+11-27 04:31:31.840   562  1360 W system_server: Long monitor contention with owner binder:562_4 (668) at void com.android.server.wm.WindowManagerService.doDump(java.io.FileDescriptor, java.io.PrintWriter, java.lang.String[], boolean)(WindowManagerService.java:7295) waiters=0 in void com.android.server.wm.Session.setOnBackInvokedCallbackInfo(android.view.IWindow, android.window.OnBackInvokedCallbackInfo) for 595ms
+11-27 04:31:31.849   562  1360 D CoreBackPreview: Window{7534ec1 u0 dev.pathpilot.app.capture/androidx.activity.ComponentActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@daa5516, mPriority=0, mIsAnimationCallback=false}
+11-27 04:31:31.861   562   943 W system_server: Long monitor contention with owner binder:562_4 (668) at void com.android.server.wm.WindowManagerService.doDump(java.io.FileDescriptor, java.io.PrintWriter, java.lang.String[], boolean)(WindowManagerService.java:7295) waiters=1 in int com.android.server.wm.WindowManagerService.relayoutWindowInner(com.android.server.wm.Session, android.view.IWindow, android.view.WindowManager$LayoutParams, int, int, int, int, int, int, android.window.ClientWindowFrames, android.util.MergedConfiguration, android.view.SurfaceControl, android.view.InsetsState, android.view.InsetsSourceControl$Array, android.os.Bundle, android.view.WindowRelayoutResult) for 157ms
+11-27 04:31:32.071   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:32.087   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:32.133   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:32.681  3322  3333 I HWUI    : Davey! duration=4044ms; Flags=1, FrameTimelineVsyncId=13257, IntendedVsync=3129746338618, Vsync=3130846338607, InputEventId=0, HandleInputStart=3130865955607, AnimationStart=3130865971383, PerformTraversalsStart=3130905735497, DrawStart=3133469373062, FrameDeadline=3129779671951, FrameInterval=3130858617350, FrameStartTime=33333333, SyncQueued=3133764103772, SyncStart=3133782504176, IssueDrawCommandsStart=3133785014729, SwapBuffers=3133793781328, FrameCompleted=3133809669392, DequeueBufferDuration=53765, QueueBufferDuration=4903918, GpuCompleted=3133809328489, SwapBuffersCompleted=3133809669392, DisplayPresentTime=0, CommandSubmissionCompleted=3133793781328, 
+11-27 04:31:32.779  3322  3340 D EGL_emulation: app_time_stats: avg=2245.18ms min=555.19ms max=3935.18ms count=2
+11-27 04:31:32.849  3322  3322 I Choreographer: Skipped 93 frames!  The application may be doing too much work on its main thread.
+11-27 04:31:32.904  3322  3333 I HWUI    : Davey! duration=4199ms; Flags=1, FrameTimelineVsyncId=13257, IntendedVsync=3129746338618, Vsync=3130846338607, InputEventId=0, HandleInputStart=3130865955607, AnimationStart=3130865971383, PerformTraversalsStart=3130905735497, DrawStart=3133857803696, FrameDeadline=3130079671948, FrameInterval=3130858617350, FrameStartTime=33333333, SyncQueued=3133873418831, SyncStart=3133884695221, IssueDrawCommandsStart=3133885118457, SwapBuffers=3133926305881, FrameCompleted=3133957007004, DequeueBufferDuration=130671, QueueBufferDuration=9706521, GpuCompleted=3133954222760, SwapBuffersCompleted=3133957007004, DisplayPresentTime=0, CommandSubmissionCompleted=3133926305881, 
+11-27 04:31:33.019  3322  3332 I HWUI    : Davey! duration=3223ms; Flags=0, FrameTimelineVsyncId=13289, IntendedVsync=3130913005273, Vsync=3134013005242, InputEventId=0, HandleInputStart=3134050620198, AnimationStart=3134050635580, PerformTraversalsStart=3134051434730, DrawStart=3134057421812, FrameDeadline=3133846338577, FrameInterval=3134023772604, FrameStartTime=33333333, SyncQueued=3134073572380, SyncStart=3134074665194, IssueDrawCommandsStart=3134084669578, SwapBuffers=3134087625680, FrameCompleted=3134138064476, DequeueBufferDuration=53431, QueueBufferDuration=19493232, GpuCompleted=3134137533634, SwapBuffersCompleted=3134138064476, DisplayPresentTime=0, CommandSubmissionCompleted=3134087625680, 
+11-27 04:31:33.144  3322  3332 I HWUI    : Davey! duration=3281ms; Flags=0, FrameTimelineVsyncId=13289, IntendedVsync=3130913005273, Vsync=3134013005242, InputEventId=0, HandleInputStart=3134050620198, AnimationStart=3134050635580, PerformTraversalsStart=3134051434730, DrawStart=3134108455846, FrameDeadline=3134013005242, FrameInterval=3134023772604, FrameStartTime=33333333, SyncQueued=3134111442306, SyncStart=3134143199366, IssueDrawCommandsStart=3134143626335, SwapBuffers=3134213926533, FrameCompleted=3134226475296, DequeueBufferDuration=71499, QueueBufferDuration=1543349, GpuCompleted=3134225877345, SwapBuffersCompleted=3134226475296, DisplayPresentTime=0, CommandSubmissionCompleted=3134213926533, 
+11-27 04:31:33.154   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:33.178   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:33.204   562   943 W BestClock: java.time.DateTimeException: Missing network time fix
+11-27 04:31:33.234     0     0 I logd    : logdr: UID=2000 GID=2000 PID=3461 n tail=650 logMask=99 pid=0 start=0ns deadline=0ns

@@ -1,0 +1,167 @@
+{
+  "startedUtc": "2026-11-27T04:27:53Z",
+  "classes": "dev.pathpilot.app.ui.settings.SettingsFlowTest#themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity,dev.pathpilot.app.ui.settings.McpPresetFlowTest,dev.pathpilot.app.ui.settings.McpFlowTest#connectionToolsAndIndependentSharingReachAnActualHttpUpstream",
+  "gitBase": "ac963f2e59a8af13a66ae950233d6fd102dd423a",
+  "worktreeDiffSha256": "019e21ced762cc022bf8615af4c057e377ebcb2dd5331322942aaf0b700b7229",
+  "apkSha256": {
+    "capture.apk": "5d3f8c4e558157180e76b289c377765d84da94c648e123b7c43a37f5facd017b",
+    "capture-test.apk": "1dd472398d3d0ea0721346ffc1a92800cac50a4ee776d7927a766bd50af144c1"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0",
+    "nightMode": "Night mode: no",
+    "locales": "Locales for dev.pathpilot.app.capture for user 0 are [zh-CN]"
+  },
+  "sourceManifestSha256": "bc864202d77c76638720736444031680337ab7c5c06c5359f23da42bbb6567a2",
+  "elapsedSeconds": 465.562,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "4",
+      "stack": "androidx.test.espresso.IdlingResourceTimeoutException: Wait for [Compose-Espresso link] to become idle timed out",
+      "stream": "",
+      "test": "themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity",
+      "statusCode": -2
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.McpPresetFlowTest",
+      "current": "2",
+      "id": "AndroidJUnitRunner",
+      "numtests": "4",
+      "stream": ".",
+      "test": "publicPresetsSaveTheirOfficialUrlFetchToolsAndRetryWithoutDuplicates",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.McpPresetFlowTest",
+      "current": "3",
+      "id": "AndroidJUnitRunner",
+      "numtests": "4",
+      "stream": ".",
+      "test": "credentialPresetsRequireTokensAndKeepDifferentAccountsSeparate",
+      "statusCode": 0
+    },
+    {
+      "class": "dev.pathpilot.app.ui.settings.McpFlowTest",
+      "current": "4",
+      "id": "AndroidJUnitRunner",
+      "numtests": "4",
+      "stream": ".",
+      "test": "connectionToolsAndIndependentSharingReachAnActualHttpUpstream",
+      "statusCode": 0
+    }
+  ],
+  "images": [
+    {
+      "name": "09-mcp-editor.png",
+      "bytes": 57690,
+      "sha256": "bfdc0b2904b0e49ae383fda9537cababfceefa544fa184bcf782a56fd34e598f",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "09a-mcp-root.png",
+      "bytes": 38825,
+      "sha256": "adcd3c744743855584df068cc5362dbd4a88c7a4cc21dcad2f30cf5578a028ee",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "10-mcp-tools.png",
+      "bytes": 85875,
+      "sha256": "95a28b98ae70d5f3e360df2be745601fd55b30dbcbfe97483b7a4c38eccba607",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "10a-mcp-access.png",
+      "bytes": 75554,
+      "sha256": "1e2f2e5f0b8c365f9ae32cbcedef54c480ad4fdc3be19e646929aae51b98accd",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "11-mcp-sharing.png",
+      "bytes": 59881,
+      "sha256": "0ab9915f7c73e194563a24c1619f659b4526a017b89ea9dbd9f14f9b93312371",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "12-mcp-calls.png",
+      "bytes": 80179,
+      "sha256": "47c10e15806a4b673f11f1542cab70f9fd83131621e3d742ba842f9f8d1e9f93",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "12a-mcp-success-call.png",
+      "bytes": 82600,
+      "sha256": "3cf532f7118e376bc7f3080328972d2465c01b46d60ed24aad8c98c1406f9b73",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "22-mcp-notification-entry.png",
+      "bytes": 81012,
+      "sha256": "199b92670741e19bf37a9a94666393e35416ecf12abef957cf2d1c3e9b2a755f",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "26-settings-theme-entry.png",
+      "bytes": 71289,
+      "sha256": "df65807c86edbdf00b0f1130680fad9bd7d79d1e07377b96d53adf5d5091fb0a",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "37-mcp-preset-catalog.png",
+      "bytes": 73587,
+      "sha256": "1887fab9d1674fb2c02c268431423bf3ee156b7328c32c16213c102b97a7ef2e",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "38-mcp-preset-fetch-error.png",
+      "bytes": 82355,
+      "sha256": "1f3b097a37a6b1edfe4f53ecd3afdb8d1ba74fa7ab09a707825ae27eccd07b20",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "39-mcp-preset-tools.png",
+      "bytes": 89732,
+      "sha256": "e6420d59c34eb4f29804822f89aaeaf172fd66f67f073c253d19b897ebe19452",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "40-mcp-github-token.png",
+      "bytes": 51668,
+      "sha256": "49f2d414b836a8da317a9832dd8fcd9997b29c439bbe16dc6f62d1e2834f621c",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "41-mcp-github-tools.png",
+      "bytes": 87154,
+      "sha256": "7cad6a28330965868809baae2c2108c46e394944e64b998b49f42725ae8f73c4",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "42-mcp-context7-key.png",
+      "bytes": 54307,
+      "sha256": "171e6701da2a01402a88386c47ac8319cb1c03af4c0eae3a22371fc1e8a731c1",
+      "captureKind": "instrumentation screenshot"
+    },
+    {
+      "name": "diagnostic-current.png",
+      "bytes": 86063,
+      "sha256": "708a64d564095f507bb8ae6ca1c4444823bfa9df1c2330a4b45d0d3cec007c1f",
+      "captureKind": "manual diagnostic during runner"
+    },
+    {
+      "name": "diagnostic-theme-before-failure.png",
+      "bytes": 77824,
+      "sha256": "cc80532d0daaace10e1a2bde7345ed8b0e06bb95be922d3c1b8da6f12f7a9a0d",
+      "captureKind": "manual diagnostic during runner"
+    }
+  ],
+  "automatedScreenshotCount": 15,
+  "diagnosticScreenshotCount": 2
+}

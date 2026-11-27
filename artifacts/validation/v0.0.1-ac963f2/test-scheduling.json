@@ -1,0 +1,28 @@
+{
+  "sourceCommit": "ac963f2e59a8af13a66ae950233d6fd102dd423a",
+  "observedLog": "artifacts/screenshots/v0.0.1-aff1629/normal-attempt1/logcat-after.txt",
+  "observedLines": "940-1022",
+  "observedFailure": "DefaultDispatcher-worker-4 executed Recomposer.applyChanges via test ApplyingContinuationInterceptor and TestMonotonicFrameClock, conflicting with main-thread SnapshotStateObserver.",
+  "change": "Use androidx.compose.ui.test.junit4.v2.createEmptyComposeRule in SettingsFlowTest, McpFlowTest and McpPresetFlowTest. Production code, assertions, idle checks and timeouts unchanged.",
+  "officialSources": [
+    {
+      "url": "https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4-android/1.12.1/ui-test-junit4-android-1.12.1-sources.jar",
+      "path": "androidMain/androidx/compose/ui/test/junit4/AndroidComposeTestRule.android.kt",
+      "lines": "256-263",
+      "finding": "Old API deprecation explains UnconfinedTestDispatcher to StandardTestDispatcher scheduling change."
+    },
+    {
+      "url": "https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-junit4-android/1.12.1/ui-test-junit4-android-1.12.1-sources.jar",
+      "path": "androidMain/androidx/compose/ui/test/junit4/v2/AndroidComposeTestRule.android.kt",
+      "lines": "132-168",
+      "finding": "v2 uses queued StandardTestDispatcher by default."
+    },
+    {
+      "url": "https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-test-android/1.12.1/ui-test-android-1.12.1-sources.jar",
+      "path": "commonMain/androidx/compose/ui/test/AbstractMainTestClock.kt",
+      "lines": "96-106",
+      "finding": "Clock advances queued scheduler work on the UI thread."
+    }
+  ],
+  "themeInitialTimeout": "Common cause not established. The unchanged final package passed the normal-font theme flow when run alone. The large-font automatic flow timed out waiting for Compose idle; production MainActivity manual checks verified palette selection, dynamic color, Done and MCP form reachability separately."
+}

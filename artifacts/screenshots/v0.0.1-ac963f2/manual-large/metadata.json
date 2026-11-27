@@ -1,0 +1,127 @@
+{
+  "sourceCommit": "ac963f2e59a8af13a66ae950233d6fd102dd423a",
+  "captureApkSha256": "5d3f8c4e558157180e76b289c377765d84da94c648e123b7c43a37f5facd017b",
+  "package": "dev.pathpilot.app.capture",
+  "host": "Production MainActivity, manual touch input via adb; no instrumentation running.",
+  "device": {
+    "sdk": 35,
+    "abi": "x86_64",
+    "resolution": "720x1280",
+    "physicalDensity": 320,
+    "overrideDensity": 360,
+    "widthDp": 320,
+    "fontScale": 1.5,
+    "systemNight": "no"
+  },
+  "capture": "Original adb exec-out screencap -p; no cropping or image editing.",
+  "scope": "Manual usability review after large-final automatic Compose idling failure. Does not replace the recorded automatic failure with a passing test result.",
+  "steps": [
+    {
+      "image": "01-theme-controls.png",
+      "action": "Launch production MainActivity; tap Settings(635,1090), then Theme(220,400); wait15sec.",
+      "observed": "Mode chips wrap; dynamic switch and fixed Done action visible."
+    },
+    {
+      "image": "02-theme-palettes-visible.png",
+      "action": "Swipe(360,1100)->(360,580),600ms; wait6sec.",
+      "observed": "Scrolled palette rows available."
+    },
+    {
+      "image": "03-amber-selected.png",
+      "action": "Swipe(600,1050)->(600,850),450ms; tap(200,1010); wait8sec.",
+      "observed": "Amber card selected; actual theme becomes amber and dynamic is off."
+    },
+    {
+      "image": "04-ocean-selected.png",
+      "action": "Swipe(500,500)->(500,1000),500ms; tap(570,780); wait8sec.",
+      "observed": "At the resulting scroll position the tap selected Ocean, not the dynamic switch. Captured the actual selection; no screenshot altered."
+    },
+    {
+      "image": "05-dynamic-enabled.png",
+      "action": "Use observed switch position(570,525); tap and wait8sec.",
+      "observed": "Dynamic switch on, fixed palette checkmark cleared; theme returns to wallpaper colors."
+    },
+    {
+      "image": "06-settings-after-done.png",
+      "action": "Tap Done(590,270); wait6sec.",
+      "observed": "Returns to Settings; summary shows system/dynamic colors."
+    },
+    {
+      "image": "07-mcp-menu.png",
+      "action": "Tap MCP(450,1090), then top-right(650,115).",
+      "observed": "MCP overflow menu opened; no menu item selected."
+    },
+    {
+      "image": "08-mcp-catalog-top.png",
+      "action": "Dismiss outside(190,150), tap actual Add(550,125), wait8sec.",
+      "observed": "Production MainActivity MCP preset sheet visible; top rows wrap without clipping."
+    },
+    {
+      "image": "09-mcp-catalog-bottom.png",
+      "action": "Swipe(350,1080)->(350,580),550ms; wait6sec.",
+      "observed": "GitHub and custom connection action reachable."
+    },
+    {
+      "image": "10-github-token-controls.png",
+      "action": "Tap GitHub card(350,840); wait8sec.",
+      "observed": "URL, token input, visibility action, token link and Add button fit on screen. No token entered or request submitted."
+    }
+  ],
+  "files": [
+    {
+      "name": "01-theme-controls.png",
+      "bytes": 82503,
+      "sha256": "4930815b67dad81c2641da9b4237a28f685b9b1cdbcb1c7ee5047c2cbb14e71a"
+    },
+    {
+      "name": "02-theme-palettes-visible.png",
+      "bytes": 79689,
+      "sha256": "4db59c92015a356de67bc17c57f95217922e7d13aa93b2c5bbef368b0b546794"
+    },
+    {
+      "name": "03-amber-selected.png",
+      "bytes": 76496,
+      "sha256": "d2df5658d44ab3c17d90cde33fe22b37acc6ac1ddace2a0c8c89b33535e6f47a"
+    },
+    {
+      "name": "04-ocean-selected.png",
+      "bytes": 83928,
+      "sha256": "5f173a0bc76f8096a3ad4c41760310bf32691b42e7d0cbec166b1075ae67afd9"
+    },
+    {
+      "name": "05-dynamic-enabled.png",
+      "bytes": 78832,
+      "sha256": "568bc98dacb5638db4a68e1b6a8efe6a847dab3c690bdffa1c08bc59bf0eef66"
+    },
+    {
+      "name": "06-settings-after-done.png",
+      "bytes": 84850,
+      "sha256": "c9d2b71a668378fe9e78a4e32830b7406fdd2615dc5d6a4b193d9f76c817a7cd"
+    },
+    {
+      "name": "07-mcp-menu.png",
+      "bytes": 96570,
+      "sha256": "a92ca309ee8e779b48741dba5a94a324af500f1e2e404fbea215e87436c307bc"
+    },
+    {
+      "name": "08-mcp-catalog-top.png",
+      "bytes": 89255,
+      "sha256": "46512ff48d3f2bf1ae19eddbd1334806a7890170b4daa211425cceb1d937c418"
+    },
+    {
+      "name": "09-mcp-catalog-bottom.png",
+      "bytes": 85447,
+      "sha256": "b2bf9831866d3b8248652b296f3602db9e1a47cbbc439f54c6ea2f23a44ddd6e"
+    },
+    {
+      "name": "10-github-token-controls.png",
+      "bytes": 67609,
+      "sha256": "49df0c345935b73843b8cde358cdaa882ed7d9f2c91a5df40c2a0cce448b88b4"
+    },
+    {
+      "name": "launch.txt",
+      "bytes": 220,
+      "sha256": "60cec954be000d7553fa3a77d42da89d865959c4959b2af82d8fbd5ef1074cdb"
+    }
+  ]
+}

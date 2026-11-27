@@ -1,0 +1,22 @@
+{
+  "density": {
+    "exitCode": 0,
+    "output": "Physical density: 320"
+  },
+  "fontScale": {
+    "exitCode": 0,
+    "output": "1.0"
+  },
+  "night": {
+    "exitCode": 0,
+    "output": "Night mode: no"
+  },
+  "package": {
+    "exitCode": 0,
+    "output": "versionCode=13 minSdk=26 targetSdk=35\nversionName=0.0.1-ac963f2"
+  },
+  "lastAnr": {
+    "exitCode": 0,
+    "output": "ACTIVITY MANAGER LAST ANR (dumpsys activity lastanr)\n  ANR time: Nov 27, 2026 4:53:40 AM\n  Reason: Input dispatching timed out (d0e1068 dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity (server) is not responding. Waited 5001ms for MotionEvent(deviceId=-1, eventTime=4456297000000, source=TOUCHSCREEN, displayId=0, action=DOWN, actionButton=0x00000000, flags=0x00000000, metaState=0x00000000, buttonState=0x00000000, classification=NONE, edgeFlags=0x00000000, xPrecision=1.0, yPrecision=1.0, xCursorPosition=nan, yCursorPosition=nan, pointers=[0: (450.0, 1090.0)]), policyFlags=0x6b000000)."
+  }
+}

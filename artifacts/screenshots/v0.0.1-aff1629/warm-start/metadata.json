@@ -1,0 +1,12 @@
+{
+  "sourceCommit": "aff16297225dadd2bc505590db53929cbcf5f763",
+  "versionName": "0.0.1-aff1629",
+  "versionCode": 13,
+  "theme": "system, Monet enabled; system night no",
+  "device": "API35 x86_64 TCG,720x1280,density320,font1.0",
+  "capture": "Original adb exec-out screencap -p after successful cold start +20sec; no ANR overlay",
+  "files": {
+    "01-sharing-light.png": "b5fac09983588a1728d24ee9d309456a920965a50753a6e0a596232d3a0bd51b",
+    "install.json": "ab1158ebc440f4af97eea79dc5bed3bbf5c8a78f9b0f6ab53bc96d7e665601a0"
+  }
+}

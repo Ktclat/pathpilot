@@ -1,0 +1,115 @@
+{
+  "sourceCommit": "ac963f2e59a8af13a66ae950233d6fd102dd423a",
+  "versionName": "0.0.1-ac963f2",
+  "versionCode": 13,
+  "captureApkSha256": "5d3f8c4e558157180e76b289c377765d84da94c648e123b7c43a37f5facd017b",
+  "host": "Production MainActivity; no instrumentation running.",
+  "deviceAtCapture": {
+    "sdk": 35,
+    "abi": "x86_64",
+    "resolution": "720x1280",
+    "density": 320,
+    "fontScale": 1.0,
+    "systemNight": "no"
+  },
+  "captureMethod": "Original adb exec-out screencap -p; no image editing.",
+  "images": {
+    "00-startup-anr.png": "First attempt after restoring normal density/font. Launch reported timeout; ANR overlay; not a completed catalog capture.",
+    "01-mcp-root-recovered.png": "One Wait-button recovery attempt still shows the original ANR. Filename does not imply successful recovery.",
+    "02-recovery-cold-static.png": "One authorized force-stop and cold restart returned Status ok,13.143s. Static screenshot and focused window verified before any new touch.",
+    "03-mcp-preset-catalog.png": "Actual MainActivity MCP preset catalog, after recovery; normal density/font. No preset selected or token submitted.",
+    "04-about-version.png": "Actual About dialog confirms0.0.1-ac963f2(13)."
+  },
+  "anr": {
+    "timeUtc": "2026-11-27T04:53:40.370Z",
+    "pid": 4201,
+    "reason": "Input dispatch timeout waiting5001ms for touch DOWN at(450,1090), after initial am start reported timeout21.308s.",
+    "mainThread": "Runnable in Android text bidi/intrinsic-width measurement and Compose text/LazyList measure stack; full original DropBox and complete main-thread excerpt retained.",
+    "cpuEvidence": "DropBox cpu pressure avg10=84.64%; app89% and system_server53% sampled after event.",
+    "causeConclusion": "Not established; no production patch or categorical environment attribution.",
+    "recovery": "Wait attempt did not remove original overlay. After parent review, force-stop only capture and cold-start once; Status ok. Static screenshot+focus verified, then MCP catalog and About interacted successfully. No APK/data/animation/timeout/system-service change during recovery.",
+    "finalLastAnr": "Still original04:53:40 event in final-device-values.json; no second recorded ANR in this sequence."
+  },
+  "files": [
+    {
+      "name": "00-startup-anr.png",
+      "bytes": 77430,
+      "sha256": "dd3f7ee66f008cc049b952cc2019d6670c907d48507cc2b66e1ddc94daac6d05"
+    },
+    {
+      "name": "01-mcp-root-recovered.png",
+      "bytes": 78014,
+      "sha256": "488934a59282386bc07adb6003e60254310aba2c28519f481422a7278d79b1d7"
+    },
+    {
+      "name": "02-recovery-cold-static.png",
+      "bytes": 77297,
+      "sha256": "478945081dd6fd4552ed5d4ff76550f0f38790fc0fac424584fd517b57a20a03"
+    },
+    {
+      "name": "03-mcp-preset-catalog.png",
+      "bytes": 79969,
+      "sha256": "494efe5388fc1b7f10a5d990560fbce5022837f9e7d3efd6c4997a957a817c20"
+    },
+    {
+      "name": "04-about-version.png",
+      "bytes": 66243,
+      "sha256": "6212b8d9307888dd695afc183e53487829f01dd3d02e8a55e2edfcfdb80c992c"
+    },
+    {
+      "name": "final-device-values.json",
+      "bytes": 984,
+      "sha256": "849b288495bc71286d414b753bc14a300ba9e27c6fe56fc1878dea7b816bb91b"
+    },
+    {
+      "name": "launch-recovery.txt",
+      "bytes": 220,
+      "sha256": "8db6ea695a64a59a8cc6b7f8c899b9e80e05fd387dcf823c9c34f1d35a158e8e"
+    },
+    {
+      "name": "launch.txt",
+      "bytes": 216,
+      "sha256": "1b0f3acd7bf04696a37d2fe4d04036c1e231c28dd090200db5e349e09f971b0b"
+    },
+    {
+      "name": "recovery-events.txt",
+      "bytes": 36824,
+      "sha256": "eee4081b15ed9437785a3adac33a5734fbf0de007e5013f7daac07e8ef25a168"
+    },
+    {
+      "name": "recovery-lastanr.txt",
+      "bytes": 6538,
+      "sha256": "66ea18edb76eafa739ec45c2667454025e5ba17c33d987c505c7d336afe94397"
+    },
+    {
+      "name": "recovery-window.txt",
+      "bytes": 58662,
+      "sha256": "5958591b2455704b681e16b941ea51de3e5baad0a4db0c03dc1da5080ae8b355"
+    },
+    {
+      "name": "startup-anr-dropbox.txt",
+      "bytes": 197019,
+      "sha256": "97d7365ab26a78a2453e009aff4b69898a20b605e5966df0c9e2e04c5d2f5671"
+    },
+    {
+      "name": "startup-anr-events.txt",
+      "bytes": 58063,
+      "sha256": "548088efb876c282553ac521eb0f593d3d0645195a986e942de6c59bde94d3a2"
+    },
+    {
+      "name": "startup-anr-logcat.txt",
+      "bytes": 93371,
+      "sha256": "cb774fdf0a12088617476c39e3b57ea72a18f85df437ec26f7cf3c56a455031b"
+    },
+    {
+      "name": "startup-anr-main-thread.txt",
+      "bytes": 14887,
+      "sha256": "692eba1685ac26b8e824df861f29b49f517cb9cce6b3153887260a77c4a8334c"
+    },
+    {
+      "name": "startup-lastanr.txt",
+      "bytes": 6538,
+      "sha256": "66ea18edb76eafa739ec45c2667454025e5ba17c33d987c505c7d336afe94397"
+    }
+  ]
+}

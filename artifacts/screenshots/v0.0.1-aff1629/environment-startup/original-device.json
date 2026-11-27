@@ -1,0 +1,38 @@
+{
+  "bootCompleted": {
+    "exitCode": 0,
+    "output": "1",
+    "stderr": ""
+  },
+  "sdk": {
+    "exitCode": 0,
+    "output": "35",
+    "stderr": ""
+  },
+  "abi": {
+    "exitCode": 0,
+    "output": "x86_64",
+    "stderr": ""
+  },
+  "size": {
+    "exitCode": 0,
+    "output": "Physical size: 720x1280",
+    "stderr": ""
+  },
+  "density": {
+    "exitCode": 0,
+    "output": "Physical density: 320",
+    "stderr": ""
+  },
+  "fontScale": {
+    "exitCode": 0,
+    "output": "1.0",
+    "stderr": ""
+  },
+  "night": {
+    "exitCode": 0,
+    "output": "Night mode: no",
+    "stderr": ""
+  },
+  "recordedUtc": "2026-11-27T03:45:01.333666+00:00"
+}

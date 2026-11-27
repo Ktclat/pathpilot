@@ -38,7 +38,7 @@ python3 scripts/verify-apk.py app/build/outputs/apk/debug/app-debug.apk
 
 ## 版本与分发
 
-当前版本采用 `0.0.1-<commit>`，其中 `commit` 是实际构建检出的 Git 提交前 7 位；构建需要保留 Git 元数据。Android `versionCode` 独立递增：本轮从 11 增至 12，不随显示版本重置。设置中的版本读取 `BuildConfig.VERSION_NAME`，打包脚本读取实际 APK 版本，不另造版本来源。
+当前版本采用 `0.0.1-<commit>`，其中 `commit` 是实际构建检出的 Git 提交前 7 位；构建需要保留 Git 元数据。Android `versionCode` 独立递增，新增对外分发版本时高于此前版本，不随显示版本或提交后缀重置。设置中的版本读取 `BuildConfig.VERSION_NAME`，打包脚本读取实际 APK 版本，不另造版本来源。
 
 发布 APK 应从已提交的源码构建；本地未提交工作树的提交后缀只标识其基线。APK、校验文件和发布标签必须对应同一次成功构建，不能用旧 APK 搭配新提交说明。
 

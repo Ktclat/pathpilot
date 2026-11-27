@@ -1,0 +1,73 @@
+{
+  "sourceCommit": "ac963f2e59a8af13a66ae950233d6fd102dd423a",
+  "apkSha256": {
+    "capture.apk": "5d3f8c4e558157180e76b289c377765d84da94c648e123b7c43a37f5facd017b",
+    "capture-test.apk": "1dd472398d3d0ea0721346ffc1a92800cac50a4ee776d7927a766bd50af144c1"
+  },
+  "startedUtc": "2026-11-27T04:25:42.488685+00:00",
+  "commands": [
+    {
+      "args": [
+        "install",
+        "-r",
+        "/tmp/pathpilot-theme-mcp-device/apks-ac963f2/capture.apk"
+      ],
+      "exitCode": 0,
+      "stdout": "Performing Streamed Install\nSuccess\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "install",
+        "-r",
+        "/tmp/pathpilot-theme-mcp-device/apks-ac963f2/capture-test.apk"
+      ],
+      "exitCode": 0,
+      "stdout": "Performing Streamed Install\nSuccess\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "shell",
+        "cmd",
+        "package",
+        "compile",
+        "-m",
+        "speed",
+        "-f",
+        "dev.pathpilot.app.capture"
+      ],
+      "exitCode": 0,
+      "stdout": "Success\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "shell",
+        "cmd",
+        "package",
+        "compile",
+        "-m",
+        "speed",
+        "-f",
+        "dev.pathpilot.app.capture.test"
+      ],
+      "exitCode": 0,
+      "stdout": "Success\n",
+      "stderr": ""
+    },
+    {
+      "args": [
+        "shell",
+        "am",
+        "start",
+        "-W",
+        "-n",
+        "dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity"
+      ],
+      "exitCode": 0,
+      "stdout": "Starting: Intent { cmp=dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity }\nStatus: ok\nLaunchState: COLD\nActivity: dev.pathpilot.app.capture/dev.pathpilot.app.MainActivity\nTotalTime: 13856\nWaitTime: 13930\nComplete\n",
+      "stderr": ""
+    }
+  ]
+}

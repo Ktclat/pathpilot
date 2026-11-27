@@ -1,0 +1,32 @@
+{
+  "sourceCommit": "aff16297225dadd2bc505590db53929cbcf5f763",
+  "captureApkSha256": "305198b69d2b84cc8f0072355bd07aae5b879eb22ca929e5bf536e2b8419c1dc",
+  "package": "dev.pathpilot.app.capture",
+  "instrumentationRunning": false,
+  "device": "API35 x86_64 TCG,720x1280,density320,font1.0,system night no",
+  "sequence": [
+    "After failed instrumentation process exited, force-stop capture and cold-launch production MainActivity.",
+    "Wait15s; tap Settings at635x1090; wait5s and capture01.",
+    "Tap Theme at220x320; wait15s and capture02, then dump windows."
+  ],
+  "observation": "Theme bottom sheet visibly renders display-mode controls, dynamic color switch, five palette options and Done. No ANR overlay. This single manual display check does not establish automated flow success or all persistence behavior.",
+  "captureMethod": "Original adb exec-out screencap -p; no image editing",
+  "files": [
+    {
+      "name": "01-settings-before-theme.png",
+      "sha256": "13e342bb4bce090e2145f3749c98e4495e477fa21de922bb10934fcc1d0d842c"
+    },
+    {
+      "name": "02-theme-open-steady.png",
+      "sha256": "12eadb6bbf53e4656f20b447f64aafa88fc996fb7a11334e1b3f6ecb8c85d736"
+    },
+    {
+      "name": "02-theme-window.txt",
+      "sha256": "6cbe540cd4f32b2a1014329d5b811f8eed98f36eccc15ffe9f63290731a6ea65"
+    },
+    {
+      "name": "launch.txt",
+      "sha256": "7b42a49d5ec04391af74977f0bddb3ba71eeb473b23963baee890ce90d50b96a"
+    }
+  ]
+}

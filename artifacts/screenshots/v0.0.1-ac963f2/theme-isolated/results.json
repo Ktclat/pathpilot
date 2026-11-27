@@ -1,0 +1,75 @@
+{
+  "startedUtc": "2026-11-27T04:36:54Z",
+  "classes": "dev.pathpilot.app.ui.settings.SettingsFlowTest#themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity",
+  "gitBase": "ac963f2e59a8af13a66ae950233d6fd102dd423a",
+  "worktreeDiffSha256": "f859ab27fb09f557ce3c19c8f8298dae81e339d73c71d186fbbc8438c93fa260",
+  "apkSha256": {
+    "capture.apk": "5d3f8c4e558157180e76b289c377765d84da94c648e123b7c43a37f5facd017b",
+    "capture-test.apk": "1dd472398d3d0ea0721346ffc1a92800cac50a4ee776d7927a766bd50af144c1"
+  },
+  "device": {
+    "sdk": "35",
+    "abi": "x86_64",
+    "size": "Physical size: 720x1280",
+    "density": "Physical density: 320",
+    "fontScale": "1.0",
+    "nightMode": "Night mode: no",
+    "locales": "Locales for dev.pathpilot.app.capture for user 0 are [zh-CN]"
+  },
+  "sourceManifestSha256": "bc864202d77c76638720736444031680337ab7c5c06c5359f23da42bbb6567a2",
+  "elapsedSeconds": 204.703,
+  "shellExitCode": 0,
+  "results": [
+    {
+      "class": "dev.pathpilot.app.ui.settings.SettingsFlowTest",
+      "current": "1",
+      "id": "AndroidJUnitRunner",
+      "numtests": "1",
+      "stream": ".",
+      "test": "themePaletteDynamicAndLanguageChoicesPersistInTheNativeActivity",
+      "statusCode": 0
+    }
+  ],
+  "images": [
+    {
+      "name": "06-settings-backup-english.png",
+      "bytes": 67300,
+      "sha256": "d289e247611b2029ee66215622f72af95bbf4d80a0eca3b6020d34b53a33d810"
+    },
+    {
+      "name": "26-settings-theme-entry.png",
+      "bytes": 71476,
+      "sha256": "34923eaf831115a5a3a40f856821da9200e3352d18a6b0a2b3c46f0a1a500c50"
+    },
+    {
+      "name": "27-theme-dynamic.png",
+      "bytes": 68712,
+      "sha256": "ad79bb2645d977ea21df35bb27cfbd3893b0abf9d1b38dc0eb4e26aa5e7080fc"
+    },
+    {
+      "name": "28-theme-ocean-dark.png",
+      "bytes": 73814,
+      "sha256": "ad36d2f6daf33fa8e7ad259cc095f5b0e65c4f7b0297677529135ed799fc4286"
+    },
+    {
+      "name": "29-theme-ocean-restored.png",
+      "bytes": 73490,
+      "sha256": "4e024e2c52bd14edff1418c90518d189cb7bf8d2847ab110e51fb6bdd2e6cfe1"
+    },
+    {
+      "name": "30-theme-dynamic-english.png",
+      "bytes": 63297,
+      "sha256": "04f4210e47b7e896ba6992cf25666dc55c2a89dbae1d664c8ce7856320c726ab"
+    },
+    {
+      "name": "31-theme-amber-english.png",
+      "bytes": 67038,
+      "sha256": "86282a866b28a1f1fb87dc2d4ec0344f96874374666cdfd28aa39c107f327c3b"
+    },
+    {
+      "name": "32-settings-english-theme.png",
+      "bytes": 68151,
+      "sha256": "eff6f8c324d2a3ecf897a80b8d328f948e9389e8fc4baf87ca20c15c8081d2af"
+    }
+  ]
+}

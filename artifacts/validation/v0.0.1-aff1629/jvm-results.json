@@ -1,0 +1,16 @@
+[
+  {
+    "module": "core",
+    "tests": 110,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "module": "app",
+    "tests": 58,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+]
